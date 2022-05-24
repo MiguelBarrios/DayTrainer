@@ -6,9 +6,9 @@
 		<class>com.skilldistillery.daytrainer.entities.User</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/FIXME?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
-			<property name="javax.persistence.jdbc.user" value="FIXME" />
-			<property name="javax.persistence.jdbc.password" value="FIXME" />
+				value="jdbc:mysql://localhost:3306/dailytrainerdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
+			<property name="javax.persistence.jdbc.user" value="trainer" />
+			<property name="javax.persistence.jdbc.password" value="trainer" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
