@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of movers" [ngClass]="checkTrend(item)">
-            <td>{{item.change | number: '1.2-2'}}</td>
+            <td>{{item.change | number: '1.2-2'}}%</td>
             <td>{{item.last}}</td>
             <td>{{item.symbol}}</td>
             <td>{{item.totalVolume}}</td>
