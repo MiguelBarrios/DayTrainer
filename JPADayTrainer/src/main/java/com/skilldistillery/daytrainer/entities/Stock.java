@@ -2,90 +2,73 @@ package com.skilldistillery.daytrainer.entities;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 public class Stock {
 
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	private String name;
-	
+	@Column(name = "symbol", nullable = false)	
 	private String symbol;
+
+	private String name;
+
+	@Column(name="exchange_name")
+	private String exchangeName;
+	
+	@OneToOne(mappedBy="stock")
+	private Trade trade;
 
 	
 	
 	
-	//methods
+	// methods
 	public Stock() {
 		super();
 	}
 
-
-
-
-	public int getId() {
-		return id;
+	public Trade getTrade() {
+		return trade;
 	}
 
-
-
-
-	public void setId(int id) {
-		this.id = id;
+	public void setTrade(Trade trade) {
+		this.trade = trade;
 	}
-
-
-
-
-	public String getName() {
-		return name;
-	}
-
-
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-
 
 	public String getSymbol() {
 		return symbol;
 	}
 
-
-
-
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
 
-
-
-
-	@Override
-	public String toString() {
-		return "Stock [id=" + id + ", name=" + name + ", symbol=" + symbol + "]";
+	public String getName() {
+		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	public String getExchangeName() {
+		return exchangeName;
+	}
 
+	public void setExchangeName(String exchangeName) {
+		this.exchangeName = exchangeName;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(symbol);
 	}
-
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -96,11 +79,20 @@ public class Stock {
 		if (getClass() != obj.getClass())
 			return false;
 		Stock other = (Stock) obj;
-		return id == other.id;
+		return Objects.equals(symbol, other.symbol);
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Stock [symbol=");
+		builder.append(symbol);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", exchangeName=");
+		builder.append(exchangeName);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

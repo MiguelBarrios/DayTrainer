@@ -3,10 +3,13 @@ package com.skilldistillery.daytrainer.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Comment {
@@ -18,10 +21,40 @@ public class Comment {
 	
 	private String content;
 	
-	private LocalDateTime created;
+	@Column(name="created_at")
+	private LocalDateTime createdAt;
 
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="trade_id")
+	private Trade trade;
+	
+	
+	
+	
+	//methods
 	public Comment() {
 		super();
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Trade getTrade() {
+		return trade;
+	}
+
+	public void setTrade(Trade trade) {
+		this.trade = trade;
 	}
 
 	public int getId() {
@@ -40,18 +73,15 @@ public class Comment {
 		this.content = content;
 	}
 
-	public LocalDateTime getCreated() {
-		return created;
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCreated(LocalDateTime created) {
-		this.created = created;
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", content=" + content + ", created=" + created + "]";
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -69,6 +99,24 @@ public class Comment {
 		Comment other = (Comment) obj;
 		return id == other.id;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Comment [id=");
+		builder.append(id);
+		builder.append(", content=");
+		builder.append(content);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", trade=");
+		builder.append(trade);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 	
 	
 }

@@ -1,6 +1,7 @@
 package com.skilldistillery.daytrainer.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,137 +9,150 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Trade {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private double price;
-	
+
+	@Column(name = "price_per_share")
+	private double pricePerShare;
+
 	private int quantity;
-	
-	private LocalDateTime created;
-	
-	@Column(name= "order_type")
-	private String orderType;
-	
-	@Column(name= "trade_type")
-	private String tradeType;
-	
-	@Column(name= "has_executed")
-	private boolean hasExecuted;
+
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
+
+	private boolean buy;
+
+	@Column(name = "completion_date")
+	private LocalDateTime completionDate;
+
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@OneToOne
+	@JoinColumn(name = "stock_symbol")
+	private Stock stock;
+
+	private String notes;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<Comment> comments;
 
 	
-	
-	//methods
+	@Column(name = "strike_price")
+	private Double strikePrice;
+
+	// methods
 	public Trade() {
 		super();
 	}
-
 
 
 	public int getId() {
 		return id;
 	}
 
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-
-	public double getPrice() {
-		return price;
-	}
-
-
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-
 
 	public int getQuantity() {
 		return quantity;
 	}
 
-
-
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
-
-
-	public LocalDateTime getCreated() {
-		return created;
+	public boolean isBuy() {
+		return buy;
 	}
 
-
-
-	public void setCreated(LocalDateTime created) {
-		this.created = created;
+	public void setBuy(boolean buy) {
+		this.buy = buy;
 	}
 
-
-
-	public String getOrderType() {
-		return orderType;
+	public LocalDateTime getCompletionDate() {
+		return completionDate;
 	}
 
-
-
-	public void setOrderType(String orderType) {
-		this.orderType = orderType;
+	public void setCompletionDate(LocalDateTime completionDate) {
+		this.completionDate = completionDate;
 	}
 
-
-
-	public String getTradeType() {
-		return tradeType;
+	public User getUser() {
+		return user;
 	}
 
-
-
-	public void setTradeType(String tradeType) {
-		this.tradeType = tradeType;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-
-
-	public boolean isHasExecuted() {
-		return hasExecuted;
+	public Stock getStock() {
+		return stock;
 	}
 
-
-
-	public void setHasExecuted(boolean hasExecuted) {
-		this.hasExecuted = hasExecuted;
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "Trade [id=" + id + ", price=" + price + ", quantity=" + quantity + ", created=" + created
-				+ ", orderType=" + orderType + ", tradeType=" + tradeType + ", hasExecuted=" + hasExecuted + "]";
+	public String getNotes() {
+		return notes;
 	}
 
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
 
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
 
+	public double getPricePerShare() {
+		return pricePerShare;
+	}
 
+	public void setPricePerShare(double pricePerShare) {
+		this.pricePerShare = pricePerShare;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Double getStrikePrice() {
+		return strikePrice;
+	}
+
+	public void setStrikePrice(Double strikePrice) {
+		this.strikePrice = strikePrice;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -151,8 +165,36 @@ public class Trade {
 		Trade other = (Trade) obj;
 		return id == other.id;
 	}
-	
-	
-	
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Trade [id=");
+		builder.append(id);
+		builder.append(", pricePerShare=");
+		builder.append(pricePerShare);
+		builder.append(", quantity=");
+		builder.append(quantity);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", buy=");
+		builder.append(buy);
+		builder.append(", completionDate=");
+		builder.append(completionDate);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", stock=");
+		builder.append(stock);
+		builder.append(", notes=");
+		builder.append(notes);
+		builder.append(", comments=");
+		builder.append(comments);
+	
+		builder.append(", strikePrice=");
+		builder.append(strikePrice);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	
 }

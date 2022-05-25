@@ -16,67 +16,37 @@ CREATE SCHEMA IF NOT EXISTS `dailytrainerdb` DEFAULT CHARACTER SET utf8 ;
 USE `dailytrainerdb` ;
 
 -- -----------------------------------------------------
--- Table `account`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `account` ;
-
-CREATE TABLE IF NOT EXISTS `account` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `balance` DECIMAL(10,2) NULL,
-  `margin_enable` TINYINT NULL,
-  `margin_amount` DECIMAL(10,2) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user` ;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NULL,
-  `password` VARCHAR(200) NULL,
-  `enabled` TINYINT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(200) NOT NULL,
+  `enabled` TINYINT NOT NULL DEFAULT 1,
   `role` VARCHAR(45) NULL,
-  `email` VARCHAR(45) NULL,
-  `active` TINYINT NULL,
-  `profile_picture` VARCHAR(200) NULL,
-  `account_id` INT NOT NULL,
-  `user_id` INT NULL,
+  `email` VARCHAR(125) NULL,
+  `profile_picture` VARCHAR(1000) NULL,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
+  `biography` TEXT NULL,
+  `created_at` DATETIME NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_user_account1_idx` (`account_id` ASC),
-  INDEX `fk_user_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_user_account1`
-    FOREIGN KEY (`account_id`)
-    REFERENCES `account` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `holding`
+-- Table `order_type`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `holding` ;
+DROP TABLE IF EXISTS `order_type` ;
 
-CREATE TABLE IF NOT EXISTS `holding` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `amount` INT NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_holding_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_holding_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+CREATE TABLE IF NOT EXISTS `order_type` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `description` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -86,36 +56,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `stock` ;
 
 CREATE TABLE IF NOT EXISTS `stock` (
-  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
-  `symbol` VARCHAR(45) NULL,
-  `holding_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_stock_holding1_idx` (`holding_id` ASC),
-  CONSTRAINT `fk_stock_holding1`
-    FOREIGN KEY (`holding_id`)
-    REFERENCES `holding` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `transaction`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `transaction` ;
-
-CREATE TABLE IF NOT EXISTS `transaction` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `total_price` DECIMAL(10,2) NULL,
-  `account_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_transaction_account1_idx` (`account_id` ASC),
-  CONSTRAINT `fk_transaction_account1`
-    FOREIGN KEY (`account_id`)
-    REFERENCES `account` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `symbol` VARCHAR(10) NOT NULL,
+  `exchange_name` VARCHAR(45) NULL,
+  PRIMARY KEY (`symbol`))
 ENGINE = InnoDB;
 
 
@@ -126,32 +70,33 @@ DROP TABLE IF EXISTS `trade` ;
 
 CREATE TABLE IF NOT EXISTS `trade` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `price` DECIMAL(10,2) NULL,
+  `price_per_share` DECIMAL(10,2) NULL,
   `quantity` INT NULL,
-  `created` DATETIME NULL,
-  `order_type` VARCHAR(45) NULL,
-  `trade_type` VARCHAR(45) NULL,
-  `has_executed` TINYINT NULL,
+  `created_at` DATETIME NULL,
+  `buy` TINYINT NOT NULL,
+  `completion_date` DATETIME NULL,
   `user_id` INT NOT NULL,
-  `stock_id` INT NOT NULL,
-  `transaction_id` INT NOT NULL,
+  `order_type_id` INT NOT NULL,
+  `notes` VARCHAR(200) NULL,
+  `stock_symbol` VARCHAR(10) NOT NULL,
+  `strike_price` DECIMAL(5,2) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Trade_user_idx` (`user_id` ASC),
-  INDEX `fk_trade_stock1_idx` (`stock_id` ASC),
-  INDEX `fk_trade_transaction1_idx` (`transaction_id` ASC),
+  INDEX `fk_trade_order_types1_idx` (`order_type_id` ASC),
+  INDEX `fk_trade_stock1_idx` (`stock_symbol` ASC),
   CONSTRAINT `fk_Trade_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_trade_stock1`
-    FOREIGN KEY (`stock_id`)
-    REFERENCES `stock` (`id`)
+  CONSTRAINT `fk_trade_order_types1`
+    FOREIGN KEY (`order_type_id`)
+    REFERENCES `order_type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_trade_transaction1`
-    FOREIGN KEY (`transaction_id`)
-    REFERENCES `transaction` (`id`)
+  CONSTRAINT `fk_trade_stock1`
+    FOREIGN KEY (`stock_symbol`)
+    REFERENCES `stock` (`symbol`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -164,31 +109,50 @@ DROP TABLE IF EXISTS `message` ;
 
 CREATE TABLE IF NOT EXISTS `message` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `content` VARCHAR(300) NULL,
-  `read` TINYINT NULL,
-  PRIMARY KEY (`id`))
+  `content` TEXT NULL,
+  `read` TINYINT NOT NULL DEFAULT 0,
+  `sender_id` INT NOT NULL,
+  `recipent_id` INT NOT NULL,
+  `reply_to_id` INT NULL,
+  `created_at` DATETIME NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_message_user1_idx` (`sender_id` ASC),
+  INDEX `fk_message_user2_idx` (`recipent_id` ASC),
+  INDEX `fk_message_message1_idx` (`reply_to_id` ASC),
+  CONSTRAINT `fk_message_user1`
+    FOREIGN KEY (`sender_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_message_user2`
+    FOREIGN KEY (`recipent_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_message_message1`
+    FOREIGN KEY (`reply_to_id`)
+    REFERENCES `message` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `user_has_message`
+-- Table `account`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `user_has_message` ;
+DROP TABLE IF EXISTS `account` ;
 
-CREATE TABLE IF NOT EXISTS `user_has_message` (
+CREATE TABLE IF NOT EXISTS `account` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `balance` DECIMAL(15,2) NULL,
+  `margin_enable` TINYINT NOT NULL DEFAULT 0,
+  `margin_amount` DECIMAL(15,2) NULL,
   `user_id` INT NOT NULL,
-  `message_id` INT NOT NULL,
-  PRIMARY KEY (`user_id`, `message_id`),
-  INDEX `fk_user_has_message_message1_idx` (`message_id` ASC),
-  INDEX `fk_user_has_message_user1_idx` (`user_id` ASC),
-  CONSTRAINT `fk_user_has_message_user1`
+  PRIMARY KEY (`id`),
+  INDEX `fk_account_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_account_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_message_message1`
-    FOREIGN KEY (`message_id`)
-    REFERENCES `message` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -201,13 +165,15 @@ DROP TABLE IF EXISTS `comment` ;
 
 CREATE TABLE IF NOT EXISTS `comment` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `content` VARCHAR(300) NULL,
+  `content` TEXT NULL,
   `trade_id` INT NOT NULL,
   `user_id` INT NOT NULL,
-  `created` DATE NULL,
+  `created_at` DATE NULL,
+  `reply_to_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_comment_trade1_idx` (`trade_id` ASC),
   INDEX `fk_comment_user1_idx` (`user_id` ASC),
+  INDEX `fk_comment_comment1_idx` (`reply_to_id` ASC),
   CONSTRAINT `fk_comment_trade1`
     FOREIGN KEY (`trade_id`)
     REFERENCES `trade` (`id`)
@@ -215,6 +181,35 @@ CREATE TABLE IF NOT EXISTS `comment` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_comment_user1`
     FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_comment_comment1`
+    FOREIGN KEY (`reply_to_id`)
+    REFERENCES `comment` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `followed_user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `followed_user` ;
+
+CREATE TABLE IF NOT EXISTS `followed_user` (
+  `user_id` INT NOT NULL,
+  `followed_user_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `followed_user_id`),
+  INDEX `fk_user_has_user_user2_idx` (`followed_user_id` ASC),
+  INDEX `fk_user_has_user_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_user_has_user_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_user_user2`
+    FOREIGN KEY (`followed_user_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -232,31 +227,22 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `account`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dailytrainerdb`;
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`) VALUES (1, 1000.00, 1, 500);
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `active`, `profile_picture`, `account_id`, `user_id`) VALUES (1, 'admin', '$2a$10$U4sc5g1WCoNJyEoTzpQaH.ZFCNQEykwdcU4ita9U0LH.MP4FCqvjq', 1, 'admin', 'email@domain.com', 1, NULL, 1, 1);
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (1, 'admin', '$2a$10$U4sc5g1WCoNJyEoTzpQaH.ZFCNQEykwdcU4ita9U0LH.MP4FCqvjq', 1, 'admin', 'email@domain.com', NULL, 'ad', 'min', 'bio', '2021-01-01 01:01:01');
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `holding`
+-- Data for table `order_type`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `holding` (`id`, `amount`, `user_id`) VALUES (1, 100, 1);
+INSERT INTO `order_type` (`id`, `name`, `description`) VALUES (1, 'Market', 'an order to buy or sell a security immediately');
+INSERT INTO `order_type` (`id`, `name`, `description`) VALUES (2, 'Limit', 'is an order to buy or sell a security at a specific price or better');
 
 COMMIT;
 
@@ -266,17 +252,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `stock` (`id`, `name`, `symbol`, `holding_id`) VALUES (1, 'Apple Inc.', 'AAPL', 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `transaction`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `dailytrainerdb`;
-INSERT INTO `transaction` (`id`, `total_price`, `account_id`) VALUES (1, 3000, 1);
+INSERT INTO `stock` (`name`, `symbol`, `exchange_name`) VALUES ('Apple Inc.', 'AAPL', 'NASDAQ');
+INSERT INTO `stock` (`name`, `symbol`, `exchange_name`) VALUES ('Oracle Corp.', 'ORCL', 'NASDAQ');
 
 COMMIT;
 
@@ -286,7 +263,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `trade` (`id`, `price`, `quantity`, `created`, `order_type`, `trade_type`, `has_executed`, `user_id`, `stock_id`, `transaction_id`) VALUES (1, 30, 100, '2021-01-01 01:01:01', 'market', 'buy', 1, 1, 1, 1);
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `stock_symbol`, `strike_price`) VALUES (1, 30, 100, '2021-01-01 01:01:01', buy, '2021-01-01 01:01:01', 1, 1, NULL, 'ORCL', NULL);
 
 COMMIT;
 
@@ -296,17 +273,17 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `message` (`id`, `content`, `read`) VALUES (1, 'Hey i saw that you needed some money', 0);
+INSERT INTO `message` (`id`, `content`, `read`, `sender_id`, `recipent_id`, `reply_to_id`, `created_at`) VALUES (1, 'Hey i saw that you needed some money', 0, 1, 1, 1, '2021-01-01 01:01:01');
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `user_has_message`
+-- Data for table `account`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `user_has_message` (`user_id`, `message_id`) VALUES (1, 1);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (1, 1000.00, 1, 500, 1);
 
 COMMIT;
 
@@ -316,9 +293,19 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `comment` (`id`, `content`, `trade_id`, `user_id`, `created`) VALUES (1, 'Nice trade!', 1, 1, NULL);
-INSERT INTO `comment` (`id`, `content`, `trade_id`, `user_id`, `created`) VALUES (2, 'I wish i had made that trade', 1, 1, NULL);
-INSERT INTO `comment` (`id`, `content`, `trade_id`, `user_id`, `created`) VALUES (3, 'Too the moon', 1, 1, NULL);
+INSERT INTO `comment` (`id`, `content`, `trade_id`, `user_id`, `created_at`, `reply_to_id`) VALUES (1, 'Nice trade!', 1, 1, '2021-01-01 01:01:01', 1);
+INSERT INTO `comment` (`id`, `content`, `trade_id`, `user_id`, `created_at`, `reply_to_id`) VALUES (2, 'I wish i had made that trade', 1, 1, '2021-01-01 01:01:01', 1);
+INSERT INTO `comment` (`id`, `content`, `trade_id`, `user_id`, `created_at`, `reply_to_id`) VALUES (3, 'Too the moon', 1, 1, '2021-01-01 01:01:01', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `followed_user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `dailytrainerdb`;
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (1, 1);
 
 COMMIT;
 
