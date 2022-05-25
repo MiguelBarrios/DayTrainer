@@ -13,7 +13,6 @@ import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.services.UserService;
 
 @RestController
-@RequestMapping("api")
 @CrossOrigin({"*", "http://localhost"})
 public class UserController {
 	
