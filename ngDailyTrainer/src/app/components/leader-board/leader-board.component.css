@@ -1,0 +1,22 @@
+.table {
+    color: white;
+}
+
+#contestentWinners {
+    color: rgb(35, 213, 180);
+}
+
+#contestentLosers {
+    color: rgb(233, 40, 31);
+}
+
+#resultTablesContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#resultsToggleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
