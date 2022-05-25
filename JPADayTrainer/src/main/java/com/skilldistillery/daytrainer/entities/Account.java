@@ -25,7 +25,7 @@ public class Account {
 	@Column(name="margin_amount")
 	private double marginAmount;
 
-	@OneToOne(mappedBy= "account")
+	@OneToOne
 	private User user;
 	
 	
