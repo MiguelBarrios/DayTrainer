@@ -1,6 +1,10 @@
 package com.skilldistillery.daytrainer.entities;
 
+
+import java.time.LocalDateTime;
+
 import java.util.HashSet;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -18,40 +22,52 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class User {
-	
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String username;
-	
+
+	@Column(name = "first_name")
+	private String firstName;
+
+	@Column(name = "last_name")
+	private String lastName;
+
 	private String password;
-	
+
 	private boolean enabled;
-	
+
 	private String role;
-	
+
 	private String email;
-	
-	private boolean active;
-	
-	@Column(name= "profile_picture")
+
+	private String biography;
+
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
+
+	@Column(name = "profile_picture")
 	private String profilePicture;
-	
-	@OneToOne
-	@JoinColumn(name="account_id")
+
+	@OneToOne(mappedBy = "user")
 	private Account account;
-	
-	@OneToMany(mappedBy= "user")
-	private List<Trade>trades;
-	
-	@OneToMany(mappedBy="user")
-	private List<Holding>holdings;
-	
-	@OneToMany(mappedBy="user")
-	private List<Comment>comments;
+
+	@OneToMany(mappedBy = "user")
+	private List<Trade> trades;
+
+	@OneToMany(mappedBy = "user")
+	private List<Comment> comments;
+
+	@OneToMany(mappedBy = "sender")
+	private List<Message> sentMessages;
+
+	@OneToMany(mappedBy = "recipient")
+	private List<Message> recMessages;
+
+	// Methods
+
 	
 	
 	@ManyToOne(cascade={CascadeType.ALL})
@@ -62,8 +78,9 @@ public class User {
 	private Set<User> friends = new HashSet<User>();
 	
 	//Methods
+
 	public User() {
-		
+
 	}
 
 	public User getFriend() {
@@ -82,60 +99,20 @@ public class User {
 		this.friends = friends;
 	}
 
-	public List<Comment> getComments() {
-		return comments;
+	public List<Message> getSentMessages() {
+		return sentMessages;
+	}
+	
+	public void setSentMessages(List<Message> sentMessages) {
+		this.sentMessages = sentMessages;
 	}
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
+	public List<Message> getRecMessages() {
+		return recMessages;
 	}
 
-	public List<Holding> getHoldings() {
-		return holdings;
-	}
-
-	public void setHoldings(List<Holding> holdings) {
-		this.holdings = holdings;
-	}
-
-	public List<Trade> getTrades() {
-		return trades;
-	}
-
-	public void setTrades(List<Trade> trades) {
-		this.trades = trades;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public String getProfilePicture() {
-		return profilePicture;
-	}
-
-	public void setProfilePicture(String profilePicture) {
-		this.profilePicture = profilePicture;
+	public void setRecMessages(List<Message> recMessages) {
+		this.recMessages = recMessages;
 	}
 
 	public int getId() {
@@ -152,6 +129,22 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPassword() {
@@ -178,6 +171,62 @@ public class User {
 		this.role = role;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getBiography() {
+		return biography;
+	}
+
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public List<Trade> getTrades() {
+		return trades;
+	}
+
+	public void setTrades(List<Trade> trades) {
+		this.trades = trades;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -197,12 +246,71 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
-				+ ", role=" + role + ", email=" + email + ", active=" + active + ", profilePicture=" + profilePicture
-				+ "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", username=");
+		builder.append(username);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append(", role=");
+		builder.append(role);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", biography=");
+		builder.append(biography);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", profilePicture=");
+		builder.append(profilePicture);
+		builder.append(", account=");
+		builder.append(account);
+		builder.append(", trades=");
+		builder.append(trades);
+		builder.append(", comments=");
+		builder.append(comments);
+		builder.append(", getId()=");
+		builder.append(getId());
+		builder.append(", getUsername()=");
+		builder.append(getUsername());
+		builder.append(", getFirstName()=");
+		builder.append(getFirstName());
+		builder.append(", getLastName()=");
+		builder.append(getLastName());
+		builder.append(", getPassword()=");
+		builder.append(getPassword());
+		builder.append(", isEnabled()=");
+		builder.append(isEnabled());
+		builder.append(", getRole()=");
+		builder.append(getRole());
+		builder.append(", getEmail()=");
+		builder.append(getEmail());
+		builder.append(", getBiography()=");
+		builder.append(getBiography());
+		builder.append(", getCreatedAt()=");
+		builder.append(getCreatedAt());
+		builder.append(", getProfilePicture()=");
+		builder.append(getProfilePicture());
+		builder.append(", getAccount()=");
+		builder.append(getAccount());
+		builder.append(", getTrades()=");
+		builder.append(getTrades());
+		builder.append(", getComments()=");
+		builder.append(getComments());
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append(", getClass()=");
+		builder.append(getClass());
+		builder.append(", toString()=");
+		builder.append(super.toString());
+		builder.append("]");
+		return builder.toString();
 	}
-	
-	
-	
 
 }
