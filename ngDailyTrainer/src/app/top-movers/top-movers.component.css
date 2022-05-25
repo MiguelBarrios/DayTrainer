@@ -1,0 +1,11 @@
+.table {
+    width: 600px;
+}
+
+.trendingUp {
+    color: green;
+}
+
+.trendingDown {
+    color: red;
+}
