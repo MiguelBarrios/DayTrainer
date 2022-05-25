@@ -36,7 +36,6 @@ public class User {
 	@Column(name= "profile_picture")
 	private String profilePicture;
 	
-	
 	@OneToOne
 	@JoinColumn(name="account_id")
 	private Account account;
