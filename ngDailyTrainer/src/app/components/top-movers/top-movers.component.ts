@@ -17,9 +17,9 @@ export class TopMoversComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTopMovers();
-    // this.id = setInterval(() => {
-    //   this.getTopMovers();
-    // }, 10000);
+    this.id = setInterval(() => {
+      this.getTopMovers();
+    }, 5000);
   }
 
   ngOnDestroy() {
