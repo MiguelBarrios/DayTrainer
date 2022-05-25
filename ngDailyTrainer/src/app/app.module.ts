@@ -8,13 +8,14 @@ import { TopMoversComponent } from './top-movers/top-movers.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
-
+import { PortfolioChartComponent } from './components/portfolio-chart/portfolio-chart.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TopMoversComponent,
+    PortfolioChartComponent,
   ],
   imports: [
     BrowserModule,
