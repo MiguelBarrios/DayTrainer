@@ -1,7 +1,7 @@
-import { TradesService } from './../services/trades.service';
 import { Component, OnInit } from '@angular/core';
-import { Movers } from '../models/movers';
 import { TimeoutInfo } from 'rxjs';
+import { Movers } from 'src/app/models/movers';
+import { TradesService } from 'src/app/services/trades.service';
 
 @Component({
   selector: 'app-top-movers',
