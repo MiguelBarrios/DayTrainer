@@ -49,22 +49,15 @@ class StockTest {
 		assertEquals("Apple Inc.",stock.getName());
 		assertEquals("AAPL",stock.getSymbol());
 	}
-	@Test
-	@DisplayName("Stock to Trade One to One mapping")
-	void test2() {
-		Trade temp = em.find(Trade.class, 1);
-		assertNotNull(stock);
-		assertEquals(temp.getId(),stock.getTrade().getId());
-	
-	}
-	@Test
-	@DisplayName("Stock to Holding One to One mapping")
-	void test3() {
-		Holding temp = em.find(Holding.class, 1);
-		assertNotNull(stock);
-		assertEquals(temp.getId(),stock.getHolding().getId());
-		
-	}
+//	@Test
+//	@DisplayName("Stock to Trade One to One mapping")
+//	void test2() {
+//		Trade temp = em.find(Trade.class, 1);
+//		assertNotNull(stock);
+//		
+//	
+//	}
+
 
 } 
 

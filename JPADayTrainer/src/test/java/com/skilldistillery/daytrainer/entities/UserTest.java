@@ -64,17 +64,22 @@ class UserTest {
 		assertTrue(user.getTrades().size()>0);
 	}
 	@Test
-	@DisplayName("Holding to User Many to One Mapping")
+	@DisplayName("User to Comments mapping")
 	void test4() {
 		assertNotNull(user);
-		assertTrue(user.getHoldings().size()> 0);
-		
+		assertTrue(user.getComments().size()>0);
 	}
 	@Test
-	@DisplayName("User to Comments One to Many Mapping")
+	@DisplayName("User to Comments mapping")
 	void test5() {
 		assertNotNull(user);
-		assertTrue(user.getHoldings().size()> 0);
-		
+		assertTrue(user.getSentMessages().size()>0);
 	}
+	@Test
+	@DisplayName("User to Comments mapping")
+	void test6() {
+		assertNotNull(user);
+		assertTrue(user.getRecMessages().size()>0);
+	}
+
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -25,11 +26,9 @@ public class Account {
 	@Column(name="margin_amount")
 	private double marginAmount;
 
-	@OneToOne(mappedBy= "account")
+	@OneToOne
+	@JoinColumn(name="user_id")
 	private User user;
-	
-	
-	
 	
 	//methods
 	public Account() {
