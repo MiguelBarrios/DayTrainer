@@ -77,4 +77,11 @@ class UserTest {
 		assertTrue(user.getHoldings().size()> 0);
 		
 	}
+	@Test
+	@DisplayName("User to User mappings")
+	void test6() {
+		assertNotNull(user);
+		assertTrue(user.getFriends().size()> 0);
+		
+	}
 }
