@@ -2,6 +2,7 @@ package com.skilldistillery.daytrainer.entities;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,8 +23,44 @@ public class User {
 	
 	private String role;
 	
+	private String email;
+	
+	private boolean active;
+	
+	@Column(name= "profile_picture")
+	private String profilePicture;
+	
+	
+	
+	
+	
+	//Methods
 	public User() {
 		
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
 	}
 
 	public int getId() {
@@ -86,7 +123,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
-				+ ", role=" + role + "]";
+				+ ", role=" + role + ", email=" + email + ", active=" + active + ", profilePicture=" + profilePicture
+				+ "]";
 	}
 	
 	
