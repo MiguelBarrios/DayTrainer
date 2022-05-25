@@ -9,3 +9,14 @@
 #contestentLosers {
     color: rgb(233, 40, 31);
 }
+
+#resultTablesContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#resultsToggleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
