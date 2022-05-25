@@ -6,11 +6,10 @@
 		<class>com.skilldistillery.daytrainer.entities.User</class>
 		<class>com.skilldistillery.daytrainer.entities.Account</class>
 		<class>com.skilldistillery.daytrainer.entities.Comment</class>
-		<class>com.skilldistillery.daytrainer.entities.Holding</class>
 		<class>com.skilldistillery.daytrainer.entities.Message</class>
 		<class>com.skilldistillery.daytrainer.entities.Stock</class>
 		<class>com.skilldistillery.daytrainer.entities.Trade</class>
-		<class>com.skilldistillery.daytrainer.entities.Transaction</class>
+		<class>com.skilldistillery.daytrainer.entities.OrderType</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.url"

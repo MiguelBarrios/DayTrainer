@@ -47,25 +47,16 @@ public class Trade {
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
 
-	@ManyToOne
-	@JoinColumn(name = "order_type_id")
-	private List<OrderType> orderType;
+	
 
 	@Column(name = "strike_price")
-	private double strikePrice;
+	private Double strikePrice;
 
 	// methods
 	public Trade() {
 		super();
 	}
 
-	public List<OrderType> getOrderType() {
-		return orderType;
-	}
-
-	public void setOrderType(List<OrderType> orderType) {
-		this.orderType = orderType;
-	}
 
 	public int getId() {
 		return id;
@@ -195,8 +186,7 @@ public class Trade {
 		builder.append(notes);
 		builder.append(", comments=");
 		builder.append(comments);
-		builder.append(", orderType=");
-		builder.append(orderType);
+	
 		builder.append(", strikePrice=");
 		builder.append(strikePrice);
 		builder.append("]");
