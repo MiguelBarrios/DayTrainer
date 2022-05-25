@@ -55,14 +55,16 @@ class TradeTest {
 		assertNotNull(trade);
 		assertEquals(1,trade.getUser().getId());
 	}
-//	@Test
-//	@DisplayName("Stock to Trade One to One mapping")
-//	void test4() {
-//		Stock temp = em.find(Stock.class, 1);
-//		assertNotNull(trade);
-//
-//	
-//	}
+	@Test
+	@DisplayName("Stock to Trade One to One mapping")
+	void test4() {
+		assertNotNull(trade);
+		assertNotNull(trade.getStock());
+		assertEquals("ORCL", trade.getStock().getSymbol());
+		assertNotNull(trade);
+
+	
+	}
 
 	@Test
 	@DisplayName("Trade to Comment One to Many mapping")

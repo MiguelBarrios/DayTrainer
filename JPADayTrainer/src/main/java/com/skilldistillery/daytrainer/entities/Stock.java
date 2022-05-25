@@ -7,10 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.NaturalId;
+
 @Entity
 public class Stock {
 
+	
 	@Id
+	@Column(name = "symbol", nullable = false)	
 	private String symbol;
 
 	private String name;
@@ -21,9 +25,20 @@ public class Stock {
 	@OneToOne(mappedBy="stock")
 	private Trade trade;
 
+	
+	
+	
 	// methods
 	public Stock() {
 		super();
+	}
+
+	public Trade getTrade() {
+		return trade;
+	}
+
+	public void setTrade(Trade trade) {
+		this.trade = trade;
 	}
 
 	public String getSymbol() {

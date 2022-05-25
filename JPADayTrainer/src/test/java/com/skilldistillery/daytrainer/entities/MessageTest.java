@@ -47,8 +47,12 @@ class MessageTest {
 	void test1() {
 		assertNotNull(mess);
 		assertEquals("Hey i saw that you needed some money",mess.getContent());
+		assertEquals(1,mess.getSender().getId());
+		assertEquals(1,mess.getRecipient().getId());
+		
 		
 	}
 
 } 
 
+ 
