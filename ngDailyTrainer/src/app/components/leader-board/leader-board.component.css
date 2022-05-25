@@ -1,0 +1,11 @@
+.table {
+    color: white;
+}
+
+#contestentWinners {
+    color: rgb(35, 213, 180);
+}
+
+#contestentLosers {
+    color: rgb(233, 40, 31);
+}
