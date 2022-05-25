@@ -1,11 +1,13 @@
 .table {
-    width: 600px;
+    width: 500px;
+    background-color: rgb(39, 42, 61);
+    color: white;
 }
 
 .trendingUp {
-    color: green;
+    color: rgb(35, 213, 180);
 }
 
 .trendingDown {
-    color: red;
+    color: rgb(233, 40, 31);
 }
