@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Trade {
 
@@ -34,6 +36,7 @@ public class Trade {
 	@Column(name = "completion_date")
 	private LocalDateTime completionDate;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -44,11 +47,11 @@ public class Trade {
 
 	private String notes;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
 
 	
-
 	@Column(name = "strike_price")
 	private Double strikePrice;
 
@@ -143,11 +146,11 @@ public class Trade {
 		this.createdAt = createdAt;
 	}
 
-	public double getStrikePrice() {
+	public Double getStrikePrice() {
 		return strikePrice;
 	}
 
-	public void setStrikePrice(double strikePrice) {
+	public void setStrikePrice(Double strikePrice) {
 		this.strikePrice = strikePrice;
 	}
 
