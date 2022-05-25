@@ -76,10 +76,19 @@ class UserTest {
 		assertTrue(user.getSentMessages().size()>0);
 	}
 	@Test
+
 	@DisplayName("User to Comments mapping")
 	void test6() {
 		assertNotNull(user);
 		assertTrue(user.getRecMessages().size()>0);
+	}
+
+
+	@DisplayName("User to User mappings")
+	void test7() {
+		assertNotNull(user);
+		assertTrue(user.getFriends().size()> 0);
+		
 	}
 
 }
