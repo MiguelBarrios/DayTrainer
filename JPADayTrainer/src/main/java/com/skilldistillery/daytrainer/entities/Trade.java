@@ -47,7 +47,7 @@ public class Trade {
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
 
-	@ManyToOne
+	@OneToMany
 	@JoinColumn(name = "order_type_id")
 	private List<OrderType> orderType;
 
