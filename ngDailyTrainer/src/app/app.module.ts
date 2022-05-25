@@ -7,17 +7,21 @@ import { AppComponent } from './app.component';
 import { TopMoversComponent } from './top-movers/top-movers.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { NgChartsModule } from 'ng2-charts';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopMoversComponent
+    TopMoversComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    NgChartsModule,
   ],
   providers: [TradesService],
   bootstrap: [AppComponent]
