@@ -1,11 +1,14 @@
 package com.skilldistillery.daytrainer.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class OrderType {
@@ -17,6 +20,10 @@ public class OrderType {
 	private String name;
 	
 	private String description;
+	
+	@OneToMany
+	@JoinColumn(name = "order_type_id")
+	private List<Trade> trade;
 	
 	
 	public OrderType() {
@@ -35,6 +42,16 @@ public class OrderType {
 		builder.append(description);
 		builder.append("]");
 		return builder.toString();
+	}
+	
+
+
+	public List<Trade> getTrade() {
+		return trade;
+	}
+
+	public void setTrade(List<Trade> trade) {
+		this.trade = trade;
 	}
 
 	public int getId() {

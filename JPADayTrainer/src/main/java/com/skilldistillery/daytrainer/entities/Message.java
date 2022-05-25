@@ -24,35 +24,35 @@ public class Message {
 
 	private boolean read;
 
-//	@ManyToOne
-//	@JoinColumn(name = "sender_id")
-//	private User sender;
-//
-//	@ManyToOne
-//	@JoinColumn(name = "recipent_id")
-//	private User recipient;
+	@ManyToOne
+	@JoinColumn(name = "sender_id")
+	private User sender;
 
-//	@ManyToOne
-//	@JoinColumn(name = "reply_to_id")
-//	private Message replyToId;
-//
-//	@OneToMany(mappedBy = "replyToId")
-//	private List<Message> replies;
-//
-//	@Column(name = "created_at")
-//	private LocalDateTime createdAt;
+	@ManyToOne
+	@JoinColumn(name = "recipent_id")
+	private User recipient;
+
+	@ManyToOne
+	@JoinColumn(name = "reply_to_id")
+	private Message replyToId;
+
+	@OneToMany(mappedBy = "replyToId")
+	private List<Message> replies;
+
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
 
 	public Message() {
 		super();
 	}
 
-//	public List<Message> getReplies() {
-//		return replies;
-//	}
-//
-//	public void setReplies(List<Message> replies) {
-//		this.replies = replies;
-//	}
+	public List<Message> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<Message> replies) {
+		this.replies = replies;
+	}
 
 	public int getId() {
 		return id;
@@ -78,37 +78,37 @@ public class Message {
 		this.read = read;
 	}
 
-//	public User getSender() {
-//		return sender;
-//	}
-//
-//	public void setSender(User sender) {
-//		this.sender = sender;
-//	}
-//
-//	public User getRecipient() {
-//		return recipient;
-//	}
-//
-//	public void setRecipient(User recipient) {
-//		this.recipient = recipient;
-//	}
+	public User getSender() {
+		return sender;
+	}
 
-//	public Message getReplyToId() {
-//		return replyToId;
-//	}
-//
-//	public void setReplyToId(Message replyToId) {
-//		this.replyToId = replyToId;
-//	}
-//
-//	public LocalDateTime getCreatedAt() {
-//		return createdAt;
-//	}
-//
-//	public void setCreatedAt(LocalDateTime createdAt) {
-//		this.createdAt = createdAt;
-//	}
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+
+	public User getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(User recipient) {
+		this.recipient = recipient;
+	}
+
+	public Message getReplyToId() {
+		return replyToId;
+	}
+
+	public void setReplyToId(Message replyToId) {
+		this.replyToId = replyToId;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 
 	@Override
 	public int hashCode() {
@@ -137,13 +137,13 @@ public class Message {
 		builder.append(", read=");
 		builder.append(read);
 		builder.append(", sender=");
-//		builder.append(sender);
-//		builder.append(", recipient=");
-//		builder.append(recipient);
-//		builder.append(", replyToId=");
-//		builder.append(replyToId);
-//		builder.append(", createdAt=");
-//		builder.append(createdAt);
+		builder.append(sender);
+		builder.append(", recipient=");
+		builder.append(recipient);
+		builder.append(", replyToId=");
+		builder.append(replyToId);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
 		builder.append("]");
 		return builder.toString();
 	}
