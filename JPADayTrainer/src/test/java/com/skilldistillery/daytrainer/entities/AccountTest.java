@@ -48,6 +48,7 @@ class AccountTest {
 		assertNotNull(acc);
 		assertEquals(1000.00,acc.getBalance());
 		assertEquals(500.00,acc.getMarginAmount());
+		assertTrue(acc.isMarginEnable());
 		
 	}
 	@Test
