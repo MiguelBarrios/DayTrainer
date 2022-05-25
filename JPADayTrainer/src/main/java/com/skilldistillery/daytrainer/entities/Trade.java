@@ -1,6 +1,7 @@
 package com.skilldistillery.daytrainer.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Trade {
@@ -32,11 +37,73 @@ public class Trade {
 	@Column(name= "has_executed")
 	private boolean hasExecuted;
 
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
+	@OneToOne
+	@JoinColumn(name="stock_id")
+	private Stock stock;
+	
+	
+	@OneToOne
+	@JoinColumn(name="transaction_id")
+	private Transaction transaction;
+	
+	@OneToMany(mappedBy="user")
+	private List<Comment>comments;
 	
 	//methods
 	public Trade() {
 		super();
+	}
+
+
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+
+
+	public Transaction getTransaction() {
+		return transaction;
+	}
+
+
+
+	public void setTransaction(Transaction transaction) {
+		this.transaction = transaction;
+	}
+
+
+
+	public Stock getStock() {
+		return stock;
+	}
+
+
+
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 

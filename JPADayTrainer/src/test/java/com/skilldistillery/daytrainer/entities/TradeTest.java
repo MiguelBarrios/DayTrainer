@@ -1,8 +1,6 @@
 package com.skilldistillery.daytrainer.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,11 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class TradeTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Trade trade;
 	
 
 	@BeforeAll
@@ -35,46 +33,52 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		trade = em.find(Trade.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		trade = null;
 	}
 
 	@Test
+	@DisplayName("Initial Testing")
 	void test1() {
-		assertNotNull(user);
-		assertEquals("admin",user.getUsername());
+		assertNotNull(trade);
+		assertEquals(100,trade.getQuantity());
+		assertEquals("market",trade.getOrderType());
 	}
 	@Test
-	@DisplayName("User to Account mapping")
-	void test2() {
-		Account temp = em.find(Account.class, 1);
-		assertNotNull(user);
-		assertNotNull(temp);
-		assertEquals(temp.getBalance(),user.getAccount().getBalance());
-	}
-	@Test
-	@DisplayName("User to Trade mapping")
+	@DisplayName("Trade to User mapping")
 	void test3() {
-		assertNotNull(user);
-		assertTrue(user.getTrades().size()>0);
+		assertNotNull(trade);
+		assertEquals(1,trade.getUser().getId());
 	}
 	@Test
-	@DisplayName("Holding to User Many to One Mapping")
+	@DisplayName("Stock to Trade One to One mapping")
 	void test4() {
-		assertNotNull(user);
-		assertTrue(user.getHoldings().size()> 0);
+		Stock temp = em.find(Stock.class, 1);
+		assertNotNull(trade);
+		assertEquals(temp.getId(),trade.getStock().getId());
+	
+	}
+	@Test
+	@DisplayName("Transaction to Trade One to One mapping")
+	void test5() {
+		Transaction temp = em.find(Transaction.class, 1);
+		assertNotNull(trade);
+		assertEquals(temp.getId(),trade.getTransaction().getId());
 		
 	}
 	@Test
-	@DisplayName("User to Comments One to Many Mapping")
-	void test5() {
-		assertNotNull(user);
-		assertTrue(user.getHoldings().size()> 0);
+	@DisplayName("Trade to Comment One to Many mapping")
+	void test6() {
+		
+		assertNotNull(trade);
+		assertTrue(trade.getComments().size()> 0);
 		
 	}
-}
+
+} 
+

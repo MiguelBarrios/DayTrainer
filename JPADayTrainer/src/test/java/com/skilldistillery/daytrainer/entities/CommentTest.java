@@ -1,8 +1,6 @@
 package com.skilldistillery.daytrainer.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,11 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class CommentTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Comment com;
 	
 
 	@BeforeAll
@@ -35,46 +33,39 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		com = em.find(Comment.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		com = null;
 	}
 
 	@Test
+	@DisplayName("Initial Testing")
 	void test1() {
-		assertNotNull(user);
-		assertEquals("admin",user.getUsername());
-	}
-	@Test
-	@DisplayName("User to Account mapping")
-	void test2() {
-		Account temp = em.find(Account.class, 1);
-		assertNotNull(user);
-		assertNotNull(temp);
-		assertEquals(temp.getBalance(),user.getAccount().getBalance());
-	}
-	@Test
-	@DisplayName("User to Trade mapping")
-	void test3() {
-		assertNotNull(user);
-		assertTrue(user.getTrades().size()>0);
-	}
-	@Test
-	@DisplayName("Holding to User Many to One Mapping")
-	void test4() {
-		assertNotNull(user);
-		assertTrue(user.getHoldings().size()> 0);
+		assertNotNull(com);
+		assertEquals("Nice trade!",com.getContent());
 		
 	}
 	@Test
 	@DisplayName("User to Comments One to Many Mapping")
-	void test5() {
-		assertNotNull(user);
-		assertTrue(user.getHoldings().size()> 0);
+	void test2() {
+		
+		User temp = em.find(User.class, 1);
+		assertNotNull(com);
+		assertEquals(com.getUser().getId(),temp.getId());
 		
 	}
-}
+	@Test
+	@DisplayName("Trade to Comments One to Many Mapping")
+	void test3() {
+		
+		
+		assertNotNull(com);
+		assertEquals(com.getUser().getId(),1);
+		
+	}
+} 
+

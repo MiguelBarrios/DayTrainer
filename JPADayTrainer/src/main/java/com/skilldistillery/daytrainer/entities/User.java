@@ -1,5 +1,6 @@
 package com.skilldistillery.daytrainer.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,9 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
+	
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,12 +37,55 @@ public class User {
 	private String profilePicture;
 	
 	
+	@OneToOne
+	@JoinColumn(name="account_id")
+	private Account account;
 	
+	@OneToMany(mappedBy= "user")
+	private List<Trade>trades;
+	
+	@OneToMany(mappedBy="user")
+	private List<Holding>holdings;
+	
+	@OneToMany(mappedBy="user")
+	private List<Comment>comments;
 	
 	
 	//Methods
 	public User() {
 		
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<Holding> getHoldings() {
+		return holdings;
+	}
+
+	public void setHoldings(List<Holding> holdings) {
+		this.holdings = holdings;
+	}
+
+	public List<Trade> getTrades() {
+		return trades;
+	}
+
+	public void setTrades(List<Trade> trades) {
+		this.trades = trades;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public String getEmail() {

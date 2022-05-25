@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Stock {
@@ -18,12 +20,45 @@ public class Stock {
 	
 	private String symbol;
 
+	@OneToOne(mappedBy="stock")
+	private Trade trade;
 	
 	
+	@OneToOne
+	@JoinColumn(name= "holding_id")
+	private Holding holding;
 	
 	//methods
 	public Stock() {
 		super();
+	}
+
+
+
+
+	public Holding getHolding() {
+		return holding;
+	}
+
+
+
+
+	public void setHolding(Holding holding) {
+		this.holding = holding;
+	}
+
+
+
+
+	public Trade getTrade() {
+		return trade;
+	}
+
+
+
+
+	public void setTrade(Trade trade) {
+		this.trade = trade;
 	}
 
 

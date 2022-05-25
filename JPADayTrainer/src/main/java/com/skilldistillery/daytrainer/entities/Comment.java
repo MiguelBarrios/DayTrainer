@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Comment {
@@ -20,8 +22,37 @@ public class Comment {
 	
 	private LocalDateTime created;
 
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="trade_id")
+	private Trade trade;
+	
+	
+	
+	
+	//methods
 	public Comment() {
 		super();
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Trade getTrade() {
+		return trade;
+	}
+
+	public void setTrade(Trade trade) {
+		this.trade = trade;
 	}
 
 	public int getId() {

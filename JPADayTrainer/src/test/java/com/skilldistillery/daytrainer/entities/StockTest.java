@@ -1,8 +1,6 @@
 package com.skilldistillery.daytrainer.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,11 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class StockTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Stock stock;
 	
 
 	@BeforeAll
@@ -35,46 +33,38 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		stock = em.find(Stock.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		stock = null;
 	}
 
 	@Test
+	@DisplayName("Initial Testing")
 	void test1() {
-		assertNotNull(user);
-		assertEquals("admin",user.getUsername());
+		assertNotNull(stock);
+		assertEquals("Apple Inc.",stock.getName());
+		assertEquals("AAPL",stock.getSymbol());
 	}
 	@Test
-	@DisplayName("User to Account mapping")
+	@DisplayName("Stock to Trade One to One mapping")
 	void test2() {
-		Account temp = em.find(Account.class, 1);
-		assertNotNull(user);
-		assertNotNull(temp);
-		assertEquals(temp.getBalance(),user.getAccount().getBalance());
+		Trade temp = em.find(Trade.class, 1);
+		assertNotNull(stock);
+		assertEquals(temp.getId(),stock.getTrade().getId());
+	
 	}
 	@Test
-	@DisplayName("User to Trade mapping")
+	@DisplayName("Stock to Holding One to One mapping")
 	void test3() {
-		assertNotNull(user);
-		assertTrue(user.getTrades().size()>0);
-	}
-	@Test
-	@DisplayName("Holding to User Many to One Mapping")
-	void test4() {
-		assertNotNull(user);
-		assertTrue(user.getHoldings().size()> 0);
+		Holding temp = em.find(Holding.class, 1);
+		assertNotNull(stock);
+		assertEquals(temp.getId(),stock.getHolding().getId());
 		
 	}
-	@Test
-	@DisplayName("User to Comments One to Many Mapping")
-	void test5() {
-		assertNotNull(user);
-		assertTrue(user.getHoldings().size()> 0);
-		
-	}
-}
+
+} 
+

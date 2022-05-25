@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Transaction {
@@ -19,8 +20,21 @@ public class Transaction {
 	@Column(name="total_price")
 	private double totalPrice;
 
+	@OneToOne(mappedBy="transaction")
+	private Trade trade;
+	
+	
+	//methods
 	public Transaction() {
 		super();
+	}
+
+	public Trade getTrade() {
+		return trade;
+	}
+
+	public void setTrade(Trade trade) {
+		this.trade = trade;
 	}
 
 	public int getId() {

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Account {
@@ -18,14 +19,37 @@ public class Account {
 	
 	private double balance;
 	
-	@Column(name="margin_enabled")
-	private boolean marginEnabled;
+	@Column(name="margin_enable")
+	private boolean marginEnable;
 	
 	@Column(name="margin_amount")
 	private double marginAmount;
 
+	@OneToOne(mappedBy= "account")
+	private User user;
+	
+	
+	
+	
+	//methods
 	public Account() {
 		super();
+	}
+
+	public boolean isMarginEnable() {
+		return marginEnable;
+	}
+
+	public void setMarginEnable(boolean marginEnable) {
+		this.marginEnable = marginEnable;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public int getId() {
@@ -45,11 +69,11 @@ public class Account {
 	}
 
 	public boolean isMarginEnabled() {
-		return marginEnabled;
+		return marginEnable;
 	}
 
 	public void setMarginEnabled(boolean marginEnabled) {
-		this.marginEnabled = marginEnabled;
+		this.marginEnable = marginEnabled;
 	}
 
 	public double getMarginAmount() {
@@ -62,7 +86,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", balance=" + balance + ", marginEnabled=" + marginEnabled + ", marginAmount="
+		return "Account [id=" + id + ", balance=" + balance + ", marginEnabled=" + marginEnable + ", marginAmount="
 				+ marginAmount + "]";
 	}
 
