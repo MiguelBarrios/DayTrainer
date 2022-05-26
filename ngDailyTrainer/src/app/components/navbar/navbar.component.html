@@ -4,7 +4,7 @@ HTML
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">DayTrainer</a>
+    <a class="navbar-brand" href="home">DayTrainer</a>
 
     <!-- Toggle button -->
 
@@ -17,20 +17,17 @@ HTML
 
     >
       <!-- Left links -->
-      <button
-      type="button"
-      [routerLink]="['/create-user']"
-    >
-     Sign Up
-    </button>
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" [routerLink]="['/home']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="['/create-user']">Sign Up</a>
         </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
             >Disabled</a

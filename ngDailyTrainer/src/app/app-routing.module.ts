@@ -4,10 +4,11 @@ import { SingleStockViewComponent } from './components/single-stock-view/single-
 import { TopMoversComponent } from './components/top-movers/top-movers.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
-  // { path: '/home', component: HomeComponent}
-  // { path: 'leaderBoard', LeaderBoardComponent}
+  { path: 'home', component: HomepageComponent},
+  { path: 'leaderBoard', component: LeaderBoardComponent},
   { path: 'topMovers', component: TopMoversComponent},
   { path: 'singleStockView', component: SingleStockViewComponent},
   { path: 'create-user', component: CreateUserComponent},
