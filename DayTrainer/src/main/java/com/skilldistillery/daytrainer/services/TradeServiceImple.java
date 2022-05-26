@@ -1,5 +1,6 @@
 package com.skilldistillery.daytrainer.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,22 +64,32 @@ public class TradeServiceImple implements TradeService {
 			double updatedBalance = account.getBalance() - (trade.getPricePerShare() * trade.getQuantity());
 			account.setBalance(updatedBalance);
 			accountRepo.saveAndFlush(account);
+			trade.setCompletionDate(LocalDateTime.now());
 			tradeRepo.saveAndFlush(trade);
 			
 		}else {
 			System.out.println("User sold shares: " + stock);
 			//Check if user Has shares
 			//TODO: Brute force, come back and create query
-			this.getCurrentHolding(username, stock.getSymbol());
+			int positionSize = this.getCurrentHolding(username, stock.getSymbol());
+			if(trade.getQuantity() > positionSize) {
+				System.err.println("User tried to sell stock he does not have");
+				return null;
+			}else {
+				double updatedBalance = account.getBalance() + (trade.getPricePerShare() * trade.getQuantity());
+				account.setBalance(updatedBalance);
+				accountRepo.saveAndFlush(account);
+				trade.setCompletionDate(LocalDateTime.now());
+				tradeRepo.saveAndFlush(trade);
+			}
 
 			
 		}		
 		return trade;
 	}
 	
-	private void getCurrentHolding(String username, String symbol) {
+	private int getCurrentHolding(String username, String symbol) {
 		List<Trade> holding = tradeRepo.getUserTradesByStock(username, symbol);
-		int numberOfTrades = holding.size();
 		int positionSize = 0;
 		for(Trade trade : holding) {
 			if(trade.isBuy()) {
@@ -89,6 +100,7 @@ public class TradeServiceImple implements TradeService {
 		}
 		System.out.println("Number of trades on: " + symbol);
 		System.out.println("Position size: " + positionSize);
+		return positionSize;
 
 		
 	}
