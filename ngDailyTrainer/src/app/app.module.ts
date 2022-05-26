@@ -12,6 +12,7 @@ import { TopMoversComponent } from './components/top-movers/top-movers.component
 import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { FormsModule } from '@angular/forms';
 import { CreateUserComponent } from './components/create-user/create-user.component';
@@ -23,6 +24,7 @@ import { AuthService } from './services/auth.service';
     TopMoversComponent,
     PortfolioChartComponent,
     LeaderBoardComponent,
+    NavbarComponent,
     FilterTablePipe,
     CreateUserComponent
   ],

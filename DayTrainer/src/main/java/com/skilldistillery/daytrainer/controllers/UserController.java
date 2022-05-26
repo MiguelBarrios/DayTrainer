@@ -52,8 +52,9 @@ public class UserController {
 
 	}
 	
-	@Scheduled(cron = "0 15 10 15 * ?")
+	@Scheduled(cron = "* * 1 * * MON-FRI", zone = "GMT-5")
 	public void payDay() {
+		//10:15 AM on the 1st day of every month in central standard time
 		userSvc.payDay();
 		System.out.println("pay Day!!");
 	}

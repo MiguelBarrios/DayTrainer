@@ -15,6 +15,7 @@
             <input class="form-control" name="bib" type="text" [(ngModel)]="newUser.biography">
             <label>Password</label>
             <input class="form-control" name="password" type="text" [(ngModel)]="newUser.password">
+            <button class="btn btn-primary" (click)="register(newUser)">Register</button>
         </div>
     </form>
 </div>
