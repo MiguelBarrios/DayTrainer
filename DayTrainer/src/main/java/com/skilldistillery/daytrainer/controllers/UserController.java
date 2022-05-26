@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,8 @@ import com.skilldistillery.daytrainer.services.UserService;
 
 @RestController
 @CrossOrigin({ "*", "http://localhost" })
+@Configuration
+@EnableScheduling
 public class UserController {
 
 	@Autowired
@@ -45,6 +50,14 @@ public class UserController {
 			@PathVariable int userId) {
 		userSvc.destroy(principal.getName(), userId);
 
+	}
+	
+	//cron = "0 15 10 15 * ?, zone=\"GMT+5.30\"
+	
+	@Scheduled(fixedRate = 1000)
+	public void payDay() {
+		userSvc.payDay();
+		System.out.println("pay Day!!");
 	}
 	
 
