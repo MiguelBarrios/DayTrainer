@@ -9,4 +9,12 @@ public interface UserService {
 
 	void destroy(String name, int userId);
 
+
+
+	void payDay();
+
+	User getUserByUsername(String username);
+
+
+
 }

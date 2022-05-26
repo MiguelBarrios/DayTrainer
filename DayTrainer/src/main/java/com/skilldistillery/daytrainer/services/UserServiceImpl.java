@@ -1,5 +1,6 @@
 package com.skilldistillery.daytrainer.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class UserServiceImpl implements UserService {
 		}
 		return null;
 	}
+	
+	@Override
+	public User getUserByUsername(String username) {
+		return userRepo.findByUsername(username);
+	}
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -45,6 +51,18 @@ public class UserServiceImpl implements UserService {
 		if (currentUser != null && currentUser.getRole().equals("admin")) {
 			userRepo.delete(userRepo.getById(userId));
 		}
+	}
+
+	@Override
+	public void payDay() {
+		List<User> allUsers = userRepo.findAll();
+		for (User user : allUsers) {
+			double currentBalance = user.getAccount().getBalance();
+			currentBalance += 200;
+			user.getAccount().setBalance(currentBalance);
+			System.out.print(user.getAccount().getBalance());
+		}
+		
 	}
 
 }
