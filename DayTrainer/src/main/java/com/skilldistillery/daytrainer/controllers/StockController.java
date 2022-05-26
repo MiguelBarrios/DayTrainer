@@ -27,7 +27,7 @@ public class StockController {
 		return stockService.getAllStocks();
 	}
 	
-	@GetMapping("stock/{symbol}")
+	@GetMapping("stocks/{symbol}")
 	public Stock getNumberOfShares(@PathVariable String symbol, Principal principal) {
 		String username = principal.getName();
 		return stockService.getStockBySymbol(username, symbol);

@@ -4,19 +4,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
 import { PortfolioChartComponent } from './components/portfolio-chart/portfolio-chart.component';
 import { TopMoversComponent } from './components/top-movers/top-movers.component';
 import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 import { NavbarComponent } from './components/navbar/navbar.component';
+
 import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { FormsModule } from '@angular/forms';
+
+import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
-import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -26,12 +29,12 @@ import { AuthService } from './services/auth.service';
     LeaderBoardComponent,
     NavbarComponent,
     FilterTablePipe,
+    SingleStockViewComponent,
     CreateUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     NgbModule,
     HttpClientModule,
     NgChartsModule,
@@ -39,11 +42,7 @@ import { AuthService } from './services/auth.service';
     MatButtonToggleModule,
     FormsModule,
   ],
-  providers: [TradesService,
-  FilterTablePipe,
-  AuthService
-
-],
-  bootstrap: [AppComponent]
+  providers: [TradesService, FilterTablePipe],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
