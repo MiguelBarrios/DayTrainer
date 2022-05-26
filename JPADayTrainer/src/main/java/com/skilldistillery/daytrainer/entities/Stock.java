@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.NaturalId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Stock {
@@ -22,6 +22,7 @@ public class Stock {
 	@Column(name="exchange_name")
 	private String exchangeName;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy="stock")
 	private Trade trade;
 
