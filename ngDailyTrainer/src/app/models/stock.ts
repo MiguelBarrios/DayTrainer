@@ -1,11 +1,11 @@
 export class Stock {
 
-  id: string;
+  symbol: string;
   name: string;
   exchangeName: string;
 
-  constructor(id: string = "", name: string =  "", exchangeName: string = "") {
-   this.id = id,
+  constructor(symbol: string = "", name: string =  "", exchangeName: string = "") {
+   this.symbol = symbol,
    this.name = name,
    this.exchangeName = exchangeName
   }

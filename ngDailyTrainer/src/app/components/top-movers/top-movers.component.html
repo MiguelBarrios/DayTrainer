@@ -1,18 +1,54 @@
-<table class="table border table-borderless">
-    <thead>
+<div class = "container">
+
+
+  <div class = "moversTable">
+    <table class="table border table-borderless">
+      <thead>
         <tr class="border">
-            <th scope="col">Change</th>
-            <th scope="col">Last Price</th>
-            <th scope="col">Symbol</th>
-            <th scope="col">Volume</th>
+          <th scope="col">Change</th>
+          <th scope="col">Last Price</th>
+          <th scope="col">Symbol</th>
+          <th scope="col">Volume</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of movers" [ngClass]="checkTrend(item)">
-            <td>{{item.change | number: '1.2-2'}}</td>
-            <td>{{item.last}}</td>
-            <td>{{item.symbol}}</td>
-            <td>{{item.totalVolume}}</td>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of movers" [ngClass]="checkTrend(item)">
+          <td>{{item.change | number: '1.2-2'}}</td>
+          <td>{{item.last}}</td>
+          <td>{{item.symbol}}</td>
+          <td>{{item.totalVolume}}</td>
         </tr>
-    </tbody>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class = "stocksTable">
+    <input type="text" id="search" name="searchInput" [(ngModel)]="searchValue" >
+<table class ="table">
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Market Open</th>
+      <th>Market Close</th>
+      <th>Currency</th>
+      <th>Match Score</th>
+    </tr>
+  </thead>
+
+    <tr *ngFor="let stock of stocks" >
+      <td>{{stock.symbol}}</td>
+      <td>{{stock.name}}</td>
+      <!-- <td>{{stock.type}}</td>
+      <td>{{stock.marketOpen}}</td>
+      <td>{{stock.marketClose}}</td>
+      <td>{{stock.currency}}</td>
+      <td>{{stock.matchScore}}</td> -->
+    </tr>
+
 </table>
+  </div>
+
+</div>

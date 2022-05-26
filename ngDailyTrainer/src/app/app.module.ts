@@ -12,7 +12,8 @@ import { TopMoversComponent } from './components/top-movers/top-movers.component
 import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-
+import { FilterTablePipe } from './pipes/filter-table.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,17 +21,21 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     TopMoversComponent,
     PortfolioChartComponent,
     LeaderBoardComponent,
+    FilterTablePipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+
     NgbModule,
     HttpClientModule,
     NgChartsModule,
     BrowserAnimationsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    FormsModule
   ],
-  providers: [TradesService],
+  providers: [TradesService,
+  FilterTablePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
