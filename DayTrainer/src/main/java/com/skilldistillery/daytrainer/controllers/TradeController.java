@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.daytrainer.entities.Account;
+import com.skilldistillery.daytrainer.entities.OrderType;
 import com.skilldistillery.daytrainer.entities.Stock;
 import com.skilldistillery.daytrainer.entities.Trade;
 import com.skilldistillery.daytrainer.entities.User;
@@ -55,45 +56,14 @@ public class TradeController {
 	@PostMapping("trades")
 	public Trade create(@RequestBody Trade trade, HttpServletResponse response, Principal principal) {
 		
-		//PERSIST STOCK SYMBOL IF NOT PRESENT
-		Stock stock = trade.getStock();
-		stock = stockService.getStock(stock);
+		String orderType = trade.getOrderType().getName();
+		if(orderType.equals("Market")){
+			trade = tradeService.createMarketTrade(principal.getName(),trade);
+		}else {
+			//TODO: Place limit order
+		}
 		
-		User user = userService.getUserByUsername(principal.getName());
-		System.out.println(user);
-		System.out.println(user.getAccount());
-		Account account = user.getAccount();
-		System.out.println(account);
-//		double balance = account.getBalance();
-//		System.out.println(account);
-//		
-//		OrderType orderType = trade.getOrderType();
-//		if(orderType.getName().equals("Market")) {
-//			if(trade.isBuy()) {
-//				double totalCost = trade.getPricePerShare() * trade.getPricePerShare();
-//				if(totalCost < balance) {
-//					//Determine status codes for incuficient funds
-//				}else {
-//					//User has enough funds for trade to execute
-//					Trade executedTrade = tradeService.createMarketTrade(principal.getName(), trade);
-//					return executedTrade;
-//				}
-//			}else {
-//				
-//			}
-//		}
-//		else {
-//			
-//		}
-//		
-		
-//		String username = principal.getName();
-//		Trade res = tradeService.createTrade(username, trade);
-//		if(res == null) {
-//			response.setStatus(404);
-//		}
-//		return res;
-		return null;
+		return trade;
 	}
 	
 	@GetMapping("trades/stock/{symbol}")
