@@ -41,7 +41,7 @@ public class Trade {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "stock_symbol")
 	private Stock stock;
 

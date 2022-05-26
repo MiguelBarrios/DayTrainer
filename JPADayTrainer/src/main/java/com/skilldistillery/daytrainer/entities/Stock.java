@@ -22,9 +22,9 @@ public class Stock {
 	@Column(name="exchange_name")
 	private String exchangeName;
 	
-	@JsonIgnore
-	@OneToOne(mappedBy="stock")
-	private Trade trade;
+//	@JsonIgnore
+//	@OneToOne(mappedBy="stock")
+//	private Trade trade;
 
 	
 	
@@ -34,13 +34,13 @@ public class Stock {
 		super();
 	}
 
-	public Trade getTrade() {
-		return trade;
-	}
-
-	public void setTrade(Trade trade) {
-		this.trade = trade;
-	}
+//	public Trade getTrade() {
+//		return trade;
+//	}
+//
+//	public void setTrade(Trade trade) {
+//		this.trade = trade;
+//	}
 
 	public String getSymbol() {
 		return symbol;
