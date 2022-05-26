@@ -211,71 +211,81 @@ public class User {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("User [id=");
-		builder.append(id);
-		builder.append(", username=");
-		builder.append(username);
-		builder.append(", firstName=");
-		builder.append(firstName);
-		builder.append(", lastName=");
-		builder.append(lastName);
-		builder.append(", password=");
-		builder.append(password);
-		builder.append(", enabled=");
-		builder.append(enabled);
-		builder.append(", role=");
-		builder.append(role);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", biography=");
-		builder.append(biography);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append(", profilePicture=");
-		builder.append(profilePicture);
-		builder.append(", account=");
-		builder.append(account);
-		builder.append(", trades=");
-		builder.append(trades);
-		builder.append(", comments=");
-		builder.append(comments);
-		builder.append(", getId()=");
-		builder.append(getId());
-		builder.append(", getUsername()=");
-		builder.append(getUsername());
-		builder.append(", getFirstName()=");
-		builder.append(getFirstName());
-		builder.append(", getLastName()=");
-		builder.append(getLastName());
-		builder.append(", getPassword()=");
-		builder.append(getPassword());
-		builder.append(", isEnabled()=");
-		builder.append(isEnabled());
-		builder.append(", getRole()=");
-		builder.append(getRole());
-		builder.append(", getEmail()=");
-		builder.append(getEmail());
-		builder.append(", getBiography()=");
-		builder.append(getBiography());
-		builder.append(", getCreatedAt()=");
-		builder.append(getCreatedAt());
-		builder.append(", getProfilePicture()=");
-		builder.append(getProfilePicture());
-		builder.append(", getAccount()=");
-		builder.append(getAccount());
-		builder.append(", getTrades()=");
-		builder.append(getTrades());
-		builder.append(", getComments()=");
-		builder.append(getComments());
-		builder.append(", hashCode()=");
-		builder.append(hashCode());
-		builder.append(", getClass()=");
-		builder.append(getClass());
-		builder.append(", toString()=");
-		builder.append(super.toString());
-		builder.append("]");
-		return builder.toString();
+		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", password=" + password + ", enabled=" + enabled + ", role=" + role + ", email=" + email
+				+ ", biography=" + biography + ", createdAt=" + createdAt + ", profilePicture=" + profilePicture
+				+ ", account=" + account + "]";
 	}
+	
+	
+
+//	@Override
+//	public String toString() {
+//		StringBuilder builder = new StringBuilder();
+//		builder.append("User [id=");
+//		builder.append(id);
+//		builder.append(", username=");
+//		builder.append(username);
+//		builder.append(", firstName=");
+//		builder.append(firstName);
+//		builder.append(", lastName=");
+//		builder.append(lastName);
+//		builder.append(", password=");
+//		builder.append(password);
+//		builder.append(", enabled=");
+//		builder.append(enabled);
+//		builder.append(", role=");
+//		builder.append(role);
+//		builder.append(", email=");
+//		builder.append(email);
+//		builder.append(", biography=");
+//		builder.append(biography);
+//		builder.append(", createdAt=");
+//		builder.append(createdAt);
+//		builder.append(", profilePicture=");
+//		builder.append(profilePicture);
+//		builder.append(", account=");
+//		builder.append(account);
+//		builder.append(", trades=");
+//		builder.append(trades);
+//		builder.append(", comments=");
+//		builder.append(comments);
+//		builder.append(", getId()=");
+//		builder.append(getId());
+//		builder.append(", getUsername()=");
+//		builder.append(getUsername());
+//		builder.append(", getFirstName()=");
+//		builder.append(getFirstName());
+//		builder.append(", getLastName()=");
+//		builder.append(getLastName());
+//		builder.append(", getPassword()=");
+//		builder.append(getPassword());
+//		builder.append(", isEnabled()=");
+//		builder.append(isEnabled());
+//		builder.append(", getRole()=");
+//		builder.append(getRole());
+//		builder.append(", getEmail()=");
+//		builder.append(getEmail());
+//		builder.append(", getBiography()=");
+//		builder.append(getBiography());
+//		builder.append(", getCreatedAt()=");
+//		builder.append(getCreatedAt());
+//		builder.append(", getProfilePicture()=");
+//		builder.append(getProfilePicture());
+//		builder.append(", getAccount()=");
+//		builder.append(getAccount());
+//		builder.append(", getTrades()=");
+//		builder.append(getTrades());
+//		builder.append(", getComments()=");
+//		builder.append(getComments());
+//		builder.append(", hashCode()=");
+//		builder.append(hashCode());
+//		builder.append(", getClass()=");
+//		builder.append(getClass());
+//		builder.append(", toString()=");
+//		builder.append(super.toString());
+//		builder.append("]");
+//		return builder.toString();
+//	}
 
 }

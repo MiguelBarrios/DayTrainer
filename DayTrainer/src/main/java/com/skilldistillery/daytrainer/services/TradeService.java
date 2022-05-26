@@ -8,7 +8,7 @@ public interface TradeService {
 
 	Trade getTradeById(int tid);
 
-	Trade createTrade(String username, Trade trade);
+	Trade createMarketTrade(String username, Trade trade);
 
 	
 	
