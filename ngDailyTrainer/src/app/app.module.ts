@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { FormsModule } from '@angular/forms';
+import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     PortfolioChartComponent,
     LeaderBoardComponent,
     FilterTablePipe,
+    SingleStockViewComponent,
   ],
   imports: [
     BrowserModule,
