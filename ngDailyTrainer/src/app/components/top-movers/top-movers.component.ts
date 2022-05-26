@@ -1,7 +1,9 @@
+import { AlphaVantageAPIService } from './../../services/alpha-vantage-api.service';
 import { Component, OnInit } from '@angular/core';
 import { TimeoutInfo } from 'rxjs';
 import { Movers } from 'src/app/models/movers';
 import { TradesService } from 'src/app/services/trades.service';
+import { Stock } from 'src/app/models/stock';
 
 @Component({
   selector: 'app-top-movers',
@@ -10,12 +12,17 @@ import { TradesService } from 'src/app/services/trades.service';
 })
 export class TopMoversComponent implements OnInit {
 
-  movers:Movers[] | null = null;
+  movers:Movers[] = [];
   id:any | null = null;
 
-  constructor(private tradeService:TradesService) { }
+  stocks: Stock[] = [];
+  searchValue: string ="";
+
+  constructor(private tradeService:TradesService, private stockService: AlphaVantageAPIService) { }
 
   ngOnInit(): void {
+
+  this.getAllStocks(this.searchValue);
     this.getTopMovers();
     this.id = setInterval(() => {
       this.getTopMovers();
@@ -48,6 +55,16 @@ export class TopMoversComponent implements OnInit {
     }
   }
 
+  getAllStocks(searchValue: string) {
+    this.stockService.search(searchValue).subscribe(res => {this.stocks = res; console.log(res)});
+    // this.stockService.retrieveAll().subscribe(
+    //   (data) =>{ this.stocks = data;
+    //   console.log("***new stocks request recieved")},
+
+    //   (err) =>{console.log(err)
+    //   console.log(this.stocks) }
+    // )
+  }
 
 
-}
+  }
