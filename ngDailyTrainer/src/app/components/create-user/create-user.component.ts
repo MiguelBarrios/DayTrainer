@@ -4,7 +4,6 @@ import {ModalDismissReasons, NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bo
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
-
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',

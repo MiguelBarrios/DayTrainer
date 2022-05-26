@@ -1,1 +1,11 @@
-<p>login works!</p>
+<div id="loginInUserContainer">
+    <form name="createNewUser">
+        <div class="form-group">
+            <label>First Name</label>
+            <input class="form-control" name="firstname" type="text" [(ngModel)]="loginUser.username">
+            <label>Password</label>
+            <input class="form-control" name="password" type="text" [(ngModel)]="loginUser.password">
+            <button class="btn btn-primary" (click)="login(loginUser)">Login</button>
+        </div>
+    </form>
+</div>
