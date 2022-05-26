@@ -59,6 +59,9 @@ public class TradeController {
 		String orderType = trade.getOrderType().getName();
 		if(orderType.equals("Market")){
 			trade = tradeService.createMarketTrade(principal.getName(),trade);
+			if(trade == null) {
+				response.setStatus(401);
+			}
 		}else {
 			//TODO: Place limit order
 		}
