@@ -14,16 +14,15 @@ public class StockServiceImple implements StockService {
 	@Autowired
 	private StockRepository stockRepo;
 	
-	private Stock getStock(Stock stock) {
+	@Override
+	public Stock getStock(Stock stock) {
 		Optional<Stock> option = stockRepo.findById(stock.getName());
-		Stock managed = option.isPresent() ?  option.get() : null;
-		
-		if(managed == null) {
-			stockRepo.saveAndFlush(managed);
+		if(option.isEmpty()) {
+			stockRepo.saveAndFlush(stock);
+			return stock;
+		}else {
+			return option.get();
 		}
-		
-		
-		return managed;
 	}
 	
 
