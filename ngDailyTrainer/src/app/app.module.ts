@@ -11,9 +11,13 @@ import { PortfolioChartComponent } from './components/portfolio-chart/portfolio-
 import { TopMoversComponent } from './components/top-movers/top-movers.component';
 import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
+import { NavbarComponent } from './components/navbar/navbar.component';
+
 import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { FormsModule } from '@angular/forms';
+
 import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
 
 @NgModule({
@@ -22,6 +26,7 @@ import { SingleStockViewComponent } from './components/single-stock-view/single-
     TopMoversComponent,
     PortfolioChartComponent,
     LeaderBoardComponent,
+    NavbarComponent,
     FilterTablePipe,
     SingleStockViewComponent,
   ],
@@ -34,10 +39,9 @@ import { SingleStockViewComponent } from './components/single-stock-view/single-
     NgChartsModule,
     BrowserAnimationsModule,
     MatButtonToggleModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [TradesService,
-  FilterTablePipe],
-  bootstrap: [AppComponent]
+  providers: [TradesService, FilterTablePipe],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

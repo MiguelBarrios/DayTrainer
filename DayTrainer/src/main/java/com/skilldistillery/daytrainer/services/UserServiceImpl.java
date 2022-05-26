@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.daytrainer.entities.User;
+import com.skilldistillery.daytrainer.repository.AccountRepository;
 import com.skilldistillery.daytrainer.repository.UserRepository;
 
 @Service
@@ -14,6 +15,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private AccountRepository accRepo;
 
 	@Override
 	public User getUserById(int userId, String name) {
@@ -23,10 +27,8 @@ public class UserServiceImpl implements UserService {
 			User foundUser = found.get();
 			if (foundUser != null) {
 				return foundUser;
-
 			}
 		}
-
 		return null;
 	}
 
@@ -59,10 +61,10 @@ public class UserServiceImpl implements UserService {
 		for (User user : allUsers) {
 			double currentBalance = user.getAccount().getBalance();
 			currentBalance += 200;
+			System.out.println(currentBalance);
 			user.getAccount().setBalance(currentBalance);
-			System.out.print(user.getAccount().getBalance());
+			accRepo.saveAndFlush(user.getAccount());
 		}
-		
 	}
 
 }
