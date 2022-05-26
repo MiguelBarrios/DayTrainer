@@ -52,9 +52,7 @@ public class UserController {
 
 	}
 	
-	//cron = "0 15 10 15 * ?, zone=\"GMT+5.30\"
-	
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(cron = "0 15 10 15 * ?")
 	public void payDay() {
 		userSvc.payDay();
 		System.out.println("pay Day!!");

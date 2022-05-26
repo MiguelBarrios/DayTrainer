@@ -16,8 +16,8 @@ public class StockServiceImple implements StockService {
 	
 	@Override
 	public Stock getStock(Stock stock) {
-		Optional<Stock> option = stockRepo.findById(stock.getName());
-		if(option.isEmpty()) {
+		Optional<Stock> option = stockRepo.findById(stock.getSymbol());
+		if(!option.isPresent()) {
 			stockRepo.saveAndFlush(stock);
 			return stock;
 		}else {
