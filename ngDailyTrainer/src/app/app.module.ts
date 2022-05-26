@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 
 import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     NavbarComponent,
     FilterTablePipe,
     SingleStockViewComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
