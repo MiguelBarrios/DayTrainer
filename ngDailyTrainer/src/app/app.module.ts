@@ -12,6 +12,7 @@ import { TopMoversComponent } from './components/top-movers/top-movers.component
 import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     TopMoversComponent,
     PortfolioChartComponent,
     LeaderBoardComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

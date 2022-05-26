@@ -95,11 +95,5 @@ public class TradeController {
 //		return res;
 		return null;
 	}
-	
-	@GetMapping("trades/stock/{symbol}")
-	public void getNumberOfShares(@PathVariable String symbol, Principal principal) {
-		String username = principal.getName();
-		//TODO: FINISH
-	}
 
 }
