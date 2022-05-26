@@ -8,23 +8,28 @@ import { Injectable } from '@angular/core';
 })
 export class AlphaVantageAPIService {
 
+  private individualQuoteUrl = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=QYLD&apikey=EQWYNBU1CC0IOGR0"
   private url = 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=';
   private endUrl = '&apikey=EQWYNBU1CC0IOGR0';
 
   constructor(private http:HttpClient) {};
 
 
- retrieveAll() {
-   return this.http.get<Stock[]>(this.url + "" + this.endUrl).pipe(
-    catchError((err:any) => {
-      console.log(err);
-      return throwError('KABOOM');
-    }));
- }
+//  retrieveAll() {
+//    return this.http.get<Stock[]>(this.searchForStock).pipe(
+//     catchError((err:any) => {
+//       console.log(err);
+//       return throwError('KABOOM');
+//     }));
+//  }
 
 
  search(keyword: string) {
-  return this.http.get<any[]>(this.url+ keyword + this.endUrl).pipe(
+  var searchForStock = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" +
+          "QYL"
+          +
+          "&apikey=EQWYNBU1CC0IOGR0";
+  return this.http.get<any[]>(this.individualQuoteUrl).pipe(
     catchError((err:any) => {
       console.log(err);
       return throwError('KABOOM');

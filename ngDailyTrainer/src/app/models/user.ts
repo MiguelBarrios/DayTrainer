@@ -3,27 +3,27 @@ import { Trade } from "./trade";
 
 export class User {
 
-  id: number;
-  username: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  enabled: boolean;
-  role: string;
-  email: string;
-  biography: string;
-  createdAt: Date;
-  profilePicture: string;
-  account: string;
-  trades: Trade[];
-  comments: Comment[];
-  sentMessages: Message[];
-  recMessages: Message[];
+  id: number | null;
+  username: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  password: string | null;
+  enabled: boolean | null;
+  role: string | null;
+  email: string | null;
+  biography: string | null;
+  createdAt: Date | null;
+  profilePicture: string | null;
+  account: string | null;
+  trades: Trade[] | null;
+  comments: Comment[] | null;
+  sentMessages: Message[] | null;
+  recMessages: Message[] | null;
 
-  constructor(  id: number = 0, username: string = "", firstName: string = "", lastName: string = "",
-   password: string = "", enabled: boolean = true, role: string = "", email: string = "",
-   biography: string = "", createdAt: Date, profilePicture: string = "", account: string = "",
-    trades: Trade[], comments: Comment[], sentMessages: Message[], recMessages: Message[]) {
+  constructor(  id: number | null = 0, username: string | null = "", firstName: string | null = "", lastName: string | null = "",
+   password: string | null = "", enabled: boolean | null = true, role: string | null = "", email: string | null = "",
+   biography: string | null = "", createdAt: Date | null = null, profilePicture: string | null = "", account: string | null = "",
+    trades: Trade[] | null = [], comments: Comment[] = [], sentMessages: Message[] = [], recMessages: Message[] = []) {
 
       this.id = id,
       this.username = username;
