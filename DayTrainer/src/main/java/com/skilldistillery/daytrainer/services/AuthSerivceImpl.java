@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.User;
+import com.skilldistillery.daytrainer.repository.AccountRepository;
 import com.skilldistillery.daytrainer.repository.UserRepository;
 
 @Service
@@ -16,20 +17,28 @@ public class AuthSerivceImpl implements AuthService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private AccountRepository accountRepo;
 
 	@Override
 	public User register(User user) {
 		user.setPassword(encoder.encode(user.getPassword()));
-		Account newAccount = new Account();
-		newAccount.setBalance(10000);
-		user.setAccount(newAccount);
+
 		//TODO: password strength validation, etc.
 		//TODO: make sure username is unique
 		user.setEnabled(true);
 		user.setRole("standard");
-		
 		userRepo.saveAndFlush(user);
 		
+		Account newAccount = new Account();
+		newAccount.setBalance(10000);
+		newAccount.setUser(user);
+		accountRepo.saveAndFlush(newAccount);
+		user.setAccount(newAccount);
+		
+		
+
 		return user;
 	}
 

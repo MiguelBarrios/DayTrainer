@@ -22,11 +22,11 @@ export class TopMoversComponent implements OnInit {
 
   ngOnInit(): void {
 
-  this.getAllStocks(this.searchValue);
+   //this.getAllStocks(this.searchValue);
     this.getTopMovers();
     this.id = setInterval(() => {
       this.getTopMovers();
-    }, 5000);
+    }, 15000);
   }
 
   ngOnDestroy() {
@@ -55,16 +55,31 @@ export class TopMoversComponent implements OnInit {
     }
   }
 
-  getAllStocks(searchValue: string) {
-    this.stockService.search(searchValue).subscribe(res => {this.stocks = res; console.log(res)});
-    // this.stockService.retrieveAll().subscribe(
-    //   (data) =>{ this.stocks = data;
-    //   console.log("***new stocks request recieved")},
+  // getAllStocks(searchValue: string) {
+  //   // this.stockService.search(searchValue).subscribe(res => {this.stocks = res; console.log(res)});
+  //   this.stockService.retrieveAll().subscribe(
+  //     (data) =>{
+  //        this.stocks = data;
+  //     }
+  //     console.log("***new stocks request recieved")},
+  //     (err) => {
+  //       console.log(err)
+  //       console.log(this.stocks) }
+  //   )
+  // }
 
-    //   (err) =>{console.log(err)
-    //   console.log(this.stocks) }
-    // )
-  }
 
+  //
 
-  }
+  // getAllStocks(searchValue: string){
+  //   this.stockService.retrieveAll().subscribe(
+  //     (data) => {
+  //       this.stocks = data;
+  //       console.log("***EX Stock service recived");
+  //     },
+  //     (error) => {
+  //       console.log("Observable got and error " + error)
+  //     }
+  //   )
+  // }
+}
