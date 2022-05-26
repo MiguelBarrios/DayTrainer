@@ -19,6 +19,7 @@ import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { FormsModule } from '@angular/forms';
 
 import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SingleStockViewComponent } from './components/single-stock-view/single-
     NavbarComponent,
     FilterTablePipe,
     SingleStockViewComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,
