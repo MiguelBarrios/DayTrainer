@@ -44,12 +44,24 @@ public class TradeController {
 	
 	@PostMapping("trades")
 	public Trade create(@RequestHeader HttpHeaders header, @RequestBody Trade trade, HttpServletResponse response) {
+		//TODO: PERSIST STOCK SYMBOL IF NOT PRESENT
+		//TODO: SET COMPLETED DATE
+		//TODO: IF SELL CHECK IF USER HAS SHARES
+		//TODO: IF SELL CREDIT MONEY TO USER'S ACCOUNT
+		//TODO: IF BUY CHECK IF USER HAS ENOUGH FUNDS
+		//TODO: IF BUY SUBTRACT MONEY FROM USERS ACCOUNT
 		String username = getUserName(header);
 		Trade res = tradeService.createTrade(username, trade);
 		if(res == null) {
 			response.setStatus(404);
 		}
 		return res;
+	}
+	
+	@GetMapping("trades/{symbol}")
+	public void getNumberOfShares(@PathVariable String symbol, @RequestHeader HttpHeaders header ) {
+		String username = getUserName(header);
+		//TODO: FINISH
 	}
 	
 	public String getUserName(HttpHeaders header) {
