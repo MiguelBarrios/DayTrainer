@@ -74,6 +74,15 @@ class TradeTest {
 		assertTrue(trade.getComments().size()> 0);
 		
 	}
+	
+//	@Test
+//	@DisplayName("MTO relationship to Order type")
+//	void test7() {
+//		assertNotNull(trade);
+//		OrderType type = trade.getOrdertype();
+//		assertNotNull(type);
+//		assertEquals("Market", type.getName());
+//	}
 
 } 
 

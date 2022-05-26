@@ -21,10 +21,10 @@ public class OrderType {
 	
 	private String description;
 	
-	@OneToMany
-	@JoinColumn(name = "order_type_id")
-	private List<Trade> trade;
-	
+//	@OneToMany
+//	@JoinColumn(name = "order_type_id")
+//	private List<Trade> trade;
+//	
 	
 	public OrderType() {
 		super();
@@ -46,13 +46,13 @@ public class OrderType {
 	
 
 
-	public List<Trade> getTrade() {
-		return trade;
-	}
-
-	public void setTrade(List<Trade> trade) {
-		this.trade = trade;
-	}
+//	public List<Trade> getTrade() {
+//		return trade;
+//	}
+//
+//	public void setTrade(List<Trade> trade) {
+//		this.trade = trade;
+//	}
 
 	public int getId() {
 		return id;

@@ -47,6 +47,7 @@ public class TradeController {
 	@PostMapping("trades")
 	public Trade create(@RequestHeader HttpHeaders header, @RequestBody Trade trade) {
 		String username = extractUserName(header);
+		System.out.println(trade);
 		Trade res = tradeSvc.createTrade(username, trade);
 		return res;
 	}
