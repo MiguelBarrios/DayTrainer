@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.repository.UserRepository;
 
@@ -19,6 +20,9 @@ public class AuthSerivceImpl implements AuthService {
 	@Override
 	public User register(User user) {
 		user.setPassword(encoder.encode(user.getPassword()));
+		Account newAccount = new Account();
+		newAccount.setBalance(10000);
+		user.setAccount(newAccount);
 		//TODO: password strength validation, etc.
 		//TODO: make sure username is unique
 		user.setEnabled(true);
@@ -33,6 +37,6 @@ public class AuthSerivceImpl implements AuthService {
 	public User getUserByUsername(String username) {
 		return userRepo.findByUsername(username);
 	}
-
+	
 
 }

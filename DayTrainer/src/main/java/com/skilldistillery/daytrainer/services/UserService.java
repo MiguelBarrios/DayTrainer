@@ -9,4 +9,6 @@ public interface UserService {
 
 	void destroy(String name, int userId);
 
+	
+	
 }
