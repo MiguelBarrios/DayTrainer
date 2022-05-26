@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.NaturalId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Stock {
@@ -22,8 +22,9 @@ public class Stock {
 	@Column(name="exchange_name")
 	private String exchangeName;
 	
-	@OneToOne(mappedBy="stock")
-	private Trade trade;
+//	@JsonIgnore
+//	@OneToOne(mappedBy="stock")
+//	private Trade trade;
 
 	
 	
@@ -33,13 +34,13 @@ public class Stock {
 		super();
 	}
 
-	public Trade getTrade() {
-		return trade;
-	}
-
-	public void setTrade(Trade trade) {
-		this.trade = trade;
-	}
+//	public Trade getTrade() {
+//		return trade;
+//	}
+//
+//	public void setTrade(Trade trade) {
+//		this.trade = trade;
+//	}
 
 	public String getSymbol() {
 		return symbol;

@@ -41,7 +41,7 @@ public class Trade {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "stock_symbol")
 	private Stock stock;
 
@@ -54,6 +54,10 @@ public class Trade {
 	
 	@Column(name = "strike_price")
 	private Double strikePrice;
+	
+	@ManyToOne
+    @JoinColumn(name="order_type_id")
+	private OrderType orderType;
 
 	// methods
 	public Trade() {
@@ -153,6 +157,17 @@ public class Trade {
 	public void setStrikePrice(Double strikePrice) {
 		this.strikePrice = strikePrice;
 	}
+
+
+	public OrderType getOrderType() {
+		return orderType;
+	}
+
+
+	public void setOrderType(OrderType orderType) {
+		this.orderType = orderType;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {

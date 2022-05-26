@@ -1,6 +1,4 @@
 package com.skilldistillery.daytrainer.controllers;
-
-
 import java.util.Base64;
 import java.util.List;
 
@@ -25,18 +23,18 @@ import com.skilldistillery.daytrainer.services.TradeService;
 public class TradeController {
 	
 	@Autowired
-	private TradeService tradeSvc;
+	private TradeService tradeService;
 	
 	@GetMapping("trades")
 	public List<Trade> getUserTrades( @RequestHeader HttpHeaders header){
-		String username = extractUserName(header);
-		return tradeSvc.getUserTrades(username);
+		String username = getUserName(header);
+		return tradeService.getUserTrades(username);
 	}
 	
 	@GetMapping("trades/{tid}")
 	public Trade getTradeById(@PathVariable Integer tid, HttpServletResponse response) {
 		
-		Trade trade = tradeSvc.getTradeById(tid);
+		Trade trade = tradeService.getTradeById(tid);
 		if(trade == null) {
 			response.setStatus(404);
 		}
@@ -45,20 +43,34 @@ public class TradeController {
 	}
 	
 	@PostMapping("trades")
-	public Trade create(@RequestHeader HttpHeaders header, @RequestBody Trade trade) {
-		String username = extractUserName(header);
-		Trade res = tradeSvc.createTrade(username, trade);
+	public Trade create(@RequestHeader HttpHeaders header, @RequestBody Trade trade, HttpServletResponse response) {
+		//TODO: PERSIST STOCK SYMBOL IF NOT PRESENT
+		//TODO: SET COMPLETED DATE
+		//TODO: IF SELL CHECK IF USER HAS SHARES
+		//TODO: IF SELL CREDIT MONEY TO USER'S ACCOUNT
+		//TODO: IF BUY CHECK IF USER HAS ENOUGH FUNDS
+		//TODO: IF BUY SUBTRACT MONEY FROM USERS ACCOUNT
+		String username = getUserName(header);
+		Trade res = tradeService.createTrade(username, trade);
+		if(res == null) {
+			response.setStatus(404);
+		}
 		return res;
 	}
 	
-	public String extractUserName(HttpHeaders header) {
+	@GetMapping("trades/{symbol}")
+	public void getNumberOfShares(@PathVariable String symbol, @RequestHeader HttpHeaders header ) {
+		String username = getUserName(header);
+		//TODO: FINISH
+	}
+	
+	public String getUserName(HttpHeaders header) {
 		String encoded = header.getFirst("authorization").split(" ")[1];
 		byte[] decodedBytes = Base64.getDecoder().decode(encoded);
 		String decodedString = new String(decodedBytes);
 		String[] credentials = decodedString.split(":");
 		String username = credentials[0];
-		return username;
-		
+		return username;	
 	}
 	
 

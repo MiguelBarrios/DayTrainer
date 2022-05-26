@@ -49,14 +49,14 @@ class StockTest {
 		assertEquals("Oracle Corp.",stock.getName());
 		assertEquals("ORCL",stock.getSymbol());
 	}
-	@Test
-	@DisplayName("Stock to Trade One to many mapping")
-	void test2() {
-		
-		assertNotNull(stock);
-		assertEquals(1,stock.getTrade().getId());
-	
-	}
+//	@Test
+//	@DisplayName("Stock to Trade One to many mapping")
+//	void test2() {
+//		
+//		assertNotNull(stock);
+//		assertEquals(1,stock.getTrade().getId());
+//	
+//	}
 
 
 } 
