@@ -15,6 +15,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { FormsModule } from '@angular/forms';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     PortfolioChartComponent,
     LeaderBoardComponent,
     FilterTablePipe,
-    CreateUserComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,10 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     FormsModule,
   ],
   providers: [TradesService,
-  FilterTablePipe],
+  FilterTablePipe,
+  AuthService
+
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
