@@ -24,20 +24,20 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     TopMoversComponent,
     PortfolioChartComponent,
     LeaderBoardComponent,
-    NavbarComponent,
     FilterTablePipe,
     SingleStockViewComponent,
     HomepageComponent,
     CreateUserComponent,
     LoginComponent,
-    AccountHomeComponent
+    AccountHomeComponent,
+    NavbarComponent
+
   ],
   imports: [
     BrowserModule,
