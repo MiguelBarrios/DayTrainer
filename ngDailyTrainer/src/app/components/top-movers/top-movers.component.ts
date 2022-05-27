@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { StockService } from './../../services/stock.service';
 import { AlphaVantageAPIService } from './../../services/alpha-vantage-api.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,8 +19,9 @@ export class TopMoversComponent implements OnInit {
 
   stocks: Stock[] = [];
   searchValue: string ="";
+  stock: Stock = new Stock;
 
-  constructor(private tradeService:TradesService, private stockService: StockService) { }
+  constructor(private tradeService:TradesService, private route: Router, private stockService: StockService) { }
 
   ngOnInit(): void {
 
@@ -63,4 +65,9 @@ export class TopMoversComponent implements OnInit {
     }, (err) => { console.log(err);
     console.log(this.stocks)});
 }
+
+onClickRow(stockSymbol: string) {
+  this.route.navigateByUrl('/singleStockView/' + stockSymbol);
+}
+
 }
