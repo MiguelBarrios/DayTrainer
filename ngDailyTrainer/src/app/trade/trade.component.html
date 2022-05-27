@@ -1,0 +1,24 @@
+<div id="tradeContainer">
+    <form>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Action</label>
+            <input type="email" class="form-control" name="action" aria-describedby="emailHelp" placeholder="Buy" [(ngModel)]="action">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Quantity</label>
+            <input type="number" class="form-control" name="quantity" [(ngModel)]="newTrade.quantity">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Symbol</label>
+            <input type="text" class="form-control" name="symbol" [(ngModel)]="newTrade.stock.symbol">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Order Type</label>
+            <input type="text" class="form-control" name="orderType" [(ngModel)]=" orderType ">
+        </div>
+        <button class="btn-danger" (click)="submitTrade() ">Execute</button>
+
+
+
+    </form>
+</div>

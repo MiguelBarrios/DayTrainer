@@ -5,32 +5,30 @@ import { OrderType } from './order-type';
 
 export class Trade {
 
-  id: number;
-  pricePerShare: number;
-  quantity: number;
-  createdAt: string;
-  completionDate: string;
-  user: User;
-  stockSymbol: Stock;
-  notes: string;
-  comments: Comment[];
-  strikePrice: number;
+  id: number | null;
+  buy: boolean | null;
+  pricePerShare: number | null;
+  quantity: number | null;
+  createdAt: string | null;
+  completionDate: string | null;
+  stock: Stock;
+  notes: string | null;
+  strikePrice: number | null;
   orderType: OrderType;
 
-constructor(id: number = 0, pricePerShare: number = 0, quantity: number = 0, createdAt: string = "",
-completionDate: string = "", user: User, stockSymbol: Stock, notes: string = "",
-comments: Comment[], strikePrice: number = 0, orderType: OrderType ) {
+constructor(id: number | null = 0, buy: boolean | null = null, pricePerShare: number | null = 0, quantity: number | null = 0, createdAt: string | null = "",
+completionDate: string | null = "", notes: string | null= "",
+ strikePrice: number | null = 0) {
   this.id = id;
   this.pricePerShare =pricePerShare;
   this.quantity = quantity;
   this.createdAt = createdAt;
   this.completionDate = completionDate;
-  this.user = user;
-  this.stockSymbol = stockSymbol;
+  this.stock = new Stock();
   this.notes = notes;
-  this.comments = comments;
   this.strikePrice = strikePrice;
-  this.orderType = orderType;
+  this.orderType = new OrderType();
+  this.buy = buy;
 };
 
 }

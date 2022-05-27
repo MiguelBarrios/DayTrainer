@@ -21,7 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
-import { TradeFormComponent } from './components/trade-form/trade-form.component';
+import { TradeComponent } from './trade/trade.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { TradeFormComponent } from './components/trade-form/trade-form.component
     HomepageComponent,
     AccountHomeComponent,
     NavbarComponent,
-    TradeFormComponent
+    TradeComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,7 @@ import { TradeFormComponent } from './components/trade-form/trade-form.component
     MatButtonToggleModule,
     FormsModule,
   ],
-  providers: [TradesService, FilterTablePipe],
+  providers: [TradesService, FilterTablePipe, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
