@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
+import { TradeFormComponent } from './components/trade-form/trade-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AccountHomeComponent } from './components/account-home/account-home.com
     SingleStockViewComponent,
     HomepageComponent,
     AccountHomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    TradeFormComponent
   ],
   imports: [
     BrowserModule,
