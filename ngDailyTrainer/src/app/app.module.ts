@@ -23,6 +23,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
 import { TradeComponent } from './trade/trade.component';
 import { DatePipe } from '@angular/common';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { DatePipe } from '@angular/common';
     BrowserAnimationsModule,
     MatButtonToggleModule,
     FormsModule,
+    MatRadioModule
   ],
   providers: [TradesService, FilterTablePipe, DatePipe],
   bootstrap: [AppComponent],

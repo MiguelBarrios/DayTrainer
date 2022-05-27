@@ -1,24 +1,64 @@
-<div id="tradeContainer">
+<!--  Place Trade Form Container -->
+<div id="tradeContainer" class="border">
     <form>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Action</label>
-            <input type="email" class="form-control" name="action" aria-describedby="emailHelp" placeholder="Buy" [(ngModel)]="action">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Quantity</label>
-            <input type="number" class="form-control" name="quantity" [(ngModel)]="newTrade.quantity">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Symbol</label>
-            <input type="text" class="form-control" name="symbol" [(ngModel)]="newTrade.stock.symbol">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Order Type</label>
-            <input type="text" class="form-control" name="orderType" [(ngModel)]=" orderType ">
-        </div>
-        <button class="btn-danger" (click)="submitTrade() ">Execute</button>
+        <div class="row">
+            <!-- Select Buy or Sell Group -->
+            <div class="col">
+                <label for="action">Action</label>
+                <select name="action" class="form-select" [(ngModel)]="action">
+                    <option value="Buy">Buy</option>
+                    <option value="Sell">Sell</option>
+              </select>
 
+            </div>
 
+            <!-- Select Order Type Group-->
+            <div class="col">
+                <label for="cars">Order Type</label>
+                <select id="cars" name="cars" class="form-select" [(ngModel)]="orderType">
+                <option value="Market" selected>Market</option>
+                <option value="Limit">Limit</option>
+              </select>
+            </div>
 
+            <div class="form-group col">
+                <label for="exampleInputPassword1">Quantity</label>
+                <input type="number" class="form-control" name="quantity" [(ngModel)]="newTrade.quantity">
+            </div>
+
+            <div class="form-group col">
+                <label for="exampleInputPassword1">Symbol</label>
+                <input type="text" class="form-control" name="symbol" [(ngModel)]="newTrade.stock.symbol">
+            </div>
+
+            <div class="form-group col" id="sumbitTradeContainer">
+                <button class="btn-success" (click)="submitTrade() ">Execute</button>
+            </div>
+
+        </div>
     </form>
+</div>
+
+<!-- User Trades Tables -->
+<div id="userTrades">
+    <table class="table border table-borderless">
+        <thead>
+            <tr class="border" class="tableData">
+                <th scope="col">Symbol</th>
+                <th scope="col">Buy</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let trade of userTrades.reverse()" class="tableData">
+                <td>{{trade.stock.symbol}}</td>
+                <td>{{trade.buy}}</td>
+                <td>{{trade.quantity}}</td>
+                <td>{{trade.pricePerShare}}</td>
+                <td>{{trade.completionDate}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

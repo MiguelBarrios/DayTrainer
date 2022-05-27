@@ -16,7 +16,7 @@ export class Trade {
   strikePrice: number | null;
   orderType: OrderType;
 
-constructor(id: number | null = 0, buy: boolean | null = null, pricePerShare: number | null = 0, quantity: number | null = 0, createdAt: string | null = "",
+constructor(id: number | null = 0, buy: boolean | null = null, pricePerShare: number | null = 0, quantity: number | null = null, createdAt: string | null = "",
 completionDate: string | null = "", notes: string | null= "",
  strikePrice: number | null = 0) {
   this.id = id;

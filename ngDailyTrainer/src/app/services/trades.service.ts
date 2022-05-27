@@ -4,11 +4,14 @@ import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { Movers } from '../models/movers';
 import { Trade } from '../models/trade';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TradesService {
+
+  private url = environment.baseUrl + 'api/trades'
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
@@ -38,6 +41,15 @@ export class TradesService {
       catchError((err: any) => {
         console.log(err);
         return throwError('Error creating new Trade');
+      })
+    )
+  }
+
+  getUserTrades(){
+    return this.http.get<Trade[]>(this.url,this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error in getUserTrades() request');
       })
     )
   }
