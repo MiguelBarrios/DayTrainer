@@ -34,6 +34,7 @@ public class AuthController {
 
 	@GetMapping(path = "/authenticate")
 	public User authenticate(Principal principal) {
+		System.out.println("In Auth Spring controller");
 	    return authService.getUserByUsername(principal.getName());
 	}
 

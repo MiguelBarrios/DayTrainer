@@ -50,15 +50,19 @@ public class User {
 	@OneToOne(mappedBy = "user")
 	private Account account;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Trade> trades;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "sender")
 	private List<Message> sentMessages;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "recipient")
 	private List<Message> recMessages;
 
