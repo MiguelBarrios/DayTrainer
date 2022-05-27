@@ -25,27 +25,19 @@
 
   <div class = "stocksTable">
     <input type="text" id="search" name="searchInput" [(ngModel)]="searchValue" >
-<table class ="table">
+<table class ="stable">
   <thead>
     <tr>
       <th>Symbol</th>
       <th>Name</th>
-      <th>Type</th>
-      <th>Market Open</th>
-      <th>Market Close</th>
-      <th>Currency</th>
-      <th>Match Score</th>
+
     </tr>
   </thead>
 
-    <tr *ngFor="let stock of stocks" >
+    <tr *ngFor="let stock of stocks | filterTable: searchValue" >
       <td>{{stock.symbol}}</td>
       <td>{{stock.name}}</td>
-      <!-- <td>{{stock.type}}</td>
-      <td>{{stock.marketOpen}}</td>
-      <td>{{stock.marketClose}}</td>
-      <td>{{stock.currency}}</td>
-      <td>{{stock.matchScore}}</td> -->
+
     </tr>
 
 </table>

@@ -1,5 +1,20 @@
-.table {
-    width: 500px;
-    background-color: rgb(39, 42, 61);
-    color: white;
+.container {
+  width: 100%;
+  margin: auto;
+}
+.stocksTable {
+  display: inline;
+  min-width: 50%;
+  background-color: rgb(39, 42, 61);
+    color: #ffffff;
+    font-size: xx-large;
+
+}
+.moversTable {
+  display: inline;
+  font-size: xx-large;
+  min-width: 50%;
+}
+#search {
+  width: 100%;
 }
