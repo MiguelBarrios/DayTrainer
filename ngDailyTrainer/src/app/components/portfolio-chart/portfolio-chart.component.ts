@@ -1,7 +1,11 @@
+import { Position } from './../../models/position';
+import { Stock } from './../../models/stock';
+import { TradesService } from 'src/app/services/trades.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { Trade } from 'src/app/models/trade';
 
 @Component({
   selector: 'app-portfolio-chart',
@@ -10,8 +14,14 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class PortfolioChartComponent implements OnInit {
   ngOnInit(): void {
+    this.refreshChartData();
   }
 
+   userTrades:Trade[]= [];
+
+  constructor(private tradesService: TradesService){
+
+  }
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
@@ -96,5 +106,34 @@ export class PortfolioChartComponent implements OnInit {
     }
 
     this.chart?.render();
+
+
+  }
+  refreshChartData(): void{
+  this.tradesService.getUserTrades().subscribe(
+    (data) => {
+      console.log(data);
+      this.userTrades = data;
+    },
+    (error) => {
+      console.log("Observable got and error " + error)
+    }
+  )
+
+  }
+  calculateUserHoldings(data: Trade[]){
+    // var res = {};
+    // for(let i = 0; i < data.length; i++){
+    //   let trade = data[i];
+    //   if(trade.stock.symbol in res){
+    //    var position = new Position(trade.stock.symbol,0,0,0);
+    //    res[trade.stock.symbol]= position;
+    //   }
+    //    var key: string = trade.stock.symbol;
+    //   let current: Position = res[key];
+
+    // }
+
+    }
   }
 }
