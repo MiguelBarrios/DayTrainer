@@ -1,5 +1,8 @@
 package com.skilldistillery.daytrainer.services;
+import java.util.Collection;
 import java.util.List;
+
+import com.skilldistillery.daytrainer.entities.Position;
 import com.skilldistillery.daytrainer.entities.Trade;
 
 public interface TradeService {
@@ -10,6 +13,6 @@ public interface TradeService {
 
 	Trade createMarketTrade(String username, Trade trade);
 
-	
+	Collection<Position> getUserPortfolio(String username);
 	
 }
