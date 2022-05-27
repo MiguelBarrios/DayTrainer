@@ -1,4 +1,3 @@
-import { LoginComponent } from './components/login/login.component';
 import { TradesService } from './services/trades.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,7 +20,6 @@ import { FormsModule } from '@angular/forms';
 
 import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { CreateUserComponent } from './components/create-user/create-user.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
 
 @NgModule({
@@ -33,11 +31,8 @@ import { AccountHomeComponent } from './components/account-home/account-home.com
     FilterTablePipe,
     SingleStockViewComponent,
     HomepageComponent,
-    CreateUserComponent,
-    LoginComponent,
     AccountHomeComponent,
     NavbarComponent
-
   ],
   imports: [
     BrowserModule,
