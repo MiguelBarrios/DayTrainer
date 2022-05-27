@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { NavbarComponent } from './../navbar/navbar.component';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -8,8 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-
+export class LoginComponent implements OnInit{
 
   loginUser: User = new User();
 
@@ -32,6 +32,4 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-
-
 }

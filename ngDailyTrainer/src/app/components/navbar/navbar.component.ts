@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,6 +8,8 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+
   closeResult = '';
 
   constructor(private router: Router, private modalService: NgbModal) { }
@@ -44,7 +46,4 @@ export class NavbarComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-
-
 }
