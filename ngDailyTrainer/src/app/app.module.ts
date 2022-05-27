@@ -1,3 +1,4 @@
+import { LoginComponent } from './components/login/login.component';
 import { TradesService } from './services/trades.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,7 +34,8 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     FilterTablePipe,
     SingleStockViewComponent,
     HomepageComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
