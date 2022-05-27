@@ -1,6 +1,9 @@
 package com.skilldistillery.daytrainer.services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.daytrainer.entities.Account;
+import com.skilldistillery.daytrainer.entities.Position;
 import com.skilldistillery.daytrainer.entities.Stock;
 import com.skilldistillery.daytrainer.entities.Trade;
 import com.skilldistillery.daytrainer.entities.User;
@@ -101,7 +105,45 @@ public class TradeServiceImple implements TradeService {
 		System.out.println("Number of trades on: " + symbol);
 		System.out.println("Position size: " + positionSize);
 		return positionSize;
-
+	
+	}
+	
+	@Override
+	public Collection<Position> getUserPortfolio(String username) {
+		HashMap<String, Position> map = new HashMap<>();
+		List<Trade> userTrades = tradeRepo.getUserTrades(username);
+		for(Trade trade : userTrades) {
+			String key = trade.getStock().getSymbol();
+			if(!map.containsKey(key)) {
+				Position pos = new Position(trade.getStock().getSymbol(), 0,0,0);
+				map.put(key, pos);
+			}
+			
+			Position cur = map.get(key);
+			
+			if(trade.isBuy()) {
+				cur.setAmount(cur.getAmount() + trade.getQuantity());
+				cur.setValue(cur.getValue() + trade.getQuantity());
+			}else {
+				cur.setAmount(cur.getAmount() - trade.getQuantity());
+				cur.setValue(cur.getValue() - trade.getQuantity());
+			}
+		}
+		Account account = accountRepo.getAccountByUsername(username);
+		Position cash = new Position("cash", 0,0,0);
+		cash.setAmount(1);
+		cash.setValue(account.getBalance());
+		map.put("cash", cash);
+		
+		Collection<Position> positions = map.values();
+		Collection<Position> res = new ArrayList<>(positions.size());
+		for(Position pos : positions) {
+			if(pos.getAmount() != 0) {
+				res.add(pos);
+			}
+		}
+		
+		return res;
 		
 	}
 	

@@ -1,3 +1,4 @@
+import { TradeComponent } from './trade/trade.component';
 import { TradesService } from './services/trades.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,7 +22,6 @@ import { FormsModule } from '@angular/forms';
 import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
-import { TradeComponent } from './trade/trade.component';
 import { DatePipe } from '@angular/common';
 import {MatRadioModule} from '@angular/material/radio';
 
@@ -36,7 +36,7 @@ import {MatRadioModule} from '@angular/material/radio';
     HomepageComponent,
     AccountHomeComponent,
     NavbarComponent,
-    TradeComponent,
+    TradeComponent
   ],
   imports: [
     BrowserModule,

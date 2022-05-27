@@ -1,6 +1,7 @@
 package com.skilldistillery.daytrainer.controllers;
 
 import java.security.Principal;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.daytrainer.entities.Account;
-import com.skilldistillery.daytrainer.entities.OrderType;
-import com.skilldistillery.daytrainer.entities.Stock;
+import com.skilldistillery.daytrainer.entities.Position;
 import com.skilldistillery.daytrainer.entities.Trade;
-import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.services.StockService;
 import com.skilldistillery.daytrainer.services.TradeService;
 import com.skilldistillery.daytrainer.services.UserService;
@@ -70,6 +68,13 @@ public class TradeController {
 		}
 		
 		return trade;
+	}
+	
+	@GetMapping("trades/portfolio")
+	public Collection<Position> getPortfolio(Principal principal) {
+		System.out.println("here");
+		return tradeService.getUserPortfolio(principal.getName());
+		
 	}
 
 }
