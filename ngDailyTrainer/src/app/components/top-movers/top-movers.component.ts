@@ -1,3 +1,4 @@
+import { StockService } from './../../services/stock.service';
 import { AlphaVantageAPIService } from './../../services/alpha-vantage-api.service';
 import { Component, OnInit } from '@angular/core';
 import { TimeoutInfo } from 'rxjs';
@@ -18,11 +19,11 @@ export class TopMoversComponent implements OnInit {
   stocks: Stock[] = [];
   searchValue: string ="";
 
-  constructor(private tradeService:TradesService, private stockService: AlphaVantageAPIService) { }
+  constructor(private tradeService:TradesService, private stockService: StockService) { }
 
   ngOnInit(): void {
 
-   //this.getAllStocks(this.searchValue);
+   this.getAllStocks();
     this.getTopMovers();
     this.id = setInterval(() => {
       this.getTopMovers();
@@ -55,31 +56,11 @@ export class TopMoversComponent implements OnInit {
     }
   }
 
-  // getAllStocks(searchValue: string) {
-  //   // this.stockService.search(searchValue).subscribe(res => {this.stocks = res; console.log(res)});
-  //   this.stockService.retrieveAll().subscribe(
-  //     (data) =>{
-  //        this.stocks = data;
-  //     }
-  //     console.log("***new stocks request recieved")},
-  //     (err) => {
-  //       console.log(err)
-  //       console.log(this.stocks) }
-  //   )
-  // }
-
-
-  //
-
-  // getAllStocks(searchValue: string){
-  //   this.stockService.retrieveAll().subscribe(
-  //     (data) => {
-  //       this.stocks = data;
-  //       console.log("***EX Stock service recived");
-  //     },
-  //     (error) => {
-  //       console.log("Observable got and error " + error)
-  //     }
-  //   )
-  // }
+  getAllStocks() {
+    this.stockService.index().subscribe( data => {
+    this.stocks = data;
+    console.log("*** stock list retrieved");
+    }, (err) => { console.log(err);
+    console.log(this.stocks)});
+}
 }
