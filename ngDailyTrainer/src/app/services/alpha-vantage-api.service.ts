@@ -28,7 +28,7 @@ export class AlphaVantageAPIService {
           keyword
           +
           this.endUrl;
-  return this.http.get<Stock>(searchForStock).pipe(
+  return this.http.get<any>(searchForStock).pipe(
     catchError((err:any) => {
       console.log(err);
       return throwError('KABOOM');
