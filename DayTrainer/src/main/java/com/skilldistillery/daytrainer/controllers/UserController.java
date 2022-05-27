@@ -1,6 +1,7 @@
 package com.skilldistillery.daytrainer.controllers;
 
 import java.security.Principal;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,7 +53,8 @@ public class UserController {
 
 	}
 	
-	@Scheduled(cron = "* * 1 * * MON-FRI", zone = "GMT-5")
+	//cron = "* * 1 * * MON-FRI",zone = "GMT-5"
+	@Scheduled(fixedDelay = 7,timeUnit = TimeUnit.DAYS)
 	public void payDay() {
 		//10:15 AM on the 1st day of every month in central standard time
 		userSvc.payDay();

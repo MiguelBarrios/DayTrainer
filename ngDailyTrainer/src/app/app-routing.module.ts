@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'home', component: HomepageComponent},
   { path: 'leaderBoard', component: LeaderBoardComponent},
   { path: 'topMovers', component: TopMoversComponent},
-  { path: 'singleStockView', component: SingleStockViewComponent},
+  { path: 'singleStockView/:symbol', component: SingleStockViewComponent},
   { path: 'accounthome', component: AccountHomeComponent}
 
 

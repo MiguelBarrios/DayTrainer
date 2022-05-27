@@ -3632,7 +3632,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (1, 30, 100, '2021-01-01 01:01:01', buy, '2021-01-01 01:01:01', 1, 1, NULL, NULL, 'AAPL');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (1, 30, 100, '2021-01-01 01:01:01', 1, '2021-01-01 01:01:01', 1, 1, NULL, NULL, 'AAPL');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (2, 45, 100, '2021-01-01 01:01:01', 0, NULL, 1, 1, NULL, NULL, 'AAPL');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (3, 7, 34, '2021-01-01 01:01:01', 1, NULL, 1, 1, NULL, NULL, 'PTX');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (4, 7, 34, '2021-01-01 01:01:01', 0, NULL, 1, 1, NULL, NULL, 'PTX');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (5, 54, 65, '2021-01-01 01:01:01', 1, NULL, 1, 1, NULL, NULL, 'PZZA');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (6, 10, 76, '2021-01-21 1:01:01', 0, NULL, 1, 1, NULL, NULL, 'PZZA');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (7, 12, 81, '2021-10-01 01:01:01', 1, NULL, 1, 1, NULL, NULL, 'NVDA');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (8, 73, 23, '2021-04-01 01:01:01', 0, NULL, 1, 1, NULL, NULL, 'NVDA');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (9, 32, 4, '2021-05-01 01:01:01', 1, NULL, 1, 1, NULL, NULL, 'NURO');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (10, 5, 7, '2021-03-10 01:01:01', 0, NULL, 1, 1, NULL, NULL, 'NURO');
 
 COMMIT;
 

@@ -42,12 +42,14 @@ export class PortfolioChartComponent implements OnInit {
       },
     }
   };
+
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ],
     datasets: [ {
       data: [ 300, 500, 100 ]
     } ]
   };
+
   public pieChartType: ChartType = 'pie';
   public pieChartPlugins = [ DatalabelsPlugin ];
 
