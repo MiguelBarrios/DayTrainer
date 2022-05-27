@@ -26,7 +26,7 @@ export class CreateUserComponent implements OnInit {
       next: (registeredUser) => {
         this.auth.login(user.username, user.password).subscribe({
           next: (loggedInUser) => {
-            //this.router.navigateByUrl('/todo');
+            this.router.navigateByUrl('/accounthome');
             this.newUser = new User();
           },
           error: (problem) => {

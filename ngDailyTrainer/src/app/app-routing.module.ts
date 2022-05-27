@@ -1,3 +1,4 @@
+import { AccountHomeComponent } from './components/account-home/account-home.component';
 import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'topMovers', component: TopMoversComponent},
   { path: 'singleStockView', component: SingleStockViewComponent},
   { path: 'create-user', component: CreateUserComponent},
+  { path: 'accounthome', component: AccountHomeComponent}
 
 
 ];
