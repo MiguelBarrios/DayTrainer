@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ import com.skilldistillery.daytrainer.services.UserService;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin({ "*", "http://localhost" })
 public class TradeController {
 	
 	@Autowired
@@ -55,6 +57,7 @@ public class TradeController {
 	
 	@PostMapping("trades")
 	public Trade create(@RequestBody Trade trade, HttpServletResponse response, Principal principal) {
+		System.out.println(trade);
 		
 		String orderType = trade.getOrderType().getName();
 		if(orderType.equals("Market")){

@@ -1,0 +1,26 @@
+#tradeContainer {
+    color: white;
+    width: 60%;
+    padding: 10px;
+}
+
+#row {
+    display: flex;
+    flex-direction: row;
+}
+
+#sumbitTradeContainer {
+    display: flex;
+}
+
+#sumbitTradeContainer {
+    width: 10px;
+}
+
+#userTrades {
+    width: 60%;
+}
+
+.tableData {
+    color: white;
+}
