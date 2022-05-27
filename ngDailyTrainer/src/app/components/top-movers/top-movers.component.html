@@ -1,9 +1,8 @@
-<div class = "container">
+ <div background-color="white">
 
-
-  <div class = "moversTable">
+ <div class = "split left">
     <table class="table border table-borderless">
-      <thead>
+      <thead id = headm>
         <tr class="border">
           <th scope="col">Change</th>
           <th scope="col">Last Price</th>
@@ -23,9 +22,9 @@
   </div>
 
 
-  <div class = "stocksTable">
-    <input type="text" id="search" name="searchInput" [(ngModel)]="searchValue" >
-<table class ="stable">
+  <div class = "split right">
+    <input type="text" id="search" name="searchInput"  [(ngModel)]="searchValue" >
+<table id ="stable">
   <thead>
     <tr>
       <th>Symbol</th>
@@ -34,7 +33,7 @@
     </tr>
   </thead>
 
-    <tr *ngFor="let stock of stocks | filterTable: searchValue" >
+    <tr  id = "SRows" *ngFor="let stock of stocks | filterTable: searchValue"  (click)="onClickRow(stock.symbol)" >
       <td>{{stock.symbol}}</td>
       <td>{{stock.name}}</td>
 
