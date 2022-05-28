@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Trade } from '../models/trade';
 import { DatePipe, DATE_PIPE_DEFAULT_TIMEZONE } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-trade',
@@ -12,15 +13,18 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class TradeComponent implements OnInit {
 
+  symbol:string | null = "";
   userTrades:Trade[] = [];
 
   newTrade = new Trade();
   action = "Buy";
   orderType = "Market";
 
-  constructor(private date:DatePipe, private tradeService: TradesService) { }
+  constructor( private route: ActivatedRoute,private date:DatePipe, private tradeService: TradesService) { }
+
 
   ngOnInit(): void {
+    this.symbol = this.route.snapshot.paramMap.get('symbol');
     this.getUserTrades();
   }
 

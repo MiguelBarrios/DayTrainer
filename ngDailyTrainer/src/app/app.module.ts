@@ -1,3 +1,4 @@
+import { UserTradesPipe } from './pipes/user-trades.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { TradesService } from './services/trades.service';
 import { NgModule } from '@angular/core';
@@ -47,8 +48,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     FooterComponent,
     TradeComponent,
     LogoutComponent,
-    NotfoundComponent
-
+    NotfoundComponent,
+    UserTradesPipe
   ],
   imports: [
     BrowserModule,
