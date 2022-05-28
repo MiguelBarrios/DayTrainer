@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   closeResult = '';
 
-  constructor(private router: Router, private modalService: NgbModal, private authService:AuthService) { }
+  constructor(private router: Router, private modalService: NgbModal, private authService:AuthService,private auth:AuthService) { }
 
   ngOnInit(): void {
   }
@@ -59,6 +59,10 @@ export class NavbarComponent implements OnInit {
           }
       }
     )
+  }
+
+  loggedIn():boolean{
+    return this.auth.checkLogin();
   }
 
   register(user: User): void {

@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-account-home',
-  templateUrl: './account-home.component.html',
-  styleUrls: ['./account-home.component.css']
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.css']
 })
-export class AccountHomeComponent implements OnInit {
+export class LogoutComponent implements OnInit {
 
   constructor(private auth:AuthService,
     private router:Router) { }
@@ -15,8 +15,10 @@ export class AccountHomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loggedIn():boolean{
-    return this.auth.checkLogin();
+  logout(){
+    console.log("logOut");
+    this.auth.logout();
+    this.router.navigateByUrl('/home');
   }
 
 }
