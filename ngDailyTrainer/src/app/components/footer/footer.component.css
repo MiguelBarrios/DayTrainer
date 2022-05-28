@@ -1,8 +1,16 @@
-.text{
-  color: aliceblue;
+.text {
+    color: aliceblue;
 }
-.container{
-  z-index: 1;
-  bottom: 0;
-  position: absolute;
+
+
+/* .container {
+    z-index: 1;
+    bottom: 0;
+    position: absolute;
+} */
+
+.footerComponent {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
