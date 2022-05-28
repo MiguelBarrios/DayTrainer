@@ -31,6 +31,7 @@ import { DatePipe } from '@angular/common';
 import {MatRadioModule} from '@angular/material/radio';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { UserUpdateFormComponent } from './components/user-update-form/user-update-form.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     FooterComponent,
     TradeComponent,
     LogoutComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    UserUpdateFormComponent
 
   ],
   imports: [

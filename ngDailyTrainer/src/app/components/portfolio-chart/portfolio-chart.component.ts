@@ -138,4 +138,4 @@ export class PortfolioChartComponent implements OnInit {
 
     }
   }
-}
+

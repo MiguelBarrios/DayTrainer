@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -16,11 +17,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.services.UserService;
 
+
+
+@RequestMapping("api")
 @RestController
 @CrossOrigin({ "*", "http://localhost" })
 @Configuration
@@ -43,8 +48,21 @@ public class UserController {
 	@PutMapping("users")
 	public User updateUser(Principal principal, HttpServletRequest req, HttpServletResponse res,
 			@RequestBody User user) {
-		return userSvc.update(principal.getName(), user);
+System.out.print("*******************testing");
+		try {
+			user= userSvc.update(principal.getName(), user);
+			if (user == null) {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+		
+		return user;
 	}
+
+
 
 	@DeleteMapping("users/{userId}")
 	public void destroy(Principal principal, HttpServletRequest req, HttpServletResponse res,
