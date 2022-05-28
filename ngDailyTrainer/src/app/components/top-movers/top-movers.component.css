@@ -1,6 +1,8 @@
-body {
-  background-color: #ffffff;
+
+.wrapper {
+
 }
+
 .split {
 margin: 40px;
 position: absolute;
@@ -35,3 +37,4 @@ background-color: darkgray;
 input {
   width: 100%;
 }
+

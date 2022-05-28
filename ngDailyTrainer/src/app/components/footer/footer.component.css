@@ -3,6 +3,6 @@
 }
 .container{
   z-index: 1;
-  bottom: 0;
-  position: absolute;
+  bottom: -20;
+
 }
