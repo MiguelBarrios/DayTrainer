@@ -1,0 +1,9 @@
+#positionInfoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#userPositionInfo {
+    padding: 20px;
+}
