@@ -28,6 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { TradeComponent } from './trade/trade.component';
 import { DatePipe } from '@angular/common';
 import {MatRadioModule} from '@angular/material/radio';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {MatRadioModule} from '@angular/material/radio';
     AccountHomeComponent,
     NavbarComponent,
     FooterComponent,
-    TradeComponent
+    TradeComponent,
+    LogoutComponent
 
   ],
   imports: [
