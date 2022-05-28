@@ -29,6 +29,7 @@ import { TradeComponent } from './trade/trade.component';
 import { DatePipe } from '@angular/common';
 import {MatRadioModule} from '@angular/material/radio';
 import { LogoutComponent } from './components/logout/logout.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     NavbarComponent,
     FooterComponent,
     TradeComponent,
-    LogoutComponent
+    LogoutComponent,
+    NotfoundComponent
 
   ],
   imports: [

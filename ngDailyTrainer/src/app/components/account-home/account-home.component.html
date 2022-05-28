@@ -1,2 +1,8 @@
-<h1 id="Header">Account Home</h1>
-<app-trade>Loading...</app-trade>
+<div *ngIf="loggedIn()">
+  <h1 id="Header">Account Home</h1>
+  <app-trade>Loading...</app-trade>
+</div>
+
+<div *ngIf="!loggedIn()">
+  <h1>You need to log in</h1>
+</div>
