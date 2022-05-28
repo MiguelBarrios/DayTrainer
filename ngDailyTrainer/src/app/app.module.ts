@@ -32,6 +32,7 @@ import { DatePipe } from '@angular/common';
 import {MatRadioModule} from '@angular/material/radio';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { BuySellPipe } from './pipes/buy-sell.pipe';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     TradeComponent,
     LogoutComponent,
     NotfoundComponent,
-    UserTradesPipe
+    UserTradesPipe,
+    BuySellPipe
   ],
   imports: [
     BrowserModule,

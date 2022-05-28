@@ -1,6 +1,5 @@
 #tradeContainer {
     color: black;
-    width: 60%;
     padding: 10px;
 }
 
@@ -15,10 +14,6 @@
 
 #sumbitTradeContainer {
     width: 10px;
-}
-
-#userTrades {
-    width: 60%;
 }
 
 .tableData {

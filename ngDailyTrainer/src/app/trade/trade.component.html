@@ -54,7 +54,7 @@
         <tbody>
             <tr *ngFor="let trade of userTrades.reverse() | userTrades:symbol" class="tableData">
                 <td>{{trade.stock.symbol}}</td>
-                <td>{{trade.buy}}</td>
+                <td>{{trade.buy | buySell}}</td>
                 <td>{{trade.quantity}}</td>
                 <td>{{trade.pricePerShare}}</td>
                 <td>{{trade.completionDate}}</td>
