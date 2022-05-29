@@ -148,4 +148,14 @@ public class TradeServiceImple implements TradeService {
 	}
 	
 	
+	public void getUserPosition(String username, String ticker) {
+		User user = userRepo.findByUsername(username);
+		List<Trade> holdings = tradeRepo.getUserTradesByStock(username, ticker);
+		for(Trade trade : holdings) {
+			System.out.println(trade);
+		}
+		
+	}
+	
+	
 }

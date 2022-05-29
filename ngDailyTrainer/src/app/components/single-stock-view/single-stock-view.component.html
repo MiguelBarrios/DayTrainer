@@ -1,5 +1,12 @@
 <div class="container" id="SingleStockViewPageContainer">
 
+    <!-- Stock Stats -->
+    <div id="stockStatsContainer">
+        <h1>Stock Stats</h1>
+
+    </div>
+
+
     <!-- Single Stock View-->
     <div class="card">
         <!-- <img src="https://businessforecastblog.com/wp-content/uploads/2015/02/GOOG.png" class ="card-img-top"> -->
@@ -9,7 +16,7 @@
             <h3>{{selected.open}} </h3>
             <h3>{{selected.high}} </h3>
             <h3>{{selected.low}} </h3>
-            <h3>{{selected.price}}</h3>
+            <h3 id="svstockPrice">{{selected.price}}</h3>
             <h3>{{selected.volume}}</h3>
             <h3>{{selected.previousClose}}</h3>
             <h3>{{selected.change}}</h3>

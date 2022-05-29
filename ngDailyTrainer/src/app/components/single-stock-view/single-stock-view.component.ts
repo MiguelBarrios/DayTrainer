@@ -1,3 +1,4 @@
+import { TradesService } from 'src/app/services/trades.service';
 import { AlphaVantageAPIService } from './../../services/alpha-vantage-api.service';
 import { StockService } from './../../services/stock.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +14,8 @@ export class SingleStockViewComponent implements OnInit {
 selected: Stock = new Stock();
 symbol = "";
 
-  constructor(private router: Router, private route: ActivatedRoute, private stockSvc: AlphaVantageAPIService) { }
+  constructor(private router: Router, private route: ActivatedRoute,
+    private stockSvc: AlphaVantageAPIService, private tradesService: TradesService) { }
 
   ngOnInit(): void {
    let symbol = this.route.snapshot.paramMap.get('symbol');
@@ -40,6 +42,10 @@ symbol = "";
 
         console.log(this.selected);},
       err => {console.log(err)})
+
+  }
+
+  getUserPositionInfo(ticker:string){
 
   }
 
