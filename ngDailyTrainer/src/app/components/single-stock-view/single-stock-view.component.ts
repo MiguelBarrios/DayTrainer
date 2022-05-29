@@ -6,6 +6,7 @@ import { StockService } from './../../services/stock.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
+import { StockPosition } from 'src/app/models/stock-position';
 
 @Component({
   selector: 'app-single-stock-view',
@@ -15,6 +16,7 @@ import { Stock } from 'src/app/models/stock';
 export class SingleStockViewComponent implements OnInit {
 stats: TDAQuote  | null = null;
 selected: Stock = new Stock();
+userPosition: StockPosition | null = null;
 symbol = "";
 
   constructor(private router: Router, private route: ActivatedRoute,
@@ -27,8 +29,6 @@ symbol = "";
         this.show(symbol);
         this.getStockStats(symbol);
       }
-
-
     }
 
 
@@ -53,7 +53,14 @@ symbol = "";
   }
 
   getUserPositionInfo(ticker:string){
-
+    this.tradesService.getStockPosition(ticker).subscribe(
+      (data) => {
+        this.userPosition = data;
+      },
+      (error) => {
+        console.log("getUserPositionInfo() Observable got and error " + error)
+      }
+    )
   }
 
   getStockStats(symbol:string){

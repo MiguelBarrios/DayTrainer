@@ -1,3 +1,4 @@
+import { StockPosition } from './../models/stock-position';
 import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -56,8 +57,14 @@ export class TradesService {
     )
   }
 
-  getUserPosition(){
-
+  getStockPosition(symbol:string){
+    var url = this.url + "/position/" + symbol;
+    return this.http.get<StockPosition>(url, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error in getStockPosition() request');
+      })
+    )
   }
 
 }
