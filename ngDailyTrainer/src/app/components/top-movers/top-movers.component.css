@@ -1,5 +1,4 @@
 
-
 /* .split {
 margin: 40px;
 position: absolute;
@@ -7,29 +6,32 @@ position: absolute;
   top: 10;
   overflow-x: hidden;
 } */
-body {
-    background-color: #ffffff;
-}
 
-.left {
+.wrapper {
+  max-height: 1080px;
+}
+.splitLeft {
+
     left: 0;
+
     width: 40%;
     font-size: xx-large;
-    color: #ffffff;
-    background-color: rgb(0, 0, 0);
+    color: black;
+
 }
 
-.right {
+.splitRight {
+
     right: 0;
-    max-height: 1360px;
+
     width: 45%;
-    color: #ffffff;
+    color: black;
     font-size: xx-large;
-    background-color: rgb(0, 0, 0);
+
 }
 
 #headm {
-    color: #ffffff;
+    color: black;
 }
 
 #SRows:hover {
@@ -37,6 +39,5 @@ body {
 }
 
 input {
-
-  width: 100%;
+    width: 100%;
 }
