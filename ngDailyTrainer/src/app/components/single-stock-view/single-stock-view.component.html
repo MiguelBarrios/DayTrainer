@@ -1,35 +1,129 @@
-<div class = "container">
-<body>
+<div class="container" id="SingleStockViewPageContainer">
 
-  <div class = "card">
-    <!-- <img src="https://businessforecastblog.com/wp-content/uploads/2015/02/GOOG.png" class ="card-img-top"> -->
-    <div class ="card-body" >
+    <!-- Stock Stats -->
+    <h1 id="selectedStock">{{selected.symbol}}</h1>
 
-      <a *ngIf="selected.open === 0 && selected.high === 0 && selected.low === 0 && selected.price === 0 &&
+    <div id="stockStatsContainer" class="border">
+        <div id="stockQuoteInfo">
+            <div>
+                <h5>Current</h5>
+                <h6 id="currentStockPrice">{{selected.price | number:"1.2-2"}}</h6>
+            </div>
+            <div>
+                <h5>Open</h5>
+                <h6>{{selected.open | number:"1.2-2"}}</h6>
+            </div>
+            <div>
+                <h5>High</h5>
+                <h6>{{selected.high | number:"1.2-2"}}</h6>
+            </div>
+            <div>
+                <h5>Low</h5>
+                <h6>{{selected.low | number:"1.2-2"}}</h6>
+            </div>
+
+        </div>
+
+        <div id="stockStats">
+            <div>
+                <h5>Change</h5>
+                <h6>{{selected.change | number:"1.2-2"}}</h6>
+            </div>
+            <div>
+                <h5>Volatility</h5>
+                <h6>{{stats?.volatility| number:"1.2-2"}}</h6>
+            </div>
+            <div>
+                <h5>52 Week High</h5>
+                <h6>{{stats?.WkHigh52| number:"1.2-2"}}</h6>
+            </div>
+            <div>
+                <h5>52 Week Low</h5>
+                <h6>{{stats?.WkLow52| number:"1.2-2"}}</h6>
+            </div>
+
+        </div>
+
+        <div id="stockStats2">
+            <div>
+                <h5>PE Ratio</h5>
+                <h6>{{stats?.peRatio| number:"1.2-2"}}</h6>
+            </div>
+            <div>
+                <h5>Dividend</h5>
+                <h6>{{stats?.divAmount| number:"1.2-2"}}</h6>
+            </div>
+            <div>
+                <h5>Dividend Yield</h5>
+                <h6>{{stats?.divYield| number:"1.2-2"}}</h6>
+            </div>
+            <div>
+                <h5>Dividend Date</h5>
+                <h6>{{stats?.divDate | date}}</h6>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <div id="userPositionInfo" class="border">
+        <h1>Your Position</h1>
+        <div id="positionInfoContainer">
+            <div>
+                <h5>Shares</h5>
+                <h6>{{numberOfShares}}</h6>
+            </div>
+
+            <div>
+                <h5>Market Value</h5>
+
+                <h6>{{marketValue | number:"1.2-2"}}</h6>
+            </div>
+
+            <div>
+                <h5>Total Return</h5>
+                <h6>{{totalReturn}}</h6>
+            </div>
+            <div>
+                <h5>Avg Cost</h5>
+                <h6>{{avgCostPerShare}}</h6>
+            </div>
+        </div>
+        <div id="positionReturnsContainer">
+
+        </div>
+
+        <!-- <a *ngIf="selected.open === 0 && selected.high === 0 && selected.low === 0 && selected.price === 0 &&
       selected.volume === 0 && selected.previousClose === 0 && selected.change === 0; else someRetrieved"> Data unavailable - Please choose another stock.</a>
 
-      <ng-template #someRetrieved>
+        <ng-template #someRetrieved>
 
-        <h5 class = "card-title">{{selected.symbol}}</h5>
-        <h3 *ngIf="selected.open != 0">{{selected.open}}</h3> <a *ngIf="selected.open === 0">Data unavailable.</a>
-        <h3 *ngIf="selected.high != 0">{{selected.high}}  </h3> <a *ngIf="selected.high === 0">Data unavailable.</a>
-        <h3 *ngIf="selected.low != 0" >{{selected.low}}  </h3> <a *ngIf="selected.low === 0">Data unavailable.</a>
-        <h3 *ngIf="selected.price != 0">{{selected.price}}</h3> <a *ngIf="selected.price === 0">Data unavailable.</a>
-        <h3 *ngIf="selected.volume != 0">{{selected.volume}}</h3> <a *ngIf="selected.volume === 0">Data unavailable.</a>
-        <h3 *ngIf="selected.previousClose != 0">{{selected.previousClose}}</h3> <a *ngIf="selected.previousClose === 0">Data unavailable.</a>
-        <h3 *ngIf="selected.change != 0">{{selected.change}}</h3> <a *ngIf="selected.change === 0">Data unavailable.</a>
+            <h5 class="card-title">{{selected.symbol}}</h5>
+            <h3 *ngIf="selected.open != 0">{{selected.open}}</h3> <a *ngIf="selected.open === 0">Data unavailable.</a>
+            <h3 *ngIf="selected.high != 0">{{selected.high}} </h3> <a *ngIf="selected.high === 0">Data unavailable.</a>
+            <h3 *ngIf="selected.low != 0">{{selected.low}} </h3> <a *ngIf="selected.low === 0">Data unavailable.</a>
+            <h3 *ngIf="selected.price != 0">{{selected.price}}</h3> <a *ngIf="selected.price === 0">Data unavailable.</a>
+            <h3 *ngIf="selected.volume != 0">{{selected.volume}}</h3> <a *ngIf="selected.volume === 0">Data unavailable.</a>
+            <h3 *ngIf="selected.previousClose != 0">{{selected.previousClose}}</h3> <a *ngIf="selected.previousClose === 0">Data unavailable.</a>
+            <h3 *ngIf="selected.change != 0">{{selected.change}}</h3> <a *ngIf="selected.change === 0">Data unavailable.</a>
 
-      </ng-template>
+        </ng-template> -->
 
-
-
-      <br>
-      <button>Buy</button>
     </div>
-  </div>
-</body>
 
+    <app-trade>Loading</app-trade>
 </div>
+
 
 <!-- symbol: string;
   name: string;

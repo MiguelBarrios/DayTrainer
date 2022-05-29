@@ -1,12 +1,13 @@
 package com.skilldistillery.daytrainer.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -44,6 +45,20 @@ public class UserController {
 		}
 		return user;
 	}
+	
+	@GetMapping("users") 
+		public List<User> getAllEnabledUsers() {
+			return userSvc.allUsers();
+		}
+	@GetMapping("users/leaders") 
+	public List<User> getLeaders() {
+		List<User> test = userSvc.leadersList();
+		System.out.println(test);
+	return test;
+
+		
+	}
+	
 
 	@PutMapping("users")
 	public User updateUser(Principal principal, HttpServletRequest req, HttpServletResponse res,

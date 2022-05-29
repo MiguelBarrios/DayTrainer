@@ -1,22 +1,22 @@
 package com.skilldistillery.daytrainer.services;
 
+import java.util.List;
+
 import com.skilldistillery.daytrainer.entities.User;
 
 public interface UserService {
-	User getUserById(int userId, String string);
+	public User getUserById(int userId, String string);
 
-	User update(String name,  User user);
+	public User update(String name, User user);
 
-	void destroy(String name, int userId);
+	public void destroy(String name, int userId);
 
+	public void payDay();
 
+	public User getUserByUsername(String username);
 
-	void payDay();
+	public List<User> allUsers();
 
-	User getUserByUsername(String username);
-
+	public List<User> leadersList();
 	
-
-	
-
 }

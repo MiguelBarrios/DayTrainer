@@ -1,3 +1,4 @@
+import { UserTradesPipe } from './pipes/user-trades.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { TradesService } from './services/trades.service';
 import { NgModule } from '@angular/core';
@@ -32,6 +33,7 @@ import { DatePipe } from '@angular/common';
 import {MatRadioModule} from '@angular/material/radio';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { BuySellPipe } from './pipes/buy-sell.pipe';
 import { UserUpdateFormComponent } from './components/user-update-form/user-update-form.component';
 
 
@@ -50,8 +52,9 @@ import { UserUpdateFormComponent } from './components/user-update-form/user-upda
     TradeComponent,
     LogoutComponent,
     NotfoundComponent,
+    UserTradesPipe,
+    BuySellPipe,
     UserUpdateFormComponent
-
   ],
   imports: [
     BrowserModule,

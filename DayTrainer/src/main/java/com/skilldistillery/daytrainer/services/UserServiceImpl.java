@@ -1,5 +1,7 @@
 package com.skilldistillery.daytrainer.services;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +76,50 @@ public class UserServiceImpl implements UserService {
 			user.getAccount().setBalance(currentBalance);
 			accRepo.saveAndFlush(user.getAccount());
 		}
+	}
+
+	@Override
+	public List<User> allUsers() {
+		List<User> enableCheck = userRepo.findAll();
+		for (User user : enableCheck) {
+			int index = 0;
+			if(!user.isEnabled()) {
+				enableCheck.remove(index);
+			}
+			index++;
+		}
+		return enableCheck;
+	}
+	
+	@Override
+	public List<User> leadersList() {
+		List<User> temp = allUsers();
+		User first = new User();
+		first.getAccount().setBalance(3);
+		User second = new User();
+		second.getAccount().setBalance(2);
+		User third = new User();
+		third.getAccount().setBalance(1);
+		List<User> topThree = new ArrayList<>();
+		for (int i = 0; i < temp.size(); i++) {
+			User current = temp.get(i);
+			if(first.getAccount().getBalance()< current.getAccount().getBalance()) {
+				third= second;
+				second = first;
+				first = current;
+			} else if(second.getAccount().getBalance()<current.getAccount().getBalance()) {
+				third = second;
+				second = current;
+			} else if(third.getAccount().getBalance()< current.getAccount().getBalance()) {
+				third = current;
+			}
+			
+		}
+		topThree.add(first);
+		topThree.add(second);
+		topThree.add(third);
+		
+		return temp; 
 	}
 
 }

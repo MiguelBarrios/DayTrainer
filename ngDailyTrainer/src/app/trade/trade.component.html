@@ -38,6 +38,34 @@
         </div>
     </form>
 </div>
+<!--
+<div id="userPositionInfo" class="border">
+    <h1>Your Position</h1>
+    <div id="positionInfoContainer">
+        <div>
+            <h5>Shares</h5>
+            <h6>42.5</h6>
+        </div>
+
+        <div>
+            <h5>Market Value</h5>
+            <h6>965.32</h6>
+        </div>
+
+        <div>
+            <h5>Total Return</h5>
+            <h6>25.52</h6>
+        </div>
+        <div>
+            <h5>Total Return</h5>
+            <h6>25.32</h6>
+        </div>
+    </div>
+    <div id="positionReturnsContainer">
+
+    </div>
+
+</div> -->
 
 <!-- User Trades Tables -->
 <div id="userTrades">
@@ -45,18 +73,18 @@
         <thead>
             <tr class="border" class="tableData">
                 <th scope="col">Symbol</th>
-                <th scope="col">Buy</th>
+                <th scope="col">Action</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Price</th>
+                <th scope="col">Purchase Price</th>
                 <th scope="col">Date</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let trade of userTrades.reverse()" class="tableData">
+            <tr *ngFor="let trade of userTrades.reverse() | userTrades:symbol" class="tableData">
                 <td>{{trade.stock.symbol}}</td>
-                <td>{{trade.buy}}</td>
+                <td>{{trade.buy | buySell}}</td>
                 <td>{{trade.quantity}}</td>
-                <td>{{trade.pricePerShare}}</td>
+                <td>{{trade.pricePerShare | number:"1.2-2"}}</td>
                 <td>{{trade.completionDate}}</td>
             </tr>
         </tbody>
