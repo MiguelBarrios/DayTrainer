@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private AccountRepository accRepo;
 
@@ -34,13 +34,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User update(String name, User user) {
-		User currentUser = userRepo.findByUsername(name);
-		if (currentUser != null && currentUser.getRole().equals("admin")) {
-			return userRepo.save(user);
+		User managed = userRepo.findByUsername(name);
+		System.out.print("%%%%");
+		System.out.print(user);
+		if (managed != null) {	
+			managed.setEnabled(user.isEnabled());
+			managed.setPassword(user.getPassword());
+			managed.setUsername(user.getUsername());
+			managed.setEmail(user.getEmail());
+			managed.setProfilePicture(user.getProfilePicture());
+			managed.setBiography(user.getBiography());
+			userRepo.saveAndFlush(managed);
+			return managed;
 		}
-		return null;
+			return null;
 	}
-	
+
 	@Override
 	public User getUserByUsername(String username) {
 		return userRepo.findByUsername(username);

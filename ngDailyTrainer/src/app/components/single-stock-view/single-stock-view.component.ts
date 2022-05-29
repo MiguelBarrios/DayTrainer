@@ -33,7 +33,7 @@ symbol = "";
       if (symbol) {
         this.show(symbol);
         this.getStockStats(symbol);
-        this.getUserPositionInfo(symbol);
+
       }
     }
 
@@ -52,6 +52,7 @@ symbol = "";
      stock.volume = data['Global Quote']['06. volume'];
      stock.previousClose = data['Global Quote']['08. previous close'];
       this.selected=stock;
+      this.getUserPositionInfo(symbol);
 
 
         console.log(this.selected);},
@@ -67,7 +68,6 @@ symbol = "";
         this.marketValue = data.numberOfShares * this.selected.price;
         this.avgCostPerShare = data.avgCostPerShare;
         this.totalReturn = (this.avgCostPerShare * this.numberOfShares) - (this.selected.price * this.numberOfShares);
-
       },
       (error) => {
         console.log("getUserPositionInfo() Observable got and error " + error)

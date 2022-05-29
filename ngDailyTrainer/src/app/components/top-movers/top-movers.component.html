@@ -1,7 +1,7 @@
 <div class="wrapper">
     <div>
 
-        <div class="split left">
+        <div *ngIf="movers.length >1" class="splitLeft">
             <table class="table border table-borderless">
                 <thead id=h eadm>
                     <tr class="border">
@@ -23,7 +23,7 @@
         </div>
 
 
-        <div class="split right">
+        <div class="splitRight">
             <input type="text" id="search" name="searchInput" [(ngModel)]="searchValue">
             <table id="stable">
                 <thead>
@@ -42,5 +42,6 @@
 
             </table>
         </div>
+
     </div>
 </div>

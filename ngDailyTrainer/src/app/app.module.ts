@@ -33,6 +33,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { BuySellPipe } from './pipes/buy-sell.pipe';
+import { UserUpdateFormComponent } from './components/user-update-form/user-update-form.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { BuySellPipe } from './pipes/buy-sell.pipe';
     LogoutComponent,
     NotfoundComponent,
     UserTradesPipe,
-    BuySellPipe
+    BuySellPipe,
+    UserUpdateFormComponent
   ],
   imports: [
     BrowserModule,
