@@ -13,7 +13,7 @@ public interface UserService {
 
 	void payDay();
 
-	User getUserByUsername(String username);
+	User getUserByUsername(String username, String name);
 
 	
 

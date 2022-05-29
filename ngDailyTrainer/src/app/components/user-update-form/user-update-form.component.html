@@ -1,17 +1,23 @@
-<p>user-update-form works!</p>
-
-
-
-<div class="border">
+<div class="">
   <div class="form-group col">
-    <label for="exampleInputPassword1">Symbol</label>
-    <input type="text" class="form-control" name="symbol" [(ngModel)]="user.username">
-    <label for="exampleInputPassword1">Symbol</label>
-    <input type="text" class="form-control" name="symbol" [(ngModel)]="user.username">
-    <label for="exampleInputPassword1">Symbol</label>
-    <input type="text" class="form-control" name="symbol" [(ngModel)]="user.username">
-    <label for="exampleInputPassword1">Symbol</label>
-    <input type="text" class="form-control" name="symbol" [(ngModel)]="user.username">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" name="username" [(ngModel)]="user.username">
+    <br>
+    <label for="fistname">First Name</label>
+    <input type="text" class="form-control" name="fistname" [(ngModel)]="user.firstName">
+    <br>
+    <label for="exampleInputPassword1">Last Name</label>
+    <input type="text" class="form-control" name="symbol" [(ngModel)]="user.lastName">
+    <br>
+    <label for="email">Email</label>
+    <input type="text" class="form-control" name="email" [(ngModel)]="user.email">
+    <br>
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password" [(ngModel)]="user.password">
+    <br>
+    <label for="biography">Biography</label>
+    <textarea class="form-control" id="form6Example7" rows="4" [(ngModel)]="user.biography"></textarea>
   </div>
-  <button (click)="updateUser"></button>
+  <br>
+  <button class="btn btn-primary btn-block mb-4" (click)="updateUser(user)">Submit</button>
 </div>

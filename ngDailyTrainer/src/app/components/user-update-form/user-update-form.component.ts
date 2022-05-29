@@ -1,5 +1,9 @@
+import { TradesService } from 'src/app/services/trades.service';
 import { User } from './../../models/user';
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/services/users.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-update-form',
@@ -8,17 +12,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserUpdateFormComponent implements OnInit {
 
-
-
   user:User = new User;
 
-
-  constructor() { }
+  constructor(private auth:AuthService,
+    private router:Router, private userServ:UsersService) { }
 
   ngOnInit(): void {
+    this.setUser()
   }
-updateUser(){
-  console.log(this.user);
+
+updateUser(user:User){
+  this.userServ.update(user).subscribe(
+    data => {
+      //this needs to be played with
+      localStorage.setItem('role',data.role)
+      localStorage.setItem('username',data.username);
+      this.user = data;
+    },
+    err => console.error(err)
+  );
+
+}
+
+setUser(){
+  this.userServ.getUserByUsername().subscribe(
+    success =>{
+      this.user = success
+     // this.accountValue = success.account
+     //make account model and set accont to be an account or null in user
+    }
+  )
 }
 
 }

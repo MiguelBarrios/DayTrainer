@@ -33,7 +33,6 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { UserUpdateFormComponent } from './components/user-update-form/user-update-form.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

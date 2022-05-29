@@ -51,7 +51,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserByUsername(String username) {
+	public User getUserByUsername(String username,String name) {
+		//add authentication
 		return userRepo.findByUsername(username);
 	}
 

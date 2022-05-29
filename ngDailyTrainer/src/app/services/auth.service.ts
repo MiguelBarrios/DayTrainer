@@ -29,6 +29,8 @@ export class AuthService {
         // While credentials are stored in browser localStorage, we consider
         // ourselves logged in.
         localStorage.setItem('credentials', credentials);
+        localStorage.setItem('role',newUser.role)
+        localStorage.setItem('username',newUser.username);
         return newUser;
       }),
       catchError((err: any) => {
@@ -69,5 +71,13 @@ export class AuthService {
 
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
+  }
+
+  isAdmin():boolean{
+    if(localStorage.getItem('role') === 'admin'){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
