@@ -45,7 +45,7 @@ export class TopMoversComponent implements OnInit {
         console.log("***new movers request recieved");
       },
       (error) => {
-        console.log("Observable got and error " + error)
+        console.log("Observable got an error " + error)
       }
     )
   }

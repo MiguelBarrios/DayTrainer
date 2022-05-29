@@ -13,6 +13,7 @@ import { TopMoversComponent } from './components/top-movers/top-movers.component
 import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule} from '@angular/material/card';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 
@@ -61,7 +62,8 @@ import { UserUpdateFormComponent } from './components/user-update-form/user-upda
     BrowserAnimationsModule,
     MatButtonToggleModule,
     FormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCardModule
   ],
   providers: [TradesService, FilterTablePipe, DatePipe],
   bootstrap: [AppComponent],

@@ -1,22 +1,18 @@
-.table {
-    color: white;
+.content {
+  padding: 16px;
+}
+.container {
+  position: relative;
+  display: inline-block;
 }
 
-#contestentWinners {
-    color: rgb(35, 213, 180);
+#card1 {
+  width: 30%;
+}
+#card2 {
+  width: 30%;
+}
+#card3 {
+  width: 30%;
 }
 
-#contestentLosers {
-    color: rgb(233, 40, 31);
-}
-
-#resultTablesContainer {
-    display: flex;
-    flex-direction: row;
-}
-
-#resultsToggleContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}

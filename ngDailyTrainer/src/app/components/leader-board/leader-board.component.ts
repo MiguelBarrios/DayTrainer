@@ -1,40 +1,34 @@
+import { UserService } from './../../services/user.service';
+import { User } from 'src/app/models/user';
 import { Contestant } from './../../models/contestant';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-leader-board',
   templateUrl: './leader-board.component.html',
-  styleUrls: ['./leader-board.component.css']
+  styleUrls: ['./leader-board.component.css'],
 })
 export class LeaderBoardComponent implements OnInit {
-
-
-
-  topWinners:Contestant[]  = [];
-  topLosers:Contestant[] = [];
-
-  constructor() { }
+  leaders: User[] = [];
+  constructor(private userSvc: UserService) {}
 
   ngOnInit(): void {
-    this.getTopWinners();
+    this.getLeaders();
   }
 
-  getTopWinners(){
-    // tmp
-    this.topWinners = [
-      new Contestant("Winner A", 3700, 312.0),
-      new Contestant("Winner B", 2300, 121.2),
-      new Contestant("Winner C", 230, 89.5),
-      new Contestant("Winner D", 12, 21.3),
-    ]
+  getLeaders() {
+    this.userSvc.index().subscribe(
+      (data) => {
+        this.leaders = data;
+        console.log('***new leaders request recieved');
+        console.log(this.leaders)
+      },
+      (error) => {
+        console.log('Observable got an error ' + error);
+      }
+    );
+    this.leaders.forEach(user => {
 
-    this.topLosers = [
-      new Contestant("Loser A", -1230, -67.3),
-      new Contestant("Loser B",434.56, -89.1),
-      new Contestant("Loser C",-1232, -92.3),
-      new Contestant("Loser D",-54.34, -99.91),
-    ]
+    });
   }
-
-
 }
