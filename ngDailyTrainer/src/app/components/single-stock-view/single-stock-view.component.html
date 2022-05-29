@@ -1,13 +1,13 @@
 <div class="container" id="SingleStockViewPageContainer">
 
     <!-- Stock Stats -->
-    <h1>{{selected.symbol}}</h1>
+    <h1 id="selectedStock">{{selected.symbol}}</h1>
 
     <div id="stockStatsContainer" class="border">
         <div id="stockQuoteInfo">
             <div>
                 <h5>Current</h5>
-                <h6>{{selected.price | number:"1.2-2"}}</h6>
+                <h6 id="currentStockPrice">{{selected.price | number:"1.2-2"}}</h6>
             </div>
             <div>
                 <h5>Open</h5>
@@ -34,7 +34,7 @@
                 <h6>{{stats?.volatility| number:"1.2-2"}}</h6>
             </div>
             <div>
-                <h5>52 Week Low</h5>
+                <h5>52 Week High</h5>
                 <h6>{{stats?.WkHigh52| number:"1.2-2"}}</h6>
             </div>
             <div>

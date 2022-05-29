@@ -56,4 +56,8 @@ export class TradesService {
     )
   }
 
+  getUserPosition(){
+
+  }
+
 }

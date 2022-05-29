@@ -26,6 +26,12 @@ export class TradeComponent implements OnInit {
   ngOnInit(): void {
     this.symbol = this.route.snapshot.paramMap.get('symbol');
     this.getUserTrades();
+    if(this.symbol){
+      this.newTrade.stock.symbol = this.symbol;
+    }
+
+
+
   }
 
 
@@ -35,14 +41,17 @@ export class TradeComponent implements OnInit {
     this.newTrade.buy = (this.action == "Buy");
     this.newTrade.orderType.name = this.orderType;
     this.newTrade.orderType.id = (this.orderType == "Market") ? 1 : 2;
-
-    console.log(this.newTrade);
+    let currentPrice = document.getElementById("currentStockPrice")?.textContent;
+    if(currentPrice){
+      this.newTrade.pricePerShare = parseFloat(currentPrice);
+    }
 
     this.tradeService.createTrade(this.newTrade).subscribe(
       (data) => {
         console.log("New Trade Created");
         console.log(data);
         this.userTrades.push(data);
+        this.userTrades = [...this.userTrades]
       },
       (error) => {
         console.log("Observable got and error " + error)

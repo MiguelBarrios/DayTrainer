@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.Position;
 import com.skilldistillery.daytrainer.entities.Stock;
+import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.repository.AccountRepository;
@@ -147,15 +149,43 @@ public class TradeServiceImple implements TradeService {
 		
 	}
 	
-	
-	public void getUserPosition(String username, String ticker) {
-		User user = userRepo.findByUsername(username);
-		List<Trade> holdings = tradeRepo.getUserTradesByStock(username, ticker);
-		for(Trade trade : holdings) {
-			System.out.println(trade);
+	@Override
+	public StockPosition getUserPosition(String username, String ticker) {
+		List<Trade> purchases = tradeRepo.getUserStockPurchases(username, ticker);
+		int sharesSold = tradeRepo.getUserPositionSize(username, ticker);
+
+		for(int i = 0; i < purchases.size(); ++i) {
+			Trade cur = purchases.get(i);
+			int amount = cur.getQuantity();
+			if(sharesSold >= amount) {
+				sharesSold -= amount;
+				purchases.set(i, null);
+			}
+			else {
+				cur.setQuantity(amount - sharesSold);
+				sharesSold = 0;
+			}
+			
+			if(sharesSold == 0) {
+				break;
+			}
 		}
 		
+		List<Trade> remainingTrades = purchases.stream().filter((t) -> t != null).collect(Collectors.toList());
+		
+		int remainingShares = 0;
+		double totalSpentOnShares = 0;
+		for(Trade cur : remainingTrades) {
+			remainingShares += cur.getQuantity();
+			totalSpentOnShares += cur.getQuantity() * cur.getPricePerShare();
+		}
+		
+		double avgCostPerShare = totalSpentOnShares / remainingShares;
+		return new StockPosition(ticker, remainingShares, avgCostPerShare);
 	}
 	
+	
+	
+
 	
 }
