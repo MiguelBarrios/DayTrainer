@@ -1,0 +1,33 @@
+#positionInfoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#userPositionInfo {
+    padding: 20px;
+}
+
+#stockStatsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#stockQuoteInfo,
+#stockStats,
+#stockStats2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#stockStatsContainer {
+    padding: 20px;
+}
+
+
+/* #stockStats {
+    display: flex;
+    flex: row;
+} */

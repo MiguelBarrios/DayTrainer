@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Trade } from '../models/trade';
 import { DatePipe, DATE_PIPE_DEFAULT_TIMEZONE } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-trade',
@@ -12,16 +13,25 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class TradeComponent implements OnInit {
 
+  symbol:string | null = "";
   userTrades:Trade[] = [];
 
   newTrade = new Trade();
   action = "Buy";
   orderType = "Market";
 
-  constructor(private date:DatePipe, private tradeService: TradesService) { }
+  constructor( private route: ActivatedRoute,private date:DatePipe, private tradeService: TradesService) { }
+
 
   ngOnInit(): void {
+    this.symbol = this.route.snapshot.paramMap.get('symbol');
     this.getUserTrades();
+    if(this.symbol){
+      this.newTrade.stock.symbol = this.symbol;
+    }
+
+
+
   }
 
 
@@ -31,14 +41,17 @@ export class TradeComponent implements OnInit {
     this.newTrade.buy = (this.action == "Buy");
     this.newTrade.orderType.name = this.orderType;
     this.newTrade.orderType.id = (this.orderType == "Market") ? 1 : 2;
-
-    console.log(this.newTrade);
+    let currentPrice = document.getElementById("currentStockPrice")?.textContent;
+    if(currentPrice){
+      this.newTrade.pricePerShare = parseFloat(currentPrice);
+    }
 
     this.tradeService.createTrade(this.newTrade).subscribe(
       (data) => {
         console.log("New Trade Created");
         console.log(data);
         this.userTrades.push(data);
+        this.userTrades = [...this.userTrades]
       },
       (error) => {
         console.log("Observable got and error " + error)
