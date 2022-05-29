@@ -17,6 +17,11 @@ export class SingleStockViewComponent implements OnInit {
 stats: TDAQuote  | null = null;
 selected: Stock = new Stock();
 userPosition: StockPosition | null = null;
+numberOfShares = 0;
+marketValue = 0;
+totalReturn = 0;
+avgCostPerShare = 0;
+
 symbol = "";
 
   constructor(private router: Router, private route: ActivatedRoute,
@@ -28,6 +33,7 @@ symbol = "";
       if (symbol) {
         this.show(symbol);
         this.getStockStats(symbol);
+        this.getUserPositionInfo(symbol);
       }
     }
 
@@ -47,6 +53,7 @@ symbol = "";
      stock.previousClose = data['Global Quote']['08. previous close'];
       this.selected=stock;
 
+
         console.log(this.selected);},
       err => {console.log(err)})
 
@@ -56,6 +63,11 @@ symbol = "";
     this.tradesService.getStockPosition(ticker).subscribe(
       (data) => {
         this.userPosition = data;
+        this.numberOfShares = data.numberOfShares;
+        this.marketValue = data.numberOfShares * this.selected.price;
+        this.avgCostPerShare = data.avgCostPerShare;
+        this.totalReturn = (this.avgCostPerShare * this.numberOfShares) - (this.selected.price * this.numberOfShares);
+
       },
       (error) => {
         console.log("getUserPositionInfo() Observable got and error " + error)

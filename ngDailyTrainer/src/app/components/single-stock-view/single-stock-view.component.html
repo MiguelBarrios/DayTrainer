@@ -97,21 +97,22 @@
         <div id="positionInfoContainer">
             <div>
                 <h5>Shares</h5>
-                <h6>42.5</h6>
+                <h6>{{numberOfShares}}</h6>
             </div>
 
             <div>
                 <h5>Market Value</h5>
-                <h6>965.32</h6>
+
+                <h6>{{marketValue}}</h6>
             </div>
 
             <div>
                 <h5>Total Return</h5>
-                <h6>25.52</h6>
+                <h6 *ngIf="totalReturn">{{totalReturn}}</h6>
             </div>
             <div>
-                <h5>Total Return</h5>
-                <h6>25.32</h6>
+                <h5>Avg Cost</h5>
+                <h6 *ngIf="totalReturn">{{avgCostPerShare}}</h6>
             </div>
         </div>
         <div id="positionReturnsContainer">
