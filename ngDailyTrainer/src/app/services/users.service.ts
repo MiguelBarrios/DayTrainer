@@ -40,4 +40,13 @@ update(user:User){
     })
   )
 }
+
+getAllUsers(){
+  return this.http.get<User[]>(this.url, this.getHttpOptions()).pipe(
+    catchError((err: any) => {
+      console.log(err);
+      return throwError('Error creating new Trade');
+    })
+  )
+}
 }

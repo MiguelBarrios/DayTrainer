@@ -20,10 +20,12 @@ export class AccountHomeComponent implements OnInit {
     accountValue :number | null = null;
     user : User = new User();
     trades :Trade[] = [];
+    users: User[]  =  [] ;
 
   ngOnInit(): void {
     this.setTrades()
     this.setUser()
+    this.setUsers()
   }
 
   loggedIn():boolean{
@@ -39,6 +41,16 @@ export class AccountHomeComponent implements OnInit {
       success =>{
         this.user = success
        // this.accountValue = success.account
+       //make account model and set accont to be an account or null in user
+      }
+    )
+  }
+
+  setUsers(){
+    this.userServ.getAllUsers().subscribe(
+      success =>{
+        console.log(success)
+        this.users = success
        //make account model and set accont to be an account or null in user
       }
     )

@@ -1,5 +1,7 @@
 package com.skilldistillery.daytrainer.services;
 
+import java.util.List;
+
 import com.skilldistillery.daytrainer.entities.User;
 
 public interface UserService {
@@ -14,6 +16,8 @@ public interface UserService {
 	void payDay();
 
 	User getUserByUsername(String username, String name);
+
+	List<User> getAllUsers(String name);
 
 	
 

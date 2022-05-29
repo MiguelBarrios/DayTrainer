@@ -77,4 +77,10 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public List<User> getAllUsers(String name) {
+		//add authentication
+		return userRepo.findAll();
+	}
+
 }

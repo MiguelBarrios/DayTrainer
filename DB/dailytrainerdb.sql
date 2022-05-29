@@ -234,6 +234,9 @@ START TRANSACTION;
 USE `dailytrainerdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (1, 'admin', '$2a$10$U4sc5g1WCoNJyEoTzpQaH.ZFCNQEykwdcU4ita9U0LH.MP4FCqvjq', 1, 'admin', 'email@domain.com', NULL, 'ad', 'min', 'bio', '2021-01-01 01:01:01');
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (2, 'userABd', '$2a$10$hgIyPOe4f9v/veo51FsiCu5uFHjfsGHM5TdqXtdGSkWG4nd5kML06', 1, 'standard', NULL, NULL, 'Miguel', 'Davila', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (3, 'AB555', '$2a$10$QpRY61r2tXUKln8wF4MCxeTwG2JlsYV84wBhcuBQ2Vc//NscorPz2', 1, 'standard', NULL, NULL, 'Anthony', 'Butler', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (4, 'C555', '$2a$10$NXaPk73hoQ9cNGNU1wIhvepIB9gl2pwoHjo2.DjvZdQ8QjaIKY4vu', 1, 'standard', NULL, NULL, 'Cecelia', 'Guerrero', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (5, 'DK23', '$2a$10$IKcV94l4j4Yu.kGAuccee./yEJdKNRG5AUlKXj4b.ZnnkaTr3DDyO', 1, 'standard', NULL, NULL, 'Daniel', 'Kregstein', NULL, '2021-01-01 01:01:01');
 
 COMMIT;
 

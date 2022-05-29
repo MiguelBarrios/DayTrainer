@@ -64,7 +64,7 @@ body {
   }
 
   #mainDash{
-    display: none;
+    display: block;
 
   }
 
