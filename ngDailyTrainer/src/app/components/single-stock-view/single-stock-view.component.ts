@@ -1,3 +1,5 @@
+import { TDAQuote } from './../../models/tdaquote';
+import { TDAserviceService } from './../../services/tdaservice.service';
 import { TradesService } from 'src/app/services/trades.service';
 import { AlphaVantageAPIService } from './../../services/alpha-vantage-api.service';
 import { StockService } from './../../services/stock.service';
@@ -11,17 +13,22 @@ import { Stock } from 'src/app/models/stock';
   styleUrls: ['./single-stock-view.component.css']
 })
 export class SingleStockViewComponent implements OnInit {
+stats: TDAQuote  | null = null;
 selected: Stock = new Stock();
 symbol = "";
 
   constructor(private router: Router, private route: ActivatedRoute,
-    private stockSvc: AlphaVantageAPIService, private tradesService: TradesService) { }
+    private stockSvc: AlphaVantageAPIService, private tradesService: TradesService,
+    private tdaService:TDAserviceService) { }
 
   ngOnInit(): void {
-   let symbol = this.route.snapshot.paramMap.get('symbol');
+      let symbol = this.route.snapshot.paramMap.get('symbol');
       if (symbol) {
         this.show(symbol);
+        this.getStockStats(symbol);
       }
+
+
     }
 
 
@@ -49,4 +56,42 @@ symbol = "";
 
   }
 
+  getStockStats(symbol:string){
+      this.tdaService.getStockStats(symbol).subscribe(
+        (data) => {
+          let stats = Object.values(data)[0];
+          let netChange = stats["netChange"];
+          let volatility = stats["volatility"];
+          let WkHigh52 = stats["52WkHigh"];
+          let WkLow52 = stats["52WkLow"];
+          let peRatio = stats["peRatio"];
+          let divAmount = stats["divAmount"];
+          let divYield = stats["divYield"];
+          let divDate = stats["divDate"];
+          this.stats = new TDAQuote(netChange, volatility, WkHigh52, WkLow52, peRatio, divAmount, divYield, divDate);
+        },
+        (error) => {
+          console.log("getStockStats() Observable got and error " + error)
+        }
+      )
+  }
+
+
+
 }
+
+  // netChange:number;
+  // volatility:number;
+  // 52WkHigh:number;
+  // 52WkLow:number;
+  // peRatio:number;
+  // divAmount:number;
+  // divYield:number;
+  // divDate:string;
+
+
+
+  // // Manufacturer and model are both of type string,
+  // // so we can pluck them both into a typed string array
+  // let makeAndModel: string[] = pluck(taxi, ["manufacturer", "model"]);
+
