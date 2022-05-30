@@ -20,7 +20,6 @@ export class Candle {
     }
 }
 
-
   // "open": 119.4,
   // "high": 119.4,
   // "low": 119.4,

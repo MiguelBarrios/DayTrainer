@@ -2,6 +2,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
+import { Candle } from '../models/candle';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +33,14 @@ export class TDAserviceService {
     )
   }
 
-  getCandelsBasic(symbol:string){
-    var url = this.url +  symbol + "pricehistory?apikey=V6DTLTMJNGVWTXDOGACC59RLTM6NTQGH%40";
+  getCandleBasic(symbol:string){
+    var url = this.url +  symbol + "/pricehistory?apikey=V6DTLTMJNGVWTXDOGACC59RLTM6NTQGH%40&startDate=1653292800000";
+    return this.http.get<Object>(url).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error in TDAService.getCandleBasic()');
+      })
+    )
   }
 
 }
