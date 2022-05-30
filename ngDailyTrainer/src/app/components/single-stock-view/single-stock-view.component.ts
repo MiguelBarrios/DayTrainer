@@ -113,4 +113,3 @@ symbol = "";
   // // Manufacturer and model are both of type string,
   // // so we can pluck them both into a typed string array
   // let makeAndModel: string[] = pluck(taxi, ["manufacturer", "model"]);
-
