@@ -24,5 +24,5 @@ public interface TradeRepository extends JpaRepository<Trade, Integer>{
 	List<Trade> getUserStockSells(@Param("username") String username, @Param("symbol") String symbol);
 
 	@Query("SELECT SUM(t.quantity) FROM Trade t WHERE t.user.username = :username AND t.stock.symbol = :symbol AND t.buy = 0")
-	int getUserPositionSize(@Param("username") String username, @Param("symbol") String symbol);
+	Integer getNumSharesSold(@Param("username") String username, @Param("symbol") String symbol);
 }
