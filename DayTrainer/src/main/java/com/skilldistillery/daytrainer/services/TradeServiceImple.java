@@ -152,11 +152,15 @@ public class TradeServiceImple implements TradeService {
 	@Override
 	public StockPosition getUserPosition(String username, String ticker) {
 		List<Trade> purchases = tradeRepo.getUserStockPurchases(username, ticker);
+		System.out.println("Purchases: " + purchases);
 		if(purchases.size() == 0) {
 			return new StockPosition(ticker, 0,0);
 		}
 		
-		int sharesSold = tradeRepo.getUserPositionSize(username, ticker);
+		Integer sharesSold = tradeRepo.getNumSharesSold(username, ticker);
+		if(sharesSold == null) {
+			sharesSold = 0;
+		}
 
 		for(int i = 0; i < purchases.size(); ++i) {
 			Trade cur = purchases.get(i);

@@ -54,7 +54,8 @@ symbol = "";
       this.getUserPositionInfo(symbol);
 
 
-        console.log(this.selected);},
+        //console.log(this.selected);
+      },
       err => {console.log(err)})
 
   }
