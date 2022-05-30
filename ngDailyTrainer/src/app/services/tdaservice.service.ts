@@ -2,7 +2,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
-import { Candle } from '../models/candle';
 
 @Injectable({
   providedIn: 'root'

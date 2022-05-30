@@ -33,7 +33,6 @@ symbol = "";
       if (symbol) {
         this.show(symbol);
         this.getStockStats(symbol);
-
       }
     }
 

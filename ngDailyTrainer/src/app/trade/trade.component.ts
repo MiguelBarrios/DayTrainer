@@ -20,6 +20,9 @@ export class TradeComponent implements OnInit {
   action = "Buy";
   orderType = "Market";
 
+  missingQuantitySMS = "";
+  missingSymbolSMS = "";
+
   constructor( private route: ActivatedRoute,private date:DatePipe, private tradeService: TradesService) { }
 
 
@@ -45,6 +48,16 @@ export class TradeComponent implements OnInit {
     if(currentPrice){
       this.newTrade.pricePerShare = parseFloat(currentPrice);
     }
+
+
+    this.missingQuantitySMS = (!this.newTrade.quantity) ? "Quantity Required" : "";
+    this.missingSymbolSMS = (!this.newTrade.stock.symbol) ? "Symbol Required" : "";
+
+    if(!this.newTrade.quantity || !this.newTrade.stock.symbol){
+      console.log("Error returned");
+      return;
+    }
+    console.log("Not error");
 
     this.tradeService.createTrade(this.newTrade).subscribe(
       (data) => {

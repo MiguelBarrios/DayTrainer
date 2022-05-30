@@ -8,8 +8,7 @@
                 <select name="action" class="form-select" [(ngModel)]="action">
                     <option value="Buy">Buy</option>
                     <option value="Sell">Sell</option>
-              </select>
-
+                </select>
             </div>
 
             <!-- Select Order Type Group-->
@@ -19,57 +18,33 @@
                 <option value="Market" selected>Market</option>
                 <option value="Limit">Limit</option>
               </select>
+                <br>
             </div>
 
             <div class="form-group col">
-                <label for="exampleInputPassword1">Quantity</label>
+                <label>Quantity</label>
                 <input type="number" class="form-control" name="quantity" [(ngModel)]="newTrade.quantity">
+                <label class="text-danger">{{missingQuantitySMS}}</label>
             </div>
 
             <div class="form-group col">
-                <label for="exampleInputPassword1">Symbol</label>
+                <label>Symbol</label>
                 <input type="text" class="form-control" name="symbol" [(ngModel)]="newTrade.stock.symbol">
+                <label class="text-danger">{{missingSymbolSMS}}</label>
             </div>
 
-            <div class="form-group col" id="sumbitTradeContainer">
-                <button class="btn-success" (click)="submitTrade() ">Execute</button>
+            <div class="form-group col" id="submitTradeContainer">
+                <br>
+                <button class="btn btn-warning" (click)="submitTrade()">Execute</button>
             </div>
 
         </div>
     </form>
 </div>
-<!--
-<div id="userPositionInfo" class="border">
-    <h1>Your Position</h1>
-    <div id="positionInfoContainer">
-        <div>
-            <h5>Shares</h5>
-            <h6>42.5</h6>
-        </div>
-
-        <div>
-            <h5>Market Value</h5>
-            <h6>965.32</h6>
-        </div>
-
-        <div>
-            <h5>Total Return</h5>
-            <h6>25.52</h6>
-        </div>
-        <div>
-            <h5>Total Return</h5>
-            <h6>25.32</h6>
-        </div>
-    </div>
-    <div id="positionReturnsContainer">
-
-    </div>
-
-</div> -->
 
 <!-- User Trades Tables -->
 <div id="userTrades">
-    <table class="table border table-borderless">
+    <table class="table border table-borderless" *ngIf="(userTrades | userTrades:symbol).length > 0">
         <thead>
             <tr class="border" class="tableData">
                 <th scope="col">Symbol</th>
@@ -85,7 +60,7 @@
                 <td>{{trade.buy | buySell}}</td>
                 <td>{{trade.quantity}}</td>
                 <td>{{trade.pricePerShare | number:"1.2-2"}}</td>
-                <td>{{trade.completionDate}}</td>
+                <td>{{trade.completionDate | date:'medium'}}</td>
             </tr>
         </tbody>
     </table>
