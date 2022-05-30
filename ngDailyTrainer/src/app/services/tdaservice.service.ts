@@ -30,7 +30,10 @@ export class TDAserviceService {
         return throwError('Error in TDAService.getstockStats()');
       })
     )
+  }
 
+  getCandelsBasic(symbol:string){
+    var url = this.url +  symbol + "pricehistory?apikey=V6DTLTMJNGVWTXDOGACC59RLTM6NTQGH%40";
   }
 
 }
