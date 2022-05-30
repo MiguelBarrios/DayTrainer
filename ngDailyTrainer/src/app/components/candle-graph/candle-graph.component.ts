@@ -31,6 +31,7 @@ export class CandleGraphComponent implements OnInit {
   candles:any[] = [];
 
   symbol = "";
+  isLoaded = false;
 
   ngOnInit(): void {
   }
@@ -87,6 +88,7 @@ export class CandleGraphComponent implements OnInit {
            }
            console.log("Candles: " + this.candles.length);
            this.loadData();
+           this.isLoaded = true;
 
       },
       (error) => {

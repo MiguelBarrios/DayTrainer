@@ -1,8 +1,3 @@
-.hidden {
-    display: none;
-    visibility: hidden;
-}
-
 .footerComponent {
     display: flex;
     flex-direction: row;
