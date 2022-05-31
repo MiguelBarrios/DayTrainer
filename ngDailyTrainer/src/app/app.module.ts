@@ -35,6 +35,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { BuySellPipe } from './pipes/buy-sell.pipe';
 import { UserUpdateFormComponent } from './components/user-update-form/user-update-form.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { CandleGraphComponent } from './components/candle-graph/candle-graph.component';
 
 
 @NgModule({
@@ -54,7 +56,8 @@ import { UserUpdateFormComponent } from './components/user-update-form/user-upda
     NotfoundComponent,
     UserTradesPipe,
     BuySellPipe,
-    UserUpdateFormComponent
+    UserUpdateFormComponent,
+    CandleGraphComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,9 @@ import { UserUpdateFormComponent } from './components/user-update-form/user-upda
     FormsModule,
     MatRadioModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    NgApexchartsModule
+
   ],
   providers: [TradesService, FilterTablePipe, DatePipe],
   bootstrap: [AppComponent],

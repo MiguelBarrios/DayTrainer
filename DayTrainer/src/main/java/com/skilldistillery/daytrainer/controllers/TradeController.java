@@ -80,7 +80,8 @@ public class TradeController {
 	
 	@GetMapping("trades/position/{ticker}")
 	public StockPosition getUserStockPosition(Principal principal, @PathVariable String ticker) {
-		return tradeService.getUserPosition(principal.getName(), ticker);
+		StockPosition pos = tradeService.getUserPosition(principal.getName(), ticker);
+		return pos;
 	}
 	
 
