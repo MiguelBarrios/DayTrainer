@@ -1,7 +1,31 @@
 body {
-  /* display: inline; */
-  padding-left: 200px;
+    /* display: inline; */
+    padding-left: 200px;
 }
+
 #page-header {
-  padding-left: 200px;
+    padding-left: 200px;
+}
+
+#leaderboardOuter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#leaderboardContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.stockReturns {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }

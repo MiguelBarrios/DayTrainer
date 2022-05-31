@@ -1,4 +1,7 @@
+import { last } from "rxjs";
+
 export class TDAQuote {
+  symbol:string;
   netChange:number;
   volatility:number;
   WkHigh52:number;
@@ -7,14 +10,18 @@ export class TDAQuote {
   divAmount:number;
   divYield:number;
   divDate:string;
-  constructor(  netChange:number,
+  lastPrice:number;
+  constructor(  symbol:string,
+    netChange:number,
     volatility:number,
     WkHigh52:number,
     WkLow52:number,
     peRatio:number,
     divAmount:number,
     divYield:number,
-    divDate:string){
+    divDate:string,
+    lastPrice:number){
+      this.symbol = symbol;
       this.netChange = netChange;
       this.volatility = volatility;
       this.WkHigh52 = WkHigh52;
@@ -23,6 +30,7 @@ export class TDAQuote {
       this.divAmount = divAmount;
       this.divYield = divYield;
       this.divDate = divDate;
+      this.lastPrice = lastPrice;
     }
 
 

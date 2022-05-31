@@ -38,6 +38,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { CandleGraphComponent } from './components/candle-graph/candle-graph.component';
 import { MoversPipe } from './pipes/movers.pipe';
 import { LoggedInNavComponent } from './components/logged-in-nav/logged-in-nav.component';
+import { LeaderboardPipe } from './pipes/leaderboard.pipe';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { LoggedInNavComponent } from './components/logged-in-nav/logged-in-nav.c
     UserUpdateFormComponent,
     CandleGraphComponent,
     MoversPipe,
-    LoggedInNavComponent
+    LoggedInNavComponent,
+    LeaderboardPipe
   ],
   imports: [
     BrowserModule,
