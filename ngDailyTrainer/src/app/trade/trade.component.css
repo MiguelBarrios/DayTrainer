@@ -1,6 +1,5 @@
 #tradeContainer {
     color: black;
-    width: 60%;
     padding: 10px;
 }
 
@@ -9,18 +8,17 @@
     flex-direction: row;
 }
 
-#sumbitTradeContainer {
-    display: flex;
-}
+#sumbitTradeContainer {}
 
 #sumbitTradeContainer {
     width: 10px;
 }
 
-#userTrades {
-    width: 60%;
-}
-
 .tableData {
     color: black;
+}
+
+#submitTradeContainer {
+    display: flex;
+    flex-direction: column;
 }

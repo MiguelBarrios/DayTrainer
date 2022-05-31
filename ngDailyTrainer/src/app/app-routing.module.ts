@@ -18,17 +18,18 @@ const routes: Routes = [
   { path: 'home', component: HomepageComponent},
   { path: 'leaderBoard', component: LeaderBoardComponent},
   { path: 'topMovers', component: TopMoversComponent},
+  { path: 'singleStockView/', component: SingleStockViewComponent},
   { path: 'singleStockView/:symbol', component: SingleStockViewComponent},
   { path: 'dashboard', component: AccountHomeComponent},
   { path: 'accounthome', component: AccountHomeComponent},
-  {path:'feed', component: FeedComponent},
-  {path:'friends', component: FriendsComponent},
-  {path:'market', component: MarketComponent},
-  {path:'settings', component: SettingsComponent},
-  {path:'users', component: UsersComponent},
-  {path:'trades', component: TradesComponent},
-  {path:'leaderboard', component: LeaderBoardComponent},
-  {path:'**', component: NotfoundComponent}
+  {path:  'feed', component: FeedComponent},
+  {path:  'friends', component: FriendsComponent},
+  {path:  'market', component: MarketComponent},
+  {path:  'settings', component: SettingsComponent},
+  {path:  'users', component: UsersComponent},
+  {path:  'trades', component: TradesComponent},
+  {path:  '**', component: NotfoundComponent}
+
 
 
 ];

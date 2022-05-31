@@ -1,12 +1,12 @@
 package com.skilldistillery.daytrainer.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.skilldistillery.daytrainer.entities.Comment;
+import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.repository.AccountRepository;
 import com.skilldistillery.daytrainer.repository.CommentRepository;
@@ -56,12 +56,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserByUsername(String username,String name) {
-		//add authentication
-		return userRepo.findByUsername(username);
-	}
-
-	@Override
 	public void destroy(String name, int userId) {
 		User currentUser = userRepo.findByUsername(name);
 		Optional<User> op = userRepo.findById(userId);
@@ -93,7 +87,59 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Comment> getAllCommentsByTradeId(String name, Integer tradeId) {
 		//add authentication
-		return null; //commRepo.getCommentsByTradeId(tradeId) ;
+		return null; }//commRepo.getCommentsByTradeId(tradeId) ;
+
+	public List<User> allUsers() {
+		List<User> enableCheck = userRepo.findAll();
+		for (User user : enableCheck) {
+			int index = 0;
+			if(!user.isEnabled()) {
+				enableCheck.remove(index);
+			}
+			index++;
+		}
+		return enableCheck;
+	}
+	
+	
+	@Override
+	public List<User> leadersList() {
+		List<User> temp = allUsers();
+		User first = new User();
+		first.setAccount(new Account());
+		first.getAccount().setBalance(3);
+		User second = new User();
+		second.setAccount(new Account());
+		second.getAccount().setBalance(2);
+		User third = new User();
+		third.setAccount(new Account());
+		third.getAccount().setBalance(1);
+		List<User> topThree = new ArrayList<>();
+		for (int i = 0; i < temp.size(); i++) {
+			User current = temp.get(i);
+			if(first.getAccount().getBalance()< current.getAccount().getBalance()) {
+				third= second;
+				second = first;
+				first = current;
+			} else if(second.getAccount().getBalance()<current.getAccount().getBalance()) {
+				third = second;
+				second = current;
+			} else if(third.getAccount().getBalance()< current.getAccount().getBalance()) {
+				third = current;
+			}
+			
+		}
+		topThree.add(first);
+		topThree.add(second);		
+		topThree.add(third);
+		
+		return topThree; 
+
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		return userRepo.findByUsername(username);
 	}
 
 }

@@ -1,7 +1,5 @@
-
-
 .footerComponent {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }

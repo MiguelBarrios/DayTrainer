@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.daytrainer.entities.Position;
+import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
 import com.skilldistillery.daytrainer.services.StockService;
 import com.skilldistillery.daytrainer.services.TradeService;
@@ -55,7 +56,8 @@ public class TradeController {
 	
 	@PostMapping("trades")
 	public Trade create(@RequestBody Trade trade, HttpServletResponse response, Principal principal) {
-		System.out.println(trade);
+		System.out.println("TEst");
+//		System.out.println(trade);
 		
 		String orderType = trade.getOrderType().getName();
 		if(orderType.equals("Market")){
@@ -72,9 +74,15 @@ public class TradeController {
 	
 	@GetMapping("trades/portfolio")
 	public Collection<Position> getPortfolio(Principal principal) {
-		System.out.println("here");
 		return tradeService.getUserPortfolio(principal.getName());
 		
 	}
+	
+	@GetMapping("trades/position/{ticker}")
+	public StockPosition getUserStockPosition(Principal principal, @PathVariable String ticker) {
+		StockPosition pos = tradeService.getUserPosition(principal.getName(), ticker);
+		return pos;
+	}
+	
 
 }

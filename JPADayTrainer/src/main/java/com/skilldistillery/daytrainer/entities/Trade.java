@@ -196,15 +196,15 @@ public class Trade {
 		builder.append(buy);
 		builder.append(", completionDate=");
 		builder.append(completionDate);
-		builder.append(", user=");
-		builder.append(user);
+//		builder.append(", user=");
+//		builder.append(user.getUsername());
 		builder.append(", stock=");
-		builder.append(stock);
-		builder.append(", notes=");
-		builder.append(notes);
-		builder.append(", comments=");
-		builder.append(comments);
-	
+		builder.append(stock.getSymbol());
+//		builder.append(", notes=");
+//		builder.append(notes);
+//		builder.append(", comments=");
+//		builder.append(comments);
+//	
 		builder.append(", strikePrice=");
 		builder.append(strikePrice);
 		builder.append("]");

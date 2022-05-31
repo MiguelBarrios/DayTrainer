@@ -1,12 +1,11 @@
 package com.skilldistillery.daytrainer.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.skilldistillery.daytrainer.entities.Comment;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.services.UserService;
@@ -33,23 +31,32 @@ public class UserController {
 
 	@Autowired
 	private UserService userSvc;
-	
+
 	@GetMapping("users")
-	public List<User> getAllUser(Principal principal,  HttpServletResponse res) {
+	public List<User> getAllUser(Principal principal, HttpServletResponse res) {
 		List<User> users = userSvc.getAllUsers(principal.getName());
 		if (users == null) {
 			res.setStatus(404);
 		}
 		return users;
 	}
-	
+
 	@GetMapping("users/commments/{tradeId}")
-	public List<Comment> getAllUserComments(Principal principal,@PathVariable Integer tradeId,  HttpServletResponse res) {
+	public List<Comment> getAllUserComments(Principal principal, @PathVariable Integer tradeId,
+			HttpServletResponse res) {
 		List<Comment> comments = userSvc.getAllCommentsByTradeId(principal.getName(), tradeId);
 		if (comments == null) {
 			res.setStatus(404);
 		}
 		return comments;
+	}
+	
+	@GetMapping("users/leaders")
+	public List<User> getLeaders() {
+		List<User> test = userSvc.leadersList();
+		System.out.println(test);
+		return test;
+
 	}
 
 	@GetMapping("users/{userId}")
@@ -59,11 +66,11 @@ public class UserController {
 			res.setStatus(404);
 		}
 		return user;
-	}
+	}	
 
 	@GetMapping("users/name/{userName}")
 	public User getUserByUserName(Principal principal, @PathVariable String userName, HttpServletResponse res) {
-		User user = userSvc.getUserByUsername(userName, principal.getName());
+		User user = userSvc.getUserByUsername(userName);
 		if (user == null) {
 			res.setStatus(404);
 		}
@@ -71,7 +78,8 @@ public class UserController {
 	}
 
 	@PutMapping("users")
-	public User updateUser(Principal principal, HttpServletRequest req, HttpServletResponse res, @RequestBody User user) {
+	public User updateUser(Principal principal, HttpServletRequest req, HttpServletResponse res,
+			@RequestBody User user) {
 		System.out.print("*******************testing");
 		try {
 			user = userSvc.update(principal.getName(), user);
@@ -87,7 +95,8 @@ public class UserController {
 	}
 
 	@DeleteMapping("users/{userId}")
-	public void destroy(Principal principal, HttpServletRequest req, HttpServletResponse res,@PathVariable int userId) {
+	public void destroy(Principal principal, HttpServletRequest req, HttpServletResponse res,
+			@PathVariable int userId) {
 		userSvc.destroy(principal.getName(), userId);
 
 	}

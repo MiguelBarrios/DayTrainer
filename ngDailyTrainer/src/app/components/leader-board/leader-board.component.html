@@ -1,52 +1,28 @@
-<div class="container pt-4" id="leaderBoard">
-  <div id="leaderboardComponentContainer" class="border p-5">
-    <div id="resultsToggleContainer">
-      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle class="btn btn-success" value="bold">Weekly</mat-button-toggle>
-        <mat-button-toggle class="btn btn-success" value="italic">All Time</mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
+<br>
+<h1>Congratulations to the current leaders!</h1>
 
-    <div id="resultTablesContainer">
-      <table class="table border table-borderless">
-        <thead>
-          <tr>
-            <th scope="col">Winners</th>
-          </tr>
-          <tr class="border">
-            <th scope="col">Username</th>
-            <th scope="col">Winnings</th>
-            <th scope="col">Change</th>
-          </tr>
-        </thead>
-        <tbody id="contestentWinners">
-          <tr *ngFor="let contestant of topWinners">
-            <td>{{contestant.username}}</td>
-            <td>{{contestant.totalWinnings}}</td>
-            <td>{{contestant.percentChange}}</td>
-          </tr>
-        </tbody>
-      </table>
+<mat-grid-list gutterSize="10px" cols="3">
+  <div *ngFor="let user of leaders">
 
-      <table class="table border table-borderless">
-        <thead>
-          <tr>
-            <th scope="col">Losers</th>
-          </tr>
-          <tr class="border">
-            <th scope="col">Username</th>
-            <th scope="col">Winnings</th>
-            <th scope="col">Change</th>
-          </tr>
-        </thead>
-        <tbody id="contestentLosers">
-          <tr *ngFor="let contestant of topLosers">
-            <td>{{contestant.username}}</td>
-            <td>{{contestant.totalWinnings}}</td>
-            <td>{{contestant.percentChange}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <mat-grid-tile *ngIf="user.username != null" colspan="1" rowspan="1">
+      <mat-card id="card" flex="40" flex-sm="80">
+        <mat-card-header>
+          <mat-card-title>
+            <h1>{{user.username}} </h1>
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <h3>
+            <h2>{{user.firstName}}'s Positions:</h2>
+          </h3>
+          <div *ngFor="let position of user.positions">
+            <h3>{{position.symbol}} value: {{position.value}}</h3>
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
+    </mat-grid-tile>
   </div>
-</div>
+</mat-grid-list>

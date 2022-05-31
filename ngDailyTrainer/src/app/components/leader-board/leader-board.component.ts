@@ -1,40 +1,68 @@
+import { Position } from './../../models/position';
+import { Trade } from './../../models/trade';
+import { TradesService } from 'src/app/services/trades.service';
+import { UserService } from './../../services/user.service';
+import { User } from 'src/app/models/user';
 import { Contestant } from './../../models/contestant';
 import { Component, OnInit } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-leader-board',
   templateUrl: './leader-board.component.html',
-  styleUrls: ['./leader-board.component.css']
+  styleUrls: ['./leader-board.component.css'],
 })
 export class LeaderBoardComponent implements OnInit {
-
-
-
-  topWinners:Contestant[]  = [];
-  topLosers:Contestant[] = [];
-
-  constructor() { }
+  leaders: User[] = [];
+  userTrades: Position[] = [];
+  constructor(private userSvc: UserService, private trade: TradesService) {}
 
   ngOnInit(): void {
-    this.getTopWinners();
+    this.getLeaders();
+
+    // this.getUserTrades(this.leaders);
   }
 
-  getTopWinners(){
-    // tmp
-    this.topWinners = [
-      new Contestant("Winner A", 3700, 312.0),
-      new Contestant("Winner B", 2300, 121.2),
-      new Contestant("Winner C", 230, 89.5),
-      new Contestant("Winner D", 12, 21.3),
-    ]
+  getLeaders() {
+    this.userSvc.getLeaders().subscribe(
+      (data) => {
+        this.leaders = data;
+        console.log('***new leaders request recieved');
+        console.log(this.leaders)
 
-    this.topLosers = [
-      new Contestant("Loser A", -1230, -67.3),
-      new Contestant("Loser B",434.56, -89.1),
-      new Contestant("Loser C",-1232, -92.3),
-      new Contestant("Loser D",-54.34, -99.91),
-    ]
+              for (let index = 0; index < this.leaders.length; index++) {
+
+                this.userSvc.getUserTrades(this.leaders[index].username).subscribe(
+                  (data) => {
+                    this.leaders[index].positions = data;
+
+                    console.log('***new leaders request recieved');
+                    console.log(this.userTrades)
+                  });
+
+              }
+
+      },
+      (error) => {
+        console.log('Observable got an error ' + error);
+      }
+    );
   }
+
+getUserTrades(username: string| null) {
+this.userSvc.getUserTrades(username).subscribe(
+  (data) => {
+    this.userTrades = data;
+    console.log('***new leaders request recieved');
+    console.log(this.userTrades)
+  },
+  (error) => {
+    console.log('Observable got an error ' + error);
+  });
+
+}
+
 
 
 }

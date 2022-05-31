@@ -1,3 +1,4 @@
+import { StockPosition } from './../models/stock-position';
 import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -10,6 +11,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TradesService {
+
+  private tdaUrl = "https://api.tdameritrade.com/v1/marketdata/";
 
   private url = environment.baseUrl + 'api/trades'
 
@@ -50,6 +53,16 @@ export class TradesService {
       catchError((err: any) => {
         console.log(err);
         return throwError('Error in getUserTrades() request');
+      })
+    )
+  }
+
+  getStockPosition(symbol:string){
+    var url = this.url + "/position/" + symbol;
+    return this.http.get<StockPosition>(url, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error in getStockPosition() request');
       })
     )
   }

@@ -7,9 +7,9 @@ import com.skilldistillery.daytrainer.entities.Trade;
 
 public interface StockService {
 
-	Stock getStock(Stock stock);
+	public Stock getStock(Stock stock);
 
-	Stock getStockBySymbol(String username, String symbol);
+	public Stock getStockBySymbol(String username, String symbol);
 
-	List<Stock> getAllStocks();
+	public List<Stock> getAllStocks();
 }
