@@ -1,7 +1,9 @@
 package com.skilldistillery.daytrainer.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.repository.AccountRepository;
 import com.skilldistillery.daytrainer.repository.CommentRepository;
+import com.skilldistillery.daytrainer.repository.TradeRepository;
 import com.skilldistillery.daytrainer.repository.UserRepository;
 
 @Service
@@ -30,6 +33,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired 
 	private TradeService tradeService;
+	
+	@Autowired
+	private TradeRepository tradeRepo;
 
 	@Override
 	public User getUserById(int userId, String name) {
@@ -111,19 +117,26 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<LeaderBoardRanking> leaderBoard() {
+	public Map<String, Object> leaderBoard() {
 		List<LeaderBoardRanking> rankings = new ArrayList<>();
 		List<User> users = userRepo.findAll();
+		List<String> stocks = tradeRepo.getCurrentlyHeldStocks();
+		System.out.println(stocks);
 		
 		for(User user : users) {
 			List<StockPosition> pos = tradeService.getUserPositions(user.getUsername());
 			user.setPassword(null);			
 			double balance = user.getAccount().getBalance() - user.getAccount().getDeposit();
+			System.out.printf("%s balance: %f  deposits: %f leaderBalance: %f", user.getUsername(), user.getAccount().getBalance(), user.getAccount().getDeposit(), balance);
 			LeaderBoardRanking cur = new LeaderBoardRanking(user, balance,pos);
 			rankings.add(cur);
 		}
 		
-		return rankings;
+		Map<String, Object> map = new HashMap<>();
+		map.put("data", rankings);
+		map.put("stocks", stocks);
+		
+		return map;
 		
 	}
 	

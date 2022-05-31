@@ -2,6 +2,7 @@ package com.skilldistillery.daytrainer.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.daytrainer.entities.Comment;
-import com.skilldistillery.daytrainer.entities.LeaderBoardRanking;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.services.UserService;
 
@@ -55,7 +55,7 @@ public class UserController {
 	}
 	
 	@GetMapping("users/leaders")
-	public List<LeaderBoardRanking> getLeaders() {
+	public Map<String, Object> getLeaders() {
 		//List<User> test = userSvc.leadersList();
 		//System.out.println(test);
 		return userSvc.leaderBoard();

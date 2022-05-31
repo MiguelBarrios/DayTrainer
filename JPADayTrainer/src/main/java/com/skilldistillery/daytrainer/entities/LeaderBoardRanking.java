@@ -18,6 +18,7 @@ public class LeaderBoardRanking {
 		super();
 		this.user = user;
 		this.positions = positions;
+		this.accountBalance = accountBalance;
 	}
 
 	public User getUser() {
@@ -37,7 +38,6 @@ public class LeaderBoardRanking {
 	}
 	
 	
-
 	public double getAccountBalance() {
 		return accountBalance;
 	}
