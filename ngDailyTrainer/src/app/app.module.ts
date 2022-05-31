@@ -32,6 +32,12 @@ import {MatRadioModule} from '@angular/material/radio';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { UserUpdateFormComponent } from './components/user-update-form/user-update-form.component';
+import { FeedComponent } from './components/feed/feed.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { MarketComponent } from './components/market/market.component';
+import { UsersComponent } from './components/users/users.component';
+import { FriendsComponent } from './components/friends/friends.component';
+import { TradesComponent } from './components/trades/trades.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +54,13 @@ import { UserUpdateFormComponent } from './components/user-update-form/user-upda
     TradeComponent,
     LogoutComponent,
     NotfoundComponent,
-    UserUpdateFormComponent
+    UserUpdateFormComponent,
+    FeedComponent,
+    SettingsComponent,
+    MarketComponent,
+    UsersComponent,
+    FriendsComponent,
+    TradesComponent
 
   ],
   imports: [

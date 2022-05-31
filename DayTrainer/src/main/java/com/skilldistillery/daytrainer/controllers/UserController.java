@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.daytrainer.entities.Comment;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.services.UserService;
 
@@ -40,6 +41,15 @@ public class UserController {
 			res.setStatus(404);
 		}
 		return users;
+	}
+	
+	@GetMapping("users/commments/{tradeId}")
+	public List<Comment> getAllUserComments(Principal principal,@PathVariable Integer tradeId,  HttpServletResponse res) {
+		List<Comment> comments = userSvc.getAllCommentsByTradeId(principal.getName(), tradeId);
+		if (comments == null) {
+			res.setStatus(404);
+		}
+		return comments;
 	}
 
 	@GetMapping("users/{userId}")
@@ -77,8 +87,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("users/{userId}")
-	public void destroy(Principal principal, HttpServletRequest req, HttpServletResponse res,
-			@PathVariable int userId) {
+	public void destroy(Principal principal, HttpServletRequest req, HttpServletResponse res,@PathVariable int userId) {
 		userSvc.destroy(principal.getName(), userId);
 
 	}

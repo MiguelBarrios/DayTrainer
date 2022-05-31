@@ -1,0 +1,70 @@
+<body>
+  <!--Main Navigation-->
+  <header>
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4">
+          <a href="#" [routerLink]="['/accounthome']" class="list-group-item list-group-item-action py-2 ripple"
+            aria-current="true">
+            <i class="fa fa-tachometer fa-fw me-3"></i><span>Main dashboard</span></a>
+          <a href="#" [routerLink]="['/settings']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-lock fa-fw me-3"></i><span>Settings</span></a>
+          <a href="#" [routerLink]="['/feed']" class="list-group-item list-group-item-action py-2 ripple">
+            <i class="fa fa-chart-pie fa-fw me-3"></i><span>Feed</span></a>
+          <a href="#" [routerLink]="['/trades']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-building fa-fw me-3 fa fa-chart-bar fa-fw me-3"></i><span>Trades</span></a>
+          <a href="#" [routerLink]="['/leaderboard']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-globe fa-fw me-3"></i><span>Leader Board</span></a>
+          <a href="#" [routerLink]="['/market']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-calendar fa-fw me-3"></i><span>Market</span></a>
+          <a *ngIf="isAdmin()" href="#" [routerLink]="['/users']"
+            class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-users fa-fw me-3"></i><span>Users</span></a>
+          <a href="#" [routerLink]="['/friends']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-money-bill fa-fw me-3"></i><span>Friends</span></a>
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar -->
+
+
+  </header>
+
+
+  <main style="margin-top: 58px;">
+    <div class="container pt-4" id="Feed">
+      <!-- Main Body -->
+      <section>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-5 col-md-6 col-12 pb-4">
+              <h1>Feed</h1>
+              <div class="comment mt-4 text-justify float-left" *ngFor="comment of comments">
+                <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
+                <h4>Jhon Doe</h4>
+                <span>- 20 October, 2018</span>
+                <br>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam
+                  vero sequi velit molestias doloremque molestiae dicta?</p>
+              </div>
+
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+              <form id="algin-form">
+                <div class="form-group">
+                  <h4>Leave a comment</h4>
+                  <label for="message">Message</label>
+                  <textarea name="msg" id="" msg cols="30" rows="5" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <button type="button" id="post" class="btn">Post Comment</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+</body>

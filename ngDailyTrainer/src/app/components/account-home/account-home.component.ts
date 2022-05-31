@@ -7,6 +7,7 @@ import { Trade } from 'src/app/models/trade';
 import { User } from 'src/app/models/user';
 
 
+
 @Component({
   selector: 'app-account-home',
   templateUrl: './account-home.component.html',
@@ -23,9 +24,15 @@ export class AccountHomeComponent implements OnInit {
     users: User[]  =  [] ;
 
   ngOnInit(): void {
+    this.isAuthorized()
     this.setTrades()
     this.setUser()
     this.setUsers()
+  }
+  isAuthorized() {
+    if(!this.auth.checkLogin()){
+    this.router.navigateByUrl('home');
+    }
   }
 
   loggedIn():boolean{

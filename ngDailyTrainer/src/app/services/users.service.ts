@@ -49,4 +49,13 @@ getAllUsers(){
     })
   )
 }
+
+delete(id:number){
+  return this.http.delete<void>(this.url+ '/'+ id, this.getHttpOptions()).pipe(
+    catchError((err: any) => {
+      console.log(err);
+      return throwError('Error creating new Trade');
+    })
+  )
+}
 }

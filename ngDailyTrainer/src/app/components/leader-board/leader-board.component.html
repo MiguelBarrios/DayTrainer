@@ -1,52 +1,52 @@
-<div id="leaderboardComponentContainer" class="border p-5">
+<div class="container pt-4" id="leaderBoard">
+  <div id="leaderboardComponentContainer" class="border p-5">
     <div id="resultsToggleContainer">
-        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-            <mat-button-toggle class="btn btn-success" value="bold">Weekly</mat-button-toggle>
-            <mat-button-toggle class="btn btn-success" value="italic">All Time</mat-button-toggle>
-        </mat-button-toggle-group>
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle class="btn btn-success" value="bold">Weekly</mat-button-toggle>
+        <mat-button-toggle class="btn btn-success" value="italic">All Time</mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
 
     <div id="resultTablesContainer">
-        <table class="table border table-borderless">
-            <thead>
-                <tr>
-                    <th scope="col">Winners</th>
-                </tr>
-                <tr class="border">
-                    <th scope="col">Username</th>
-                    <th scope="col">Winnings</th>
-                    <th scope="col">Change</th>
-                </tr>
-            </thead>
-            <tbody id="contestentWinners">
-                <tr *ngFor="let contestant of topWinners">
-                    <td>{{contestant.username}}</td>
-                    <td>{{contestant.totalWinnings}}</td>
-                    <td>{{contestant.percentChange}}</td>
-                </tr>
-            </tbody>
-        </table>
+      <table class="table border table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">Winners</th>
+          </tr>
+          <tr class="border">
+            <th scope="col">Username</th>
+            <th scope="col">Winnings</th>
+            <th scope="col">Change</th>
+          </tr>
+        </thead>
+        <tbody id="contestentWinners">
+          <tr *ngFor="let contestant of topWinners">
+            <td>{{contestant.username}}</td>
+            <td>{{contestant.totalWinnings}}</td>
+            <td>{{contestant.percentChange}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <table class="table border table-borderless">
-            <thead>
-                <tr>
-                    <th scope="col">Losers</th>
-                </tr>
-                <tr class="border">
-                    <th scope="col">Username</th>
-                    <th scope="col">Winnings</th>
-                    <th scope="col">Change</th>
-                </tr>
-            </thead>
-            <tbody id="contestentLosers">
-                <tr *ngFor="let contestant of topLosers">
-                    <td>{{contestant.username}}</td>
-                    <td>{{contestant.totalWinnings}}</td>
-                    <td>{{contestant.percentChange}}</td>
-                </tr>
-            </tbody>
-        </table>
+      <table class="table border table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">Losers</th>
+          </tr>
+          <tr class="border">
+            <th scope="col">Username</th>
+            <th scope="col">Winnings</th>
+            <th scope="col">Change</th>
+          </tr>
+        </thead>
+        <tbody id="contestentLosers">
+          <tr *ngFor="let contestant of topLosers">
+            <td>{{contestant.username}}</td>
+            <td>{{contestant.totalWinnings}}</td>
+            <td>{{contestant.percentChange}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-
+  </div>
 </div>

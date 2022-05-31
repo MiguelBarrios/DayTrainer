@@ -1,6 +1,6 @@
 import { TradesService } from 'src/app/services/trades.service';
 import { User } from './../../models/user';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserUpdateFormComponent implements OnInit {
 
+  @Input()
   user:User = new User;
 
   constructor(private auth:AuthService,

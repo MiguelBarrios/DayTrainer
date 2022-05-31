@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.daytrainer.entities.Comment;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.repository.AccountRepository;
+import com.skilldistillery.daytrainer.repository.CommentRepository;
 import com.skilldistillery.daytrainer.repository.UserRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private AccountRepository accRepo;
+	
+	@Autowired
+	private CommentRepository commRepo;
 
 	@Override
 	public User getUserById(int userId, String name) {
@@ -56,12 +61,14 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findByUsername(username);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void destroy(String name, int userId) {
 		User currentUser = userRepo.findByUsername(name);
-		if (currentUser != null && currentUser.getRole().equals("admin")) {
-			userRepo.delete(userRepo.getById(userId));
+		Optional<User> op = userRepo.findById(userId);
+		if (currentUser != null && currentUser.getRole().equals("admin") && op.get() != null) {
+			User userToDelete= op.get();
+			accRepo.deleteById(userToDelete.getAccount().getId());
+			userRepo.delete(userToDelete);
 		}
 	}
 
@@ -81,6 +88,12 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllUsers(String name) {
 		//add authentication
 		return userRepo.findAll();
+	}
+
+	@Override
+	public List<Comment> getAllCommentsByTradeId(String name, Integer tradeId) {
+		//add authentication
+		return null; //commRepo.getCommentsByTradeId(tradeId) ;
 	}
 
 }

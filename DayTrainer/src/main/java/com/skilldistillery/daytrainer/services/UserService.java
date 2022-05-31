@@ -2,6 +2,7 @@ package com.skilldistillery.daytrainer.services;
 
 import java.util.List;
 
+import com.skilldistillery.daytrainer.entities.Comment;
 import com.skilldistillery.daytrainer.entities.User;
 
 public interface UserService {
@@ -18,6 +19,8 @@ public interface UserService {
 	User getUserByUsername(String username, String name);
 
 	List<User> getAllUsers(String name);
+
+	List<Comment> getAllCommentsByTradeId(String name, Integer tradeId);
 
 	
 
