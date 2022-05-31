@@ -67,4 +67,14 @@ export class TradesService {
     )
   }
 
+  getUserPositions(){
+    var url = this.url + "/position";
+    return this.http.get<StockPosition[]>(url, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error in getuserPositions() request');
+      })
+    )
+  }
+
 }

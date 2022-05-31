@@ -1,43 +1,17 @@
-
-/* .split {
-margin: 40px;
-position: absolute;
-  z-index: 1;
-  top: 10;
-  overflow-x: hidden;
-} */
-
-.wrapper {
-  max-height: 1080px;
-}
-.splitLeft {
-
-    left: 0;
-
-    width: 40%;
-    font-size: xx-large;
-    color: black;
-
-}
-
-.splitRight {
-
-    right: 0;
-
-    width: 45%;
-    color: black;
-    font-size: xx-large;
-
-}
-
-#headm {
-    color: black;
+#topMoversContainer {
+    display: flex;
+    flex-direction: row;
 }
 
 #SRows:hover {
     background-color: darkgray;
 }
 
-input {
+
+/* input {
     width: 100%;
+} */
+
+.table {
+    height: 200px;
 }

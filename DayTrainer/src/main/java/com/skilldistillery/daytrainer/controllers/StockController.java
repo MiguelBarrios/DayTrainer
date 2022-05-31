@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.daytrainer.entities.Stock;
-import com.skilldistillery.daytrainer.entities.Trade;
 import com.skilldistillery.daytrainer.services.StockService;
 
 @RestController
@@ -35,5 +34,12 @@ public class StockController {
 		return stockService.getStockBySymbol(username, symbol);
 		
 	}
+	
+	@GetMapping("stocks/search/{pattern}")
+	public List<String> searchStocks(@PathVariable String pattern, Principal principal){
+		
+		return null;
+	}
+	
 
 }

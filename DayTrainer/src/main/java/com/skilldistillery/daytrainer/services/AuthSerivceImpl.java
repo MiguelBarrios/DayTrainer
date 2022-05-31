@@ -33,6 +33,7 @@ public class AuthSerivceImpl implements AuthService {
 		
 		Account newAccount = new Account();
 		newAccount.setBalance(10000);
+		newAccount.setDeposit(10000);
 		newAccount.setUser(user);
 		accountRepo.saveAndFlush(newAccount);
 		user.setAccount(newAccount);
