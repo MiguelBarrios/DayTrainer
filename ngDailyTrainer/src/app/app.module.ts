@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -70,7 +70,9 @@ import { CandleGraphComponent } from './components/candle-graph/candle-graph.com
     FormsModule,
     MatRadioModule,
     MatCardModule,
+    MatGridListModule,
     NgApexchartsModule
+
   ],
   providers: [TradesService, FilterTablePipe, DatePipe],
   bootstrap: [AppComponent],

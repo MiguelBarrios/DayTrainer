@@ -1,13 +1,13 @@
 package com.skilldistillery.daytrainer.services;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.repository.AccountRepository;
 import com.skilldistillery.daytrainer.repository.UserRepository;
@@ -91,14 +91,18 @@ public class UserServiceImpl implements UserService {
 		return enableCheck;
 	}
 	
+	
 	@Override
 	public List<User> leadersList() {
 		List<User> temp = allUsers();
 		User first = new User();
+		first.setAccount(new Account());
 		first.getAccount().setBalance(3);
 		User second = new User();
+		second.setAccount(new Account());
 		second.getAccount().setBalance(2);
 		User third = new User();
+		third.setAccount(new Account());
 		third.getAccount().setBalance(1);
 		List<User> topThree = new ArrayList<>();
 		for (int i = 0; i < temp.size(); i++) {
@@ -116,10 +120,10 @@ public class UserServiceImpl implements UserService {
 			
 		}
 		topThree.add(first);
-		topThree.add(second);
+		topThree.add(second);		
 		topThree.add(third);
 		
-		return temp; 
+		return topThree; 
 	}
 
 }

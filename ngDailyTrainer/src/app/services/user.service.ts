@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Trade } from '../models/trade';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
 
@@ -34,6 +35,14 @@ index() {
 
 getLeaders() {
   return this.http.get<User[]>(this.url + '/leaders', this.getHttpOptions()).pipe(
+    catchError((err:any) => {
+      console.log(err);
+      return throwError(() => new Error('KABOOM - Stock list cannot be retrieved.'));
+    }));
+}
+
+getUserTrades(username: string | null) {
+  return this.http.get<any[]>(environment.baseUrl + 'api/trades/portfolio', this.getHttpOptions()).pipe(
     catchError((err:any) => {
       console.log(err);
       return throwError(() => new Error('KABOOM - Stock list cannot be retrieved.'));
