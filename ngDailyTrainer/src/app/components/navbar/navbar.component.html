@@ -9,8 +9,8 @@
 
         <!-- Toggle button -->
         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="fa fa-bars"></i>
-    </button>
+    <i class="fa fa-bars"></i>
+  </button>
 
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarButtonsExample">
@@ -23,24 +23,24 @@
                     <a class="nav-link" href="#" [routerLink]="['/dashboard']">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['topMovers']" tabindex="-1" aria-disabled="true">Top Movers</a>
+                    <a class="nav-link" [routerLink]="['/topMovers']" tabindex="-1" aria-disabled="true">Top Movers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['leaderBoard']" tabindex="-1" aria-disabled="true">Leader Board</a>
+                    <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leader Board</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
+                    <a class="nav-link" [routerLink]="['/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
                 </li>
             </ul>
             <!-- Left links -->
 
             <div class="d-flex align-items-center">
                 <button *ngIf="!loggedIn()" type="button" class="btn btn-primary px-3 me-2" (click)="open(loginModal)">
-          Login
-        </button>
+        Login
+      </button>
                 <button *ngIf="!loggedIn()" type="button" class="btn btn-primary me-3" (click)="open(registerModal)">
-          Sign up for free
-        </button>
+        Sign up for free
+      </button>
                 <div *ngIf="loggedIn()">
                     <app-logout></app-logout>
                 </div>
