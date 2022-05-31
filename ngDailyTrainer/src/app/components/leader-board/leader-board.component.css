@@ -1,4 +1,7 @@
-#outside {
-  width: 30%;
-  display: grid;
+body {
+  /* display: inline; */
+  padding-left: 200px;
+}
+#page-header {
+  padding-left: 200px;
 }

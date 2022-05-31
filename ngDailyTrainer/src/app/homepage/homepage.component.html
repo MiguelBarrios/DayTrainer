@@ -27,9 +27,35 @@
       <div class="container">
         <div class="masthead-subheading">Welcome To Daily Trainer</div>
         <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
-        <a class="btn btn-primary btn-xl text-uppercase" href="#services">Learn More</a>
+
+        <a *ngIf="!loggedIn()" class="btn btn-primary btn-xl text-uppercase" (click)="open(loginModal)">Sign In</a>
       </div>
     </header>
+
+<!-- Login Modal -->
+<ng-template #loginModal let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Login</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+      <form name="updateEvent">
+          <h1>Login</h1>
+          <div class="mb-3">
+              <label>First Name</label>
+              <input class="form-control" name="firstname" type="text" [(ngModel)]="loginUser.username">
+              <label>Password</label>
+              <input class="form-control" name="password" type="text" [(ngModel)]="loginUser.password">
+          </div>
+      </form>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-outline-success" (click)="login(loginUser); modal.dismiss()">Login</button>
+  </div>
+</ng-template>
+
+
+
     <!-- Services-->
     <section class="page-section" id="services">
       <div class="container">
@@ -85,7 +111,7 @@
       <div class="container">
         <div class="text-center">
           <h2 class="section-heading text-uppercase">About</h2>
-          <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+          <h3 class="section-subheading text-muted">Our Skill Distillery Journey.</h3>
         </div>
         <ul class="timeline">
           <li>
@@ -172,7 +198,9 @@
         <div class="row">
           <div class="col">
             <div class="team-member">
-              <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." />
+              <img class="mx-auto rounded-circle"
+                src="https://media-exp1.licdn.com/dms/image/C4E03AQEPOkX_vnzFbw/profile-displayphoto-shrink_400_400/0/1650393738190?e=1659571200&v=beta&t=cbUAuI_GC09VSKQg3nJSyQ32I5J2WjeFNxiSR3KQFmc"
+                alt="..." />
               <h4>Cecelia Guerrero</h4>
               <p class="text-muted">Lead Designer</p>
               <a class="btn btn-dark btn-social mx-2" href="https://github.com/Cagugu"
@@ -183,7 +211,9 @@
           </div>
           <div class="col">
             <div class="team-member">
-              <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="..." />
+              <img class="mx-auto rounded-circle"
+                src="https://media-exp1.licdn.com/dms/image/C4E03AQHKoj0zTFzXZw/profile-displayphoto-shrink_400_400/0/1588560066428?e=1659571200&v=beta&t=iiukQlOIhrwmuXLEa2zTnyYlf8sKeztWZoL_917kYnk"
+                alt="..." />
               <h4>Anthony Butler</h4>
               <p class="text-muted">Lead Marketer</p>
               <a class="btn btn-dark btn-social mx-2" href="https://github.com/anthonyb0824"
@@ -194,7 +224,7 @@
           </div>
           <div class="col">
             <div class="team-member">
-              <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
+              <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." />
               <h4>Miguel Barrios</h4>
               <p class="text-muted">Lead Developer</p>
               <a class="btn btn-dark btn-social mx-2" href="https://github.com/MiguelBarrios"

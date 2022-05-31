@@ -3,10 +3,14 @@ package com.skilldistillery.daytrainer.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.skilldistillery.daytrainer.entities.Comment;
+
 import com.skilldistillery.daytrainer.entities.Account;
+import com.skilldistillery.daytrainer.entities.Comment;
+import com.skilldistillery.daytrainer.entities.LeaderBoardRanking;
+import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.repository.AccountRepository;
 import com.skilldistillery.daytrainer.repository.CommentRepository;
@@ -23,6 +27,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private CommentRepository commRepo;
+	
+	@Autowired 
+	private TradeService tradeService;
 
 	@Override
 	public User getUserById(int userId, String name) {
@@ -74,6 +81,8 @@ public class UserServiceImpl implements UserService {
 			currentBalance += 200;
 			System.out.println(currentBalance);
 			user.getAccount().setBalance(currentBalance);
+			double deposits = user.getAccount().getDeposit() + 200;
+			user.getAccount().setDeposit(deposits);
 			accRepo.saveAndFlush(user.getAccount());
 		}
 	}
@@ -99,6 +108,23 @@ public class UserServiceImpl implements UserService {
 			index++;
 		}
 		return enableCheck;
+	}
+	
+	@Override
+	public List<LeaderBoardRanking> leaderBoard() {
+		List<LeaderBoardRanking> rankings = new ArrayList<>();
+		List<User> users = userRepo.findAll();
+		
+		for(User user : users) {
+			List<StockPosition> pos = tradeService.getUserPositions(user.getUsername());
+			user.setPassword(null);			
+			double balance = user.getAccount().getBalance() - user.getAccount().getDeposit();
+			LeaderBoardRanking cur = new LeaderBoardRanking(user, balance,pos);
+			rankings.add(cur);
+		}
+		
+		return rankings;
+		
 	}
 	
 	
