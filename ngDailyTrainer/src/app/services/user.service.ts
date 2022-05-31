@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Trade } from '../models/trade';
@@ -47,6 +47,14 @@ getUserTrades(username: string | null) {
       console.log(err);
       return throwError(() => new Error('KABOOM - Stock list cannot be retrieved.'));
     }));
-}
+  }
+
+ getLeaderBoard(){
+  return this.http.get<User[]>(this.url + '/leaders', this.getHttpOptions()).pipe(
+    catchError((err:any) => {
+      console.log(err);
+      return throwError(() => new Error('KABOOM - Stock list cannot be retrieved.'));
+    }));
+ }
 
 }

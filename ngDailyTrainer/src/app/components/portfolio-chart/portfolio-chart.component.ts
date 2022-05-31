@@ -121,21 +121,11 @@ export class PortfolioChartComponent implements OnInit {
       console.log("Observable got and error " + error)
     }
   )
+  }
+
+  getChartData(){
 
   }
-  calculateUserHoldings(data: Trade[]){
-    // var res = {};
-    // for(let i = 0; i < data.length; i++){
-    //   let trade = data[i];
-    //   if(trade.stock.symbol in res){
-    //    var position = new Position(trade.stock.symbol,0,0,0);
-    //    res[trade.stock.symbol]= position;
-    //   }
-    //    var key: string = trade.stock.symbol;
-    //   let current: Position = res[key];
 
-    // }
-
-    }
-  }
+}
 

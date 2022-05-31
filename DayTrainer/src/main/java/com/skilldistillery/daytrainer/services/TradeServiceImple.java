@@ -150,6 +150,18 @@ public class TradeServiceImple implements TradeService {
 	}
 	
 	@Override
+	public List<StockPosition> getUserPositions(String username){
+		List<String> stocks = tradeRepo.getUserStocks(username);
+		List<StockPosition> positions = new ArrayList<>();
+		for(String stock : stocks) {
+			StockPosition pos = this.getUserPosition(username, stock);
+			if(pos.getNumberOfShares() > 0)
+				positions.add(pos);
+		}
+		return positions;
+	}
+	
+	@Override
 	public StockPosition getUserPosition(String username, String ticker) {
 		List<Trade> purchases = tradeRepo.getUserStockPurchases(username, ticker);
 		System.out.println("Purchases: " + purchases);
@@ -191,6 +203,8 @@ public class TradeServiceImple implements TradeService {
 		double avgCostPerShare = totalSpentOnShares / remainingShares;
 		return new StockPosition(ticker, remainingShares, avgCostPerShare);
 	}
+	
+	
 	
 	
 	

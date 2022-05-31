@@ -1,7 +1,10 @@
 package com.skilldistillery.daytrainer.services;
 
 import java.util.List;
+import java.util.Map;
+
 import com.skilldistillery.daytrainer.entities.Comment;
+import com.skilldistillery.daytrainer.entities.LeaderBoardRanking;
 import com.skilldistillery.daytrainer.entities.User;
 
 public interface UserService {
@@ -22,5 +25,7 @@ public interface UserService {
 	public List<User> allUsers();
 
 	public List<User> leadersList();
+
+	Map<String, Object> leaderBoard();
 	
 }

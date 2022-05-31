@@ -1,5 +1,8 @@
 <div class="container" id="SingleStockViewPageContainer">
 
+    <!-- Top Movers -->
+    <app-top-movers>Loading ...</app-top-movers>
+
     <!-- Candle Chart Graph -->
     <app-candle-graph>Loading...</app-candle-graph>
 
@@ -74,13 +77,6 @@
 
     </div>
 
-
-
-
-
-
-
-
     <div id="userPositionInfo" class="border">
         <h1>Your Position</h1>
         <div id="positionInfoContainer">
@@ -104,25 +100,6 @@
                 <h6>{{avgCostPerShare}}</h6>
             </div>
         </div>
-        <div id="positionReturnsContainer">
-
-        </div>
-
-        <!-- <a *ngIf="selected.open === 0 && selected.high === 0 && selected.low === 0 && selected.price === 0 &&
-      selected.volume === 0 && selected.previousClose === 0 && selected.change === 0; else someRetrieved"> Data unavailable - Please choose another stock.</a>
-
-        <ng-template #someRetrieved>
-
-            <h5 class="card-title">{{selected.symbol}}</h5>
-            <h3 *ngIf="selected.open != 0">{{selected.open}}</h3> <a *ngIf="selected.open === 0">Data unavailable.</a>
-            <h3 *ngIf="selected.high != 0">{{selected.high}} </h3> <a *ngIf="selected.high === 0">Data unavailable.</a>
-            <h3 *ngIf="selected.low != 0">{{selected.low}} </h3> <a *ngIf="selected.low === 0">Data unavailable.</a>
-            <h3 *ngIf="selected.price != 0">{{selected.price}}</h3> <a *ngIf="selected.price === 0">Data unavailable.</a>
-            <h3 *ngIf="selected.volume != 0">{{selected.volume}}</h3> <a *ngIf="selected.volume === 0">Data unavailable.</a>
-            <h3 *ngIf="selected.previousClose != 0">{{selected.previousClose}}</h3> <a *ngIf="selected.previousClose === 0">Data unavailable.</a>
-            <h3 *ngIf="selected.change != 0">{{selected.change}}</h3> <a *ngIf="selected.change === 0">Data unavailable.</a>
-
-        </ng-template> -->
 
     </div>
 
