@@ -34,37 +34,49 @@
   <main style="margin-top: 58px;">
     <div class="container pt-4" id="Feed">
       <!-- Main Body -->
-      <section>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-5 col-md-6 col-12 pb-4">
-              <h1>Feed</h1>
-              <div class="comment mt-4 text-justify float-left" *ngFor="comment of comments">
-                <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
-                <h4>Jhon Doe</h4>
-                <span>- 20 October, 2018</span>
-                <br>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam
-                  vero sequi velit molestias doloremque molestiae dicta?</p>
+      <div class="container mt-5">
+        <h1>Feed</h1>
+        <div class="row  d-flex justify-content-center">
+          <div class="col-md-8">
+            <div class="headings d-flex justify-content-between align-items-center mb-3">
+              <h5>Unread comments({{comments.length}})</h5>
+              <div class="buttons">
+                <span class="badge bg-white d-flex flex-row align-items-center">
+                  <span class="text-primary">Comments "ON"</span>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                  </div>
+                </span>
               </div>
-
             </div>
-            <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
-              <form id="algin-form">
-                <div class="form-group">
-                  <h4>Leave a comment</h4>
-                  <label for="message">Message</label>
-                  <textarea name="msg" id="" msg cols="30" rows="5" class="form-control"></textarea>
+            <div class="card p-3" *ngFor="let comment of comments">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="user d-flex flex-row align-items-center">
+                  <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2">
+                  <span><small class="font-weight-bold text-primary">james_olesenn </small> </span>
+                  <small class="font-weight-bold">Hmm, This poster looks cool</small>
                 </div>
-                <div class="form-group">
-                  <button type="button" id="post" class="btn">Post Comment</button>
+                <small>2 days ago</small>
+              </div>
+              <div class="action d-flex justify-content-between mt-2 align-items-center">
+                <div class="reply px-4">
+                  <small>Remove</small>
+                  <span class="dots"></span>
+                  <small>Reply</small>
+                  <span class="dots"></span>
+                  <small>Translate</small>
                 </div>
-              </form>
+                <div class="icons align-items-center">
+                  <i class="fa fa-star text-warning"></i>
+                  <i class="fa fa-check-circle-o check-icon"></i>
+                </div>
+              </div>
+              <br>
             </div>
+            <br>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   </main>
-
 </body>

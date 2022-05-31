@@ -25,10 +25,11 @@ export class CommentService {
   }
 
   index() {
-    return this.http.get<Comment[]>(this.url, this.getHttpOptions()).pipe(
+    //i think i should either user users id or call this per individual trade
+    return this.http.get<Comment[]>(this.url+'/', this.getHttpOptions()).pipe(
       catchError((err:any) => {
         console.log(err);
-        return throwError(() => new Error('KABOOM - Stock list cannot be retrieved.'));
+        return throwError(() => new Error('KABOOM - comment list cannot be retrieved.'));
       }));
 
 }
