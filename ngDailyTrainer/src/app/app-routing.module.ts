@@ -13,8 +13,8 @@ const routes: Routes = [
   { path: 'topMovers', component: TopMoversComponent},
   { path: 'singleStockView/:symbol', component: SingleStockViewComponent},
   { path: 'accounthome', component: AccountHomeComponent},
-  {path:'dashboard', component: AccountHomeComponent},
-  {path:'**', component: NotfoundComponent}
+  { path: 'dashboard', component: AccountHomeComponent},
+  { path: '**', component: NotfoundComponent}
 
 
 ];

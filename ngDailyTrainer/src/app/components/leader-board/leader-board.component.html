@@ -1,18 +1,28 @@
-<div class="content">
-  <div class="container">
-    <div *ngFor="let user of leaders" >
-      <mat-card id="card1" >
-        <mat-card-header>
-          <mat-card-title>{{user.username}} </mat-card-title>
-        </mat-card-header>
+<br>
+<h1>Congratulations to the current leaders!</h1>
 
-        <mat-card-content>
-          <p>
-            <a>{{user.trades}}</a>
-          </p>
-        </mat-card-content>
+<mat-grid-list gutterSize="10px" cols="3">
+<div *ngFor="let user of leaders">
 
-      </mat-card>
-    </div>
-  </div>
-  </div>
+  <mat-grid-tile *ngIf="user.username != null" colspan="1" rowspan="1" >
+    <mat-card id="card" flex="40" flex-sm="80" >
+      <mat-card-header>
+        <mat-card-title><h1>{{user.username}} </h1></mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <h3>
+          <h2>{{user.firstName}}'s Positions:</h2>
+        </h3>
+        <div *ngFor="let position of user.positions">
+          <h3>{{position.symbol}} value: {{position.value}}</h3>
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+  </mat-grid-tile>
+</div>
+</mat-grid-list>
+
+

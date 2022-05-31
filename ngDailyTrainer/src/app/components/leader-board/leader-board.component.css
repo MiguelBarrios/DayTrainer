@@ -1,18 +1,4 @@
-.content {
-  padding: 16px;
-}
-.container {
-  position: relative;
-  display: inline-block;
-}
-
-#card1 {
+#outside {
   width: 30%;
+  display: grid;
 }
-#card2 {
-  width: 30%;
-}
-#card3 {
-  width: 30%;
-}
-

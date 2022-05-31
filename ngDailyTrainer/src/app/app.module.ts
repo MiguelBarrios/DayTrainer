@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AccountHomeComponent } from './components/account-home/account-home.component';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -66,7 +66,8 @@ import { UserUpdateFormComponent } from './components/user-update-form/user-upda
     MatButtonToggleModule,
     FormsModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [TradesService, FilterTablePipe, DatePipe],
   bootstrap: [AppComponent],
