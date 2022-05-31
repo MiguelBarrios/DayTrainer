@@ -3646,6 +3646,12 @@ INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `
 INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (8, 73, 23, '2021-04-01 01:01:01', 0, NULL, 1, 1, NULL, NULL, 'NVDA');
 INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (9, 32, 4, '2021-05-01 01:01:01', 1, NULL, 1, 1, NULL, NULL, 'NURO');
 INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (10, 5, 7, '2021-03-10 01:01:01', 0, NULL, 1, 1, NULL, NULL, 'NURO');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (11, 2, 30, '2021-03-10 01:01:01', 0, NULL, 2, 1, NULL, NULL, 'TSLA');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (12, 5, 50, '2021-03-10 01:01:01', 0, NULL, 2, 1, NULL, NULL, 'TSLA');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (13, 90, 40, '2021-03-10 01:01:01', 0, NULL, 3, 1, NULL, NULL, 'AAWW');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (14, 40, 60, '2021-03-10 01:01:01', 0, NULL, 3, 1, NULL, NULL, 'ABCD');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (15, 70, 45, '2021-03-10 01:01:01', 0, NULL, 4, 1, NULL, NULL, 'ABCD');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (16, 5, 1000, '2021-03-10 01:01:01', 0, NULL, 4, 1, NULL, NULL, 'AAWW');
 
 COMMIT;
 
