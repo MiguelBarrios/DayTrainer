@@ -1,5 +1,6 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
     <!-- Container wrapper -->
     <div class="container">
         <!-- Navbar brand -->
@@ -34,11 +35,11 @@
             </ul>
             <!-- Left links -->
 
-            <div class="d-flex align-items-center">
-                <button *ngIf="!loggedIn()" type="button" class="btn btn-primary px-3 me-2" (click)="open(loginModal)">
+            <div class="d-flex align-items-center ms-auto">
+                <button *ngIf="!loggedIn()" type="button" class="btn btn-warning px-3 me-2" (click)="open(loginModal)">
         Login
       </button>
-                <button *ngIf="!loggedIn()" type="button" class="btn btn-primary me-3" (click)="open(registerModal)">
+                <button *ngIf="!loggedIn()" type="button" class="btn btn-warning me-3" (click)="open(registerModal)">
         Sign up for free
       </button>
                 <div *ngIf="loggedIn()">
