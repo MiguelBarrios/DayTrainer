@@ -1,27 +1,88 @@
-<div *ngIf="loggedIn()">
-    <h1 id="Header">Account Home</h1>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Daily Trainer</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+</head>
 
-    <mat-tab-group mat-align-tabs="center">
-        <mat-tab label="Portfolio"> Portfolio </mat-tab>
-        <mat-tab label="Positions">
-            <div id="tradeSummeryContainer">
-                <app-user-trades-summery>Loading...</app-user-trades-summery>
+<body>
+    <!--Main Navigation-->
+    <header>
+        <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                    <a href="#" [routerLink]="['/accounthome']" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <i class="fa fa-tachometer fa-fw me-3"></i><span>Main dashboard</span></a>
+                    <a href="#" [routerLink]="['/settings']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-lock fa-fw me-3"></i><span>Settings</span></a>
+                    <a href="#" [routerLink]="['/feed']" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fa fa-chart-pie fa-fw me-3"></i><span>Feed</span></a>
+                    <a href="#" [routerLink]="['/trades']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-building fa-fw me-3 fa fa-chart-bar fa-fw me-3"></i><span>Trades</span></a>
+                    <a href="#" [routerLink]="['/leaderBoard']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-globe fa-fw me-3"></i><span>Leader Board</span></a>
+                    <a href="#" [routerLink]="['/market']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-calendar fa-fw me-3"></i><span>Market</span></a>
+                    <a *ngIf="isAdmin()" href="#" [routerLink]="['/users']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-users fa-fw me-3"></i><span>Users</span></a>
+                    <a href="#" [routerLink]="['/friends']" class="list-group-item list-group-item-action py-2 ripple"><i
+              class="fa fa-money-bill fa-fw me-3"></i><span>Friends</span></a>
+                </div>
             </div>
-
-        </mat-tab>
-        <mat-tab label="Trades">
-            <app-trade>Loading...</app-trade>
-        </mat-tab>
-    </mat-tab-group>
+        </nav>
+        <!-- Sidebar -->
 
 
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <main style="margin-top: 58px;">
+        <div class="container pt-4" id="mainDash">
+            <div class="col">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
+                    <h4>{{user.firstName +' '+ user.lastName}}</h4>
+                    <p class="text-muted">Member Since: {{user.createdAt | date}} <br> Account Type: {{user.role | uppercase}}</p>
+                </div>
+            </div>
+            <div class="rounded" id="accountValue">
+                <h1>Total Account Balance: {{user.account}}</h1>
+            </div>
+            <div class="tradeHistory">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Price Per Share</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let trade of trades">
+                            <th scope="row">{{trade.stock.symbol}}</th>
+                            <td>{{trade.orderType.name }}</td>
+                            <td>{{trade.createdAt}}</td>
+                            <td>{{trade.pricePerShare | currency}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <!--Main layout-->
 
 
-</div>
-
-<div *ngIf="!loggedIn()">
-    <h1>You need to log in</h1>
-</div>
-
-
-<!-- <app-user-update-form></app-user-update-form> -->
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>

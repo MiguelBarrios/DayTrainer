@@ -234,6 +234,9 @@ START TRANSACTION;
 USE `dailytrainerdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (1, 'admin', '$2a$10$U4sc5g1WCoNJyEoTzpQaH.ZFCNQEykwdcU4ita9U0LH.MP4FCqvjq', 1, 'admin', 'email@domain.com', NULL, 'ad', 'min', 'bio', '2021-01-01 01:01:01');
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (2, 'userABd', '$2a$10$hgIyPOe4f9v/veo51FsiCu5uFHjfsGHM5TdqXtdGSkWG4nd5kML06', 1, 'standard', NULL, NULL, 'Miguel', 'Davila', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (3, 'AB555', '$2a$10$QpRY61r2tXUKln8wF4MCxeTwG2JlsYV84wBhcuBQ2Vc//NscorPz2', 1, 'standard', NULL, NULL, 'Anthony', 'Butler', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (4, 'C555', '$2a$10$NXaPk73hoQ9cNGNU1wIhvepIB9gl2pwoHjo2.DjvZdQ8QjaIKY4vu', 1, 'standard', NULL, NULL, 'Cecelia', 'Guerrero', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (5, 'DK23', '$2a$10$IKcV94l4j4Yu.kGAuccee./yEJdKNRG5AUlKXj4b.ZnnkaTr3DDyO', 1, 'standard', NULL, NULL, 'Daniel', 'Kregstein', NULL, '2021-01-01 01:01:01');
 
 COMMIT;
 
@@ -3643,6 +3646,12 @@ INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `
 INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (8, 73, 23, '2021-04-01 01:01:01', 0, NULL, 1, 1, NULL, NULL, 'NVDA');
 INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (9, 32, 4, '2021-05-01 01:01:01', 1, NULL, 1, 1, NULL, NULL, 'NURO');
 INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (10, 5, 7, '2021-03-10 01:01:01', 0, NULL, 1, 1, NULL, NULL, 'NURO');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (11, 2, 30, '2021-03-10 01:01:01', 0, NULL, 2, 1, NULL, NULL, 'TSLA');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (12, 5, 50, '2021-03-10 01:01:01', 0, NULL, 2, 1, NULL, NULL, 'TSLA');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (13, 90, 40, '2021-03-10 01:01:01', 0, NULL, 3, 1, NULL, NULL, 'AAWW');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (14, 40, 60, '2021-03-10 01:01:01', 0, NULL, 3, 1, NULL, NULL, 'ABCD');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (15, 70, 45, '2021-03-10 01:01:01', 0, NULL, 4, 1, NULL, NULL, 'ABCD');
+INSERT INTO `trade` (`id`, `price_per_share`, `quantity`, `created_at`, `buy`, `completion_date`, `user_id`, `order_type_id`, `notes`, `strike_price`, `stock_symbol`) VALUES (16, 5, 1000, '2021-03-10 01:01:01', 0, NULL, 4, 1, NULL, NULL, 'AAWW');
 
 COMMIT;
 
@@ -3664,6 +3673,9 @@ START TRANSACTION;
 USE `dailytrainerdb`;
 INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (1, 1000.00, 1, 500, 1);
 INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (2, 1500, 1, 600, 2);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (3, 4000, 1, 500, 3);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (4, 200, 1, 500, 4);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (5, 500, 1, 500, 5);
 
 COMMIT;
 
