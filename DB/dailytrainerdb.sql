@@ -234,10 +234,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `dailytrainerdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (1, 'admin', '$2a$10$U4sc5g1WCoNJyEoTzpQaH.ZFCNQEykwdcU4ita9U0LH.MP4FCqvjq', 1, 'admin', 'email@domain.com', 'https://k5k8z6h5.stackpathcdn.com/wp-content/uploads/2021/06/90-Day-Fiance-Ed-Brown-6329-800x445.jpg', 'ad', 'min', 'bio', '2021-01-01 01:01:01');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (2, 'userABd', '$2a$10$hgIyPOe4f9v/veo51FsiCu5uFHjfsGHM5TdqXtdGSkWG4nd5kML06', 1, 'standard', NULL, 'https://jenworley.com/wp-content/uploads/2020/04/Pittsburgh-Headshot-Photographer-1203-min.jpg', 'Miguel', 'Davila', NULL, '2021-01-01 01:01:01');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (3, 'AB555', '$2a$10$QpRY61r2tXUKln8wF4MCxeTwG2JlsYV84wBhcuBQ2Vc//NscorPz2', 1, 'standard', NULL, 'https://www.bethesdaheadshots.com/wp-content/uploads/2020/02/Jonathan-Business-Headshot.jpg', 'Anthony', 'Butler', NULL, '2021-01-01 01:01:01');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (4, 'C555', '$2a$10$NXaPk73hoQ9cNGNU1wIhvepIB9gl2pwoHjo2.DjvZdQ8QjaIKY4vu', 1, 'standard', NULL, 'https://josephanzalone.com/images/p35.jpg', 'Cecelia', 'Guerrero', NULL, '2021-01-01 01:01:01');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (5, 'DK23', '$2a$10$IKcV94l4j4Yu.kGAuccee./yEJdKNRG5AUlKXj4b.ZnnkaTr3DDyO', 1, 'standard', NULL, 'https://paloaltoheadshots.com/wp-content/uploads/2020/11/formal-business-headshot.jpg', 'Daniel', 'Kregstein', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (2, 'userABd', '$2a$10$hgIyPOe4f9v/veo51FsiCu5uFHjfsGHM5TdqXtdGSkWG4nd5kML06', 1, 'standard', NULL, 'https://jenworley.com/wp-content/uploads/2020/04/Pittsburgh-Headshot-Photographer-1203-min.jpg', 'Miguel', 'Davila', 'Extreme reader. Certified web buff. Passionate bacon expert. Zombie evangelist. Subtly charming coffee maven. Evil creator. Total internet ninja.', '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (3, 'AB555', '$2a$10$QpRY61r2tXUKln8wF4MCxeTwG2JlsYV84wBhcuBQ2Vc//NscorPz2', 1, 'standard', NULL, 'https://www.bethesdaheadshots.com/wp-content/uploads/2020/02/Jonathan-Business-Headshot.jpg', 'Anthony', 'Butler', 'Web geek. Devoted explorer. Introvert. Lifelong travel aficionado. General bacon nerd. Prone to fits of apathy.', '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (4, 'C555', '$2a$10$NXaPk73hoQ9cNGNU1wIhvepIB9gl2pwoHjo2.DjvZdQ8QjaIKY4vu', 1, 'standard', NULL, 'https://josephanzalone.com/images/p35.jpg', 'Cecelia', 'Guerrero', 'Zombie lover. Internet junkie. Hipster-friendly alcohol fan. Bacon specialist. Pop culture guru.', '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (5, 'DK23', '$2a$10$IKcV94l4j4Yu.kGAuccee./yEJdKNRG5AUlKXj4b.ZnnkaTr3DDyO', 1, 'standard', NULL, 'https://paloaltoheadshots.com/wp-content/uploads/2020/11/formal-business-headshot.jpg', 'Daniel', 'Kregstein', 'Problem solver. Coffee junkie. Typical travel scholar. Certified twitteraholic. Unapologetic pop culture fanatic. Proud reader.', '2021-01-01 01:01:01');
 
 COMMIT;
 
@@ -3689,6 +3689,7 @@ USE `dailytrainerdb`;
 INSERT INTO `comment` (`id`, `content`, `trade_id`, `user_id`, `created_at`, `reply_to_id`) VALUES (1, 'Nice trade!', 1, 1, '2021-01-01 01:01:01', 1);
 INSERT INTO `comment` (`id`, `content`, `trade_id`, `user_id`, `created_at`, `reply_to_id`) VALUES (2, 'I wish i had made that trade', 1, 1, '2021-01-01 01:01:01', 1);
 INSERT INTO `comment` (`id`, `content`, `trade_id`, `user_id`, `created_at`, `reply_to_id`) VALUES (3, 'Too the moon', 1, 1, '2021-01-01 01:01:01', 1);
+INSERT INTO `comment` (`id`, `content`, `trade_id`, `user_id`, `created_at`, `reply_to_id`) VALUES (4, 'RIP', 11, 2, '2021-01-01 01:01:01', 1);
 
 COMMIT;
 
@@ -3699,6 +3700,30 @@ COMMIT;
 START TRANSACTION;
 USE `dailytrainerdb`;
 INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (1, 1);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (1, 2);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (1, 3);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (1, 4);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (1, 5);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (2, 1);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (2, 2);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (2, 3);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (2, 4);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (2, 5);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (3, 1);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (3, 2);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (3, 3);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (3, 4);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (3, 5);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (4, 1);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (4, 2);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (4, 3);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (4, 4);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (4, 5);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (5, 1);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (5, 2);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (5, 3);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (5, 4);
+INSERT INTO `followed_user` (`user_id`, `followed_user_id`) VALUES (5, 5);
 
 COMMIT;
 

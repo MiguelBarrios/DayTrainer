@@ -9,9 +9,6 @@ export class Comment {
   user:User | null;
   trade:Trade | null;
 
-
-
-
   constructor(id:number =0,content:string ='',createdAt = null, user = null, trade = null){
     this.id = id
     this.content = content

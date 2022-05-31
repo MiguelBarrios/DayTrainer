@@ -1,8 +1,10 @@
+import { TradesService } from 'src/app/services/trades.service';
 import { CommentService } from './../../services/comment.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { Comment } from 'src/app/models/comment';
+import { Trade } from 'src/app/models/trade';
+import { Comment } from './../../models/comment';
 
 @Component({
   selector: 'app-feed',
@@ -11,28 +13,16 @@ import { Comment } from 'src/app/models/comment';
 })
 export class FeedComponent implements OnInit {
 
-  comments:Comment[] = [
-    {
-      id: 0,
-      content:"Nice Trade!!",
-      createdAt:null,
-      user: null,
-      trade:null
-    },
-    {
-      id: 0,
-      content:"Nice Trade!!",
-      createdAt:null,
-      user: null,
-      trade:null
-    }
-  ]
+  trades:Trade[] = [];
+  comments:any[]=[];
 
-  constructor(private auth:AuthService, private router:Router, private commServ:CommentService) { }
+
+  constructor(private auth:AuthService, private router:Router, private commServ:CommentService,private tradeServ:TradesService) { }
 
   ngOnInit(): void {
     this.isAuthorized();
     this.setComments()
+    this.setTrades();
   }
 
   isAdmin(){
@@ -45,10 +35,24 @@ export class FeedComponent implements OnInit {
     }
   }
 
-  setComments(){
-    this.commServ.index().subscribe(
+  setTrades(){
+    this.tradeServ.getUserTrades().subscribe(
       success =>{
-        console.log(success)
+        this.trades = success
+      },
+      err=>{
+        console.log(err)
+      }
+    )
+
+  }
+
+  setComments(){
+    this.commServ.index(this.trades).subscribe(
+      success =>{
+        console.log(Object.values(success))
+        this.comments = success;
+        console.log(success[0])
 
       },
       error =>{

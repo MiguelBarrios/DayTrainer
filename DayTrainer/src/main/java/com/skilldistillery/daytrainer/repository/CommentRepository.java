@@ -10,9 +10,7 @@ import com.skilldistillery.daytrainer.entities.Comment;
 
 public interface CommentRepository  extends JpaRepository<Comment, Integer> {
 	
-//	@Query("SELECT c FROM Comment c WHERE c.trade_id = :tradeid")
-//	List<Comment> getCommentsByTradeId(@Param("tradeid")int tradeid);
-	
-//	Account getAccountByUsername(@Param("username") String username);
+	@Query("SELECT c FROM Comment c WHERE trade_id = :tradeid")
+	public List<Comment> getCommentsByTradeId(@Param("tradeid")int tradeid);
 
 }

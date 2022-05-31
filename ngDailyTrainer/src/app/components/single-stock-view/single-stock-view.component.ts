@@ -23,6 +23,7 @@ totalReturn = 0;
 avgCostPerShare = 0;
 
 symbol = "";
+searchTerm = "";
 
   constructor(private router: Router, private route: ActivatedRoute,
     private stockSvc: AlphaVantageAPIService, private tradesService: TradesService,
@@ -36,6 +37,15 @@ symbol = "";
       }
     }
 
+  reload(){
+    if(this.searchTerm.length > 0){
+      this.router.navigateByUrl('/singleStockView/' + this.searchTerm);
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/singleStockView/' + this.searchTerm]);
+    }
+
+  }
 
 
   show (symbol: string) {
