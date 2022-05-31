@@ -1,0 +1,12 @@
+#stockCardData {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#positionContainers {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    height: 500px;
+}

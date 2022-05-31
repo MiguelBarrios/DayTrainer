@@ -155,7 +155,8 @@ public class TradeServiceImple implements TradeService {
 		List<StockPosition> positions = new ArrayList<>();
 		for(String stock : stocks) {
 			StockPosition pos = this.getUserPosition(username, stock);
-			positions.add(pos);
+			if(pos.getNumberOfShares() > 0)
+				positions.add(pos);
 		}
 		return positions;
 	}

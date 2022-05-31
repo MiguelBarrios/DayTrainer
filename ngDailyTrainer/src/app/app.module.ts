@@ -37,6 +37,7 @@ import { BuySellPipe } from './pipes/buy-sell.pipe';
 import { UserUpdateFormComponent } from './components/user-update-form/user-update-form.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { CandleGraphComponent } from './components/candle-graph/candle-graph.component';
+import { UserTradesSummeryComponent } from './components/user-trades-summery/user-trades-summery.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { CandleGraphComponent } from './components/candle-graph/candle-graph.com
     UserTradesPipe,
     BuySellPipe,
     UserUpdateFormComponent,
-    CandleGraphComponent
+    CandleGraphComponent,
+    UserTradesSummeryComponent
   ],
   imports: [
     BrowserModule,
