@@ -84,5 +84,10 @@ public class TradeController {
 		return pos;
 	}
 	
+	@GetMapping("trades/position")
+	public List<StockPosition> getUserStockPositions(Principal principal){
+		return tradeService.getUserPositions(principal.getName());
+	}
+	
 
 }
