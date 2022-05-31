@@ -38,10 +38,13 @@ searchTerm = "";
     }
 
   reload(){
-    this.router.navigateByUrl('/singleStockView/' + this.searchTerm);
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/singleStockView/' + this.searchTerm]);
+    if(this.searchTerm.length > 0){
+      this.router.navigateByUrl('/singleStockView/' + this.searchTerm);
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/singleStockView/' + this.searchTerm]);
+    }
+
   }
 
 
