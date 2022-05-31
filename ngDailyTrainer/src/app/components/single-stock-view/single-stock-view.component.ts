@@ -87,7 +87,8 @@ symbol = "";
           let divAmount = stats["divAmount"];
           let divYield = stats["divYield"];
           let divDate = stats["divDate"];
-          this.stats = new TDAQuote(netChange, volatility, WkHigh52, WkLow52, peRatio, divAmount, divYield, divDate);
+          let lastPrice = stats["lastPrice"];
+          this.stats = new TDAQuote(symbol,netChange, volatility, WkHigh52, WkLow52, peRatio, divAmount, divYield, divDate,lastPrice );
         },
         (error) => {
           console.log("getStockStats() Observable got and error " + error)
