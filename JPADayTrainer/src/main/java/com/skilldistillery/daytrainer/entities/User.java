@@ -65,6 +65,9 @@ public class User {
 	@JsonIgnore
 	@OneToMany(mappedBy = "recipient")
 	private List<Message> recMessages;
+	
+	@OneToMany(mappedBy = "user")
+	private List<FollowedUser> friends;
 
 
 	public User() {
