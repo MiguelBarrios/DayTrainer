@@ -1,45 +1,45 @@
 <header>
     <app-logged-in-nav></app-logged-in-nav>
 </header>
-<br>
 
-<body>
+<h1 id="page-header">Congratulations to the current leaders!</h1>
 
-    <h1 id="page-header">Congratulations to the current leaders!</h1>
 
-    <div id="leaderboardOuter">
-        <div id="leaderboardContainer">
-            <div class="card" style="width: 25rem;" *ngFor="let item of rankings | leaderboard:5">
-                <div class="card-body">
-                    <div>
-                        <img src="{{item.profilePicture}}" width="50" height="50">
+<div id="leaderboardOuter">
 
-                    </div>
-                    <div>
-                        @{{item.username}}
-                        <div>
-                            {{item.firstname}} {{item.lastname}}
-                        </div>
-                    </div>
+    <div id="leaderboardContainer">
 
-                    <div class="stockReturns">
-                        <div>
-                            Shares: {{item.totalNumberOfShares}}
-                        </div>
-                        <div>
-                            Return: {{item.portfolioValue | number:"1.2-2"}}
-                        </div>
-                    </div>
+        <div class="card" style="width: 25rem;" *ngFor="let item of rankings | leaderboard:5">
+            <div class="card-body">
+                <div>
+                    <img src="{{item.profilePicture}}" width="50" height="50">
 
                 </div>
+                <div>
+                    @{{item.username}}
+                    <div>
+                        {{item.firstname}} {{item.lastname}}
+                    </div>
+                </div>
+
+                <div class="stockReturns">
+                    <div>
+                        Shares: {{item.totalNumberOfShares}}
+                    </div>
+                    <div>
+                        Return: {{item.portfolioValue | number:"1.2-2"}}
+                    </div>
+                </div>
+
             </div>
-
         </div>
+
     </div>
+</div>
 
 
 
-    <!-- <mat-grid-list gutterSize="10px" cols="3">
+<!-- <mat-grid-list gutterSize="10px" cols="3">
     <div *ngFor="let user of leaders">
 
       <mat-grid-tile *ngIf="user.username != null" colspan="1" rowspan="1">
@@ -64,5 +64,3 @@
     </mat-grid-tile>
   </div>
 </mat-grid-list> -->
-
-</body>
