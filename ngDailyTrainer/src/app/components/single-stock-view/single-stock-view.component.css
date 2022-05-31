@@ -31,3 +31,8 @@
     display: flex;
     flex: row;
 } */
+
+#searchBox {
+    display: flex;
+    flex-direction: row;
+}
