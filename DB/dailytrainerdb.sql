@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   `margin_enable` TINYINT NOT NULL DEFAULT 0,
   `margin_amount` DECIMAL(15,2) NULL,
   `user_id` INT NOT NULL,
+  `deposit` DECIMAL(15,2) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_account_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_account_user1`
@@ -3671,11 +3672,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (1, 1000.00, 1, 500, 1);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (2, 1500, 1, 600, 2);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (3, 4000, 1, 500, 3);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (4, 200, 1, 500, 4);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (5, 500, 1, 500, 5);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (1, 1000.00, 1, 500, 1, NULL);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (2, 1500, 1, 600, 2, NULL);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (3, 4000, 1, 500, 3, NULL);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (4, 200, 1, 500, 4, NULL);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (5, 500, 1, 500, 5, NULL);
 
 COMMIT;
 
