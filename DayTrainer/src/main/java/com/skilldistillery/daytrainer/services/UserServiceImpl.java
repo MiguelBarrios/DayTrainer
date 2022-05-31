@@ -71,8 +71,11 @@ public class UserServiceImpl implements UserService {
 		List<User> allUsers = userRepo.findAll();
 		for (User user : allUsers) {
 			double currentBalance = user.getAccount().getBalance();
+			double currentDeposit = user.getAccount().getDeposit();
+			currentDeposit += 200;
 			currentBalance += 200;
 			System.out.println(currentBalance);
+			user.getAccount().setDeposit(currentDeposit);
 			user.getAccount().setBalance(currentBalance);
 			accRepo.saveAndFlush(user.getAccount());
 		}
