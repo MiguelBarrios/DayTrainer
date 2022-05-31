@@ -36,6 +36,7 @@ import { FriendsComponent } from './components/friends/friends.component';
 import { TradesComponent } from './components/trades/trades.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { CandleGraphComponent } from './components/candle-graph/candle-graph.component';
+import { LoggedInNavComponent } from './components/logged-in-nav/logged-in-nav.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { CandleGraphComponent } from './components/candle-graph/candle-graph.com
     UserTradesPipe,
     BuySellPipe,
     UserUpdateFormComponent,
-    CandleGraphComponent
+    CandleGraphComponent,
+    LoggedInNavComponent
 
   ],
   imports: [
