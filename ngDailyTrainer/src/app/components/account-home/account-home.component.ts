@@ -72,6 +72,5 @@ export class AccountHomeComponent implements OnInit {
         console.log(err)
       }
     )
-
   }
 }

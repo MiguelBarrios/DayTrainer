@@ -270,3 +270,7 @@ display: inline-block;
   cursor: pointer;
 
 }
+
+#comment{
+margin-bottom: 10px;
+}
