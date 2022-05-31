@@ -1,8 +1,22 @@
 <div *ngIf="loggedIn()">
     <h1 id="Header">Account Home</h1>
-    <app-user-trades-summery>Loading...</app-user-trades-summery>
 
-    <app-trade>Loading...</app-trade>
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Portfolio"> Portfolio </mat-tab>
+        <mat-tab label="Positions">
+            <div id="tradeSummeryContainer">
+                <app-user-trades-summery>Loading...</app-user-trades-summery>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Trades">
+            <app-trade>Loading...</app-trade>
+        </mat-tab>
+    </mat-tab-group>
+
+
+
+
 </div>
 
 <div *ngIf="!loggedIn()">
@@ -10,4 +24,4 @@
 </div>
 
 
-<app-user-update-form></app-user-update-form>
+<!-- <app-user-update-form></app-user-update-form> -->

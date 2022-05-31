@@ -1,14 +1,12 @@
-<div id="positionContainers">
-    <div class="col-xl-5 col-md-6 mb-4" *ngFor="let pos of positions">
+<div>
+    <div id="positionContainers" *ngFor="let pos of positions">
         <div class="card border-left-success shadow h-100 py-2">
             <div class="card-body" (click)="forwardToSSV(pos.symbol)">
-                <div class="row no-gutters align-items-center">
-                    <div id="stockCardData">
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{pos.symbol}}</div>
-                        <div>{{pos.numberOfShares}} shares</div>
-                        <div>Avg Cost: {{pos.avgCostPerShare | number:"1.2-2"}}</div>
-                        <div>Return: todo</div>
-                    </div>
+                <div id="stockCardData">
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{pos.symbol}}</div>
+                    <div>{{pos.numberOfShares}} shares</div>
+                    <div>Avg Cost: {{pos.avgCostPerShare | number:"1.2-2"}}</div>
+                    <div>Return: todo</div>
                 </div>
             </div>
         </div>

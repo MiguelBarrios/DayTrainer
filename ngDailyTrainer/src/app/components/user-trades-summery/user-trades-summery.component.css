@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 10px;
 }
 
 #positionContainers {
     display: flex;
     flex-direction: column;
     overflow: auto;
-    height: 500px;
 }

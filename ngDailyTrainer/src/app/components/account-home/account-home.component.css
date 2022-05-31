@@ -1,3 +1,9 @@
 #Header {
     color: black;
 }
+
+#tradeSummeryContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

@@ -38,6 +38,8 @@ import { UserUpdateFormComponent } from './components/user-update-form/user-upda
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { CandleGraphComponent } from './components/candle-graph/candle-graph.component';
 import { UserTradesSummeryComponent } from './components/user-trades-summery/user-trades-summery.component';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 @NgModule({
@@ -73,8 +75,8 @@ import { UserTradesSummeryComponent } from './components/user-trades-summery/use
     MatRadioModule,
     MatCardModule,
     MatGridListModule,
-    NgApexchartsModule
-
+    NgApexchartsModule,
+    MatTabsModule
   ],
   providers: [TradesService, FilterTablePipe, DatePipe],
   bootstrap: [AppComponent],
