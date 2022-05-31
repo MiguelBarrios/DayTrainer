@@ -25,6 +25,8 @@ public class Account {
 	
 	@Column(name="margin_amount")
 	private double marginAmount;
+	
+	private double deposit;
 
 	@OneToOne
 	@JoinColumn(name="user_id")
@@ -34,6 +36,16 @@ public class Account {
 	public Account() {
 		super();
 	}
+	
+	public double getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(double deposit) {
+		this.deposit = deposit;
+	}
+
+
 
 	public boolean isMarginEnable() {
 		return marginEnable;

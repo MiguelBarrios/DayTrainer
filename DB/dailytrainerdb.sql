@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   `margin_enable` TINYINT NOT NULL DEFAULT 0,
   `margin_amount` DECIMAL(15,2) NULL,
   `user_id` INT NOT NULL,
+  `deposit` DECIMAL(15,2) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_account_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_account_user1`
@@ -232,11 +233,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (1, 'admin', '$2a$10$U4sc5g1WCoNJyEoTzpQaH.ZFCNQEykwdcU4ita9U0LH.MP4FCqvjq', 1, 'admin', 'email@domain.com', NULL, 'ad', 'min', 'bio', '2021-01-01 01:01:01');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (2, 'userABd', '$2a$10$hgIyPOe4f9v/veo51FsiCu5uFHjfsGHM5TdqXtdGSkWG4nd5kML06', 1, 'standard', NULL, NULL, 'Miguel', 'Davila', NULL, '2021-01-01 01:01:01');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (3, 'AB555', '$2a$10$QpRY61r2tXUKln8wF4MCxeTwG2JlsYV84wBhcuBQ2Vc//NscorPz2', 1, 'standard', NULL, NULL, 'Anthony', 'Butler', NULL, '2021-01-01 01:01:01');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (4, 'C555', '$2a$10$NXaPk73hoQ9cNGNU1wIhvepIB9gl2pwoHjo2.DjvZdQ8QjaIKY4vu', 1, 'standard', NULL, NULL, 'Cecelia', 'Guerrero', NULL, '2021-01-01 01:01:01');
-INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (5, 'DK23', '$2a$10$IKcV94l4j4Yu.kGAuccee./yEJdKNRG5AUlKXj4b.ZnnkaTr3DDyO', 1, 'standard', NULL, NULL, 'Daniel', 'Kregstein', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (1, 'admin', '$2a$10$U4sc5g1WCoNJyEoTzpQaH.ZFCNQEykwdcU4ita9U0LH.MP4FCqvjq', 1, 'admin', 'email@domain.com', 'https://k5k8z6h5.stackpathcdn.com/wp-content/uploads/2021/06/90-Day-Fiance-Ed-Brown-6329-800x445.jpg', 'ad', 'min', 'bio', '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (2, 'userABd', '$2a$10$hgIyPOe4f9v/veo51FsiCu5uFHjfsGHM5TdqXtdGSkWG4nd5kML06', 1, 'standard', NULL, 'https://jenworley.com/wp-content/uploads/2020/04/Pittsburgh-Headshot-Photographer-1203-min.jpg', 'Miguel', 'Davila', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (3, 'AB555', '$2a$10$QpRY61r2tXUKln8wF4MCxeTwG2JlsYV84wBhcuBQ2Vc//NscorPz2', 1, 'standard', NULL, 'https://www.bethesdaheadshots.com/wp-content/uploads/2020/02/Jonathan-Business-Headshot.jpg', 'Anthony', 'Butler', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (4, 'C555', '$2a$10$NXaPk73hoQ9cNGNU1wIhvepIB9gl2pwoHjo2.DjvZdQ8QjaIKY4vu', 1, 'standard', NULL, 'https://josephanzalone.com/images/p35.jpg', 'Cecelia', 'Guerrero', NULL, '2021-01-01 01:01:01');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`, `profile_picture`, `first_name`, `last_name`, `biography`, `created_at`) VALUES (5, 'DK23', '$2a$10$IKcV94l4j4Yu.kGAuccee./yEJdKNRG5AUlKXj4b.ZnnkaTr3DDyO', 1, 'standard', NULL, 'https://paloaltoheadshots.com/wp-content/uploads/2020/11/formal-business-headshot.jpg', 'Daniel', 'Kregstein', NULL, '2021-01-01 01:01:01');
 
 COMMIT;
 
@@ -3671,11 +3672,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (1, 1000.00, 1, 500, 1);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (2, 1500, 1, 600, 2);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (3, 4000, 1, 500, 3);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (4, 200, 1, 500, 4);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`) VALUES (5, 500, 1, 500, 5);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (1, 1000.00, 1, 500, 1, 1000);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (2, 1500, 1, 600, 2, 1500);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (3, 4000, 1, 500, 3, 4000);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (4, 200, 1, 500, 4, 200);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (5, 500, 1, 500, 5, 500);
 
 COMMIT;
 
