@@ -2,6 +2,12 @@
 <header>
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
         <div class="position-sticky">
+            <div id="iconContainer">
+                <a class="navbar-brand me-2" href="#" [routerLink]="['/home']">
+                    <img src="assets/img/logos/dailytrainer.svg" height="18" alt="MDB Logo" loading="lazy" style="margin-top: -1px;" />
+                </a>
+            </div>
+
             <div class="list-group list-group-flush mx-3 mt-4">
                 <a href="#" [routerLink]="['/accounthome']" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
                     <i class="fa fa-tachometer fa-fw me-3"></i><span>Main dashboard</span></a>
@@ -25,9 +31,6 @@
             class="fa fa-money-bill fa-fw me-3"></i><span>Friends</span></a>
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
               class="fa fa-money-bill fa-fw me-3"></i><span> <app-logout></app-logout></span></a>
-            </div>
-            <div><a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-              class="fa fa-money-bill fa-fw me-3"></i>  <span> <app-logout></app-logout></span></a>
             </div>
         </div>
 

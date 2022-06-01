@@ -14,13 +14,13 @@ import { Trade } from 'src/app/models/trade';
 })
 export class PortfolioChartComponent implements OnInit {
   ngOnInit(): void {
+    console.log("*****");
     this.refreshChartData();
   }
 
    userTrades:Trade[]= [];
 
   constructor(private tradesService: TradesService){
-
   }
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
@@ -30,7 +30,7 @@ export class PortfolioChartComponent implements OnInit {
     responsive: true,
     plugins: {
       legend: {
-        display: true,
+        display: false,
         position: 'top',
       },
       datalabels: {
@@ -44,9 +44,9 @@ export class PortfolioChartComponent implements OnInit {
   };
 
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ],
+    labels: [],
     datasets: [ {
-      data: [ 300, 500, 100 ]
+      data: []
     } ]
   };
 
@@ -112,19 +112,21 @@ export class PortfolioChartComponent implements OnInit {
 
   }
   refreshChartData(): void{
-  this.tradesService.getUserTrades().subscribe(
+  this.tradesService.getUserPositions().subscribe(
     (data) => {
-      console.log(data);
-      this.userTrades = data;
+      for(let position of data){
+        this.pieChartData.datasets[0].data.push(position.avgCostPerShare * position.numberOfShares);
+        if(this.pieChartData.labels){
+          this.pieChartData.labels.push([position.symbol, "Shares:" + position.numberOfShares]);
+        }
+      }
+      this.chart?.update();
+      // [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ]
     },
     (error) => {
       console.log("Observable got and error " + error)
     }
   )
-  }
-
-  getChartData(){
-
   }
 
 }

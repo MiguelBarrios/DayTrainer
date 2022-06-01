@@ -16,6 +16,7 @@ import { TradesComponent } from './components/trades/trades.component';
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent},
+  { path: '', component: HomepageComponent},
   { path: 'leaderBoard', component: LeaderBoardComponent},
   { path: 'topMovers', component: TopMoversComponent},
   { path: 'singleStockView/', component: SingleStockViewComponent},
