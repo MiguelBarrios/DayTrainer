@@ -66,8 +66,11 @@ export class TopMoversComponent implements OnInit {
     console.log(this.stocks)});
 }
 
-onClickRow(stockSymbol: string) {
-  this.route.navigateByUrl('/singleStockView/' + stockSymbol);
+onClickRow(stockSymbol: string|null) {
+  console.log("here");
+  if(stockSymbol){
+    this.route.navigateByUrl('/singleStockView/' + stockSymbol);
+  }
 }
 
 }
