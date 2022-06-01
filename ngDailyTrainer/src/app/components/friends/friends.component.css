@@ -1,11 +1,23 @@
 #pic {
-  width: 200px;
-  max-height: 300px;
+    width: 300px;
+    max-height: 400px;
 }
+
 main {
-  margin-left: 150px;
+    margin-left: 120px;
 }
-#card{
-  max-width:80%;
-  vertical-align: top;
+
+#card {
+    vertical-align: top;
+}
+
+#friendsContainerMain {
+    margin-top: 20px;
+    margin-left: 240px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    background-color: rgb(245, 245, 247);
 }
