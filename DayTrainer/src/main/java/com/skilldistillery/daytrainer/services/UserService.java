@@ -28,5 +28,9 @@ public interface UserService {
 
 	Map<String, Object> leaderBoard();
 	
+
 	public Double getBalance(String username);
+
+	public List<User> getFollowingList(int userId);
+
 }

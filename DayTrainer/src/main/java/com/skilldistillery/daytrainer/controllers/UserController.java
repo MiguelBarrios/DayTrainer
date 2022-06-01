@@ -1,6 +1,7 @@
 package com.skilldistillery.daytrainer.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -110,6 +111,18 @@ public class UserController {
 		// 10:15 AM on the 1st day of every month in central standard time
 		userSvc.payDay();
 		System.out.println("pay Day!!");
+	}
+	
+	@GetMapping("users/{userId}/following")
+	public List<User> getUserFollowing(Principal principal, @PathVariable Integer userId, HttpServletResponse res) {
+		
+		List<User> followedUsers = userSvc.getFollowingList(userId);
+//		for (Integer followed : followingIds) {
+//			User u = userSvc.getUserById(followed, principal.getName());
+//			followedUsers.add(u);
+//		}
+		return followedUsers;
+		
 	}
 
 	@GetMapping("users/initialbalance")

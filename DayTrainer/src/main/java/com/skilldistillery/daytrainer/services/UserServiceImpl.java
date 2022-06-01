@@ -182,10 +182,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+
 	public Double getBalance(String username) {
 	User newUser = userRepo.findByUsername(username);
 	return newUser.getAccount().getBalance();
-		
+	}
+
+	public List<User> getFollowingList(int userId) {
+		Optional<User> u = userRepo.findById(userId);
+		System.out.println(u.get());
+		if(u.isPresent()) {
+			List<User> following = u.get().getFollowing();			
+			return following;
+		}
+		return null;
+
 	}
 
 }
+
