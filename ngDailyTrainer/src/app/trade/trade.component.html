@@ -3,6 +3,10 @@
     <div class="pageContent">
         <!--  Place Trade Form Container -->
         <div id="tradeContainer" class="border">
+            <div>
+                <p>purchasing power: {{accountBalance}}</p>
+                <p class="text-danger">{{errorSMS}}</p>
+            </div>
             <form>
                 <div class="row">
                     <!-- Select Buy or Sell Group -->
@@ -26,7 +30,7 @@
 
                     <div class="form-group col">
                         <label>Quantity</label>
-                        <input type="number" class="form-control" name="quantity" [(ngModel)]="newTrade.quantity">
+                        <input type="number" class="form-control" name="quantity" [(ngModel)]="newTrade.quantity" (ngModelChange)="updateExtimate()">
                         <label class="text-danger">{{missingQuantitySMS}}</label>
                     </div>
 

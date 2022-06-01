@@ -89,5 +89,10 @@ public class TradeController {
 		return tradeService.getUserPositions(principal.getName());
 	}
 	
+	@GetMapping("trades/users/{username}")
+	public List<Trade> friendsTrades(Principal principal, @PathVariable String username){
+		return tradeService.getUserTrades(username);
+	}
+	
 
 }
