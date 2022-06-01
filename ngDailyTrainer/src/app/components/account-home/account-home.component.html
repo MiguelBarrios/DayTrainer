@@ -54,18 +54,25 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Symbol</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Action</th>
                             <th scope="col">Time</th>
                             <th scope="col">Price Per Share</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let trade of trades">
-                            <th scope="row">{{trade.stock.symbol}}</th>
-                            <td>{{trade.orderType.name }}</td>
-                            <td>{{trade.createdAt}}</td>
-                            <td>{{trade.pricePerShare | currency}}</td>
+                    <tbody >
+
+
+                        <tr *ngFor="let trade of trades" >
+
+                          <th scope="row">{{trade.stock.symbol}}</th>
+                          <td >{{trade.orderType.name }}</td>
+                          <td *ngIf=" trade.buy === true" style="background-color: #61caf4e6;">Buy</td>
+                          <td *ngIf=" trade.buy === false" style="background-color: #56ae69f2;">Sell</td>
+                          <td>{{trade.createdAt}}</td>
+                          <td>{{trade.pricePerShare | currency}}</td>
                         </tr>
+
                     </tbody>
                 </table>
             </div>
