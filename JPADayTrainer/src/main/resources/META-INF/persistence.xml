@@ -10,6 +10,9 @@
 		<class>com.skilldistillery.daytrainer.entities.Stock</class>
 		<class>com.skilldistillery.daytrainer.entities.Trade</class>
 		<class>com.skilldistillery.daytrainer.entities.OrderType</class>
+		<class>com.skilldistillery.daytrainer.entities.FollowedUser</class>
+		<class>com.skilldistillery.daytrainer.entities.FollowedUserId</class>
+		
 	
 		<properties>
 			<property name="javax.persistence.jdbc.url"
