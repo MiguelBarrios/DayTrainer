@@ -82,8 +82,16 @@ class UserTest {
 		assertNotNull(user);
 		assertTrue(user.getRecMessages().size()>0);
 	}
+	
+	@Test
+	@DisplayName("User to friends mapping")
+	void test7() {
+		assertNotNull(user);
+		assertTrue(user.getFollowing().size() > 0);
+		assertEquals(user.getFollowing().get(0).getId(), 1);
+	}
 
-
+	
 
 
 }
