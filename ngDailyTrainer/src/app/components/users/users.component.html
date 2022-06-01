@@ -22,9 +22,13 @@
               <th scope="row">{{user.username}}</th>
               <td>{{user.firstName }}</td>
               <td>{{user.lastName}}</td>
-              <td>{{user.createdAt}}</td>
-              <button  class="btn btn-warning" (click)="setSelectedUser(user)">Update</button>
-              <button  class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
+              <td>{{user.createdAt | date}}</td>
+              <td>
+                <button type="button" class="btn btn-outline-warning" (click)="setSelectedUser(user)">Update</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-outline-danger" (click)="deleteUser(user)">Delete</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -32,7 +36,6 @@
       <div *ngIf="selectedUser">
         <app-user-update-form [user]="selectedUser"></app-user-update-form>
       </div>
-      <app-footer></app-footer>
     </div>
   </main>
 </body>

@@ -39,12 +39,12 @@
           </div>
         </div>
         <div class="rounded" id="accountValue">
-          <h1>Total Account Balance: {{this.userBalance}}</h1>
+          <h1>Total Account Balance: {{this.userBalance | currency}}</h1>
         </div>
       </div>
-      <div id="accountHomecontainerUpperLeft">
+      <!-- <div id="accountHomecontainerUpperLeft">
         <app-portfolio-chart></app-portfolio-chart>
-      </div>
+      </div> -->
 
     </div>
     <div class="container pt-4" id="mainDash">
@@ -69,7 +69,7 @@
               <td>{{trade.orderType.name }}</td>
               <td *ngIf=" trade.buy === true" style="background-color: #61caf4e6;">Buy</td>
               <td *ngIf=" trade.buy === false" style="background-color: #56ae69f2;">Sell</td>
-              <td>{{trade.createdAt}}</td>
+              <td>{{trade.createdAt | date}}</td>
               <td>{{trade.pricePerShare | currency}}</td>
             </tr>
 

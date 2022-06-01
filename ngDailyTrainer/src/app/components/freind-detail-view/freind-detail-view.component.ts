@@ -19,23 +19,33 @@ export class FreindDetailViewComponent implements OnInit {
      accountValue :number | null = null;
      user : User = new User();
     trades :Trade[] = [];
-    //  users: User[]  =  [];
-     userBalance: Number = 0;
-     username:string = '';
+     userBalance: string = '';
+     username:string | null = '';
 
   ngOnInit(): void {
-    if (!this.user && this.route.snapshot.paramMap.get('username')) {
-      let id = this.route.snapshot.paramMap.get('username');
-      if (id) {
-        this.show(this.username);
-      }
-    }
+      this.username = this.route.snapshot.paramMap.get('username');
+      this.show(this.username);
+      console.log(this.username)
     this.isAuthorized()
-    this.setTrades()
-    this.setUser()
+    this.setTrades(this.username)
     // this.setUsers()
     this.getUserBalance()
   }
+
+  show(username:string|null){
+    if(username){
+      this.userServ.getUserWithUsername(username).subscribe(
+        success =>{
+          this.user = success;
+          console.log(this.user)
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+    }
+  }
+
   isAuthorized() {
     if(!this.auth.checkLogin()){
     this.router.navigateByUrl('home');
@@ -50,41 +60,23 @@ export class FreindDetailViewComponent implements OnInit {
     return this.auth.isAdmin();
   }
 
-  setUser(){
-    this.userServ.getUserByUsername().subscribe(
-      success =>{
-        this.user = success
-       // this.accountValue = success.account
-       //make account model and set accont to be an account or null in user
-      }
-    )
-  }
-
-  // setUsers(){
-  //   this.userServ.getAllUsers().subscribe(
-  //     success =>{
-  //       console.log(success)
-  //       //this.users = success
-  //      //make account model and set accont to be an account or null in user
-  //     }
-  //   )
-  // }
-
-  setTrades(){
-    this.tradeServ.getUserTrades().subscribe(
-      success =>{
-        this.trades = success
-      },
-      err=>{
-        console.log(err)
-      }
-    )
+  setTrades(username:string|null){
+    if(username){
+      this.tradeServ.getFriendsTrade(username).subscribe(
+        success =>{
+          this.trades = success
+        },
+        err=>{
+          console.log(err)
+        }
+      )
+    }
   }
 
   getUserBalance(){
     this.userServ.newAccountBalance().subscribe(
       success =>{
-       //this.userBalance = success
+      this.userBalance = success + '';
       },
       err=>{
         console.log(err)
@@ -92,16 +84,6 @@ export class FreindDetailViewComponent implements OnInit {
     )
   }
 
-  show(username:string){
-    this.userServ.getUserByUsername(username).subscribe(
-      success =>{
-        this.user = success;
 
-      },
-      error=>{
-        console.log(error);
-      }
-    )
-  }
 }
 

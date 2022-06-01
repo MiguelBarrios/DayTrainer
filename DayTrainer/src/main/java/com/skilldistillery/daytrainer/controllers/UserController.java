@@ -80,14 +80,14 @@ public class UserController {
 		}
 		return user;
 	}
-	@GetMapping("users/{userName}")
-	public User getUserByUserName(@PathVariable String userName, HttpServletResponse res) {
-		User user = userSvc.getUserByUsername(userName);
-		if (user == null) {
-			res.setStatus(404);
-		}
-		return user;
-	}
+//	@GetMapping("users/{userName}")
+//	public User getUserByUserName(@PathVariable String userName, HttpServletResponse res) {
+//		User user = userSvc.getUserByUsername(userName);
+//		if (user == null) {
+//			res.setStatus(404);
+//		}
+//		return user;
+//	}
 
 	@PutMapping("users")
 	public User updateUser(Principal principal, HttpServletRequest req, HttpServletResponse res,
@@ -116,7 +116,6 @@ public class UserController {
 	// cron = "* * 1 * * MON-FRI",zone = "GMT-5"
 	@Scheduled(fixedDelay = 7, timeUnit = TimeUnit.DAYS)
 	public void payDay() {
-		// 10:15 AM on the 1st day of every month in central standard time
 		userSvc.payDay();
 		System.out.println("pay Day!!");
 	}
