@@ -1,10 +1,11 @@
 #pic {
-  width: 300px;
-  max-height: 400px;
+  width: 200px;
+  max-height: 300px;
 }
 main {
   margin-left: 120px;
 }
 #card{
+  max-width:80%;
   vertical-align: top;
 }
