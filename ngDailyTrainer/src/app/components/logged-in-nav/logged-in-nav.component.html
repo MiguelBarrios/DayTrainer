@@ -1,33 +1,35 @@
 <!--Main Navigation-->
 <header>
-  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
-    <div class="position-sticky">
-      <div class="list-group list-group-flush mx-3 mt-4">
-        <a href="#" [routerLink]="['/accounthome']" class="list-group-item list-group-item-action py-2 ripple"
-          aria-current="true">
-          <i class="fa fa-tachometer fa-fw me-3"></i><span>Main dashboard</span></a>
-        <a href="#" [routerLink]="['/settings']" class="list-group-item list-group-item-action py-2 ripple"><i
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+        <div class="position-sticky">
+            <div class="list-group list-group-flush mx-3 mt-4">
+                <a href="#" [routerLink]="['/accounthome']" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                    <i class="fa fa-tachometer fa-fw me-3"></i><span>Main dashboard</span></a>
+                <a href="#" [routerLink]="['/settings']" class="list-group-item list-group-item-action py-2 ripple"><i
             class="fa fa-lock fa-fw me-3"></i><span>Settings</span></a>
-        <a href="#" [routerLink]="['/feed']" class="list-group-item list-group-item-action py-2 ripple">
-          <i class="fa fa-chart-pie fa-fw me-3"></i><span>Feed</span></a>
-        <a href="#" [routerLink]="['/trades']" class="list-group-item list-group-item-action py-2 ripple"><i
-            class="fa fa-building fa-fw me-3 fa fa-chart-bar fa-fw me-3"></i><span>Trades</span></a>
-        <a href="#" [routerLink]="['/leaderBoard']" class="list-group-item list-group-item-action py-2 ripple"><i
+                <a href="#" [routerLink]="['/feed']" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fa fa-chart-pie fa-fw me-3"></i><span>Feed</span></a>
+                <a href="#" [routerLink]="['/topMovers']" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                    <i class="fa fa-tachometer fa-fw me-3"></i><span>Movers</span></a>
+                <a href="#" [routerLink]="['/singleStockView/ORCL']" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                    <i class="fa fa-tachometer fa-fw me-3"></i><span>Trade</span></a>
+                <a href="#" [routerLink]="['/trades']" class="list-group-item list-group-item-action py-2 ripple"><i
+            class="fa fa-building fa-fw me-3 fa fa-chart-bar fa-fw me-3"></i><span>My Trades</span></a>
+                <a href="#" [routerLink]="['/leaderBoard']" class="list-group-item list-group-item-action py-2 ripple"><i
             class="fa fa-globe fa-fw me-3"></i><span>Leader Board</span></a>
-        <a href="#" [routerLink]="['/market']" class="list-group-item list-group-item-action py-2 ripple"><i
+                <a href="#" [routerLink]="['/market']" class="list-group-item list-group-item-action py-2 ripple"><i
             class="fa fa-calendar fa-fw me-3"></i><span>Market</span></a>
-        <a *ngIf="isAdmin()" href="#" [routerLink]="['/users']"
-          class="list-group-item list-group-item-action py-2 ripple"><i
+                <a *ngIf="isAdmin()" href="#" [routerLink]="['/users']" class="list-group-item list-group-item-action py-2 ripple"><i
             class="fa fa-users fa-fw me-3"></i><span>Users</span></a>
-        <a href="#" [routerLink]="['/friends']" class="list-group-item list-group-item-action py-2 ripple"><i
+                <a href="#" [routerLink]="['/friends']" class="list-group-item list-group-item-action py-2 ripple"><i
             class="fa fa-money-bill fa-fw me-3"></i><span>Friends</span></a>
-            <a href="#"  class="list-group-item list-group-item-action py-2 ripple"><i
+                <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
               class="fa fa-money-bill fa-fw me-3"></i><span> <app-logout></app-logout></span></a>
-      </div>
-    </div>
+            </div>
+        </div>
 
-  </nav>
-  <!-- Sidebar -->
+    </nav>
+    <!-- Sidebar -->
 
 
 </header>

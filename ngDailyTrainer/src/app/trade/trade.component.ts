@@ -1,3 +1,4 @@
+import { SingleStockViewComponent } from './../components/single-stock-view/single-stock-view.component';
 import { TradesService } from 'src/app/services/trades.service';
 import { OrderType } from './../models/order-type';
 import { Component, OnInit } from '@angular/core';
@@ -23,7 +24,8 @@ export class TradeComponent implements OnInit {
   missingQuantitySMS = "";
   missingSymbolSMS = "";
 
-  constructor( private route: ActivatedRoute,private date:DatePipe, private tradeService: TradesService) { }
+  constructor( private route: ActivatedRoute,private date:DatePipe, private tradeService: TradesService,
+    private ssv:SingleStockViewComponent) { }
 
 
   ngOnInit(): void {
@@ -65,6 +67,10 @@ export class TradeComponent implements OnInit {
         console.log(data);
         this.userTrades.push(data);
         this.userTrades = [...this.userTrades]
+        if(this.symbol){
+          this.ssv.getUserPositionInfo(this.symbol);
+        }
+
       },
       (error) => {
         console.log("Observable got and error " + error)

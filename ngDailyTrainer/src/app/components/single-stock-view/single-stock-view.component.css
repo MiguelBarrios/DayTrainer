@@ -45,3 +45,13 @@
 #pageContent {
     margin-left: 240px;
 }
+
+#SingleStockViewPageContainer {
+    padding-top: 50px;
+}
+
+#searchBoxHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
