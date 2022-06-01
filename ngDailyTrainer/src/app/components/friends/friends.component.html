@@ -1,33 +1,15 @@
-<body>
-  <header>
+<header>
     <app-logged-in-nav></app-logged-in-nav>
-  </header>
+</header>
 
-  <main style="margin-top: 58px;">
-    <div class="container pt-4" id="friends">
-      <h1>Friends</h1>
-      <mat-grid-list gutterSize="10px" cols="3">
-    <div *ngFor="let friend of friends">
-
-      <mat-grid-tile *ngIf="friend.username != null" colspan="1" rowspan="2">
-        <mat-card id="card" flex="40" flex-sm="80">
-          <mat-card-header>
-          <img id= "pic" src="{{friend.profilePicture}}" >
-        </mat-card-header>
-            <mat-card-title>
-              <h1>{{friend.username}} </h1>
-            </mat-card-title>
-          <mat-card-content>
-            <h3>
-              <p>{{friend.biography}}'</p>
-
-            </h3>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </div>
-</mat-grid-list>
-      <app-footer></app-footer>
+<div id="friendsContainerMain">
+    <div class="card border shadow" style="width: 18rem;" *ngFor="let friend of friends">
+        <img src="{{friend.profilePicture}}" class="card-img-top " alt="... " width="200" height="200">
+        <div class="card-body ">
+            <h5 class="card-title ">{{friend.firstName}} {{friend.lastName}}</h5>
+            <p class="card-text">@{{friend.username}}</p>
+            <p class="card-text ">{{friend.biography}}</p>
+            <!-- <a href="# " class="btn btn-primary ">Go somewhere</a> -->
+        </div>
     </div>
-  </main>
-</body>
+</div>
