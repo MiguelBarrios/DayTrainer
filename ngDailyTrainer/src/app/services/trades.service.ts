@@ -77,4 +77,13 @@ export class TradesService {
     )
   }
 
+  getFriendsTrade(username:string){
+    var url = this.url + "/users/" + username;
+    return this.http.get<Trade[]>(url, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        return throwError('Error in getuserPositions() request');
+      })
+    )
+  }
+
 }
