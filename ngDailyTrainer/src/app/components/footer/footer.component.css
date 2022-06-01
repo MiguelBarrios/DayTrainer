@@ -1,9 +1,16 @@
-
-.text{
-  color: rgb(0, 0, 0);
+.text {
+    color: rgb(0, 0, 0);
 }
+
+
 /* .container{
   z-index: 1;
   bottom: -20;
 
 } */
+
+#footerComponent {
+    position: fixed;
+    bottom: 0;
+    background-color: darkgray;
+}
