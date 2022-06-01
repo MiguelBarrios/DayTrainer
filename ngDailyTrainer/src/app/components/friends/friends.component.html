@@ -7,7 +7,7 @@
     <div class="container pt-4" id="friends">
       <h1>Friends</h1>
       <mat-grid-list gutterSize="10px" cols="3">
-    <div *ngFor="let friend of friends">
+    <div *ngFor="let friend of friends" style="vertical-align: top;">
 
       <mat-grid-tile *ngIf="friend.username != null" colspan="1" rowspan="2">
         <mat-card id="card" flex="40" flex-sm="80">
