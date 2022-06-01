@@ -54,11 +54,11 @@ public class UserController {
 		}
 		return comments;
 	}
-	
+
 	@GetMapping("users/leaders")
 	public Map<String, Object> getLeaders() {
-		//List<User> test = userSvc.leadersList();
-		//System.out.println(test);
+		// List<User> test = userSvc.leadersList();
+		// System.out.println(test);
 		return userSvc.leaderBoard();
 
 	}
@@ -70,7 +70,7 @@ public class UserController {
 			res.setStatus(404);
 		}
 		return user;
-	}	
+	}
 
 	@GetMapping("users/name/{userName}")
 	public User getUserByUserName(Principal principal, @PathVariable String userName, HttpServletResponse res) {
@@ -125,4 +125,9 @@ public class UserController {
 		
 	}
 
+	@GetMapping("users/initialbalance")
+	public Double getBalance(Principal principal) {
+		return userSvc.getBalance(principal.getName());
+		 
+	}
 }

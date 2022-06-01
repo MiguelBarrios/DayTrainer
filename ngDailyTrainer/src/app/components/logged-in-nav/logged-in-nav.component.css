@@ -32,3 +32,9 @@
       overflow-y: auto;
       /* Scrollable contents if viewport is shorter than content. */
   }
+
+  #iconContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+  }

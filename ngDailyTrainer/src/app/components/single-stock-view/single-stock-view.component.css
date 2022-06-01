@@ -44,4 +44,15 @@
 
 #pageContent {
     margin-left: 240px;
+    padding-bottom: 80px;
+}
+
+#SingleStockViewPageContainer {
+    padding-top: 50px;
+}
+
+#searchBoxHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

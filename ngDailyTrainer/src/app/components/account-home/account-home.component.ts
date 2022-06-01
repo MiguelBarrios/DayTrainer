@@ -21,13 +21,15 @@ export class AccountHomeComponent implements OnInit {
     accountValue :number | null = null;
     user : User = new User();
     trades :Trade[] = [];
-    users: User[]  =  [] ;
+    users: User[]  =  [];
+    userBalance: Number = 0;
 
   ngOnInit(): void {
     this.isAuthorized()
     this.setTrades()
     this.setUser()
     this.setUsers()
+    this.getUserBalance()
   }
   isAuthorized() {
     if(!this.auth.checkLogin()){
@@ -67,6 +69,16 @@ export class AccountHomeComponent implements OnInit {
     this.tradeServ.getUserTrades().subscribe(
       success =>{
         this.trades = success
+      },
+      err=>{
+        console.log(err)
+      }
+    )
+  }
+  getUserBalance(){
+    this.userServ.newAccountBalance().subscribe(
+      success =>{
+       this.userBalance = success
       },
       err=>{
         console.log(err)

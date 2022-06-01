@@ -6,13 +6,25 @@
         <!--Search-->
         <div>
 
-            <div id="searchBox">
-                <input class="form-control" type="search" name="searchTerm" placeholder="Search" aria-label="Search" [(ngModel)]="searchTerm">
-                <button class="btn btn-outline-success" type="submit" (click)="reload()">Search</button>
+
+
+            <!-- Top Movers
+            <app-top-movers>Loading ...</app-top-movers> -->
+            <div id="searchBoxHeader">
+                <h1 id="selectedStock">{{selected.symbol}}</h1>
+                <div>
+                    <div id="searchBox">
+                        <input class="form-control" type="search" name="searchTerm" placeholder="Search" aria-label="Search" [(ngModel)]="searchTerm">
+                        <button class="btn btn-outline-success" type="submit" (click)="reload()">Search</button>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Top Movers -->
-            <app-top-movers>Loading ...</app-top-movers>
+
+
+
+
 
             <!-- Candle Chart Graph -->
             <app-candle-graph>Loading...</app-candle-graph>
@@ -20,7 +32,7 @@
 
 
             <!-- Stock Stats -->
-            <h1 id="selectedStock">{{selected.symbol}}</h1>
+
 
             <div id="stockStatsContainer" class="border">
                 <div id="stockQuoteInfo">
@@ -115,6 +127,10 @@
             </div>
 
             <app-trade>Loading</app-trade>
+
         </div>
+
     </div>
+    <app-footer></app-footer>
+
 </div>
