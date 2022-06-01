@@ -6,6 +6,7 @@
             <div>
                 <p>purchasing power: {{accountBalance}}</p>
                 <p class="text-danger">{{errorSMS}}</p>
+                <p> Cost: {{totalCost}}</p>
             </div>
             <form>
                 <div class="row">
@@ -42,7 +43,7 @@
 
                     <div class="form-group col" id="submitTradeContainer">
                         <br>
-                        <button class="btn btn-warning" (click)="submitTrade()">Execute</button>
+                        <button *ngIf="!errorFlag" class="btn btn-warning" (click)="submitTrade()">Execute</button>
                     </div>
 
                 </div>
