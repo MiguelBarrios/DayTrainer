@@ -3,8 +3,8 @@ package com.skilldistillery.daytrainer.services;
 import java.util.List;
 import java.util.Map;
 
+import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.Comment;
-import com.skilldistillery.daytrainer.entities.LeaderBoardRanking;
 import com.skilldistillery.daytrainer.entities.User;
 
 public interface UserService {
@@ -28,4 +28,5 @@ public interface UserService {
 
 	Map<String, Object> leaderBoard();
 	
+	public Double getBalance(String username);
 }

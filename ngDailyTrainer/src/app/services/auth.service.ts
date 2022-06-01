@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
@@ -10,7 +11,8 @@ export class AuthService {
 
   private url = 'http://localhost:8089/';
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(username: string |null, password: string | null): Observable<User> {
     // Make credentials
@@ -56,6 +58,8 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('credentials');
+    this.router.navigateByUrl('home');
+
   }
 
   checkLogin(): boolean {
