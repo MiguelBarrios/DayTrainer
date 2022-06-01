@@ -19,3 +19,16 @@
 #moversContainerMain {
     margin-left: 240px;
 }
+
+th {
+  font-size: xx-large;
+  font-weight: 400;
+}
+td {
+  font-size: x-large;
+  font-weight: 500;
+}
+td {
+  background-color: rgba(226, 226, 226, 0.128);
+}
+
