@@ -3,12 +3,12 @@
     padding: 10px;
 }
 
-.row {
+#dataRow {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    gap: 15px;
 }
-
-#sumbitTradeContainer {}
 
 #sumbitTradeContainer {
     width: 10px;
