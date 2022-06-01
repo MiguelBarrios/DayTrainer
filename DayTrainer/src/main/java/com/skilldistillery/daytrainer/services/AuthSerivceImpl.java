@@ -1,5 +1,7 @@
 package com.skilldistillery.daytrainer.services;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class AuthSerivceImpl implements AuthService {
 		//TODO: make sure username is unique
 		user.setEnabled(true);
 		user.setRole("standard");
+		user.setCreatedAt(LocalDateTime.now());
 		userRepo.saveAndFlush(user);
 		
 		Account newAccount = new Account();
