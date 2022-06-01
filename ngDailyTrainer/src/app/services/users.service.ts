@@ -58,23 +58,21 @@ delete(id:number){
     })
   )
 }
-<<<<<<< HEAD
 newAccountBalance(){
   return this.http.get<Number>(this.url+"/initialbalance", this.getHttpOptions()).pipe(
-=======
-
-
-getUserFollowingList(userId: number) {
-  return this.http.get<User[]>(this.url + '/' + userId +  '/following', this.getHttpOptions()).pipe(
->>>>>>> ad77dcd49deadb70120c1cdf875f7f6bb8310dfa
     catchError((err: any) => {
       console.log(err);
       return throwError('Error creating new Trade');
     })
   )
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> ad77dcd49deadb70120c1cdf875f7f6bb8310dfa
-}
+
+getUserFollowingList(userId: number) {
+  return this.http.get<User[]>(this.url + '/' + userId +  '/following', this.getHttpOptions()).pipe(
+    catchError((err: any) => {
+      console.log(err);
+      return throwError('Error creating new Trade');
+    })
+  )
+  }}
