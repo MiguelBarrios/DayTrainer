@@ -31,3 +31,17 @@
     display: flex;
     flex: row;
 } */
+
+#searchBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+#pageContent {
+    margin-left: 240px;
+}

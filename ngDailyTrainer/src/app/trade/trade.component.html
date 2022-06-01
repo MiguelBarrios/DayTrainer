@@ -1,67 +1,74 @@
-<!--  Place Trade Form Container -->
-<div id="tradeContainer" class="border">
-    <form>
-        <div class="row">
-            <!-- Select Buy or Sell Group -->
-            <div class="col">
-                <label for="action">Action</label>
-                <select name="action" class="form-select" [(ngModel)]="action">
-                    <option value="Buy">Buy</option>
-                    <option value="Sell">Sell</option>
-                </select>
-            </div>
+<div class="row">
 
-            <!-- Select Order Type Group-->
-            <div class="col">
-                <label for="cars">Order Type</label>
-                <select id="cars" name="cars" class="form-select" [(ngModel)]="orderType">
-                <option value="Market" selected>Market</option>
-                <option value="Limit">Limit</option>
+    <div class="pageContent">
+        <!--  Place Trade Form Container -->
+        <div id="tradeContainer" class="border">
+            <form>
+                <div class="row">
+                    <!-- Select Buy or Sell Group -->
+                    <div class="col">
+                        <label for="action">Action</label>
+                        <select name="action" class="form-select" [(ngModel)]="action">
+                  <option value="Buy">Buy</option>
+                  <option value="Sell">Sell</option>
               </select>
-                <br>
-            </div>
+                    </div>
 
-            <div class="form-group col">
-                <label>Quantity</label>
-                <input type="number" class="form-control" name="quantity" [(ngModel)]="newTrade.quantity">
-                <label class="text-danger">{{missingQuantitySMS}}</label>
-            </div>
+                    <!-- Select Order Type Group-->
+                    <div class="col">
+                        <label for="cars">Order Type</label>
+                        <select id="cars" name="cars" class="form-select" [(ngModel)]="orderType">
+              <option value="Market" selected>Market</option>
+              <option value="Limit">Limit</option>
+            </select>
+                        <br>
+                    </div>
 
-            <div class="form-group col">
-                <label>Symbol</label>
-                <input type="text" class="form-control" name="symbol" [(ngModel)]="newTrade.stock.symbol">
-                <label class="text-danger">{{missingSymbolSMS}}</label>
-            </div>
+                    <div class="form-group col">
+                        <label>Quantity</label>
+                        <input type="number" class="form-control" name="quantity" [(ngModel)]="newTrade.quantity">
+                        <label class="text-danger">{{missingQuantitySMS}}</label>
+                    </div>
 
-            <div class="form-group col" id="submitTradeContainer">
-                <br>
-                <button class="btn btn-warning" (click)="submitTrade()">Execute</button>
-            </div>
+                    <div class="form-group col">
+                        <label>Symbol</label>
+                        <input type="text" class="form-control" name="symbol" [(ngModel)]="newTrade.stock.symbol">
+                        <label class="text-danger">{{missingSymbolSMS}}</label>
+                    </div>
 
+                    <div class="form-group col" id="submitTradeContainer">
+                        <br>
+                        <button class="btn btn-warning" (click)="submitTrade()">Execute</button>
+                    </div>
+
+                </div>
+            </form>
         </div>
-    </form>
-</div>
 
-<!-- User Trades Tables -->
-<div id="userTrades">
-    <table class="table border table-borderless" *ngIf="(userTrades | userTrades:symbol).length > 0">
-        <thead>
-            <tr class="border" class="tableData">
-                <th scope="col">Symbol</th>
-                <th scope="col">Action</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Purchase Price</th>
-                <th scope="col">Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let trade of userTrades.reverse() | userTrades:symbol" class="tableData">
-                <td>{{trade.stock.symbol}}</td>
-                <td>{{trade.buy | buySell}}</td>
-                <td>{{trade.quantity}}</td>
-                <td>{{trade.pricePerShare | number:"1.2-2"}}</td>
-                <td>{{trade.completionDate | date:'medium'}}</td>
-            </tr>
-        </tbody>
-    </table>
+        <!-- User Trades Tables -->
+        <div id="userTrades">
+            <table class="table border table-borderless" *ngIf="(userTrades | userTrades:symbol).length > 0">
+                <thead>
+                    <tr class="border" class="tableData">
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Action</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Purchase Price</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let trade of userTrades.reverse() | userTrades:symbol" class="tableData">
+                        <td>{{trade.stock.symbol}}</td>
+                        <td>{{trade.buy | buySell}}</td>
+                        <td>{{trade.quantity}}</td>
+                        <td>{{trade.pricePerShare | number:"1.2-2"}}</td>
+                        <td>{{trade.completionDate | date:'medium'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
 </div>
