@@ -6,7 +6,27 @@
   <main style="margin-top: 58px;">
     <div class="container pt-4" id="friends">
       <h1>Friends</h1>
-      <!-- this person made this trade -->
+      <mat-grid-list gutterSize="10px" cols="3">
+    <div *ngFor="let friend of friends">
+
+      <mat-grid-tile *ngIf="friend.username != null" colspan="1" rowspan="2">
+        <mat-card id="card" flex="40" flex-sm="80">
+          <mat-card-header>
+          <img id= "pic" src="{{friend.profilePicture}}" >
+        </mat-card-header>
+            <mat-card-title>
+              <h1>{{friend.username}} </h1>
+            </mat-card-title>
+          <mat-card-content>
+            <h3>
+              <p>{{friend.biography}}'</p>
+
+            </h3>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>
       <app-footer></app-footer>
     </div>
   </main>

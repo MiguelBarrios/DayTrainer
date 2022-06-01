@@ -181,4 +181,15 @@ public class UserServiceImpl implements UserService {
 		return userRepo.findByUsername(username);
 	}
 
+	@Override
+	public List<User> getFollowingList(int userId) {
+		Optional<User> u = userRepo.findById(userId);
+		System.out.println(u.get());
+		if(u.isPresent()) {
+			List<User> following = u.get().getFollowing();			
+			return following;
+		}
+		return null;
+	}
+
 }
