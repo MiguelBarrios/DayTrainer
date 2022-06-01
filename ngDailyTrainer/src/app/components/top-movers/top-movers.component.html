@@ -2,57 +2,56 @@
 </app-logged-in-nav>
 
 <div id="moversContainerMain">
-  <div *ngIf="movers.length >1" class="splitLeft">
-    <div id="topMoversContainer">
+    <div *ngIf="movers.length >1" class="splitLeft">
+        <div id="topMoversContainer">
 
-      <!-- Gainers-->
-      <table class="table border table-borderless table-sm ">
-        <thead>
-          <tr>
-            <th>Gainers</th>
-          </tr>
-          <tr class="border">
-            <th scope="col">Change</th>
-            <th scope="col">Last Price</th>
-            <th scope="col">Symbol</th>
-            <th scope="col">Volume</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of movers | movers:'up'" [ngClass]="checkTrend(item)" (click)="onClickRow(item.symbol)">
-            <td>{{item.change | number: '1.2-2'}}</td>
-            <td>{{item.last}}</td>
-            <td>{{item.symbol}}</td>
-            <td>{{item.totalVolume}}</td>
-          </tr>
-        </tbody>
-      </table>
+            <!-- Gainers-->
+            <table class="table border table-borderless table-sm table-hover">
+                <thead class="">
+                    <tr>
+                        <th>Gainers</th>
+                    </tr>
+                    <tr class="border">
+                        <th scope="col">Change</th>
+                        <th scope="col">Last Price</th>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Volume</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of movers | movers:'up'" [ngClass]="checkTrend(item)" (click)="onClickRow(item.symbol)">
+                        <td>{{item.change | number: '1.2-2'}}</td>
+                        <td>{{item.last}}</td>
+                        <td>{{item.symbol}}</td>
+                        <td>{{item.totalVolume}}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-      <!-- Losers -->
-      <table class="table border table-borderless table-sm ">
-        <thead>
-          <tr>
-            <th>Losers</th>
-          </tr>
-          <tr class="border">
-            <th scope="col">Change</th>
-            <th scope="col">Last Price</th>
-            <th scope="col">Symbol</th>
-            <th scope="col">Volume</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of movers | movers:'down'" (click)="onClickRow(item.symbol)"
-            [ngClass]="checkTrend(item)">
-            <td>{{item.change | number: '1.2-2'}}</td>
-            <td>{{item.last}}</td>
-            <td>{{item.symbol}}</td>
-            <td>{{item.totalVolume}}</td>
-          </tr>
-        </tbody>
-      </table>
+            <!-- Losers -->
+            <table class="table border table-borderless table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>Losers</th>
+                    </tr>
+                    <tr class="border">
+                        <th scope="col">Change</th>
+                        <th scope="col">Last Price</th>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Volume</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of movers | movers:'down'" (click)="onClickRow(item.symbol)" [ngClass]="checkTrend(item)">
+                        <td>{{item.change | number: '1.2-2'}}</td>
+                        <td>{{item.last}}</td>
+                        <td>{{item.symbol}}</td>
+                        <td>{{item.totalVolume}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 
 </div>
 

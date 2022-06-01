@@ -1,85 +1,86 @@
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <title>Daily Trainer</title>
-  <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-  <!-- Font Awesome icons (free version)-->
-  <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Google fonts-->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Daily Trainer</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-  <!--Main Navigation-->
-  <header>
-    <app-logged-in-nav></app-logged-in-nav>
-  </header>
+    <!--Main Navigation-->
+    <header>
+        <app-logged-in-nav></app-logged-in-nav>
+    </header>
 
-  <!--Main Navigation-->
-  <div id="portfolioChartContainer">
-
-  </div>
-
-  <!--Main layout-->
-  <main style="margin-top: 58px;">
-    <div id="accountHomeContainerUpper">
-      <div id="accountHomeContainerUpperRight">
-        <div class="col">
-          <div class="team-member">
-            <img class="mx-auto rounded-circle" src="{{user.profilePicture}}" alt="..." />
-            <h4>{{user.firstName +' '+ user.lastName}}</h4>
-            <p class="text-muted">Member Since: {{user.createdAt | date}} <br> Account Type: {{user.role | uppercase}}
-              <br> Bio: {{user.biography}}
-            </p>
-          </div>
-        </div>
-        <div class="rounded" id="accountValue">
-          <h1>Total Account Balance: {{this.userBalance | currency}}</h1>
-        </div>
-      </div>
-      <div id="accountHomecontainerUpperLeft">
-        <app-portfolio-chart></app-portfolio-chart>
-      </div>
+    <!--Main Navigation-->
+    <div id="portfolioChartContainer">
 
     </div>
-    <div class="container pt-4" id="mainDash">
 
-      <div class="tradeHistory">
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Symbol</th>
-              <th scope="col">Type</th>
-              <th scope="col">Action</th>
-              <th scope="col">Time</th>
-              <th scope="col">Price Per Share</th>
-            </tr>
-          </thead>
-          <tbody>
+    <!--Main layout-->
+    <main style="margin-top: 58px;">
+        <div id="accountHomeContainerUpper">
+            <div id="accountHomeContainerUpperRight">
+                <div class="col">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="{{user.profilePicture}}" alt="..." />
+                        <h4>{{user.firstName +' '+ user.lastName}}</h4>
+                        <p class="text-muted">Member Since: {{user.createdAt | date}} <br> Account Type: {{user.role | uppercase}}
+                            <br> Bio: {{user.biography}}
+                        </p>
+                    </div>
+                </div>
+                <div class="rounded" id="accountValue">
+                    <h1>Total Account Balance: {{this.userBalance | currency}}</h1>
+                </div>
+            </div>
+            <div id="accountHomecontainerUpperLeft">
+                <app-portfolio-chart></app-portfolio-chart>
+            </div>
+
+        </div>
+        <div class="container pt-4" id="mainDash">
+
+            <div class="tradeHistory">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Price Per Share</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
 
-            <tr *ngFor="let trade of trades">
+                        <tr *ngFor="let trade of trades" [ngClass]="{'table-success': trade.buy, 'table-info':!trade.buy}">
 
-              <th scope="row">{{trade.stock.symbol}}</th>
-              <td>{{trade.orderType.name }}</td>
-              <td *ngIf=" trade.buy === true" style="background-color: #61caf4e6;">Buy</td>
-              <td *ngIf=" trade.buy === false" style="background-color: #56ae69f2;">Sell</td>
-              <td>{{trade.createdAt | date}}</td>
-              <td>{{trade.pricePerShare | currency}}</td>
-            </tr>
+                            <th scope="row">{{trade.stock.symbol}}</th>
+                            <td>{{trade.orderType.name }}</td>
+                            <td>{{trade.buy | buySell}}</td>
+                            <!-- <td *ngIf=" trade.buy === true" style="background-color: #61caf4e6;">Buy</td>
+              <td *ngIf=" trade.buy === false" style="background-color: #56ae69f2;">Sell</td> -->
+                            <td>{{trade.createdAt | date}}</td>
+                            <td>{{trade.pricePerShare | currency}}</td>
+                        </tr>
 
-          </tbody>
-        </table>
-      </div>
+                    </tbody>
+                </table>
+            </div>
 
-    </div>
-  </main>
-  <!--Main layout-->
-  <!-- Bootstrap core JS-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        </div>
+    </main>
+    <!--Main layout-->
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
