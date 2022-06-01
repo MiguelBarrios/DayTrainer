@@ -6,6 +6,7 @@ import { Trade } from '../models/trade';
 import { DatePipe, DATE_PIPE_DEFAULT_TIMEZONE } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
 import { ActivatedRoute } from '@angular/router';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-trade',
@@ -14,6 +15,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TradeComponent implements OnInit {
 
+  errorSMS:string = ""
+  errorFlag: boolean = false;
+
+  accountBalance: Number = 0;
   symbol:string | null = "";
   userTrades:Trade[] = [];
 
@@ -21,27 +26,46 @@ export class TradeComponent implements OnInit {
   action = "Buy";
   orderType = "Market";
 
+  quantity: number = 0;
+  totalCost:number = 0;
+
+
   missingQuantitySMS = "";
   missingSymbolSMS = "";
 
   constructor( private route: ActivatedRoute,private date:DatePipe, private tradeService: TradesService,
-    private ssv:SingleStockViewComponent) { }
+    private ssv:SingleStockViewComponent,
+    private userService:UsersService) { }
 
 
   ngOnInit(): void {
     this.symbol = this.route.snapshot.paramMap.get('symbol');
     this.getUserTrades();
+    this.getAccountBalance();
     if(this.symbol){
       this.newTrade.stock.symbol = this.symbol;
     }
+  }
 
+  updateExtimate(){
+    if(this.newTrade.quantity)
+      this.totalCost = this.newTrade.quantity * this.ssv.selected.price;
+    console.log(this.totalCost);
 
-
+    if(this.totalCost >  this.accountBalance){
+      this.errorSMS = "incuficient funds";
+    }else{
+      this.errorSMS = "";
+    }
   }
 
 
 
   submitTrade(){
+    if(this.totalCost > this.accountBalance){
+      console.error("Incuficiunt funds");
+      return;
+    }
     this.newTrade.createdAt = this.date.transform(Date.now(),"YYYY-MM-ddThh:mm:ss");
     this.newTrade.buy = (this.action == "Buy");
     this.newTrade.orderType.name = this.orderType;
@@ -70,7 +94,7 @@ export class TradeComponent implements OnInit {
         if(this.symbol){
           this.ssv.getUserPositionInfo(this.symbol);
         }
-
+        this.getAccountBalance();
       },
       (error) => {
         console.log("Observable got and error " + error)
@@ -89,6 +113,16 @@ export class TradeComponent implements OnInit {
     )
   }
 
+  getAccountBalance(){
+    this.userService.newAccountBalance().subscribe(
+      (data) => {
+        this.accountBalance = data;
+      },
+      (error) => {
+
+      }
+    )
+  }
 
 
 

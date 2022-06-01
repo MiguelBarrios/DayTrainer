@@ -19,12 +19,11 @@
                     <i class="fa fa-tachometer fa-fw me-3"></i><span>Movers</span></a>
                 <a href="#" [routerLink]="['/singleStockView/ORCL']" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
                     <i class="fa fa-tachometer fa-fw me-3"></i><span>Trade</span></a>
-                <a href="#" [routerLink]="['/trades']" class="list-group-item list-group-item-action py-2 ripple"><i
-            class="fa fa-building fa-fw me-3 fa fa-chart-bar fa-fw me-3"></i><span>My Trades</span></a>
+                <!-- <a href="#" [routerLink]="['/trades']" class="list-group-item list-group-item-action py-2 ripple"><i
+            class="fa fa-building fa-fw me-3 fa fa-chart-bar fa-fw me-3"></i><span>My Trades</span></a> -->
                 <a href="#" [routerLink]="['/leaderBoard']" class="list-group-item list-group-item-action py-2 ripple"><i
             class="fa fa-globe fa-fw me-3"></i><span>Leader Board</span></a>
-                <a href="#" [routerLink]="['/market']" class="list-group-item list-group-item-action py-2 ripple"><i
-            class="fa fa-calendar fa-fw me-3"></i><span>Market</span></a>
+
                 <a *ngIf="isAdmin()" href="#" [routerLink]="['/users']" class="list-group-item list-group-item-action py-2 ripple"><i
             class="fa fa-users fa-fw me-3"></i><span>Users</span></a>
                 <a href="#" [routerLink]="['/friends']" class="list-group-item list-group-item-action py-2 ripple"><i
