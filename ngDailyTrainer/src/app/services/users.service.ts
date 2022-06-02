@@ -76,4 +76,18 @@ getUserFollowingList(userId: number) {
       return throwError('Error creating new Trade');
     })
   )
-  }}
+  }
+
+  getUserWithUsername(username:string){
+    return this.http.get<User>(this.url +'/' +'name/'+ username, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error finding username with username');
+      })
+    )
+  }
+
+}
+
+
+

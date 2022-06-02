@@ -1,3 +1,4 @@
+import { FreindDetailViewComponent } from './components/freind-detail-view/freind-detail-view.component';
 import { UsersComponent } from './components/users/users.component';
 import { MarketComponent } from './components/market/market.component';
 import { TradeComponent } from './trade/trade.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path:  'settings', component: SettingsComponent},
   {path:  'users', component: UsersComponent},
   {path:  'trades', component: TradesComponent},
+  {path:  'friendView/:username', component: FreindDetailViewComponent},
   {path:  '**', component: NotfoundComponent}
 
 

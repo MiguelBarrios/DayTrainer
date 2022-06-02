@@ -3,9 +3,18 @@
     <div class="pageContent">
         <!--  Place Trade Form Container -->
         <div id="tradeContainer" class="border">
-            <div>
-                <p>purchasing power: {{accountBalance}}</p>
-                <p class="text-danger">{{errorSMS}}</p>
+            <div id="dataRow">
+                <div>
+                    <p>Funds: {{accountBalance}}</p>
+                </div>
+                <div>
+
+                    <p> Cost: {{totalCost}}</p>
+                </div>
+                <div>
+                    <p class="text-danger">{{errorSMS}}</p>
+                </div>
+
             </div>
             <form>
                 <div class="row">
@@ -42,7 +51,7 @@
 
                     <div class="form-group col" id="submitTradeContainer">
                         <br>
-                        <button class="btn btn-warning" (click)="submitTrade()">Execute</button>
+                        <button *ngIf="!errorFlag" class="btn btn-warning" (click)="submitTrade()">Execute</button>
                     </div>
 
                 </div>

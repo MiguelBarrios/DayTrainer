@@ -1,136 +1,126 @@
 <app-logged-in-nav>
 </app-logged-in-nav>
 <div id="pageContent">
-    <div class="container" id="SingleStockViewPageContainer">
+  <div class="container" id="SingleStockViewPageContainer">
 
-        <!--Search-->
-        <div>
+    <!--Search-->
+    <div>
 
 
 
-            <!-- Top Movers
+      <!-- Top Movers
             <app-top-movers>Loading ...</app-top-movers> -->
-            <div id="searchBoxHeader">
-                <h1 id="selectedStock">{{selected.symbol}}</h1>
-                <div>
-                    <div id="searchBox">
-                        <input class="form-control" type="search" name="searchTerm" placeholder="Search" aria-label="Search" [(ngModel)]="searchTerm">
-                        <button class="btn btn-outline-success" type="submit" (click)="reload()">Search</button>
-                    </div>
-                </div>
+      <div id="searchBoxHeader">
+        <h1 id="selectedStock">{{selected.symbol}}</h1>
+        <div>
+          <div id="searchBox">
+            <input class="form-control" type="search" name="searchTerm" placeholder="Search" aria-label="Search"
+              [(ngModel)]="searchTerm">
+            <button class="btn btn-outline-success" type="submit" (click)="reload()">Search</button>
+          </div>
+        </div>
 
-            </div>
-
-
-
-
-
-
-            <!-- Candle Chart Graph -->
-            <app-candle-graph>Loading...</app-candle-graph>
-
-
-
-            <!-- Stock Stats -->
-
-
-            <div id="stockStatsContainer" class="border">
-                <div id="stockQuoteInfo">
-                    <div>
-                        <h5>Current</h5>
-                        <h6 id="currentStockPrice">{{selected.price | number:"1.2-2"}}</h6>
-                    </div>
-                    <div>
-                        <h5>Open</h5>
-                        <h6>{{selected.open | number:"1.2-2"}}</h6>
-                    </div>
-                    <div>
-                        <h5>High</h5>
-                        <h6>{{selected.high | number:"1.2-2"}}</h6>
-                    </div>
-                    <div>
-                        <h5>Low</h5>
-                        <h6>{{selected.low | number:"1.2-2"}}</h6>
-                    </div>
-
-                </div>
-
-                <div id="stockStats">
-                    <div>
-                        <h5>Change</h5>
-                        <h6>{{selected.change | number:"1.2-2"}}</h6>
-                    </div>
-                    <div>
-                        <h5>Volatility</h5>
-                        <h6>{{stats?.volatility| number:"1.2-2"}}</h6>
-                    </div>
-                    <div>
-                        <h5>52 Week High</h5>
-                        <h6>{{stats?.WkHigh52| number:"1.2-2"}}</h6>
-                    </div>
-                    <div>
-                        <h5>52 Week Low</h5>
-                        <h6>{{stats?.WkLow52| number:"1.2-2"}}</h6>
-                    </div>
-
-                </div>
-
-                <div id="stockStats2">
-                    <div>
-                        <h5>PE Ratio</h5>
-                        <h6>{{stats?.peRatio| number:"1.2-2"}}</h6>
-                    </div>
-                    <div>
-                        <h5>Dividend</h5>
-                        <h6>{{stats?.divAmount| number:"1.2-2"}}</h6>
-                    </div>
-                    <div>
-                        <h5>Dividend Yield</h5>
-                        <h6>{{stats?.divYield| number:"1.2-2"}}</h6>
-                    </div>
-                    <div>
-                        <h5>Dividend Date</h5>
-                        <h6>{{stats?.divDate | date}}</h6>
-                    </div>
-                </div>
-
-
-
-
-
-            </div>
-
-            <div id="userPositionInfo" class="border">
-                <h1>Your Position</h1>
-                <div id="positionInfoContainer">
-                    <div>
-                        <h5>Shares</h5>
-                        <h6>{{numberOfShares}}</h6>
-                    </div>
-
-                    <div>
-                        <h5>Market Value</h5>
-
-                        <h6>{{marketValue | number:"1.2-2"}}</h6>
-                    </div>
-
-                    <div>
-                        <h5>Total Return</h5>
-                        <h6>{{totalReturn}}</h6>
-                    </div>
-                    <div>
-                        <h5>Avg Cost</h5>
-                        <h6>{{avgCostPerShare}}</h6>
-                    </div>
-                </div>
-
-            </div>
-
-            <app-trade>Loading</app-trade>
+      </div>
+      <!-- Candle Chart Graph -->
+      <app-candle-graph>Loading...</app-candle-graph>
+      <!-- Stock Stats -->
+      <div id="stockStatsContainer" class="border">
+        <div id="stockQuoteInfo">
+          <div>
+            <h5>Current</h5>
+            <h6 id="currentStockPrice">{{selected.price | number:"1.2-2"}}</h6>
+          </div>
+          <div>
+            <h5>Open</h5>
+            <h6>{{selected.open | number:"1.2-2"}}</h6>
+          </div>
+          <div>
+            <h5>High</h5>
+            <h6>{{selected.high | number:"1.2-2"}}</h6>
+          </div>
+          <div>
+            <h5>Low</h5>
+            <h6>{{selected.low | number:"1.2-2"}}</h6>
+          </div>
 
         </div>
 
+        <div id="stockStats">
+          <div>
+            <h5>Change</h5>
+            <h6>{{selected.change | number:"1.2-2"}}</h6>
+          </div>
+          <div>
+            <h5>Volatility</h5>
+            <h6>{{stats?.volatility| number:"1.2-2"}}</h6>
+          </div>
+          <div>
+            <h5>52 Week High</h5>
+            <h6>{{stats?.WkHigh52| number:"1.2-2"}}</h6>
+          </div>
+          <div>
+            <h5>52 Week Low</h5>
+            <h6>{{stats?.WkLow52| number:"1.2-2"}}</h6>
+          </div>
+
+        </div>
+
+        <div id="stockStats2">
+          <div>
+            <h5>PE Ratio</h5>
+            <h6>{{stats?.peRatio| number:"1.2-2"}}</h6>
+          </div>
+          <div>
+            <h5>Dividend</h5>
+            <h6>{{stats?.divAmount| number:"1.2-2"}}</h6>
+          </div>
+          <div>
+            <h5>Dividend Yield</h5>
+            <h6>{{stats?.divYield| number:"1.2-2"}}</h6>
+          </div>
+          <div>
+            <h5>Dividend Date</h5>
+            <h6>{{stats?.divDate | date}}</h6>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+
+      <div id="userPositionInfo" class="border">
+        <h1>Your Position</h1>
+        <div id="positionInfoContainer">
+          <div>
+            <h5>Shares</h5>
+            <h6>{{numberOfShares}}</h6>
+          </div>
+
+          <div>
+            <h5>Market Value</h5>
+
+            <h6>{{marketValue | number:"1.2-2"}}</h6>
+          </div>
+
+          <div>
+            <h5>Total Return</h5>
+            <h6>{{totalReturn}}</h6>
+          </div>
+          <div>
+            <h5>Avg Cost</h5>
+            <h6>{{avgCostPerShare}}</h6>
+          </div>
+        </div>
+
+      </div>
+
+      <app-trade>Loading</app-trade>
+
     </div>
+
+  </div>
 
 
 </div>

@@ -22,7 +22,7 @@ export class AccountHomeComponent implements OnInit {
     user : User = new User();
     trades :Trade[] = [];
     users: User[]  =  [];
-    userBalance: Number = 0;
+    userBalance: string = '';
 
   ngOnInit(): void {
     this.isAuthorized()
@@ -78,7 +78,7 @@ export class AccountHomeComponent implements OnInit {
   getUserBalance(){
     this.userServ.newAccountBalance().subscribe(
       success =>{
-       this.userBalance = success
+       this.userBalance = success +" ";
       },
       err=>{
         console.log(err)

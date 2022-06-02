@@ -48,15 +48,36 @@ export class TradeComponent implements OnInit {
   }
 
   updateExtimate(){
-    if(this.newTrade.quantity)
-      this.totalCost = this.newTrade.quantity * this.ssv.selected.price;
-    console.log(this.totalCost);
 
-    if(this.totalCost >  this.accountBalance){
-      this.errorSMS = "incuficient funds";
-    }else{
-      this.errorSMS = "";
+    if(this.action == "Buy"){
+      if(this.newTrade.quantity){
+        this.totalCost = this.newTrade.quantity * this.ssv.selected.price;
+      }
+      console.log(this.totalCost);
+
+      if(this.totalCost >  this.accountBalance){
+        this.errorSMS = "incuficient funds";
+        this.errorFlag = true;
+      }else{
+        this.errorSMS = "";
+        this.errorFlag = false;
+      }
     }
+    else{
+      var sharesToSell = this.newTrade.quantity;
+      if(sharesToSell){
+        if(sharesToSell > this.ssv.numberOfShares){
+          console.error("Can only sell: " + this.ssv.numberOfShares);
+          this.errorSMS = "Only " + this.ssv.numberOfShares + " available for sale";
+          this.errorFlag = true;
+          return;
+        }else{
+          this.errorSMS = '';
+          this.errorFlag = false;
+        }
+      }
+    }
+
   }
 
 

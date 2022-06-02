@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="rounded" id="accountValue">
-                    <h1>Total Account Balance: {{this.userBalance}}</h1>
+                    <h1>Total Account Balance: {{this.userBalance | currency}}</h1>
                 </div>
             </div>
             <div id="accountHomecontainerUpperLeft">
@@ -60,17 +60,18 @@
                             <th scope="col">Price Per Share</th>
                         </tr>
                     </thead>
-                    <tbody >
+                    <tbody>
 
 
-                        <tr *ngFor="let trade of trades" >
+                        <tr *ngFor="let trade of trades" [ngClass]="{'table-success': trade.buy, 'table-info':!trade.buy}">
 
-                          <th scope="row">{{trade.stock.symbol}}</th>
-                          <td >{{trade.orderType.name }}</td>
-                          <td *ngIf=" trade.buy === true" style="background-color: #61caf4e6;">Buy</td>
-                          <td *ngIf=" trade.buy === false" style="background-color: #56ae69f2;">Sell</td>
-                          <td>{{trade.createdAt}}</td>
-                          <td>{{trade.pricePerShare | currency}}</td>
+                            <th scope="row">{{trade.stock.symbol}}</th>
+                            <td>{{trade.orderType.name }}</td>
+                            <td>{{trade.buy | buySell}}</td>
+                            <!-- <td *ngIf=" trade.buy === true" style="background-color: #61caf4e6;">Buy</td>
+              <td *ngIf=" trade.buy === false" style="background-color: #56ae69f2;">Sell</td> -->
+                            <td>{{trade.createdAt | date}}</td>
+                            <td>{{trade.pricePerShare | currency}}</td>
                         </tr>
 
                     </tbody>
