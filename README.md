@@ -1,6 +1,6 @@
-## Daily Trainer FinalProject
+# Daily Trainer FinalProject
 
-#Description
+## Description
 
 For our final project to culminate the completion of our learning experience at Skill Distillery full-stack software development course, our team of developers created an investing website application that allows users to create an account and trade stocks with simulated money allowing people to gain experience trading and investing in securities making real buy and sell orders and tracking their accounts performance over time.
 
@@ -13,7 +13,7 @@ When an account holder logs in he/she is brought to a dashboard that displays to
 The site implements an API linking real daily stock price movement and charts from Yahoo finance. This way each trade transaction and resulting account balance movement mimics as it would if the user were placing identical trades with real money with a brokerage bank.
 
 ---
-#Key Features
+## Key Features
 
 * Main Dashboard- Users personalized account data
 
@@ -30,7 +30,7 @@ The site implements an API linking real daily stock price movement and charts fr
 * Crud- Create,Delete,Edit users
 
 ---
-#Lessons Learned
+## Lessons Learned
 
 This was our first project implementing Angular technology with TypeScript. It was a good learning experience creating a second full-stack application utilizing different technologies than our midterm Projects which was created entirely on Spring Tool Suite by utilizing JSPs. This project also allowed us the opportunity to learn how to implement an API that gives us the ability to incorporate and display constantly changing data from the internet.
 
@@ -41,7 +41,7 @@ Another new lesson learned while working on this project was how to implement a 
 
 
 ---
-#Key Technologies Used
+## Key Technologies Used
 
 * Angular - TypeScript
 * Java
@@ -72,12 +72,12 @@ Another new lesson learned while working on this project was how to implement a 
 * Postman
 
 ---
-# Code Highlights
+## Code Highlights
 
 ![alt text](codesnippet1.jpg)
 
 ---
-# Meet the Team
+## Meet the Team
 
 Cecelia Guerrero
 
