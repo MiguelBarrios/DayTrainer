@@ -62,5 +62,7 @@ setUser(){
       }
     ) }
 
-
+    loadFriendDetailView(username:string){
+      this.router.navigateByUrl('friendView/'+username);
+    }
 }

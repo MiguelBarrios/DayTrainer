@@ -39,6 +39,7 @@ import { CandleGraphComponent } from './components/candle-graph/candle-graph.com
 import { MoversPipe } from './pipes/movers.pipe';
 import { LoggedInNavComponent } from './components/logged-in-nav/logged-in-nav.component';
 import { LeaderboardPipe } from './pipes/leaderboard.pipe';
+import { FreindDetailViewComponent } from './components/freind-detail-view/freind-detail-view.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { LeaderboardPipe } from './pipes/leaderboard.pipe';
     CandleGraphComponent,
     MoversPipe,
     LoggedInNavComponent,
-    LeaderboardPipe
+    LeaderboardPipe,
+    FreindDetailViewComponent
   ],
   imports: [
     BrowserModule,
