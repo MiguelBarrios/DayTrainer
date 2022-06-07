@@ -1,3 +1,12 @@
+#tradePageContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+#pageContent{
+    
+}
+
 #positionInfoContainer {
     display: flex;
     flex-direction: row;
@@ -28,11 +37,6 @@
 }
 
 
-/* #stockStats {
-    display: flex;
-    flex: row;
-} */
-
 #searchBox {
     display: flex;
     flex-direction: row;
@@ -44,7 +48,6 @@
 }
 
 #pageContent {
-    margin-left: 240px;
     padding-bottom: 80px;
 }
 
