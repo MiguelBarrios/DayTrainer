@@ -33,7 +33,7 @@ class StockTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		stock = em.find(Stock.class, "ORCL");
+		stock = em.find(Stock.class, "ZYNE");
 	}
 
 	@AfterEach
@@ -46,8 +46,7 @@ class StockTest {
 	@DisplayName("Initial Testing")
 	void test1() {
 		assertNotNull(stock);
-		assertEquals("Oracle Corp.",stock.getName());
-		assertEquals("ORCL",stock.getSymbol());
+		assertEquals("ZYNE",stock.getSymbol());
 	}
 //	@Test
 //	@DisplayName("Stock to Trade One to many mapping")

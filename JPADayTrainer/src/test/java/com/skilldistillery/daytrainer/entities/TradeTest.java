@@ -60,7 +60,7 @@ class TradeTest {
 	void test4() {
 		assertNotNull(trade);
 		assertNotNull(trade.getStock());
-		assertEquals("ORCL", trade.getStock().getSymbol());
+		assertEquals("AAPL", trade.getStock().getSymbol());
 		assertNotNull(trade);
 
 	
