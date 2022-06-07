@@ -1,12 +1,12 @@
-import { SingleStockViewComponent } from './../components/single-stock-view/single-stock-view.component';
 import { TradesService } from 'src/app/services/trades.service';
-import { OrderType } from './../models/order-type';
 import { Component, OnInit } from '@angular/core';
-import { Trade } from '../models/trade';
 import { DatePipe, DATE_PIPE_DEFAULT_TIMEZONE } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
 import { ActivatedRoute } from '@angular/router';
-import { UsersService } from '../services/users.service';
+import { Trade } from 'src/app/models/trade';
+import { UsersService } from 'src/app/services/users.service';
+import { SingleStockViewComponent } from '../single-stock-view/single-stock-view.component';
+
 
 @Component({
   selector: 'app-trade',

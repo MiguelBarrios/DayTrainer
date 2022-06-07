@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
-import { StockPosition } from './../../models/stock-position';
-import { TradesService } from './../../services/trades.service';
+
 import { Component, OnInit } from '@angular/core';
+import { StockPosition } from 'src/app/models/stock-position';
+import { TradesService } from 'src/app/services/trades.service';
 
 @Component({
   selector: 'app-user-trades-summery',

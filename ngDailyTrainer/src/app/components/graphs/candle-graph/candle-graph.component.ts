@@ -1,4 +1,3 @@
-import { TDAserviceService } from './../../services/tdaservice.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
@@ -10,6 +9,7 @@ import {
   ApexXAxis,
   ApexTitleSubtitle
 } from "ng-apexcharts";
+import { TDAserviceService } from 'src/app/services/tdaservice.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;

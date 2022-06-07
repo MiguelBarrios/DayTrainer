@@ -1,10 +1,9 @@
 import { TradesService } from 'src/app/services/trades.service';
-import { CommentService } from './../../services/comment.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Trade } from 'src/app/models/trade';
-import { Comment } from './../../models/comment';
+import { CommentService } from 'src/app/services/comment.service';
 
 @Component({
   selector: 'app-feed',

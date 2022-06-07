@@ -1,10 +1,10 @@
 import { TradesService } from 'src/app/services/trades.service';
-import { UsersService } from './../../services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Trade } from 'src/app/models/trade';
 import { User } from 'src/app/models/user';
+import { UsersService } from 'src/app/services/users.service';
 
 
 

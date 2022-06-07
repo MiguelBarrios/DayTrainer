@@ -1,9 +1,9 @@
 import { TradesService } from 'src/app/services/trades.service';
-import { User } from './../../models/user';
 import { Component, Input, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-user-update-form',

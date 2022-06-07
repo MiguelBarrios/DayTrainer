@@ -1,11 +1,11 @@
 import { Router } from '@angular/router';
-import { StockService } from './../../services/stock.service';
-import { AlphaVantageAPIService } from './../../services/alpha-vantage-api.service';
+
 import { Component, OnInit } from '@angular/core';
 import { TimeoutInfo } from 'rxjs';
 import { Movers } from 'src/app/models/movers';
 import { TradesService } from 'src/app/services/trades.service';
 import { Stock } from 'src/app/models/stock';
+import { StockService } from 'src/app/services/stock.service';
 
 @Component({
   selector: 'app-top-movers',

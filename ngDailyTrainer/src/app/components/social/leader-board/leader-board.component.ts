@@ -1,16 +1,12 @@
-import { LeaderboardItem } from './../../models/leaderboard-item';
 import { getTestBed } from '@angular/core/testing';
-import { StockPosition } from './../../models/stock-position';
 import { first, last } from 'rxjs';
-import { TDAQuote } from './../../models/tdaquote';
-import { TDAserviceService } from './../../services/tdaservice.service';
-import { StockService } from './../../services/stock.service';
-import { Trade } from './../../models/trade';
 import { TradesService } from 'src/app/services/trades.service';
-import { UserService } from './../../services/user.service';
+
 import { User } from 'src/app/models/user';
-import { Contestant } from './../../models/contestant';
 import { Component, OnInit } from '@angular/core';
+import { LeaderboardItem } from 'src/app/models/leaderboard-item';
+import { TDAserviceService } from 'src/app/services/tdaservice.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 

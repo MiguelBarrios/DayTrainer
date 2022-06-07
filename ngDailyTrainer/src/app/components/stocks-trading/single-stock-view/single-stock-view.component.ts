@@ -1,12 +1,12 @@
-import { TDAQuote } from './../../models/tdaquote';
-import { TDAserviceService } from './../../services/tdaservice.service';
-import { TradesService } from 'src/app/services/trades.service';
-import { AlphaVantageAPIService } from './../../services/alpha-vantage-api.service';
-import { StockService } from './../../services/stock.service';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
 import { StockPosition } from 'src/app/models/stock-position';
+import { TDAQuote } from 'src/app/models/tdaquote';
+import { AlphaVantageAPIService } from 'src/app/services/alpha-vantage-api.service';
+import { TDAserviceService } from 'src/app/services/tdaservice.service';
+import { TradesService } from 'src/app/services/trades.service';
 
 @Component({
   selector: 'app-single-stock-view',

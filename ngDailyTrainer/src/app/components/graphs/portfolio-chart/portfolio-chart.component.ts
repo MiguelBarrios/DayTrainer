@@ -1,5 +1,4 @@
-import { Position } from './../../models/position';
-import { Stock } from './../../models/stock';
+
 import { TradesService } from 'src/app/services/trades.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
