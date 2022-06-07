@@ -1,18 +1,21 @@
 package com.skilldistillery.daytrainer.services;
 
+import java.util.Hashtable;
+
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skilldistillery.daytrainer.Config;
 
 @Service
 public class TDAService {
+	
+	private String stocks = "AAPL,MSFT,AMZN,TSLA,GOOGL,GOOG,NVDA,BRK.B,FB,UNH";
+	Hashtable<String, String> table = new Hashtable<>();
+
 
 	private static String url ="https://api.tdameritrade.com/v1/marketdata/";
 	private final RestTemplate restTemplate;
@@ -23,22 +26,33 @@ public class TDAService {
 
 	public String getQuote(String symbol) {
 		symbol = symbol.toUpperCase();
-		String requestUrl = this.url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
-		String json = this.restTemplate.getForObject(requestUrl, String.class);
-		String quote = null;
-
-		try {
-			// Get Quote, check if quote is present
-			final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
-			if (node.has(symbol)) {
-				quote =  node.get(symbol).toString();
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		System.out.println("keys");
+		System.out.println(table.keySet());
+		System.out.println("Searching for " + symbol);
+		String res = table.get(symbol);
+		System.err.println(res);
+		if(table.containsKey(symbol)) {
+			return table.get(symbol);
+		}else {
+			System.out.println("Sysmbole not found");
+			return null;
 		}
-
-		return quote;
+//		String requestUrl = this.url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
+//		String json = this.restTemplate.getForObject(requestUrl, String.class);
+//		String quote = null;
+//
+//		try {
+//			// Get Quote, check if quote is present
+//			final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
+//			if (node.has(symbol)) {
+//				quote =  node.get(symbol).toString();
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		return quote;
 	}
 	
 	public String getQuotes(String symbols) {
@@ -48,6 +62,29 @@ public class TDAService {
 		System.out.println(requestUrl);
 		String json = this.restTemplate.getForObject(requestUrl, String.class);
 		return json;
+	}
+	
+	public void updateQuotesAll() {
+		String requestUrl = this.url + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + stocks;
+		String json = this.restTemplate.getForObject(requestUrl, String.class);
+		String[] keys = stocks.split(",");
+		String quote = "";
+		for(String key : keys) {
+			try {
+				// Get Quote, check if quote is present
+				final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
+				if (node.has(key)) {
+					quote =  node.get(key).toString();
+					table.put(key, quote);
+				}else {
+					System.err.println(key + " not found");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}		
 	}
 	
 
