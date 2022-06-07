@@ -17,15 +17,15 @@
                             </p>
                         </div>
                     </div>
-                    <div class="rounded" id="accountValue">
+                    <div id="accountValue">
                         <h1>Total Account Balance: {{this.userBalance | currency}}</h1>
                     </div>
                 </div>
-                <div id="accountHomecontainerUpperLeft">
-                    <app-portfolio-chart></app-portfolio-chart>
-                </div>
             </div>
             <mat-tab-group>
+                <mat-tab label="Portfolio"> 
+                    <app-portfolio-chart></app-portfolio-chart>
+                </mat-tab>
                 <mat-tab label="User Info"> </mat-tab>
                 <mat-tab label="Trades"> 
                     <div class="tradeHistory">
@@ -51,7 +51,7 @@
                         </table>
                     </div>     
                 </mat-tab>
-                <mat-tab label="Portfolio"> </mat-tab>
+
             </mat-tab-group>
     
 

@@ -1,11 +1,13 @@
-#pic {
-    width: 300px;
-    max-height: 400px;
+#freindsPageContainer{
+    display: flex;
+    flex-direction: row;
 }
 
-main {
-    margin-left: 120px;
+#pic {
+    width: 200px;
+    max-height: 300px;
 }
+
 
 #card {
     vertical-align: top;
@@ -13,11 +15,9 @@ main {
 
 #friendsContainerMain {
     margin-top: 20px;
-    margin-left: 240px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    background-color: rgb(245, 245, 247);
 }

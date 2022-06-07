@@ -1,15 +1,18 @@
-<header>
+<div id="freindsPageContainer" >
   <app-logged-in-nav></app-logged-in-nav>
-</header>
-
-<div id="friendsContainerMain">
-  <div class="card border shadow" style="width: 18rem;" *ngFor="let friend of friends">
-    <img src="{{friend.profilePicture}}" class="card-img-top " alt="... " width="200" height="200">
-    <div class="card-body" (click)="loadFriendDetailView(friend.username)">
-      <h5 class="card-title ">{{friend.firstName}} {{friend.lastName}}</h5>
-      <p class="card-text">@{{friend.username}}</p>
-      <p class="card-text ">{{friend.biography}}</p>
-      <!-- <a href="# " class="btn btn-primary ">Go somewhere</a> -->
+  <div>
+    <div id="friendsContainerMain" class="container-fluid">
+      <div class="card border shadow" style="width: 18rem;" *ngFor="let friend of friends">
+        <img src="{{friend.profilePicture}}" class="card-img-top " alt="... " width="200" height="200">
+        <div class="card-body" (click)="loadFriendDetailView(friend.username)">
+          <h5 class="card-title ">{{friend.firstName}} {{friend.lastName}}</h5>
+          <p class="card-text">@{{friend.username}}</p>
+          <p class="card-text ">{{friend.biography}}</p>
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
+
+
