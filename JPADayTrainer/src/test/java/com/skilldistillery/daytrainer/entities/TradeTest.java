@@ -14,11 +14,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class TradeTest {
-	
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Trade trade;
-	
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -46,15 +45,17 @@ class TradeTest {
 	@DisplayName("Initial Testing")
 	void test1() {
 		assertNotNull(trade);
-		assertEquals(100,trade.getQuantity());
-		
+		assertEquals(100, trade.getQuantity());
+
 	}
+
 	@Test
 	@DisplayName("Trade to User mapping")
 	void test3() {
 		assertNotNull(trade);
-		assertEquals(1,trade.getUser().getId());
+		assertEquals(1, trade.getUser().getId());
 	}
+
 	@Test
 	@DisplayName("Stock to Trade One to One mapping")
 	void test4() {
@@ -63,18 +64,17 @@ class TradeTest {
 		assertEquals("AAPL", trade.getStock().getSymbol());
 		assertNotNull(trade);
 
-	
 	}
 
 	@Test
 	@DisplayName("Trade to Comment One to Many mapping")
 	void test6() {
-		
+
 		assertNotNull(trade);
-		assertTrue(trade.getComments().size()> 0);
-		
+		assertTrue(trade.getComments().size() > 0);
+
 	}
-	
+
 	@Test
 	@DisplayName("MTO relationship to Order type")
 	void test7() {
@@ -84,5 +84,4 @@ class TradeTest {
 		assertEquals("Market", type.getName());
 	}
 
-} 
-
+}

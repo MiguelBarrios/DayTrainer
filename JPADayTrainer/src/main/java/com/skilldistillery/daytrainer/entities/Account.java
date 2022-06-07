@@ -13,30 +13,29 @@ import javax.persistence.OneToOne;
 @Entity
 public class Account {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private double balance;
-	
-	@Column(name="margin_enable")
+
+	@Column(name = "margin_enable")
 	private boolean marginEnable;
-	
-	@Column(name="margin_amount")
+
+	@Column(name = "margin_amount")
 	private double marginAmount;
-	
+
 	private double deposit;
 
 	@OneToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
-	//methods
+
+	// methods
 	public Account() {
 		super();
 	}
-	
+
 	public double getDeposit() {
 		return deposit;
 	}
@@ -44,8 +43,6 @@ public class Account {
 	public void setDeposit(double deposit) {
 		this.deposit = deposit;
 	}
-
-
 
 	public boolean isMarginEnable() {
 		return marginEnable;
@@ -96,12 +93,6 @@ public class Account {
 	}
 
 	@Override
-	public String toString() {
-		return "Account [id=" + id + ", balance=" + balance + ", marginEnabled=" + marginEnable + ", marginAmount="
-				+ marginAmount + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
@@ -118,5 +109,10 @@ public class Account {
 		return id == other.id;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", balance=" + balance + ", marginEnabled=" + marginEnable + ", marginAmount="
+				+ marginAmount + "]";
+	}
+
 }

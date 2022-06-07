@@ -16,11 +16,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
-	
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private User user;
-	
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -47,42 +46,47 @@ class UserTest {
 	@Test
 	void test1() {
 		assertNotNull(user);
-		assertEquals("admin",user.getUsername());
+		assertEquals("admin", user.getUsername());
 	}
+
 	@Test
 	@DisplayName("User to Account mapping")
 	void test2() {
 		Account temp = em.find(Account.class, 1);
 		assertNotNull(user);
 		assertNotNull(temp);
-		assertEquals(temp.getBalance(),user.getAccount().getBalance());
+		assertEquals(temp.getBalance(), user.getAccount().getBalance());
 	}
+
 	@Test
 	@DisplayName("User to Trade mapping")
 	void test3() {
 		assertNotNull(user);
-		assertTrue(user.getTrades().size()>0);
+		assertTrue(user.getTrades().size() > 0);
 	}
+
 	@Test
 	@DisplayName("User to Comments mapping")
 	void test4() {
 		assertNotNull(user);
-		assertTrue(user.getComments().size()>0);
+		assertTrue(user.getComments().size() > 0);
 	}
+
 	@Test
 	@DisplayName("User to Comments mapping")
 	void test5() {
 		assertNotNull(user);
-		assertTrue(user.getSentMessages().size()>0);
+		assertTrue(user.getSentMessages().size() > 0);
 	}
+
 	@Test
 
 	@DisplayName("User to Comments mapping")
 	void test6() {
 		assertNotNull(user);
-		assertTrue(user.getRecMessages().size()>0);
+		assertTrue(user.getRecMessages().size() > 0);
 	}
-	
+
 	@Test
 	@DisplayName("User to friends mapping")
 	void test7() {
@@ -90,8 +94,5 @@ class UserTest {
 		assertTrue(user.getFollowing().size() > 0);
 		assertEquals(user.getFollowing().get(0).getId(), 1);
 	}
-
-	
-
 
 }

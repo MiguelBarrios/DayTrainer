@@ -14,29 +14,24 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Comment {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String content;
-	
-	@Column(name="created_at")
+
+	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 
-	
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@ManyToOne
-	@JoinColumn(name="trade_id")
+	@JoinColumn(name = "trade_id")
 	private Trade trade;
-	
-	
-	
-	
-	//methods
+
+	// methods
 	public Comment() {
 		super();
 	}
@@ -81,8 +76,6 @@ public class Comment {
 		this.createdAt = createdAt;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -102,21 +95,8 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Comment [id=");
-		builder.append(id);
-		builder.append(", content=");
-		builder.append(content);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append(", trade=");
-		builder.append(trade);
-		builder.append("]");
-		return builder.toString();
+		return "Comment [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", user=" + user.getUsername() + ", trade="
+				+ trade.getId() + "]";
 	}
-	
-	
-	
+
 }

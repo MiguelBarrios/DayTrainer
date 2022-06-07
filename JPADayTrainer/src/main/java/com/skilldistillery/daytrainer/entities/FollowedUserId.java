@@ -8,35 +8,20 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class FollowedUserId implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
-	@Column(name= "user_id")
-	private int userId;
-	
-	@Column(name= "followed_user_id")
-	private int followedUserId;
-	
-	
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("FollowedUser [userId=");
-		builder.append(userId);
-		builder.append(", followedUserId=");
-		builder.append(followedUserId);
-		builder.append("]");
-		return builder.toString();
-	}
-	
-	
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "user_id")
+	private int userId;
+
+	@Column(name = "followed_user_id")
+	private int followedUserId;
 
 	public FollowedUserId() {
 		super();
-	
+
 	}
-	
+
 	public FollowedUserId(int userId, int followedUserId) {
 		super();
 		this.userId = userId;
@@ -80,8 +65,11 @@ public class FollowedUserId implements Serializable {
 		return followedUserId == other.followedUserId && userId == other.userId;
 	}
 
+	@Override
+	public String toString() {
+		return "FollowedUserId [userId=" + userId + ", followedUserId=" + followedUserId + "]";
+	}
 	
 	
-	
-	
+
 }

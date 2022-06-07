@@ -1,6 +1,5 @@
 package com.skilldistillery.daytrainer.entities;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -68,40 +67,31 @@ public class User {
 	@JsonIgnore
 	@OneToMany(mappedBy = "recipient")
 	private List<Message> recMessages;
-	
+
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "followed_user",
-	joinColumns = @JoinColumn(name="user_id"),
-	inverseJoinColumns=@JoinColumn(name="followed_user_id"))
+	@JoinTable(name = "followed_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "followed_user_id"))
 	private List<User> following;
-	
-	@ManyToMany(mappedBy="following")
-	private List<User> users;
 
+	@ManyToMany(mappedBy = "following")
+	private List<User> users;
 
 	public User() {
 
 	}
-	
-	
 
 	public List<User> getFollowing() {
 		return following;
 	}
 
-
-
 	public void setFollowing(List<User> following) {
 		this.following = following;
 	}
 
-
-
 	public List<Message> getSentMessages() {
 		return sentMessages;
 	}
-	
+
 	public void setSentMessages(List<Message> sentMessages) {
 		this.sentMessages = sentMessages;
 	}
@@ -250,76 +240,5 @@ public class User {
 				+ ", biography=" + biography + ", createdAt=" + createdAt + ", profilePicture=" + profilePicture
 				+ ", account=" + account + "]";
 	}
-	
-	
-
-//	@Override
-//	public String toString() {
-//		StringBuilder builder = new StringBuilder();
-//		builder.append("User [id=");
-//		builder.append(id);
-//		builder.append(", username=");
-//		builder.append(username);
-//		builder.append(", firstName=");
-//		builder.append(firstName);
-//		builder.append(", lastName=");
-//		builder.append(lastName);
-//		builder.append(", password=");
-//		builder.append(password);
-//		builder.append(", enabled=");
-//		builder.append(enabled);
-//		builder.append(", role=");
-//		builder.append(role);
-//		builder.append(", email=");
-//		builder.append(email);
-//		builder.append(", biography=");
-//		builder.append(biography);
-//		builder.append(", createdAt=");
-//		builder.append(createdAt);
-//		builder.append(", profilePicture=");
-//		builder.append(profilePicture);
-//		builder.append(", account=");
-//		builder.append(account);
-//		builder.append(", trades=");
-//		builder.append(trades);
-//		builder.append(", comments=");
-//		builder.append(comments);
-//		builder.append(", getId()=");
-//		builder.append(getId());
-//		builder.append(", getUsername()=");
-//		builder.append(getUsername());
-//		builder.append(", getFirstName()=");
-//		builder.append(getFirstName());
-//		builder.append(", getLastName()=");
-//		builder.append(getLastName());
-//		builder.append(", getPassword()=");
-//		builder.append(getPassword());
-//		builder.append(", isEnabled()=");
-//		builder.append(isEnabled());
-//		builder.append(", getRole()=");
-//		builder.append(getRole());
-//		builder.append(", getEmail()=");
-//		builder.append(getEmail());
-//		builder.append(", getBiography()=");
-//		builder.append(getBiography());
-//		builder.append(", getCreatedAt()=");
-//		builder.append(getCreatedAt());
-//		builder.append(", getProfilePicture()=");
-//		builder.append(getProfilePicture());
-//		builder.append(", getAccount()=");
-//		builder.append(getAccount());
-//		builder.append(", getTrades()=");
-//		builder.append(getTrades());
-//		builder.append(", getComments()=");
-//		builder.append(getComments());
-//		builder.append(", hashCode()=");
-//		builder.append(hashCode());
-//		builder.append(", getClass()=");
-//		builder.append(getClass());
-//		builder.append(", toString()=");
-//		builder.append(super.toString());
-//		builder.append("]");
-//		return builder.toString();
-//	}
 
 }

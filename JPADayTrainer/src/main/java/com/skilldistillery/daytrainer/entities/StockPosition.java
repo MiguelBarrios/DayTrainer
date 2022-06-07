@@ -1,13 +1,13 @@
 package com.skilldistillery.daytrainer.entities;
 
 public class StockPosition {
-	
+
 	private String symbol;
-	
+
 	private int numberOfShares;
-	
-	private double avgCostPerShare; 
-	
+
+	private double avgCostPerShare;
+
 	public StockPosition() {
 	}
 
@@ -17,7 +17,6 @@ public class StockPosition {
 		this.numberOfShares = numberOfShares;
 		this.avgCostPerShare = avgCostPerShare;
 	}
-	
 
 	public String getSymbol() {
 		return symbol;
@@ -47,7 +46,5 @@ public class StockPosition {
 	public String toString() {
 		return "StockPosition [numberOfShares=" + numberOfShares + ", avgCostPerShare=" + avgCostPerShare + "]";
 	}
-	
-	
 
 }

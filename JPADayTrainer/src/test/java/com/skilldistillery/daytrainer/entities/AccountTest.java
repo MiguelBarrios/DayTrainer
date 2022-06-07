@@ -14,11 +14,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class AccountTest {
-	
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Account acc;
-	
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -46,18 +45,18 @@ class AccountTest {
 	@DisplayName("Initial Testing")
 	void test1() {
 		assertNotNull(acc);
-		assertEquals(1000.00,acc.getBalance());
-		assertEquals(500.00,acc.getMarginAmount());
+		assertEquals(1000.00, acc.getBalance());
+		assertEquals(500.00, acc.getMarginAmount());
 		assertTrue(acc.isMarginEnable());
-		
+
 	}
+
 	@Test
 	@DisplayName("Account to User mapping")
 	void test2() {
 		User temp = em.find(User.class, 1);
 		assertNotNull(acc);
 		assertNotNull(temp);
-		assertEquals(temp.getAccount().getBalance(),acc.getBalance());
+		assertEquals(temp.getAccount().getBalance(), acc.getBalance());
 	}
-} 
-
+}
