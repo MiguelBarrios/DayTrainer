@@ -26,4 +26,9 @@ public class TDAController {
 		return res;
 		
 	}
+	
+	@RequestMapping(path = "tda/quotes/{symbols}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String getQuotes(Principal principal, @PathVariable String symbols) {
+		return tdaService.getQuotes(symbols);
+	}
 }

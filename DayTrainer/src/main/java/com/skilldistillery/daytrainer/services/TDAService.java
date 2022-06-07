@@ -14,6 +14,7 @@ import com.skilldistillery.daytrainer.Config;
 @Service
 public class TDAService {
 
+	private static String url ="https://api.tdameritrade.com/v1/marketdata/";
 	private final RestTemplate restTemplate;
 
 	public TDAService(RestTemplateBuilder restTemplateBuilder) {
@@ -22,9 +23,8 @@ public class TDAService {
 
 	public String getQuote(String symbol) {
 		symbol = symbol.toUpperCase();
-		String url = "https://api.tdameritrade.com/v1/marketdata/" + symbol
-				+ "/quotes?apikey=" + Config.getTDAKEY();
-		String json = this.restTemplate.getForObject(url, String.class);
+		String requestUrl = this.url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
+		String json = this.restTemplate.getForObject(requestUrl, String.class);
 		String quote = null;
 
 		try {
@@ -40,5 +40,15 @@ public class TDAService {
 
 		return quote;
 	}
+	
+	public String getQuotes(String symbols) {
+		symbols = symbols.toUpperCase();
+		//"https://api.tdameritrade.com/v1/marketdata/quotes?apikey=V6DTLTMJNGVWTXDOGACC59RLTM6NTQGH%40&symbol=A,QYLD"
+		String requestUrl = this.url + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + symbols;
+		System.out.println(requestUrl);
+		String json = this.restTemplate.getForObject(requestUrl, String.class);
+		return json;
+	}
+	
 
 }
