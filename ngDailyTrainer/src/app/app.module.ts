@@ -25,7 +25,6 @@ import { AccountHomeComponent } from './components/page-components/account-home/
 import { HomepageComponent } from './components/page-components/homepage/homepage.component';
 import { LoggedInNavComponent } from './components/page-components/logged-in-nav/logged-in-nav.component';
 import { LogoutComponent } from './components/page-components/logout/logout.component';
-import { MarketComponent } from './components/page-components/market/market.component';
 import { NavbarComponent } from './components/page-components/navbar/navbar.component';
 import { NotfoundComponent } from './components/page-components/notfound/notfound.component';
 import { SettingsComponent } from './components/page-components/settings/settings.component';
@@ -41,6 +40,7 @@ import { PortfolioChartComponent } from './components/graphs/portfolio-chart/por
 import { FooterComponent } from './components/page-components/footer/footer.component';
 import { LeaderBoardComponent } from './components/social/leader-board/leader-board.component';
 import { TopMoversComponent } from './components/stocks-trading/top-movers/top-movers.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -61,7 +61,6 @@ import { TopMoversComponent } from './components/stocks-trading/top-movers/top-m
     UserUpdateFormComponent,
     FeedComponent,
     SettingsComponent,
-    MarketComponent,
     UsersComponent,
     FriendsComponent,
     TradesComponent,
@@ -86,7 +85,8 @@ import { TopMoversComponent } from './components/stocks-trading/top-movers/top-m
     MatRadioModule,
     MatCardModule,
     MatGridListModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatTabsModule
 
   ],
   providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe],

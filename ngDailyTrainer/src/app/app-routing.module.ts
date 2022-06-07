@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountHomeComponent } from './components/page-components/account-home/account-home.component';
 import { HomepageComponent } from './components/page-components/homepage/homepage.component';
-import { MarketComponent } from './components/page-components/market/market.component';
 import { NotfoundComponent } from './components/page-components/notfound/notfound.component';
 import { SettingsComponent } from './components/page-components/settings/settings.component';
 import { FeedComponent } from './components/social/feed/feed.component';
@@ -27,7 +26,6 @@ const routes: Routes = [
   { path: 'accounthome', component: AccountHomeComponent},
   {path:  'feed', component: FeedComponent},
   {path:  'friends', component: FriendsComponent},
-  {path:  'market', component: MarketComponent},
   {path:  'settings', component: SettingsComponent},
   {path:  'users', component: UsersComponent},
   {path:  'trades', component: TradesComponent},
