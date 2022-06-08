@@ -26,15 +26,10 @@ public class TDAService {
 
 	public String getQuote(String symbol) {
 		symbol = symbol.toUpperCase();
-		System.out.println("keys");
-		System.out.println(table.keySet());
-		System.out.println("Searching for " + symbol);
-		String res = table.get(symbol);
-		System.err.println(res);
 		if(table.containsKey(symbol)) {
 			return table.get(symbol);
 		}else {
-			System.out.println("Sysmbole not found");
+			System.out.println("Symbol not found");
 			return null;
 		}
 //		String requestUrl = this.url + symbol + "/quotes?apikey=" + Config.getTDAKEY();

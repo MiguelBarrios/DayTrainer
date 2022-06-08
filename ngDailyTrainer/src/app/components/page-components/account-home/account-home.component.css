@@ -39,3 +39,13 @@
 }
 
 
+#portfolioChartContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#portfolioChartContainer{
+    margin: 2%;
+}
+

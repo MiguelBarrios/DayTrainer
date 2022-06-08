@@ -40,7 +40,7 @@ public class TDAController {
 		return tdaService.getQuotes(symbols);
 	}
 	
-	@Scheduled(fixedDelay = 5, timeUnit = TimeUnit.SECONDS)
+	@Scheduled(fixedDelay = 10, timeUnit = TimeUnit.SECONDS)
 	public void payDay() {
 		tdaService.updateQuotesAll();
 	}
