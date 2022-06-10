@@ -66,7 +66,7 @@ if (symbol) {
         type: 'category',
         labels: {
           formatter: function(val: any) {
-            return dayjs(val).format('MM DD HH:mm')
+            return dayjs(val).format('MMM DD HH:mm')
           }
         }
       },
@@ -79,8 +79,7 @@ if (symbol) {
 
 
   getCandles(symbol:string){
-    this.tda.getCandles10Day30Minute(symbol).subscribe(
-    //this.tdaService.getCandleBasic(symbol).subscribe(
+    this.tda.getCandles10Day(symbol).subscribe(
       (data) => {
           let info = Object.values(data)[0];
            for(let i = 0; i < info.length; ++i){
