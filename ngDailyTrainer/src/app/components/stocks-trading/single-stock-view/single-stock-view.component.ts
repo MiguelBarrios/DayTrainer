@@ -103,7 +103,7 @@ id:any | null = null;
     document.getElementById("currentStockPrice")?.classList.add("flash");
     setTimeout(function(){
       document.getElementById("currentStockPrice")?.classList.remove("flash");
-    }, 300);
+    }, 400);
   }
 }
 

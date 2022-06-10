@@ -10,6 +10,7 @@ import {
   ApexTitleSubtitle
 } from "ng-apexcharts";
 import { TDAserviceService } from 'src/app/services/tdaservice.service';
+import { TDAService } from 'src/app/services/tda.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -41,7 +42,7 @@ export class CandleGraphComponent implements OnInit {
       series: [
         {
           name: "candle",
-          data: [...this.candles.slice(0,200)]
+          data: [...this.candles]
         }
       ],
       chart: {
@@ -64,7 +65,7 @@ export class CandleGraphComponent implements OnInit {
   }
 
   constructor(private router:Router, private route: ActivatedRoute,
-        private tdaService:TDAserviceService) {
+        private tdaService:TDAserviceService, private tda:TDAService) {
     let symbol = this.route.snapshot.paramMap.get('symbol');
     if (symbol) {
       this.getCandles(symbol);
@@ -73,9 +74,31 @@ export class CandleGraphComponent implements OnInit {
 
   }
 
+  // getCandles(symbol:string){
+  //   this.tda.getCandles10Day10Minute(symbol).subscribe(
+  //     (data) => {
+  //         let info = Object.values(data)[0];
+  //          for(let i = 0; i < info.length; ++i){
+  //            let fields = Object.values(info[i]);
+  //            let cur  = {
+  //               x: new Date(info[i]["datetime"]),
+  //               y: [info[i]["open"], info[i]["high"], info[i]["low"], info[i]["close"]]
+  //             }
+  //             this.candles.push(cur);
+  //          }
+  //          console.log("Candles: " + this.candles.length);
+  //          this.loadData();
+  //          this.isLoaded = true;
+  //     },
+  //     (error) => {
+  //       console.error("Error in observable");
+  //     }
+  //   )
+  // }
 
   getCandles(symbol:string){
-    this.tdaService.getCandleBasic(symbol).subscribe(
+    this.tda.getCandles10Day10Minute(symbol).subscribe(
+    //this.tdaService.getCandleBasic(symbol).subscribe(
       (data) => {
           let info = Object.values(data)[0];
            for(let i = 0; i < info.length; ++i){
