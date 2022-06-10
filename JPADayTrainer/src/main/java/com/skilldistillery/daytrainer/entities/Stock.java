@@ -18,8 +18,7 @@ public class Stock {
 
 	private String name;
 
-	@Column(name = "exchange_name")
-	private String exchangeName;
+	private String sector;
 
 
 	// methods
@@ -43,12 +42,13 @@ public class Stock {
 		this.name = name;
 	}
 
-	public String getExchangeName() {
-		return exchangeName;
+
+	public String getSector() {
+		return sector;
 	}
 
-	public void setExchangeName(String exchangeName) {
-		this.exchangeName = exchangeName;
+	public void setSector(String sector) {
+		this.sector = sector;
 	}
 
 	@Override
@@ -70,9 +70,8 @@ public class Stock {
 
 	@Override
 	public String toString() {
-		return "Stock [symbol=" + symbol + ", name=" + name + ", exchangeName=" + exchangeName + "]";
+		return "Stock [symbol=" + symbol + ", name=" + name + ", sector=" + sector + "]";
 	}
-
 	
 
 }

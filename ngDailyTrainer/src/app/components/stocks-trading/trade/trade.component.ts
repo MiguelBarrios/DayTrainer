@@ -51,7 +51,9 @@ export class TradeComponent implements OnInit {
 
     if(this.action == "Buy"){
       if(this.newTrade.quantity){
-        this.totalCost = this.newTrade.quantity * this.ssv.selected.price;
+        if(this.ssv.quote){
+          this.totalCost = this.newTrade.quantity * this.ssv.quote.lastPrice;
+        }
       }
       console.log(this.totalCost);
 

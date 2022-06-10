@@ -44,6 +44,7 @@ public class TradeServiceImple implements TradeService {
 	
 	@Override
 	public List<Trade> getUserTrades(String username) {
+		System.err.println("Here");
 		return tradeRepo.getUserTrades(username);
 	}
 	

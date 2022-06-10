@@ -54,4 +54,8 @@ export class TDAserviceService {
     )
   }
 
+  getQuote(symbole:string){
+
+  }
+
 }
