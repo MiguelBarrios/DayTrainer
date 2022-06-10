@@ -73,4 +73,6 @@ onClickRow(stockSymbol: string|null) {
   }
 }
 
+
+
 }

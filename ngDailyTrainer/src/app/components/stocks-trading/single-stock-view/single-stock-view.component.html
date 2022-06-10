@@ -42,10 +42,11 @@
   
           </div>
   
-          <div id="stockStats">
+          <div id="stockStats" >
             <div>
               <h5>Change</h5>
-              <h6>{{quote?.netChange| number:"1.2-2"}}</h6>
+              <h6 [ngClass]="{'trendingDown': quote.netChange < 0, 'trendingUp' : quote.netChange > 0}"
+              > {{quote?.netChange| number:"1.2-2"}}</h6>
             </div>
             <div>
               <h5>Volatility</h5>

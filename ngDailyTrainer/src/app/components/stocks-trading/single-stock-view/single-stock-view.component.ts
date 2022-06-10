@@ -20,21 +20,33 @@ numberOfShares = 0;
 marketValue = 0;
 totalReturn = 0;
 avgCostPerShare = 0;
-quote:TDAQuote | null = null;
+quote:TDAQuote = new TDAQuote("",1,1,1,1,1,1,1,"",1,"",1,1,1,1,1);
 
 symbol = "";
 searchTerm = "";
+id:any | null = null;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private stockSvc: AlphaVantageAPIService, private tradesService: TradesService,
     private tdaService:TDAserviceService, private tda:TDAService) { }
 
+
+
   ngOnInit(): void {
       let symbol = this.route.snapshot.paramMap.get('symbol');
       if (symbol) {
         this.getQuote(symbol);
+       this.id = setInterval(() => {
+        this.getQuote(symbol);
+       }, 10000);
       }
     }
+
+  ngOnDestroy() {
+       if (this.id) {
+         clearInterval(this.id);
+       }
+  }
 
   reload(){
     if(this.searchTerm.length > 0){
@@ -49,8 +61,6 @@ searchTerm = "";
   getUserPositionInfo(ticker:string){
     this.tradesService.getStockPosition(ticker).subscribe(
       (data) => {
-        console.error(data);
-        console.log(this.quote);
         if(this.quote){
           this.userPosition = data;
           this.numberOfShares = data.numberOfShares;
@@ -66,22 +76,35 @@ searchTerm = "";
     )
   }
 
-  getQuote(symbol: string){
-    this.tda.getQuote(symbol).subscribe(
-      (quote) => {
-          this.quote = quote;
-          let keys = Object.keys(quote);
-          let data = Object.values(quote);
-          let low = keys.indexOf("52WkLow");
-          let high = keys.indexOf("52WkHigh");
-          this.quote.WkHigh52 = data[high];
-          this.quote.WkLow52 = data[low];
-          this.getUserPositionInfo(symbol);
-      },
-      (error) => {
-        console.error("Error getting quote");
-      }
-    )
+  getQuote(symbol: string | null){
+    if(symbol){
+      this.tda.getQuote(symbol).subscribe(
+        (quote) => {
+            this.quote = quote;
+            let keys = Object.keys(quote);
+            let data = Object.values(quote);
+            let low = keys.indexOf("52WkLow");
+            let high = keys.indexOf("52WkHigh");
+            this.quote.WkHigh52 = data[high];
+            this.quote.WkLow52 = data[low];
+            this.getUserPositionInfo(symbol);
+            this.flashPriceChange();
+
+        },
+        (error) => {
+          console.error("Error getting quote");
+        }
+      )
+    }
+
   }
 
+  flashPriceChange(){
+    document.getElementById("currentStockPrice")?.classList.add("flash");
+    setTimeout(function(){
+      document.getElementById("currentStockPrice")?.classList.remove("flash");
+    }, 300);
+  }
 }
+
+
