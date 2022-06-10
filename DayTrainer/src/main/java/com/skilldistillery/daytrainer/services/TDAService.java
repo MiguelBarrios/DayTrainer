@@ -29,25 +29,25 @@ public class TDAService {
 		if(table.containsKey(symbol)) {
 			return table.get(symbol);
 		}else {
-			System.out.println("Symbol not found");
-			return null;
+			System.err.println("Non smp 500 quote requested");
+			String requestUrl = url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
+			String json = this.restTemplate.getForObject(requestUrl, String.class);
+			String quote = null;
+
+			try {
+				// Get Quote, check if quote is present
+				final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
+				if (node.has(symbol)) {
+					quote =  node.get(symbol).toString();
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return quote;
 		}
-//		String requestUrl = this.url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
-//		String json = this.restTemplate.getForObject(requestUrl, String.class);
-//		String quote = null;
-//
-//		try {
-//			// Get Quote, check if quote is present
-//			final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
-//			if (node.has(symbol)) {
-//				quote =  node.get(symbol).toString();
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return quote;
+
 	}
 	
 	public String getQuotes(String symbols) {

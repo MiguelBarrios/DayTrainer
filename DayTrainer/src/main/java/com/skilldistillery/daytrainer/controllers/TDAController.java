@@ -32,7 +32,6 @@ public class TDAController {
 			response.setStatus(404);
 		}
 		return res;
-		
 	}
 	
 	@RequestMapping(path = "tda/quotes/{symbols}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
