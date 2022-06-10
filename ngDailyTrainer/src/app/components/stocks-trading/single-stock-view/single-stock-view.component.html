@@ -25,19 +25,19 @@
           <div id="stockQuoteInfo">
             <div>
               <h5>Current</h5>
-              <h6 id="currentStockPrice">{{selected.price | number:"1.2-2"}}</h6>
+              <h6 id="currentStockPrice">{{quote?.lastPrice| number:"1.2-2"}}</h6>
             </div>
             <div>
               <h5>Open</h5>
-              <h6>{{selected.open | number:"1.2-2"}}</h6>
+              <h6>{{quote?.openPrice| number:"1.2-2"}}</h6>
             </div>
             <div>
               <h5>High</h5>
-              <h6>{{selected.high | number:"1.2-2"}}</h6>
+              <h6>{{quote?.highPrice| number:"1.2-2"}}</h6>
             </div>
             <div>
               <h5>Low</h5>
-              <h6>{{selected.low | number:"1.2-2"}}</h6>
+              <h6>{{quote?.lowPrice| number:"1.2-2"}}</h6>
             </div>
   
           </div>
@@ -45,19 +45,19 @@
           <div id="stockStats">
             <div>
               <h5>Change</h5>
-              <h6>{{selected.change | number:"1.2-2"}}</h6>
+              <h6>{{quote?.netChange| number:"1.2-2"}}</h6>
             </div>
             <div>
               <h5>Volatility</h5>
-              <h6>{{stats?.volatility| number:"1.2-2"}}</h6>
+              <h6>{{quote?.volatility}}</h6>
             </div>
             <div>
               <h5>52 Week High</h5>
-              <h6>{{stats?.WkHigh52| number:"1.2-2"}}</h6>
+              <h6>{{quote?.WkHigh52| number:"1.2-2"}}</h6>
             </div>
             <div>
               <h5>52 Week Low</h5>
-              <h6>{{stats?.WkLow52| number:"1.2-2"}}</h6>
+              <h6>{{quote?.WkLow52| number:"1.2-2"}}</h6>
             </div>
   
           </div>
@@ -65,19 +65,19 @@
           <div id="stockStats2">
             <div>
               <h5>PE Ratio</h5>
-              <h6>{{stats?.peRatio| number:"1.2-2"}}</h6>
+              <h6>{{quote?.peRatio| number:"1.2-2"}}</h6>
             </div>
             <div>
               <h5>Dividend</h5>
-              <h6>{{stats?.divAmount| number:"1.2-2"}}</h6>
+              <h6>{{quote?.divAmount| number:"1.2-2"}}</h6>
             </div>
             <div>
               <h5>Dividend Yield</h5>
-              <h6>{{stats?.divYield| number:"1.2-2"}}</h6>
+              <h6>{{quote?.divYield| number:"1.2-2"}}</h6>
             </div>
             <div>
               <h5>Dividend Date</h5>
-              <h6>{{stats?.divDate | date}}</h6>
+              <h6>{{quote?.divDate | date}}</h6>
             </div>
           </div>
         </div>

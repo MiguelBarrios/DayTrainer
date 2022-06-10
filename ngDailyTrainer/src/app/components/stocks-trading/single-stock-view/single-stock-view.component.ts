@@ -7,6 +7,7 @@ import { TDAQuote } from 'src/app/models/tdaquote';
 import { AlphaVantageAPIService } from 'src/app/services/alpha-vantage-api.service';
 import { TDAserviceService } from 'src/app/services/tdaservice.service';
 import { TradesService } from 'src/app/services/trades.service';
+import { TDAService } from 'src/app/services/tda.service';
 
 @Component({
   selector: 'app-single-stock-view',
@@ -21,19 +22,20 @@ numberOfShares = 0;
 marketValue = 0;
 totalReturn = 0;
 avgCostPerShare = 0;
+quote:TDAQuote | null = null;
 
 symbol = "";
 searchTerm = "";
 
   constructor(private router: Router, private route: ActivatedRoute,
     private stockSvc: AlphaVantageAPIService, private tradesService: TradesService,
-    private tdaService:TDAserviceService) { }
+    private tdaService:TDAserviceService, private tda:TDAService) { }
 
   ngOnInit(): void {
       let symbol = this.route.snapshot.paramMap.get('symbol');
       if (symbol) {
+        this.getQuote(symbol);
         this.show(symbol);
-        this.getStockStats(symbol);
       }
     }
 
@@ -85,42 +87,21 @@ searchTerm = "";
     )
   }
 
-  getStockStats(symbol:string){
-      this.tdaService.getStockStats(symbol).subscribe(
-        (data) => {
-          let stats = Object.values(data)[0];
-          let netChange = stats["netChange"];
-          let volatility = stats["volatility"];
-          let WkHigh52 = stats["52WkHigh"];
-          let WkLow52 = stats["52WkLow"];
-          let peRatio = stats["peRatio"];
-          let divAmount = stats["divAmount"];
-          let divYield = stats["divYield"];
-          let divDate = stats["divDate"];
-          let lastPrice = stats["lastPrice"];
-          this.stats = new TDAQuote(symbol,netChange, volatility, WkHigh52, WkLow52, peRatio, divAmount, divYield, divDate,lastPrice );
-        },
-        (error) => {
-          console.log("getStockStats() Observable got and error " + error)
-        }
-      )
+  getQuote(symbol: string){
+    this.tda.getQuote(symbol).subscribe(
+      (quote) => {
+          this.quote = quote;
+          let keys = Object.keys(quote);
+          let data = Object.values(quote);
+          let low = keys.indexOf("52WkLow");
+          let high = keys.indexOf("52WkHigh");
+          this.quote.WkHigh52 = data[high];
+          this.quote.WkLow52 = data[low];
+      },
+      (error) => {
+        console.error("Error getting quote");
+      }
+    )
   }
 
-
-
 }
-
-  // netChange:number;
-  // volatility:number;
-  // 52WkHigh:number;
-  // 52WkLow:number;
-  // peRatio:number;
-  // divAmount:number;
-  // divYield:number;
-  // divDate:string;
-
-
-
-  // // Manufacturer and model are both of type string,
-  // // so we can pluck them both into a typed string array
-  // let makeAndModel: string[] = pluck(taxi, ["manufacturer", "model"]);

@@ -11,6 +11,12 @@ export class TDAQuote {
   divYield:number;
   divDate:string;
   lastPrice:number;
+  description:string;
+  totalVolume:number;
+  openPrice:number;
+  highPrice:number;
+  lowPrice:number;
+  closePrice:number;
   constructor(  symbol:string,
     netChange:number,
     volatility:number,
@@ -20,7 +26,13 @@ export class TDAQuote {
     divAmount:number,
     divYield:number,
     divDate:string,
-    lastPrice:number){
+    lastPrice:number,
+    description:string,
+    totalVolume:number, 
+    openPrice:number,
+    highPrice:number,
+    lowPrice:number,
+    closePrice:number){
       this.symbol = symbol;
       this.netChange = netChange;
       this.volatility = volatility;
@@ -31,6 +43,12 @@ export class TDAQuote {
       this.divYield = divYield;
       this.divDate = divDate;
       this.lastPrice = lastPrice;
+      this.description = description;
+      this.totalVolume = totalVolume;
+      this.openPrice = openPrice;
+      this.highPrice = highPrice;
+      this.lowPrice = lowPrice;
+      this.closePrice = closePrice;
     }
 
 
