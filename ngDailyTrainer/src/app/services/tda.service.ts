@@ -36,8 +36,8 @@ export class TDAService {
     )
   }
 
-  getCandles10Day10Minute(symbol:string){
-    var url = this.tda + "/" + symbol + "/pricehistory?apikey=V6DTLTMJNGVWTXDOGACC59RLTM6NTQGH%40&periodType=day&period=10&frequencyType=minute&frequency=10";
+  getCandles10Day30Minute(symbol:string){
+    var url = this.tda + "/" + symbol + "/pricehistory?apikey=V6DTLTMJNGVWTXDOGACC59RLTM6NTQGH%40&periodType=day&period=10&frequencyType=minute&frequency=30";
     return this.http.get<Object>(url).pipe(
       catchError((err: any) => {
         console.log(err);

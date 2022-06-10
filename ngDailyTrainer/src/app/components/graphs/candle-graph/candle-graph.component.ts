@@ -1,5 +1,8 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { DatePipe, formatDate } from '@angular/common';
+
+import * as dayjs from 'dayjs'
 
 import {
   ChartComponent,
@@ -36,7 +39,13 @@ export class CandleGraphComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  constructor(private router:Router, private route: ActivatedRoute,
+    private tdaService:TDAserviceService, private tda:TDAService, private datePipe:DatePipe) {
+let symbol = this.route.snapshot.paramMap.get('symbol');
+if (symbol) {
+  this.getCandles(symbol);
+}
+}
   loadData(){
     this.chartOptions = {
       series: [
@@ -54,50 +63,23 @@ export class CandleGraphComponent implements OnInit {
         align: "left"
       },
       xaxis: {
-        type: "datetime"
+        type: 'category',
+        labels: {
+          formatter: function(val: any) {
+            return dayjs(val).format('MM DD HH:mm')
+          }
+        }
       },
       yaxis: {
-        tooltip: {
-          enabled: true
-        }
+        type: 'category',
       }
     };
   }
 
-  constructor(private router:Router, private route: ActivatedRoute,
-        private tdaService:TDAserviceService, private tda:TDAService) {
-    let symbol = this.route.snapshot.paramMap.get('symbol');
-    if (symbol) {
-      this.getCandles(symbol);
-    }
 
-
-  }
-
-  // getCandles(symbol:string){
-  //   this.tda.getCandles10Day10Minute(symbol).subscribe(
-  //     (data) => {
-  //         let info = Object.values(data)[0];
-  //          for(let i = 0; i < info.length; ++i){
-  //            let fields = Object.values(info[i]);
-  //            let cur  = {
-  //               x: new Date(info[i]["datetime"]),
-  //               y: [info[i]["open"], info[i]["high"], info[i]["low"], info[i]["close"]]
-  //             }
-  //             this.candles.push(cur);
-  //          }
-  //          console.log("Candles: " + this.candles.length);
-  //          this.loadData();
-  //          this.isLoaded = true;
-  //     },
-  //     (error) => {
-  //       console.error("Error in observable");
-  //     }
-  //   )
-  // }
 
   getCandles(symbol:string){
-    this.tda.getCandles10Day10Minute(symbol).subscribe(
+    this.tda.getCandles10Day30Minute(symbol).subscribe(
     //this.tdaService.getCandleBasic(symbol).subscribe(
       (data) => {
           let info = Object.values(data)[0];
@@ -109,7 +91,6 @@ export class CandleGraphComponent implements OnInit {
               }
               this.candles.push(cur);
            }
-           console.log("Candles: " + this.candles.length);
            this.loadData();
            this.isLoaded = true;
 

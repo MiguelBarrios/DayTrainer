@@ -13,7 +13,6 @@
                             
                             <img *ngIf="user.profilePicture" class="mx-auto rounded-circle" src="{{user.profilePicture}}" alt="..." />
                             <img *ngIf="!user.profilePicture" class="mx-auto rounded-circle" src="assets/img/profilePic.png" alt="..." />
-                            <br>
                             <h4>{{user.firstName +' '+ user.lastName}}</h4>
                             <p class="text-muted">Member Since: {{user.createdAt | date}} <br> Account Type: {{user.role | uppercase}}
                                 <br> Bio: {{user.biography}}
