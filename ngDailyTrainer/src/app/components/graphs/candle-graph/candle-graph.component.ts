@@ -1,5 +1,8 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { DatePipe, formatDate } from '@angular/common';
+
+import * as dayjs from 'dayjs'
 
 import {
   ChartComponent,
@@ -10,6 +13,7 @@ import {
   ApexTitleSubtitle
 } from "ng-apexcharts";
 import { TDAserviceService } from 'src/app/services/tdaservice.service';
+import { TDAService } from 'src/app/services/tda.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -35,13 +39,19 @@ export class CandleGraphComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  constructor(private router:Router, private route: ActivatedRoute,
+    private tdaService:TDAserviceService, private tda:TDAService, private datePipe:DatePipe) {
+let symbol = this.route.snapshot.paramMap.get('symbol');
+if (symbol) {
+  this.getCandles(symbol);
+}
+}
   loadData(){
     this.chartOptions = {
       series: [
         {
           name: "candle",
-          data: [...this.candles.slice(0,200)]
+          data: [...this.candles]
         }
       ],
       chart: {
@@ -53,29 +63,23 @@ export class CandleGraphComponent implements OnInit {
         align: "left"
       },
       xaxis: {
-        type: "datetime"
+        type: 'category',
+        labels: {
+          formatter: function(val: any) {
+            return dayjs(val).format('MMM DD HH:mm')
+          }
+        }
       },
       yaxis: {
-        tooltip: {
-          enabled: true
-        }
+        type: 'category',
       }
     };
   }
 
-  constructor(private router:Router, private route: ActivatedRoute,
-        private tdaService:TDAserviceService) {
-    let symbol = this.route.snapshot.paramMap.get('symbol');
-    if (symbol) {
-      this.getCandles(symbol);
-    }
-
-
-  }
 
 
   getCandles(symbol:string){
-    this.tdaService.getCandleBasic(symbol).subscribe(
+    this.tda.getCandles10Day(symbol).subscribe(
       (data) => {
           let info = Object.values(data)[0];
            for(let i = 0; i < info.length; ++i){
@@ -86,7 +90,6 @@ export class CandleGraphComponent implements OnInit {
               }
               this.candles.push(cur);
            }
-           console.log("Candles: " + this.candles.length);
            this.loadData();
            this.isLoaded = true;
 
