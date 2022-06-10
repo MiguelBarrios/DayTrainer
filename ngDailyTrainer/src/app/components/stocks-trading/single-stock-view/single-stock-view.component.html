@@ -8,7 +8,7 @@
         <!-- Top Movers
               <app-top-movers>Loading ...</app-top-movers> -->
         <div id="searchBoxHeader">
-          <h1 id="selectedStock">{{selected.symbol}}</h1>
+          <h1 id="selectedStock">{{quote?.symbol}}</h1>
           <div>
             <div id="searchBox">
               <input class="form-control" type="search" name="searchTerm" placeholder="Search" aria-label="Search"
@@ -98,7 +98,7 @@
   
             <div>
               <h5>Total Return</h5>
-              <h6>{{totalReturn}}</h6>
+              <h6>{{totalReturn | number:"1.2-2"}}</h6>
             </div>
             <div>
               <h5>Avg Cost</h5>

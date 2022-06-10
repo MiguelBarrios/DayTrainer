@@ -15,8 +15,6 @@ import { TDAService } from 'src/app/services/tda.service';
   styleUrls: ['./single-stock-view.component.css']
 })
 export class SingleStockViewComponent implements OnInit {
-stats: TDAQuote  | null = null;
-selected: Stock = new Stock();
 userPosition: StockPosition | null = null;
 numberOfShares = 0;
 marketValue = 0;
@@ -35,7 +33,6 @@ searchTerm = "";
       let symbol = this.route.snapshot.paramMap.get('symbol');
       if (symbol) {
         this.getQuote(symbol);
-        this.show(symbol);
       }
     }
 
@@ -49,37 +46,19 @@ searchTerm = "";
 
   }
 
-
-  show (symbol: string) {
-    this.stockSvc.search(symbol).subscribe(
-      data => {
-    let stock = new Stock();
-     stock.symbol = data['Global Quote']['01. symbol'];
-     stock.open = data['Global Quote']['02. open'];
-     stock.high = data['Global Quote']['03. high'];
-     stock.low = data['Global Quote']['04. low'];
-     stock.price = data['Global Quote']['05. price'];
-     stock.change = data['Global Quote']['09. change'];
-     stock.volume = data['Global Quote']['06. volume'];
-     stock.previousClose = data['Global Quote']['08. previous close'];
-      this.selected=stock;
-      this.getUserPositionInfo(symbol);
-
-
-        //console.log(this.selected);
-      },
-      err => {console.log(err)})
-
-  }
-
   getUserPositionInfo(ticker:string){
     this.tradesService.getStockPosition(ticker).subscribe(
       (data) => {
-        this.userPosition = data;
-        this.numberOfShares = data.numberOfShares;
-        this.marketValue = data.numberOfShares * this.selected.price;
-        this.avgCostPerShare = data.avgCostPerShare;
-        this.totalReturn = (this.avgCostPerShare * this.numberOfShares) - (this.selected.price * this.numberOfShares);
+        console.error(data);
+        console.log(this.quote);
+        if(this.quote){
+          this.userPosition = data;
+          this.numberOfShares = data.numberOfShares;
+          this.marketValue = data.numberOfShares * this.quote?.lastPrice;
+          this.avgCostPerShare = data.avgCostPerShare;
+          this.totalReturn = (this.avgCostPerShare * this.numberOfShares) - (this.quote.lastPrice * this.numberOfShares);
+        }
+
       },
       (error) => {
         console.log("getUserPositionInfo() Observable got and error " + error)
@@ -97,6 +76,7 @@ searchTerm = "";
           let high = keys.indexOf("52WkHigh");
           this.quote.WkHigh52 = data[high];
           this.quote.WkLow52 = data[low];
+          this.getUserPositionInfo(symbol);
       },
       (error) => {
         console.error("Error getting quote");
