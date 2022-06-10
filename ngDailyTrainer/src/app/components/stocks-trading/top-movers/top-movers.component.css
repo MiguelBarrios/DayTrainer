@@ -1,0 +1,31 @@
+#moversPageContainer{
+  display: flex;
+  flex-direction: row;
+}
+#topMoversContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#SRows:hover {
+    background-color: darkgray;
+}
+
+
+.table {
+    height: 200px;
+}
+
+
+th {
+  font-size: x-large;
+  font-weight: 400;
+}
+td {
+  font-size: x-large;
+  font-weight: 300;
+}
+td {
+  background-color: rgba(226, 226, 226, 0.128);
+}
+

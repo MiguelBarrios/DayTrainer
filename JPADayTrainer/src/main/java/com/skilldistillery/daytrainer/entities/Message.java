@@ -129,23 +129,10 @@ public class Message {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Message [id=");
-		builder.append(id);
-		builder.append(", content=");
-		builder.append(content);
-		builder.append(", read=");
-		builder.append(read);
-		builder.append(", sender=");
-		builder.append(sender);
-		builder.append(", recipient=");
-		builder.append(recipient);
-		builder.append(", replyToId=");
-		builder.append(replyToId);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append("]");
-		return builder.toString();
+		return "Message [id=" + id + ", content=" + content + ", read=" + read + ", sender=" + sender + ", recipient="
+				+ recipient + ", replyToId=" + replyToId + ", replies=" + replies + ", createdAt=" + createdAt + "]";
 	}
+
+	
 
 }

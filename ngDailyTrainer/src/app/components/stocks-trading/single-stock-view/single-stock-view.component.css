@@ -1,0 +1,62 @@
+#tradePageContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+#pageContent{
+    
+}
+
+#positionInfoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#userPositionInfo {
+    padding: 20px;
+}
+
+#stockStatsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(179, 178, 178, 0.174);
+}
+
+#stockQuoteInfo,
+#stockStats,
+#stockStats2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#stockStatsContainer {
+    padding: 20px;
+}
+
+
+#searchBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+#pageContent {
+    padding-bottom: 80px;
+}
+
+#SingleStockViewPageContainer {
+    padding-top: 50px;
+}
+
+#searchBoxHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

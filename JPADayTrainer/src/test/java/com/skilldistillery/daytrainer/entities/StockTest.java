@@ -48,14 +48,5 @@ class StockTest {
 		assertNotNull(stock);
 		assertEquals("ZYNE",stock.getSymbol());
 	}
-//	@Test
-//	@DisplayName("Stock to Trade One to many mapping")
-//	void test2() {
-//		
-//		assertNotNull(stock);
-//		assertEquals(1,stock.getTrade().getId());
-//	
-//	}
-
 
 } 

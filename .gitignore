@@ -8,3 +8,5 @@ bin
 .gradle
 *.war
 *.bak
+
+Config.java

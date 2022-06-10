@@ -1,0 +1,49 @@
+body {
+    /* display: inline; */
+    padding-left: 200px;
+
+}
+
+#leaderboardPageContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+
+#page-header {
+    padding-top: 40px;
+    padding-bottom: 15px;
+}
+
+#leaderboardOuter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#leaderboardContainer {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: x-large;
+    font-weight: 800;
+}
+
+.stockReturns {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#page-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

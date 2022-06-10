@@ -1,0 +1,12 @@
+
+#usersPageContainer{
+  display: flex;
+  flex-direction: row;
+}
+
+
+
+thead{
+  font-size: x-large;
+}
+

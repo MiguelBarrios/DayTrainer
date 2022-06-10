@@ -12,35 +12,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Stock {
 
-	
 	@Id
-	@Column(name = "symbol", nullable = false)	
+	@Column(name = "symbol", nullable = false)
 	private String symbol;
 
 	private String name;
 
-	@Column(name="exchange_name")
+	@Column(name = "exchange_name")
 	private String exchangeName;
-	
-//	@JsonIgnore
-//	@OneToOne(mappedBy="stock")
-//	private Trade trade;
 
-	
-	
-	
+
 	// methods
 	public Stock() {
 		super();
 	}
-
-//	public Trade getTrade() {
-//		return trade;
-//	}
-//
-//	public void setTrade(Trade trade) {
-//		this.trade = trade;
-//	}
 
 	public String getSymbol() {
 		return symbol;
@@ -85,15 +70,9 @@ public class Stock {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Stock [symbol=");
-		builder.append(symbol);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", exchangeName=");
-		builder.append(exchangeName);
-		builder.append("]");
-		return builder.toString();
+		return "Stock [symbol=" + symbol + ", name=" + name + ", exchangeName=" + exchangeName + "]";
 	}
+
+	
 
 }

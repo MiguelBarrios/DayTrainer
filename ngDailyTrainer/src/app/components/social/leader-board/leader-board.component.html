@@ -1,0 +1,39 @@
+
+  <div id="leaderboardPageContainer">
+    <app-logged-in-nav></app-logged-in-nav>
+    <div class="container-fluid">
+
+      <h1 id="page-header"> <i class="fa fa-trophy" aria-hidden="true"></i>Congratulations to the current leaders! <i
+        class="fa fa-trophy" aria-hidden="true"></i></h1>
+
+        <div id="leaderboardOuter">
+          <div id="leaderboardContainer">
+            <div class="card shadow" style="width: 50rem;" *ngFor="let item of rankings | leaderboard:5">
+              <div class="card-body">
+                <div>
+                  <img class="mx-auto rounded-circle" src="{{item.profilePicture}}" alt="..." width="100" height="100" />
+                </div>
+                <div>
+                  @{{item.username}}
+                  <div>
+                    {{item.firstname}} {{item.lastname}}
+                  </div>
+                </div>
+                <div class="stockReturns">
+                  <div>
+                    Shares: {{item.totalNumberOfShares}}
+                  </div>
+                  <div>
+                    Return: {{item.portfolioValue | number:"1.2-2"}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+  
+
+

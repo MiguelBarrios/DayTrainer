@@ -51,19 +51,16 @@ public class Trade {
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
 
-	
 	@Column(name = "strike_price")
 	private Double strikePrice;
-	
+
 	@ManyToOne
-    @JoinColumn(name="order_type_id")
+	@JoinColumn(name = "order_type_id")
 	private OrderType orderType;
 
-	// methods
 	public Trade() {
 		super();
 	}
-
 
 	public int getId() {
 		return id;
@@ -158,16 +155,13 @@ public class Trade {
 		this.strikePrice = strikePrice;
 	}
 
-
 	public OrderType getOrderType() {
 		return orderType;
 	}
 
-
 	public void setOrderType(OrderType orderType) {
 		this.orderType = orderType;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -183,32 +177,10 @@ public class Trade {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Trade [id=");
-		builder.append(id);
-		builder.append(", pricePerShare=");
-		builder.append(pricePerShare);
-		builder.append(", quantity=");
-		builder.append(quantity);
-		builder.append(", createdAt=");
-		builder.append(createdAt);
-		builder.append(", buy=");
-		builder.append(buy);
-		builder.append(", completionDate=");
-		builder.append(completionDate);
-//		builder.append(", user=");
-//		builder.append(user.getUsername());
-		builder.append(", stock=");
-		builder.append(stock.getSymbol());
-//		builder.append(", notes=");
-//		builder.append(notes);
-//		builder.append(", comments=");
-//		builder.append(comments);
-//	
-		builder.append(", strikePrice=");
-		builder.append(strikePrice);
-		builder.append("]");
-		return builder.toString();
+		return "Trade [id=" + id + ", pricePerShare=" + pricePerShare + ", quantity=" + quantity + ", createdAt="
+				+ createdAt + ", buy=" + buy + ", completionDate=" + completionDate + ", user=" + user.getUsername() + ", stock="
+				+ stock.getName() + ", notes=" + notes + ", strikePrice=" + strikePrice
+				+ ", orderType=" + orderType + "]";
 	}
 
 	

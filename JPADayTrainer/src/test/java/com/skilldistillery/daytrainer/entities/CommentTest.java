@@ -14,11 +14,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CommentTest {
-	
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Comment com;
-	
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -46,26 +45,26 @@ class CommentTest {
 	@DisplayName("Initial Testing")
 	void test1() {
 		assertNotNull(com);
-		assertEquals("Nice trade!",com.getContent());
-		
+		assertEquals("Nice trade!", com.getContent());
+
 	}
+
 	@Test
 	@DisplayName("User to Comments One to Many Mapping")
 	void test2() {
-		
+
 		User temp = em.find(User.class, 1);
 		assertNotNull(com);
-		assertEquals(com.getUser().getId(),temp.getId());
-		
+		assertEquals(com.getUser().getId(), temp.getId());
+
 	}
+
 	@Test
 	@DisplayName("Trade to Comments One to Many Mapping")
 	void test3() {
-		
-		
-		assertNotNull(com);
-		assertEquals(com.getUser().getId(),1);
-		
-	}
-} 
 
+		assertNotNull(com);
+		assertEquals(com.getUser().getId(), 1);
+
+	}
+}

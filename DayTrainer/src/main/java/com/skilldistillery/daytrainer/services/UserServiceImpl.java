@@ -27,13 +27,13 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private AccountRepository accRepo;
-	
+
 	@Autowired
 	private CommentRepository commRepo;
-	
-	@Autowired 
+
+	@Autowired
 	private TradeService tradeService;
-	
+
 	@Autowired
 	private TradeRepository tradeRepo;
 
@@ -53,11 +53,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User update(String name, User user) {
 		User managed = userRepo.findByUsername(name);
-		System.out.print("%%%%");
-		System.out.print(user);
-		if (managed != null) {	
+		if (managed != null) {
 			managed.setEnabled(user.isEnabled());
-			managed.setPassword(user.getPassword());
+			//TODO: ENCRYPT PASSWORD
+			//managed.setPassword(user.getPassword());
 			managed.setUsername(user.getUsername());
 			managed.setEmail(user.getEmail());
 			managed.setProfilePicture(user.getProfilePicture());
@@ -65,7 +64,7 @@ public class UserServiceImpl implements UserService {
 			userRepo.saveAndFlush(managed);
 			return managed;
 		}
-			return null;
+		return null;
 	}
 
 	@Override
@@ -73,7 +72,7 @@ public class UserServiceImpl implements UserService {
 		User currentUser = userRepo.findByUsername(name);
 		Optional<User> op = userRepo.findById(userId);
 		if (currentUser != null && currentUser.getRole().equals("admin") && op.get() != null) {
-			User userToDelete= op.get();
+			User userToDelete = op.get();
 			accRepo.deleteById(userToDelete.getAccount().getId());
 			userRepo.delete(userToDelete);
 		}
@@ -95,52 +94,51 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getAllUsers(String name) {
-		//add authentication
+		// add authentication
 		return userRepo.findAll();
 	}
 
 	@Override
 	public List<Comment> getAllCommentsByTradeId(String name, Integer tradeId) {
-		//add authentication
-		return null; }//commRepo.getCommentsByTradeId(tradeId) ;
+		// add authentication
+		return null;
+	}// commRepo.getCommentsByTradeId(tradeId) ;
 
 	public List<User> allUsers() {
 		List<User> enableCheck = userRepo.findAll();
 		for (User user : enableCheck) {
 			int index = 0;
-			if(!user.isEnabled()) {
+			if (!user.isEnabled()) {
 				enableCheck.remove(index);
 			}
 			index++;
 		}
 		return enableCheck;
 	}
-	
+
 	@Override
 	public Map<String, Object> leaderBoard() {
 		List<LeaderBoardRanking> rankings = new ArrayList<>();
 		List<User> users = userRepo.findAll();
 		List<String> stocks = tradeRepo.getCurrentlyHeldStocks();
-		System.out.println(stocks);
-		
-		for(User user : users) {
+
+		for (User user : users) {
 			List<StockPosition> pos = tradeService.getUserPositions(user.getUsername());
-			user.setPassword(null);			
+			user.setPassword(null);
 			double balance = user.getAccount().getBalance() - user.getAccount().getDeposit();
-			System.out.printf("%s balance: %f  deposits: %f leaderBalance: %f", user.getUsername(), user.getAccount().getBalance(), user.getAccount().getDeposit(), balance);
-			LeaderBoardRanking cur = new LeaderBoardRanking(user, balance,pos);
+//			System.out.printf("%s balance: %f  deposits: %f leaderBalance: %f", user.getUsername(), user.getAccount().getBalance(), user.getAccount().getDeposit(), balance);
+			LeaderBoardRanking cur = new LeaderBoardRanking(user, balance, pos);
 			rankings.add(cur);
 		}
-		
+
 		Map<String, Object> map = new HashMap<>();
 		map.put("data", rankings);
 		map.put("stocks", stocks);
-		
+
 		return map;
-		
+
 	}
-	
-	
+
 	@Override
 	public List<User> leadersList() {
 		List<User> temp = allUsers();
@@ -156,23 +154,23 @@ public class UserServiceImpl implements UserService {
 		List<User> topThree = new ArrayList<>();
 		for (int i = 0; i < temp.size(); i++) {
 			User current = temp.get(i);
-			if(first.getAccount().getBalance()< current.getAccount().getBalance()) {
-				third= second;
+			if (first.getAccount().getBalance() < current.getAccount().getBalance()) {
+				third = second;
 				second = first;
 				first = current;
-			} else if(second.getAccount().getBalance()<current.getAccount().getBalance()) {
+			} else if (second.getAccount().getBalance() < current.getAccount().getBalance()) {
 				third = second;
 				second = current;
-			} else if(third.getAccount().getBalance()< current.getAccount().getBalance()) {
+			} else if (third.getAccount().getBalance() < current.getAccount().getBalance()) {
 				third = current;
 			}
-			
+
 		}
 		topThree.add(first);
-		topThree.add(second);		
+		topThree.add(second);
 		topThree.add(third);
-		
-		return topThree; 
+
+		return topThree;
 
 	}
 
@@ -184,15 +182,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 
 	public Double getBalance(String username) {
-	User newUser = userRepo.findByUsername(username);
-	return newUser.getAccount().getBalance();
+		User newUser = userRepo.findByUsername(username);
+		return newUser.getAccount().getBalance();
 	}
 
 	public List<User> getFollowingList(int userId) {
 		Optional<User> u = userRepo.findById(userId);
 		System.out.println(u.get());
-		if(u.isPresent()) {
-			List<User> following = u.get().getFollowing();			
+		if (u.isPresent()) {
+			List<User> following = u.get().getFollowing();
 			return following;
 		}
 		return null;
@@ -200,4 +198,3 @@ public class UserServiceImpl implements UserService {
 	}
 
 }
-

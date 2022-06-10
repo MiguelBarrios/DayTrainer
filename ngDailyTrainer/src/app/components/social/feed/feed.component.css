@@ -1,0 +1,117 @@
+#feedPageContainerMain{
+  display: flex;
+  flex-direction: row;
+}
+
+#nav-items li a,#profile{
+  text-decoration: none;
+  color: rgb(224, 219, 219);
+  background-color: black;
+}
+
+.card{
+  width: 600px;
+}
+.comments{
+  margin-top: 5%;
+  margin-left: 20px;
+}
+
+.comment{
+  border: 1px solid rgba(16, 46, 46, 1);
+  background-color: rgba(16, 46, 46, 0.973);
+  float: left;
+  border-radius: 5px;
+  padding-left: 40px;
+  padding-right: 30px;
+  padding-top: 10px;
+
+}
+.comment h4,.comment span,.darker h4,.darker span{
+  display: inline;
+}
+
+.comment p,.comment span,.darker p,.darker span{
+  color: rgb(184, 183, 183);
+}
+
+h1,h4{
+  /* color: white; */
+  font-weight: bold;
+}
+label{
+  color: rgb(212, 208, 208);
+}
+
+#align-form{
+  margin-top: 20px;
+}
+.form-group p a{
+  color: white;
+}
+
+#checkbx{
+  background-color: black;
+}
+
+#darker img{
+  margin-right: 15px;
+  position: static;
+}
+
+.form-group input,.form-group textarea{
+  background-color: black;
+  border: 1px solid rgba(16, 46, 46, 1);
+  border-radius: 12px;
+}
+
+form{
+  border: 1px solid rgba(16, 46, 46, 1);
+  background-color: rgba(16, 46, 46, 0.973);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.user-img{
+
+  margin-top: 4px;
+}
+
+.check-icon{
+
+  font-size: 17px;
+  color: #c3bfbf;
+  top: 1px;
+  position: relative;
+  margin-left: 3px;
+}
+
+.form-check-input{
+  margin-top: 6px;
+  margin-left: -24px !important;
+  cursor: pointer;
+}
+
+.icons i{
+
+  margin-left: 8px;
+}
+.reply{
+
+  margin-left: 12px;
+}
+
+.reply small{
+
+  color: #b7b4b4;
+
+}
+
+.reply small:hover{
+  color: green;
+  cursor: pointer;
+}
+
+#comment{
+margin-bottom: 10px;
+}

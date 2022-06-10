@@ -3,18 +3,18 @@ package com.skilldistillery.daytrainer.entities;
 import java.util.List;
 
 public class LeaderBoardRanking {
-	
+
 	private User user;
-	
+
 	private double accountBalance;
-	
+
 	private List<StockPosition> positions;
-	
+
 	public LeaderBoardRanking() {
-		
+
 	}
 
-	public LeaderBoardRanking(User user,double accountBalance, List<StockPosition> positions) {
+	public LeaderBoardRanking(User user, double accountBalance, List<StockPosition> positions) {
 		super();
 		this.user = user;
 		this.positions = positions;
@@ -36,8 +36,7 @@ public class LeaderBoardRanking {
 	public void setPositions(List<StockPosition> positions) {
 		this.positions = positions;
 	}
-	
-	
+
 	public double getAccountBalance() {
 		return accountBalance;
 	}
@@ -51,7 +50,5 @@ public class LeaderBoardRanking {
 		return "LeaderBoardRanking [user=" + user + ", accountBalance=" + accountBalance + ", positions=" + positions
 				+ "]";
 	}
-	
-	
 
 }

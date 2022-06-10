@@ -14,11 +14,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class MessageTest {
-	
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Message mess;
-	
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -46,13 +45,10 @@ class MessageTest {
 	@DisplayName("Initial Testing")
 	void test1() {
 		assertNotNull(mess);
-		assertEquals("Hey i saw that you needed some money",mess.getContent());
-		assertEquals(1,mess.getSender().getId());
-		assertEquals(1,mess.getRecipient().getId());
-		
-		
+		assertEquals("Hey i saw that you needed some money", mess.getContent());
+		assertEquals(1, mess.getSender().getId());
+		assertEquals(1, mess.getRecipient().getId());
+
 	}
 
-} 
-
- 
+}

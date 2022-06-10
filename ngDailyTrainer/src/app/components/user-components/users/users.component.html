@@ -1,0 +1,43 @@
+
+  <div id="usersPageContainer">
+    <app-logged-in-nav></app-logged-in-nav>
+    <div>
+      <div class="container-fluid" id="users">
+        <h1>Users</h1>
+        <div class="tradeHistory">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Username</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Date Joined</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <th scope="row">{{user.username}}</th>
+                <td>{{user.firstName }}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.createdAt | date}}</td>
+                <td>
+                  <button type="button" class="btn btn-outline-warning" (click)="setSelectedUser(user)">Update</button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-outline-danger" (click)="deleteUser(user)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="selectedUser">
+          <app-user-update-form [user]="selectedUser"></app-user-update-form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+
+
+

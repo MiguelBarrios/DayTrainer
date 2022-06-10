@@ -15,43 +15,17 @@ public class OrderType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String name;
-	
+
 	private String description;
-	
-//	@OneToMany
-//	@JoinColumn(name = "order_type_id")
-//	private List<Trade> trade;
-//	
-	
+
+
 	public OrderType() {
 		super();
-		
-	}
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("OrderType [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append("]");
-		return builder.toString();
-	}
-	
 
+	}
 
-//	public List<Trade> getTrade() {
-//		return trade;
-//	}
-//
-//	public void setTrade(List<Trade> trade) {
-//		this.trade = trade;
-//	}
 
 	public int getId() {
 		return id;
@@ -76,12 +50,12 @@ public class OrderType {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(description, id, name);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -93,4 +67,12 @@ public class OrderType {
 		OrderType other = (OrderType) obj;
 		return Objects.equals(description, other.description) && id == other.id && Objects.equals(name, other.name);
 	}
+
+
+	@Override
+	public String toString() {
+		return "OrderType [id=" + id + ", name=" + name + ", description=" + description + "]";
+	}
+	
+	
 }

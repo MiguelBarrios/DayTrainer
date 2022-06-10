@@ -1,19 +1,19 @@
-import { FreindDetailViewComponent } from './components/freind-detail-view/freind-detail-view.component';
-import { UsersComponent } from './components/users/users.component';
-import { MarketComponent } from './components/market/market.component';
-import { TradeComponent } from './trade/trade.component';
-import { SettingsComponent } from './components/settings/settings.component';
-import { FriendsComponent } from './components/friends/friends.component';
-import { FeedComponent } from './components/feed/feed.component';
-import { AccountHomeComponent } from './components/account-home/account-home.component';
-import { LeaderBoardComponent } from './components/leader-board/leader-board.component';
-import { SingleStockViewComponent } from './components/single-stock-view/single-stock-view.component';
-import { TopMoversComponent } from './components/top-movers/top-movers.component';
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from './homepage/homepage.component';
-import { NotfoundComponent } from './components/notfound/notfound.component';
-import { TradesComponent } from './components/trades/trades.component';
+import { AccountHomeComponent } from './components/page-components/account-home/account-home.component';
+import { HomepageComponent } from './components/page-components/homepage/homepage.component';
+import { NotfoundComponent } from './components/page-components/notfound/notfound.component';
+import { SettingsComponent } from './components/page-components/settings/settings.component';
+import { FeedComponent } from './components/social/feed/feed.component';
+import { FreindDetailViewComponent } from './components/social/freind-detail-view/freind-detail-view.component';
+import { FriendsComponent } from './components/social/friends/friends.component';
+import { LeaderBoardComponent } from './components/social/leader-board/leader-board.component';
+import { SingleStockViewComponent } from './components/stocks-trading/single-stock-view/single-stock-view.component';
+import { TopMoversComponent } from './components/stocks-trading/top-movers/top-movers.component';
+import { TradesComponent } from './components/stocks-trading/trades/trades.component';
+import { UsersComponent } from './components/user-components/users/users.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomepageComponent},
@@ -26,7 +26,6 @@ const routes: Routes = [
   { path: 'accounthome', component: AccountHomeComponent},
   {path:  'feed', component: FeedComponent},
   {path:  'friends', component: FriendsComponent},
-  {path:  'market', component: MarketComponent},
   {path:  'settings', component: SettingsComponent},
   {path:  'users', component: UsersComponent},
   {path:  'trades', component: TradesComponent},

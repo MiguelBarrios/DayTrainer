@@ -1,0 +1,58 @@
+
+
+  <!--Main Navigation-->
+
+    <app-logged-in-nav></app-logged-in-nav>
+
+  <!--Main layout-->
+  <main style="margin-top: 58px;">
+    <div id="accountHomeContainerUpper">
+      <div id="accountHomeContainerUpperRight">
+        <div class="col">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{{user.profilePicture}}" alt="..." />
+            <h4>{{user.firstName +' '+ user.lastName}}</h4>
+            <p class="text-muted">Member Since: {{user.createdAt | date}} <br> Account Type: {{user.role | uppercase}}
+              <br> Bio: {{user.biography}}
+            </p>
+          </div>
+        </div>
+        <div class="rounded" id="accountValue">
+          <h1>Total Account Balance: {{this.userBalance | currency}}</h1>
+        </div>
+      </div>
+
+    </div>
+    <div class="container pt-4" id="mainDash">
+
+      <div class="tradeHistory">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Symbol</th>
+              <th scope="col">Type</th>
+              <th scope="col">Action</th>
+              <th scope="col">Time</th>
+              <th scope="col">Price Per Share</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr *ngFor="let trade of trades">
+
+              <th scope="row">{{trade.stock.symbol}}</th>
+              <td>{{trade.orderType.name }}</td>
+              <td *ngIf=" trade.buy === true" style="background-color: #61caf4e6;">Buy</td>
+              <td *ngIf=" trade.buy === false" style="background-color: #56ae69f2;">Sell</td>
+              <td>{{trade.createdAt | date}}</td>
+              <td>{{trade.pricePerShare | currency}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+
