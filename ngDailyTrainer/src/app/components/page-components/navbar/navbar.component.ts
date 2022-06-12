@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router, private modalService: NgbModal, private authService:AuthService,private auth:AuthService) { }
 
   ngOnInit(): void {
+    this.loggedin = this.loggedIn();
   }
 
   click() {
@@ -94,6 +95,5 @@ export class NavbarComponent implements OnInit {
   logout(){
     this.auth.logout();
     this.loggedin = false;
-
 }
 }
