@@ -24,7 +24,6 @@ import { CandleGraphComponent } from './components/graphs/candle-graph/candle-gr
 import { AccountHomeComponent } from './components/page-components/account-home/account-home.component';
 import { HomepageComponent } from './components/page-components/homepage/homepage.component';
 import { LoggedInNavComponent } from './components/page-components/logged-in-nav/logged-in-nav.component';
-import { LogoutComponent } from './components/page-components/logout/logout.component';
 import { NavbarComponent } from './components/page-components/navbar/navbar.component';
 import { NotfoundComponent } from './components/page-components/notfound/notfound.component';
 import { SettingsComponent } from './components/page-components/settings/settings.component';
@@ -43,6 +42,7 @@ import { TopMoversComponent } from './components/stocks-trading/top-movers/top-m
 import {MatTabsModule} from '@angular/material/tabs';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +56,6 @@ import {MatTabsModule} from '@angular/material/tabs';
     NavbarComponent,
     FooterComponent,
     TradeComponent,
-    LogoutComponent,
     NotfoundComponent,
     UserUpdateFormComponent,
     FeedComponent,
@@ -71,7 +70,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MoversPipe,
     LoggedInNavComponent,
     LeaderboardPipe,
-    FreindDetailViewComponent
+    FreindDetailViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +85,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCardModule,
     MatGridListModule,
     NgApexchartsModule,
-    MatTabsModule
+    MatTabsModule,
 
   ],
   providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe],

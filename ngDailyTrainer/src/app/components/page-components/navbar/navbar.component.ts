@@ -11,6 +11,8 @@ import { User } from 'src/app/models/user';
 })
 export class NavbarComponent implements OnInit {
 
+  loggedin:boolean = false;
+
   loginUser: User = new User();
 
   newUser: User = new User();
@@ -20,6 +22,7 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router, private modalService: NgbModal, private authService:AuthService,private auth:AuthService) { }
 
   ngOnInit(): void {
+    this.loggedin = this.loggedIn();
   }
 
   click() {
@@ -46,23 +49,23 @@ export class NavbarComponent implements OnInit {
   }
 
   login(user:User){
-    console.log("Login user");
-    console.log(user);
     this.authService.login(user.username, user.password).subscribe(
       {
           next: (loggedinUser) => {
             this.router.navigateByUrl('/accounthome');
             this.loginUser = new User();
+            this.loggedin = true;
           },
           error: () => {
-            console.error('loginComponent.login(): login failed');
+            console.error('loginFailed');
           }
       }
     )
   }
 
   loggedIn():boolean{
-    return this.auth.checkLogin();
+    this.loggedin = this.auth.checkLogin();
+    return this.loggedin;
   }
 
   register(user: User): void {
@@ -74,6 +77,7 @@ export class NavbarComponent implements OnInit {
           next: (loggedInUser) => {
             this.router.navigateByUrl('/accounthome');
             this.newUser = new User();
+            this.loggedin = true;
           },
           error: (problem) => {
             console.error('RegisterComponent.register(): Error logging in user:');
@@ -87,4 +91,9 @@ export class NavbarComponent implements OnInit {
       }
     });
   }
+
+  logout(){
+    this.auth.logout();
+    this.loggedin = false;
+}
 }

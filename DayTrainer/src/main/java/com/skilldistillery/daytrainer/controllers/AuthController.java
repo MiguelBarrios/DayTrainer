@@ -24,7 +24,6 @@ public class AuthController {
 	
 	@PostMapping(path = "/register")
 	public User register(@RequestBody User user, HttpServletResponse res) {
-		System.err.println(user);
 	    if (user == null) {
 	        res.setStatus(400);
 	    }
@@ -34,7 +33,6 @@ public class AuthController {
 
 	@GetMapping(path = "/authenticate")
 	public User authenticate(Principal principal) {
-		System.out.println("In Auth Spring controller");
 	    return authService.getUserByUsername(principal.getName());
 	}
 

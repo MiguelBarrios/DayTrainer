@@ -3,7 +3,7 @@
     <!--Main Navigation-->
     <div id="accountHomeContainerMain">
         <div>
-            <app-logged-in-nav></app-logged-in-nav>
+            <!-- <app-logged-in-nav></app-logged-in-nav> -->
         </div>
         <div id="accountHomeContainerContent" class="container-fluid">
             <div id="accountHomeContainerUpper">
@@ -11,8 +11,8 @@
                     <div class="col">
                         <div class="team-member">
                             
-                            <img *ngIf="user.profilePicture" class="mx-auto rounded-circle" src="{{user.profilePicture}}" alt="..." />
-                            <img *ngIf="!user.profilePicture" class="mx-auto rounded-circle" src="assets/img/profilePic.png" alt="..." />
+                            <img *ngIf="user.profilePicture" class="mx-auto rounded-circle" src="{{user.profilePicture}}" alt="assets/img/profilePic.png" />
+                            <img *ngIf="!user.profilePicture" class="mx-auto rounded-circle" src="assets/img/profilePic.png" alt="assets/img/profilePic.png"/>
                             <h4>{{user.firstName +' '+ user.lastName}}</h4>
                             <p class="text-muted">Member Since: {{user.createdAt | date}} <br> Account Type: {{user.role | uppercase}}
                                 <br> Bio: {{user.biography}}

@@ -95,14 +95,18 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-                            "src/styles.css"
+   
                         ],
-                        "scripts": []
+                        "scripts": [
+
+                        ]
                     }
                 }
             }
         }
     },
-    "defaultProject": "ngDailyTrainer"
+    "defaultProject": "ngDailyTrainer",
+    "cli": {
+      "analytics": "83e61a1c-19de-4270-a66b-cb4de95e7e82"
+    }
 }

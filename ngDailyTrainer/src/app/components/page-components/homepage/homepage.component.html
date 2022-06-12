@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+
 <div id="wrapper">
 
 
@@ -9,7 +9,7 @@
                 <div class="masthead-subheading">Welcome To Daily Trainer</div>
                 <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
 
-                <a *ngIf="!loggedIn()" class="btn btn-primary btn-xl text-uppercase" (click)="open(loginModal)">Sign In</a>
+                <a *ngIf="!loggedin" class="btn btn-primary btn-xl text-uppercase" (click)="open(loginModal)">Sign In</a>
             </div>
         </header>
 
@@ -47,10 +47,11 @@
 
                 <div class="row text-center">
                     <div class="col-md-4">
+                        
+
                         <span class="fa-stack fa-4x">
-              <i class="fa fa-circle fa-stack-2x text-warning"></i>
-              <i class="fa fa-line-chart fa-stack-1x fa-inverse"></i>
-            </span>
+                            <i class="fa fa-line-chart" style="color:rgb(254,182,53)"></i>
+                        </span>
                         <h4 class="my-3">Learn to Trade</h4>
                         <p class="text-muted">Take charge of your financial future and get hands on experience placing real buy and sell orders without risking your hard earned capital. Daily trainer offers you the opportunity to learn to swim before jumping into the deep
                             end.
@@ -58,25 +59,22 @@
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
-              <i class="fa fa-circle fa-stack-2x text-warning"></i>
-              <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-            </span>
+                            <i class="fa fa-shopping-cart fa-stack-1x" style="color:rgb(254,182,53)"></i>
+                        </span>
                         <h4 class="my-3">Real Time Market Data</h4>
                         <p class="text-muted">From market buys to limit orders, you'll have the real time data at your fingertips
                         </p>
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
-              <i class="fa fa-circle fa-stack-2x text-warning"></i>
-              <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+              <i class="fa fa-laptop fa-stack-1x" style="color:rgb(254,182,53)"></i>
             </span>
                         <h4 class="my-3">Responsive Design</h4>
                         <p class="text-muted">No more getting lost in the data. With our streamlined design, you get the data you need to make the best trades.</p>
                     </div>
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
-              <i class="fa fa-circle fa-stack-2x text-warning"></i>
-              <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+              <i class="fa fa-lock fa-stack-1x" style="color:rgb(254,182,53)"></i>
             </span>
                         <h4 class="my-3">Easy And Secure</h4>
                         <p class="text-muted">We're all about categorizing your financial data into meaningful and easily comprehensible charts and tables. We won't leave you guessing. </p>
@@ -168,39 +166,39 @@
                 <div class="row">
                     <div class="col">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="https://media-exp1.licdn.com/dms/image/C4E03AQEPOkX_vnzFbw/profile-displayphoto-shrink_400_400/0/1650393738190?e=1659571200&v=beta&t=cbUAuI_GC09VSKQg3nJSyQ32I5J2WjeFNxiSR3KQFmc" alt="..." />
+                            <img class="mx-auto rounded-circle" src="https://media-exp1.licdn.com/dms/image/C4E03AQEPOkX_vnzFbw/profile-displayphoto-shrink_400_400/0/1650393738190?e=1659571200&v=beta&t=cbUAuI_GC09VSKQg3nJSyQ32I5J2WjeFNxiSR3KQFmc" onerror="this.src='assets/img/profilePic.png';" />
                             <h4>Cecelia Guerrero</h4>
                             <p class="text-muted">Lead Designer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Cagugu" aria-label="Cecelia Guerrero Facebook Profile"><i class="fa fa-github"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/cecelia-guerrero/" aria-label="Cecelia Guerrero LinkedIn Profile"><i class="fa fa-linkedin"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Cagugu" aria-label="Cecelia Guerrero Facebook Profile"><i class="fa-brands fa-github"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/cecelia-guerrero/" aria-label="Cecelia Guerrero LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
                         </div>
                     </div>
                     <div class="col">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="https://media-exp1.licdn.com/dms/image/C4E03AQHKoj0zTFzXZw/profile-displayphoto-shrink_400_400/0/1588560066428?e=1659571200&v=beta&t=iiukQlOIhrwmuXLEa2zTnyYlf8sKeztWZoL_917kYnk" alt="..." />
+                            <img class="mx-auto rounded-circle" src="https://media-exp1.licdn.com/dms/image/C4E03AQHKoj0zTFzXZw/profile-displayphoto-shrink_400_400/0/1588560066428?e=1659571200&v=beta&t=iiukQlOIhrwmuXLEa2zTnyYlf8sKeztWZoL_917kYnk" onerror="this.src='assets/img/profilePic.png';" />
                             <h4>Anthony Butler</h4>
                             <p class="text-muted">Lead Marketer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/anthonyb0824" aria-label="Anthony Butler Facebook Profile"><i class="fa fa-github "></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/anthony-tyler-butler/" aria-label="Anthony Butler LinkedIn Profile"><i class="fa fa-linkedin"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/anthonyb0824" aria-label="Anthony Butler Facebook Profile"><i class="fa-brands fa-github"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/anthony-tyler-butler/" aria-label="Anthony Butler LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
                         </div>
                     </div>
                     <div class="col">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="https://media-exp1.licdn.com/dms/image/C4E03AQGA4z2-66nOBw/profile-displayphoto-shrink_800_800/0/1622854156811?e=1659571200&v=beta&t=6arDmiREZj2FoGHp93jKb7PjtyS-zbJ3_2KszacY0KI" alt="..." />
+                            <img class="mx-auto rounded-circle" src="https://media-exp1.licdn.com/dms/image/C4E03AQGA4z2-66nOBw/profile-displayphoto-shrink_800_800/0/1622854156811?e=1659571200&v=beta&t=6arDmiREZj2FoGHp93jKb7PjtyS-zbJ3_2KszacY0KI" onerror="this.src='assets/img/profilePic.png';" />
                             <h4>Miguel Barrios</h4>
                             <p class="text-muted">Lead Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/MiguelBarrios" aria-label="Miguel Barrios Facebook Profile"><i class="fa fa-github "></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/MiguelBarrios" aria-label="Miguel Barrios Facebook Profile"><i class="fa-brands fa-github"></i></a>
                             <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/miguelbarriosdavila/" aria-label="Miguel Barrios LinkedIn Profile"><i
-                  class="fa fa-linkedin"></i></a>
+                  class="fa-brands fa-linkedin"></i></a>
                         </div>
                     </div>
                     <div class="col">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="https://media-exp1.licdn.com/dms/image/C4E03AQFw6DPkulkb0Q/profile-displayphoto-shrink_400_400/0/1654030899736?e=1659571200&v=beta&t=tzw364ZfT36bKS4lGpyfc7CchwStvtycVqLv7BSuLpA" alt="..." />
+                            <img class="mx-auto rounded-circle" src="https://media-exp1.licdn.com/dms/image/C4E03AQFw6DPkulkb0Q/profile-displayphoto-shrink_400_400/0/1654030899736?e=1659571200&v=beta&t=tzw364ZfT36bKS4lGpyfc7CchwStvtycVqLv7BSuLpA" onerror="this.src='assets/img/profilePic.png';" />
                             <h4>Daniel Kregstein</h4>
                             <p class="text-muted">Lead Developer</p>
-                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Akregstein" aria-label="Daniel Kregstein Facebook Profile"><i class="fa fa-github "></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/daniel-kregstein-364883240/" aria-label="Daniel Kregstein LinkedIn Profile"><i class="fa fa-linkedin"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Akregstein" aria-label="Daniel Kregstein Facebook Profile"><i class="fa-brands fa-github"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/daniel-kregstein-364883240/" aria-label="Daniel Kregstein LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
                         </div>
                     </div>
                 </div>
