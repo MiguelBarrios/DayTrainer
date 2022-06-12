@@ -11,9 +11,8 @@
       <div ngbDropdown class="d-inline-block" display="dynamic">
         <button class="btn btn-outline-primary navbar-toggler" type="button" id="dropdownMenuButton" ngbDropdownToggle><i class="fa fa-bars"></i></button>
         <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
-          <button ngbDropdownItem>Action</button>
-          <button ngbDropdownItem>Another Action</button>
-          <button ngbDropdownItem>Something else here</button>
+          <button ngbDropdownItem (click)="open(loginModal)">Login</button>
+          <button ngbDropdownItem (click)="open(registerModal)">Sign Up</button>
         </div>
       </div>
       <!-- Collapsible wrapper -->
@@ -41,7 +40,7 @@
           <button *ngIf="!loggedIn()" type="button" class="btn btn-warning px-3 me-2" (click)="open(loginModal)"> Login </button>
           <button *ngIf="!loggedIn()" type="button" class="btn btn-warning me-3" (click)="open(registerModal)"> Sign up </button>
           <div *ngIf="loggedIn()">
-            <app-logout></app-logout>
+            <button type="button" class="btn btn-warning me-3" (click)="logout()">Logout</button>
           </div>
         </div>
       </div>
