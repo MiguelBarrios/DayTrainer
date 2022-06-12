@@ -41,6 +41,8 @@ import { FooterComponent } from './components/page-components/footer/footer.comp
 import { LeaderBoardComponent } from './components/social/leader-board/leader-board.component';
 import { TopMoversComponent } from './components/stocks-trading/top-movers/top-movers.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { NavigationbarComponent } from './components/page-components/navigationbar/navigationbar.component';
+
 
 
 @NgModule({
@@ -71,7 +73,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MoversPipe,
     LoggedInNavComponent,
     LeaderboardPipe,
-    FreindDetailViewComponent
+    FreindDetailViewComponent,
+    NavigationbarComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCardModule,
     MatGridListModule,
     NgApexchartsModule,
-    MatTabsModule
+    MatTabsModule,
 
   ],
   providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe],

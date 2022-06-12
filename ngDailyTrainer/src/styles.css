@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~bootstrap/dist/css/bootstrap.css";
+
 .trendingUp {
     color: rgb(35, 213, 180);
 }
