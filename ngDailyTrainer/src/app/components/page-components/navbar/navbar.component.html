@@ -1,117 +1,98 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
     <!-- Container wrapper -->
     <div class="container">
-        <!-- Navbar brand -->
-        <a class="navbar-brand me-2" href="#" [routerLink]="['/home']">
-            <img src="assets/img/logos/dailytrainer.svg" height="18" alt="MDB Logo" loading="lazy" style="margin-top: -1px;" />
-        </a>
-
-        <!-- Toggle button -->
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fa fa-bars"></i>
-  </button>
-
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarButtonsExample">
-            <!-- Left links -->
-            <ul *ngIf="loggedIn()" class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/home']">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/topMovers']" tabindex="-1" aria-disabled="true">Top Movers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leader Board</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
-                </li>
-            </ul>
-            <!-- Left links -->
-
-            <div class="d-flex align-items-center ms-auto">
-                <button *ngIf="!loggedIn()" type="button" class="btn btn-warning px-3 me-2" (click)="open(loginModal)">
-        Login
-      </button>
-                <button *ngIf="!loggedIn()" type="button" class="btn btn-warning me-3" (click)="open(registerModal)">
-        Sign up
-      </button>
-                <div *ngIf="loggedIn()">
-                    <app-logout></app-logout>
-                </div>
-            </div>
+      <!-- Navbar brand -->
+      <a class="navbar-brand me-2" href="#" [routerLink]="['/home']">
+        <img src="assets/img/logos/dailytrainer.svg" height="18" alt="MDB Logo" loading="lazy" style="margin-top: -1px;" />
+      </a>
+      <!-- Toggle button -->
+      <!-- <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button> -->
+      <div ngbDropdown class="d-inline-block" display="dynamic">
+        <button class="btn btn-outline-primary navbar-toggler" type="button" id="dropdownMenuButton" ngbDropdownToggle><i class="fa fa-bars"></i></button>
+        <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+          <button ngbDropdownItem>Action</button>
+          <button ngbDropdownItem>Another Action</button>
+          <button ngbDropdownItem>Something else here</button>
         </div>
-        <!-- Collapsible wrapper -->
+      </div>
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarButtonsExample">
+        <!-- Left links -->
+        <ul *ngIf="loggedIn()" class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/home']">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/topMovers']" tabindex="-1" aria-disabled="true">Top Movers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leader Board</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+        <div class="d-flex align-items-center ms-auto">
+          <button *ngIf="!loggedIn()" type="button" class="btn btn-warning px-3 me-2" (click)="open(loginModal)"> Login </button>
+          <button *ngIf="!loggedIn()" type="button" class="btn btn-warning me-3" (click)="open(registerModal)"> Sign up </button>
+          <div *ngIf="loggedIn()">
+            <app-logout></app-logout>
+          </div>
+        </div>
+      </div>
+      <!-- Collapsible wrapper -->
     </div>
     <!-- Container wrapper -->
-</nav>
-<!-- Navbar -->
-
-<!---- Dropo Down -->
-<div ngbDropdown class="dropdown">
-    <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1" aria-expanded="false">
-  </button>
-    <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
-      <li><a ngbDropdownItem href="#">Action</a></li>
-      <li><a ngbDropdownItem href="#">Another action</a></li>
-      <li><a ngbDropdownItem href="#">Something else here</a></li>
-    </ul>
-  </div>
-
-
-
-
-<!-- Login Modal -->
-<ng-template #loginModal let-modal>
+  </nav>
+  <!-- Login Modal -->
+  <ng-template #loginModal let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Login</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      <h4 class="modal-title" id="modal-basic-title">Login</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form name="updateEvent">
-            <h1>Login</h1>
-            <div class="mb-3">
-                <label>Username</label>
-                <input class="form-control" name="username" type="text" [(ngModel)]="loginUser.username">
-                <label>Password</label>
-                <input class="form-control" name="password" type="text" [(ngModel)]="loginUser.password">
-            </div>
-        </form>
+      <form name="updateEvent">
+        <h1>Login</h1>
+        <div class="mb-3">
+          <label>Username</label>
+          <input class="form-control" name="username" type="text" [(ngModel)]="loginUser.username">
+          <label>Password</label>
+          <input class="form-control" name="password" type="text" [(ngModel)]="loginUser.password">
+        </div>
+      </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-outline-success" (click)="login(loginUser); modal.dismiss()">Login</button>
+      <button class="btn btn-outline-success" (click)="login(loginUser); modal.dismiss()">Login</button>
     </div>
-</ng-template>
-
-<!-- Register Modal -->
-<ng-template #registerModal let-modal>
+  </ng-template>
+  <!-- Register Modal -->
+  <ng-template #registerModal let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Register</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      <h4 class="modal-title" id="modal-basic-title">Register</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <label>First Name</label>
-        <input class="form-control" name="firstname" type="text" [(ngModel)]="newUser.firstName">
-        <label>Last Name</label>
-        <input class="form-control" name="lastname" type="text" [(ngModel)]="newUser.lastName">
-        <label>Username</label>
-        <input class="form-control" name="username" type="text" [(ngModel)]="newUser.username">
-        <label>Email</label>
-        <input class="form-control" name="email" type="text" [(ngModel)]="newUser.email">
-        <label>Profile Picture</label>
-        <input class="form-control" name="profilePic" type="text" [(ngModel)]="newUser.profilePicture">
-        <label>Bio</label>
-        <input class="form-control" name="bib" type="text" [(ngModel)]="newUser.biography">
-        <label>Password</label>
-        <input class="form-control" name="password" type="text" [(ngModel)]="newUser.password">
+      <label>First Name</label>
+      <input class="form-control" name="firstname" type="text" [(ngModel)]="newUser.firstName">
+      <label>Last Name</label>
+      <input class="form-control" name="lastname" type="text" [(ngModel)]="newUser.lastName">
+      <label>Username</label>
+      <input class="form-control" name="username" type="text" [(ngModel)]="newUser.username">
+      <label>Email</label>
+      <input class="form-control" name="email" type="text" [(ngModel)]="newUser.email">
+      <label>Profile Picture</label>
+      <input class="form-control" name="profilePic" type="text" [(ngModel)]="newUser.profilePicture">
+      <label>Bio</label>
+      <input class="form-control" name="bib" type="text" [(ngModel)]="newUser.biography">
+      <label>Password</label>
+      <input class="form-control" name="password" type="text" [(ngModel)]="newUser.password">
     </div>
     <div class="modal-footer">
-        <button class="btn btn-outline-success" (click)="register(newUser); modal.dismiss()">Register</button>
+      <button class="btn btn-outline-success" (click)="register(newUser); modal.dismiss()">Register</button>
     </div>
-</ng-template>
+  </ng-template>
