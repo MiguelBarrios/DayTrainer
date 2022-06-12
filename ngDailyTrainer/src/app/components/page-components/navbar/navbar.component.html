@@ -56,17 +56,17 @@
     </div>
     <div class="modal-body">
       <form name="updateEvent">
-        <h1>Login</h1>
         <div class="mb-3">
           <label>Username</label>
           <input class="form-control" name="username" type="text" [(ngModel)]="loginUser.username">
           <label>Password</label>
           <input class="form-control" name="password" type="text" [(ngModel)]="loginUser.password">
         </div>
+        <label *ngIf="loginError" class="text-danger">Invalid login</label>
       </form>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-outline-success" (click)="login(loginUser); modal.dismiss()">Login</button>
+      <button class="btn btn-outline-success" (click)="login(loginUser)">Login</button>
     </div>
   </ng-template>
   <!-- Register Modal -->

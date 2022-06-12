@@ -72,6 +72,11 @@ if (symbol) {
       },
       yaxis: {
         type: 'category',
+      },
+      noData: {
+        text: "No data text",
+        align: "center",
+        verticalAlign: "middle",
       }
     };
   }

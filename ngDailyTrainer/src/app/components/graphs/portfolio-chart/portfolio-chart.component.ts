@@ -13,7 +13,6 @@ import { Trade } from 'src/app/models/trade';
 })
 export class PortfolioChartComponent implements OnInit {
   ngOnInit(): void {
-    console.log("*****");
     this.refreshChartData();
   }
 
