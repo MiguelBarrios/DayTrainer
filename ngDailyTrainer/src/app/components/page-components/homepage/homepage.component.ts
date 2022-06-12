@@ -14,16 +14,19 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomepageComponent implements OnInit {
 
+  loggedin = false;
   loginUser: User = new User();
   closeResult = '';
 
   constructor(private auth:AuthService,private router: Router, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    this.loggedin = this.loggedIn();
   }
 
   loggedIn():boolean{
-    return this.auth.checkLogin();
+    this.loggedin = this.auth.checkLogin();
+    return this.loggedin;
   }
 
   login(user:User){
@@ -34,6 +37,7 @@ export class HomepageComponent implements OnInit {
           next: (loggedinUser) => {
             this.router.navigateByUrl('/accounthome');
             this.loginUser = new User();
+            this.loggedin = true;
           },
           error: () => {
             console.error('loginComponent.login(): login failed');

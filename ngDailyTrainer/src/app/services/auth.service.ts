@@ -9,6 +9,7 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
+  count = 0;
   private url = 'http://localhost:8089/';
 
 
@@ -63,6 +64,8 @@ export class AuthService {
   }
 
   checkLogin(): boolean {
+    this.count = this.count + 1;
+    console.error("** checkLogin(): " + this.count)
     if (localStorage.getItem('credentials')) {
       return true;
     }

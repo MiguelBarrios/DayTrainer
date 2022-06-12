@@ -18,7 +18,7 @@
       <!-- Collapsible wrapper -->
       <div class="collapse navbar-collapse" id="navbarButtonsExample">
         <!-- Left links -->
-        <ul *ngIf="loggedIn()" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul *ngIf="loggedIn" class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/home']">Home</a>
           </li>
@@ -37,9 +37,9 @@
         </ul>
         <!-- Left links -->
         <div class="d-flex align-items-center ms-auto">
-          <button *ngIf="!loggedIn()" type="button" class="btn btn-warning px-3 me-2" (click)="open(loginModal)"> Login </button>
-          <button *ngIf="!loggedIn()" type="button" class="btn btn-warning me-3" (click)="open(registerModal)"> Sign up </button>
-          <div *ngIf="loggedIn()">
+          <button *ngIf="!loggedin" type="button" class="btn btn-warning px-3 me-2" (click)="open(loginModal)"> Login </button>
+          <button *ngIf="!loggedin" type="button" class="btn btn-warning me-3" (click)="open(registerModal)"> Sign up </button>
+          <div *ngIf="loggedin">
             <button type="button" class="btn btn-warning me-3" (click)="logout()">Logout</button>
           </div>
         </div>
