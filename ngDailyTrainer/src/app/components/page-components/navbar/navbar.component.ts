@@ -11,6 +11,8 @@ import { User } from 'src/app/models/user';
 })
 export class NavbarComponent implements OnInit {
 
+  loginError = false;
+
   loggedin:boolean = false;
 
   loginUser: User = new User();
@@ -55,9 +57,12 @@ export class NavbarComponent implements OnInit {
             this.router.navigateByUrl('/accounthome');
             this.loginUser = new User();
             this.loggedin = true;
+            this.modalService.dismissAll();
+            this.loginError = false;
           },
           error: () => {
             console.error('loginFailed');
+            this.loginError = true;
           }
       }
     )

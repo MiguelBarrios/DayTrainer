@@ -58,7 +58,6 @@ export class AccountHomeComponent implements OnInit {
   setUsers(){
     this.userServ.getAllUsers().subscribe(
       success =>{
-        console.log(success)
         this.users = success
        //make account model and set accont to be an account or null in user
       }
