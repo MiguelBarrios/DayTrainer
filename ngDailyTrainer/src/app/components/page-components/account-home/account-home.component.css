@@ -36,6 +36,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    padding-top: 40px;
 }
 
 
@@ -49,3 +50,21 @@
     margin: 2%;
 }
 
+#accountHomeTopContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#portChartContainer{
+    padding-top: 20px;
+}
+
+
+#userTrades{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}

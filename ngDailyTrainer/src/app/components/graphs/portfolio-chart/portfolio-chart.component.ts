@@ -17,7 +17,10 @@ export class PortfolioChartComponent implements OnInit {
   }
 
    userTrades:Trade[]= [];
-
+   valueOfStocks = 0;
+   cashOnHand = 0;
+   portfolioValue = 0;
+  
   constructor(private tradesService: TradesService){
   }
 
@@ -60,43 +63,11 @@ export class PortfolioChartComponent implements OnInit {
     console.log(event, active);
   }
 
-  changeLabels(): void {
-    const words = [ 'hen', 'variable', 'embryo', 'instal', 'pleasant', 'physical', 'bomber', 'army', 'add', 'film',
-      'conductor', 'comfortable', 'flourish', 'establish', 'circumstance', 'chimney', 'crack', 'hall', 'energy',
-      'treat', 'window', 'shareholder', 'division', 'disk', 'temptation', 'chord', 'left', 'hospital', 'beef',
-      'patrol', 'satisfied', 'academy', 'acceptance', 'ivory', 'aquarium', 'building', 'store', 'replace', 'language',
-      'redeem', 'honest', 'intention', 'silk', 'opera', 'sleep', 'innocent', 'ignore', 'suite', 'applaud', 'funny' ];
-    const randomWord = () => words[Math.trunc(Math.random() * words.length)];
-    this.pieChartData.labels = new Array(3).map(_ => randomWord());
-
-    this.chart?.update();
-  }
-
-  addSlice(): void {
-    if (this.pieChartData.labels) {
-      this.pieChartData.labels.push([ 'Line 1', 'Line 2', 'Line 3' ]);
-    }
-
-    this.pieChartData.datasets[0].data.push(400);
-
-    this.chart?.update();
-  }
-
-  removeSlice(): void {
-    if (this.pieChartData.labels) {
-      this.pieChartData.labels.pop();
-    }
-
-    this.pieChartData.datasets[0].data.pop();
-
-    this.chart?.update();
-  }
 
   changeLegendPosition(): void {
     if (this.pieChartOptions?.plugins?.legend) {
       this.pieChartOptions.plugins.legend.position = this.pieChartOptions.plugins.legend.position === 'left' ? 'top' : 'left';
     }
-
     this.chart?.render();
   }
 
@@ -106,25 +77,31 @@ export class PortfolioChartComponent implements OnInit {
     }
 
     this.chart?.render();
-
-
   }
+
   refreshChartData(): void{
-  this.tradesService.getUserPositions().subscribe(
-    (data) => {
-      for(let position of data){
-        this.pieChartData.datasets[0].data.push(position.avgCostPerShare * position.numberOfShares);
-        if(this.pieChartData.labels){
-          this.pieChartData.labels.push([position.symbol, "Shares:" + position.numberOfShares]);
+    this.tradesService.getUserPositions().subscribe(
+      (data) => {
+        this.valueOfStocks = 0;
+        for(let position of data){
+          this.pieChartData.datasets[0].data.push(position.avgCostPerShare * position.numberOfShares);
+          this.valueOfStocks += position.avgCostPerShare * position.numberOfShares;
+          if(this.pieChartData.labels){
+            this.pieChartData.labels.push([position.symbol]);
+          }
+
+          if(position.symbol == 'Cash'){
+            this.cashOnHand = position.avgCostPerShare;
+            this.valueOfStocks -= position.avgCostPerShare;
+          }
         }
+        this.portfolioValue = this.cashOnHand + this.valueOfStocks;
+        this.chart?.update();
+      },
+      (error) => {
+        console.log("Observable got and error " + error)
       }
-      this.chart?.update();
-      // [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ]
-    },
-    (error) => {
-      console.log("Observable got and error " + error)
-    }
-  )
+    )
   }
 
 }
