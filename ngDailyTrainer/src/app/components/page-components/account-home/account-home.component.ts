@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Trade } from 'src/app/models/trade';
 import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
+import { PortfolioChartComponent } from '../../graphs/portfolio-chart/portfolio-chart.component';
 
 
 
@@ -16,7 +17,8 @@ import { UsersService } from 'src/app/services/users.service';
 export class AccountHomeComponent implements OnInit {
 
   constructor(private auth:AuthService,
-    private router:Router, private userServ:UsersService, private tradeServ:TradesService) { }
+    private router:Router, private userServ:UsersService, 
+    private tradeServ:TradesService) { }
 
     accountValue :number | null = null;
     user : User = new User();

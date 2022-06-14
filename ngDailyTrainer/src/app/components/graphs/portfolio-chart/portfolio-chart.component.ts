@@ -5,7 +5,6 @@ import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { Trade } from 'src/app/models/trade';
-import { AccountHomeComponent } from '../../page-components/account-home/account-home.component';
 
 @Component({
   selector: 'app-portfolio-chart',
@@ -18,8 +17,11 @@ export class PortfolioChartComponent implements OnInit {
   }
 
    userTrades:Trade[]= [];
-
-  constructor(private tradesService: TradesService, private accountComponent:AccountHomeComponent){
+   valueOfStocks = 0;
+   cashOnHand = 0;
+   portfolioValue = 0;
+  
+  constructor(private tradesService: TradesService){
   }
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
@@ -80,17 +82,20 @@ export class PortfolioChartComponent implements OnInit {
   refreshChartData(): void{
     this.tradesService.getUserPositions().subscribe(
       (data) => {
+        this.valueOfStocks = 0;
         for(let position of data){
           this.pieChartData.datasets[0].data.push(position.avgCostPerShare * position.numberOfShares);
+          this.valueOfStocks += position.avgCostPerShare * position.numberOfShares;
           if(this.pieChartData.labels){
             this.pieChartData.labels.push([position.symbol]);
           }
-        }
 
-        this.pieChartData.datasets[0].data.push(parseFloat(this.accountComponent.userBalance));
-        if(this.pieChartData.labels){
-          this.pieChartData.labels.push(["Cash"]);
+          if(position.symbol == 'Cash'){
+            this.cashOnHand = position.avgCostPerShare;
+            this.valueOfStocks -= position.avgCostPerShare;
+          }
         }
+        this.portfolioValue = this.cashOnHand + this.valueOfStocks;
         this.chart?.update();
       },
       (error) => {
