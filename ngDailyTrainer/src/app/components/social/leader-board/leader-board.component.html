@@ -1,6 +1,45 @@
 
   <div id="leaderboardPageContainer">
-    <app-logged-in-nav></app-logged-in-nav>
+
+    <div class="container-fluid">
+        <h1>Leaderboard</h1>
+        <table class="table border rounded">
+          <thead class="">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Participant name</th>
+              <th scope="col">Username</th>
+              <th scope="col">Portfolio Value</th>
+
+              <th scope="col">Total Return</th>
+
+
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of rankings | leaderboard:5; let i = index" [attr.data-index]="i">
+              <th  *ngIf="i <= 2" scope="row">
+                <span *ngIf="i == 0" style="background-color: rgb(237,203,94);">{{i + 1}}</span>
+                <span *ngIf="i == 1" style="background-color: rgb(200,209,222);">{{i + 1}}</span>
+                <span *ngIf="i == 2" style="background-color: rgb(213, 178, 137);">{{i + 1}}</span>
+              </th>
+              <th  *ngIf="i >= 3" scope="row"><span style="background-color: white; color: black;">{{i + 1}}</span></th>
+              <td>
+                <img *ngIf="item.profilePicture" class="mx-auto rounded-circle" src="{{item.profilePicture}}"  width="30" height="30" />
+                <img *ngIf="!item.profilePicture" class="mx-auto rounded-circle" src="assets/img/profilePic.png" width="30" height="30" />
+
+                {{item.firstname}} {{item.lastname}}
+              </td>
+              <td>@{{item.username}}</td>
+              <td>{{item.portfolioValue | number:"1.2-2"}}</td>
+              <td>{{item.portfolioValue | number:"1.2-2"}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+<!-- 
     <div class="container-fluid">
 
       <h1 id="page-header"> <i class="fa fa-trophy" aria-hidden="true"></i>Congratulations to the current leaders! <i
@@ -32,7 +71,9 @@
           </div>
         </div>
 
-    </div>
+    </div> -->
+
+
   </div>
   
 
