@@ -40,32 +40,36 @@
 
 
             <mat-tab-group mat-align-tabs="center">
-                <mat-tab label="Portfolio"> 
+                <mat-tab label="Stocks"> 
     
                 </mat-tab>
-                <mat-tab label="User Info"> </mat-tab>
+                <mat-tab label="Profile"><app-settings></app-settings> </mat-tab>
                 <mat-tab label="Trades"> 
-                    <div class="tradeHistory">
-                        <table class="table table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Symbol</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Action</th>
-                                    <th scope="col">Time</th>
-                                    <th scope="col">Price Per Share</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let trade of trades">
-                                    <th scope="row">{{trade.stock.symbol}}</th>
-                                    <td>{{trade.orderType.name }}</td>
-                                    <td>{{trade.buy | buySell}}</td>
-                                    <td>{{trade.createdAt | date}}</td>
-                                    <td>{{trade.pricePerShare | currency}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div id="userTrades">
+                        <div class="container-fluid">
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col" >Symbol</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Action</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Price Per Share</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let trade of trades">
+                                        <th scope="row">{{trade.stock.symbol}}</th>
+                                        <td>{{trade.orderType.name }}</td>
+                                        <td>{{trade.buy | buySell}}</td>
+                                        <td>{{trade.createdAt | date}}</td>
+                                        <td>{{trade.pricePerShare | currency}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
                     </div>     
                 </mat-tab>
 
