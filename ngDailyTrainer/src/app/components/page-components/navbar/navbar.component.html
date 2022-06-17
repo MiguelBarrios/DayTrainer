@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
     <!-- Container wrapper -->
     <div class="container">
       <!-- Navbar brand -->
@@ -7,12 +7,21 @@
         <img src="assets/img/logos/dailytrainer.svg" height="18" alt="MDB Logo" loading="lazy" style="margin-top: -1px;" />
       </a>
       <!-- Toggle button -->
-      <!-- <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button> -->
       <div ngbDropdown class="d-inline-block" display="dynamic">
         <button class="btn btn-outline-primary navbar-toggler" type="button" id="dropdownMenuButton" ngbDropdownToggle><i class="fa fa-bars"></i></button>
         <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">
-          <button ngbDropdownItem (click)="open(loginModal)">Login</button>
-          <button ngbDropdownItem (click)="open(registerModal)">Sign Up</button>
+          <div *ngIf="!loggedin">
+            <button ngbDropdownItem (click)="open(loginModal)">Login</button>
+            <button ngbDropdownItem (click)="open(registerModal)">Sign Up</button>
+          </div>
+          <div *ngIf="loggedin">
+            <a class="nav-link" [routerLink]="['/home']">Home</a>
+            <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
+            <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leader Board</a>
+            <a class="nav-link" [routerLink]="['/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
+            <a class="nav-link" [routerLink]="['/topMovers']" tabindex="-1" aria-disabled="true">Top Movers</a>
+          </div>
+
         </div>
       </div>
       <!-- Collapsible wrapper -->

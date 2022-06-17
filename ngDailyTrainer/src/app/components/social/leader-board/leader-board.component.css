@@ -47,3 +47,27 @@ body {
     flex-direction: row;
     justify-content: center;
 }
+
+thead {
+    background-color: rgb(236,238,240);
+    border: none;
+}
+
+span {
+    display: block;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+
+    -moz-border-radius: 30px; /* or 50% */
+    border-radius: 30px; /* or 50% */
+
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 1em;
+}
+
+tbody {
+    color:grey
+}
