@@ -1,6 +1,5 @@
 import { Stock } from './stock';
 import { User } from './user';
-import { QueryFlags } from "@angular/compiler/src/render3/view/compiler";
 import { OrderType } from './order-type';
 
 export class Trade {
