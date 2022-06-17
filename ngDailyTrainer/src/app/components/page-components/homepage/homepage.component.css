@@ -11412,7 +11412,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("/assets/img/stockchart2.jpg");
+  background-image: url("http://3.229.131.97:8080/DayTrainer/assets/img/stockchart2.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
