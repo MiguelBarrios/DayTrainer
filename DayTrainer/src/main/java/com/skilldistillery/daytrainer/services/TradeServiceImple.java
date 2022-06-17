@@ -153,6 +153,7 @@ public class TradeServiceImple implements TradeService {
 	@Override
 	public List<StockPosition> getUserPositions(String username){
 		List<String> stocks = tradeRepo.getUserStocks(username);
+		System.err.println(stocks);
 		List<StockPosition> positions = new ArrayList<>();
 		for(String stock : stocks) {
 			StockPosition pos = this.getUserPosition(username, stock);

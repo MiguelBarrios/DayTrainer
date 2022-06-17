@@ -82,6 +82,7 @@ export class PortfolioChartComponent implements OnInit {
   refreshChartData(): void{
     this.tradesService.getUserPositions().subscribe(
       (data) => {
+        console.error(data);
         this.valueOfStocks = 0;
         for(let position of data){
           this.pieChartData.datasets[0].data.push(position.avgCostPerShare * position.numberOfShares);
