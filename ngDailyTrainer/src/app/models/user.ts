@@ -1,4 +1,3 @@
-import { Message } from "@angular/compiler/src/i18n/i18n_ast";
 import { Position } from "./position";
 import { Trade } from "./trade";
 
@@ -18,14 +17,12 @@ export class User {
   account: string | null;
   trades: Trade[] | null;
   comments: Comment[] | null;
-  sentMessages: Message[] | null;
-  recMessages: Message[] | null;
   positions: Position[] | null;
 
   constructor(  id: number = 0, username: string = "", firstName: string | null = "", lastName: string | null = "",
    password: string | null = "", enabled: boolean | null = true, role: string = "", email: string | null = "",
    biography: string | null = "", createdAt: Date | null = null, profilePicture: string | null = "", account: string | null = "",
-    trades: Trade[] | null = [], comments: Comment[] = [], sentMessages: Message[] = [], recMessages: Message[] = [], positions: Position[] = []) {
+    trades: Trade[] | null = [], comments: Comment[] = [], positions: Position[] = []) {
 
       this.id = id,
       this.username = username;
@@ -41,8 +38,6 @@ export class User {
       this.account = account;
       this.trades = trades;
       this.comments = comments;
-      this.sentMessages = sentMessages;
-      this.recMessages = recMessages;
       this.positions = positions;
   }
 
