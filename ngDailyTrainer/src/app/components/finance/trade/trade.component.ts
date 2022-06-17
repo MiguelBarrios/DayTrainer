@@ -137,7 +137,7 @@ export class TradeComponent implements OnInit {
   }
 
   getAccountBalance(){
-    this.userService.newAccountBalance().subscribe(
+    this.userService.accountBalance().subscribe(
       (data) => {
         this.accountBalance = data;
       },

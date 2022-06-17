@@ -180,7 +180,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-
 	public Double getBalance(String username) {
 		User newUser = userRepo.findByUsername(username);
 		return newUser.getAccount().getBalance();

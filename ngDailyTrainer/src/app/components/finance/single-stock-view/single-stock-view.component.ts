@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
 import { StockPosition } from 'src/app/models/stock-position';
 import { TDAQuote } from 'src/app/models/tdaquote';
-import { AlphaVantageAPIService } from 'src/app/services/alpha-vantage-api.service';
 import { TDAserviceService } from 'src/app/services/tdaservice.service';
 import { TradesService } from 'src/app/services/trades.service';
 import { TDAService } from 'src/app/services/tda.service';
@@ -27,7 +26,7 @@ searchTerm = "";
 id:any | null = null;
 
   constructor(private router: Router, private route: ActivatedRoute,
-    private stockSvc: AlphaVantageAPIService, private tradesService: TradesService,
+    private tradesService: TradesService,
     private tdaService:TDAserviceService, private tda:TDAService) { }
 
 

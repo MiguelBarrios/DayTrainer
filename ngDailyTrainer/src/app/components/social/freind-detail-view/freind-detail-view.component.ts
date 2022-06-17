@@ -74,7 +74,7 @@ export class FreindDetailViewComponent implements OnInit {
   }
 
   getUserBalance(){
-    this.userServ.newAccountBalance().subscribe(
+    this.userServ.accountBalance().subscribe(
       success =>{
       this.userBalance = success + '';
       },

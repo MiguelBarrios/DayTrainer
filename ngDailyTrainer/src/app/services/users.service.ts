@@ -59,8 +59,8 @@ delete(id:number){
   )
 }
 
-newAccountBalance(){
-  return this.http.get<Number>(this.url+"/initialbalance", this.getHttpOptions()).pipe(
+accountBalance(){
+  return this.http.get<Number>(this.url+"/accountbalance", this.getHttpOptions()).pipe(
     catchError((err: any) => {
       console.log(err);
       return throwError('Error creating new Trade');

@@ -1,6 +1,9 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SingleStockViewComponent } from './components/finance/single-stock-view/single-stock-view.component';
+import { TopMoversComponent } from './components/finance/top-movers/top-movers.component';
+import { TradesComponent } from './components/finance/trades/trades.component';
 import { AccountHomeComponent } from './components/page-components/account-home/account-home.component';
 import { HomepageComponent } from './components/page-components/homepage/homepage.component';
 import { NotfoundComponent } from './components/page-components/notfound/notfound.component';
@@ -9,10 +12,8 @@ import { FeedComponent } from './components/social/feed/feed.component';
 import { FreindDetailViewComponent } from './components/social/freind-detail-view/freind-detail-view.component';
 import { FriendsComponent } from './components/social/friends/friends.component';
 import { LeaderBoardComponent } from './components/social/leader-board/leader-board.component';
-import { SingleStockViewComponent } from './components/stocks-trading/single-stock-view/single-stock-view.component';
-import { TopMoversComponent } from './components/stocks-trading/top-movers/top-movers.component';
-import { TradesComponent } from './components/stocks-trading/trades/trades.component';
 import { UsersComponent } from './components/user-components/users/users.component';
+
 
 
 const routes: Routes = [

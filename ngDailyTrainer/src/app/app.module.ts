@@ -15,13 +15,18 @@ import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { FormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { DatePipe } from '@angular/common';
+
+import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
-import { BuySellPipe } from './pipes/buy-sell.pipe';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { MoversPipe } from './pipes/movers.pipe';
-import { LeaderboardPipe } from './pipes/leaderboard.pipe';
+import { SingleStockViewComponent } from './components/finance/single-stock-view/single-stock-view.component';
+import { TopMoversComponent } from './components/finance/top-movers/top-movers.component';
+import { TradeComponent } from './components/finance/trade/trade.component';
+import { TradesComponent } from './components/finance/trades/trades.component';
 import { CandleGraphComponent } from './components/graphs/candle-graph/candle-graph.component';
+import { PortfolioChartComponent } from './components/graphs/portfolio-chart/portfolio-chart.component';
 import { AccountHomeComponent } from './components/page-components/account-home/account-home.component';
+import { FooterComponent } from './components/page-components/footer/footer.component';
 import { HomepageComponent } from './components/page-components/homepage/homepage.component';
 import { LoggedInNavComponent } from './components/page-components/logged-in-nav/logged-in-nav.component';
 import { NavbarComponent } from './components/page-components/navbar/navbar.component';
@@ -30,16 +35,12 @@ import { SettingsComponent } from './components/page-components/settings/setting
 import { FeedComponent } from './components/social/feed/feed.component';
 import { FreindDetailViewComponent } from './components/social/freind-detail-view/freind-detail-view.component';
 import { FriendsComponent } from './components/social/friends/friends.component';
-import { SingleStockViewComponent } from './components/stocks-trading/single-stock-view/single-stock-view.component';
-import { TradeComponent } from './components/stocks-trading/trade/trade.component';
-import { TradesComponent } from './components/stocks-trading/trades/trades.component';
+import { LeaderBoardComponent } from './components/social/leader-board/leader-board.component';
 import { UserUpdateFormComponent } from './components/user-components/user-update-form/user-update-form.component';
 import { UsersComponent } from './components/user-components/users/users.component';
-import { PortfolioChartComponent } from './components/graphs/portfolio-chart/portfolio-chart.component';
-import { FooterComponent } from './components/page-components/footer/footer.component';
-import { LeaderBoardComponent } from './components/social/leader-board/leader-board.component';
-import { TopMoversComponent } from './components/stocks-trading/top-movers/top-movers.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { BuySellPipe } from './pipes/buy-sell.pipe';
+import { LeaderboardPipe } from './pipes/leaderboard.pipe';
+import { MoversPipe } from './pipes/movers.pipe';
 
 
 

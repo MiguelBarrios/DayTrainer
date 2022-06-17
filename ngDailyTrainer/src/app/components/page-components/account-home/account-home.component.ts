@@ -77,7 +77,7 @@ export class AccountHomeComponent implements OnInit {
     )
   }
   getUserBalance(){
-    this.userServ.newAccountBalance().subscribe(
+    this.userServ.accountBalance().subscribe(
       success =>{
        console.error(success);
        this.userBalance = success +" ";

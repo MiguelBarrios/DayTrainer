@@ -131,8 +131,8 @@ public class UserController {
 		return followedUsers;
 		
 	}
-
-	@GetMapping("users/initialbalance")
+	
+	@GetMapping("users/accountbalance")
 	public Double getBalance(Principal principal) {
 		return userSvc.getBalance(principal.getName());
 		 
