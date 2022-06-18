@@ -15,8 +15,6 @@ public interface TradeService {
 
 	public Trade createMarketTrade(String username, Trade trade);
 
-	public Collection<Position> getUserPortfolio(String username);
-
 	public StockPosition getUserPosition(String username, String ticker);
 
 	List<StockPosition> getUserPositions(String username);

@@ -71,11 +71,6 @@ public class TradeController {
 		return trade;
 	}
 	
-	@GetMapping("trades/portfolio")
-	public Collection<Position> getPortfolio(Principal principal) {
-		return tradeService.getUserPortfolio(principal.getName());
-		
-	}
 	
 	@GetMapping("trades/position/{ticker}")
 	public StockPosition getUserStockPosition(Principal principal, @PathVariable String ticker) {

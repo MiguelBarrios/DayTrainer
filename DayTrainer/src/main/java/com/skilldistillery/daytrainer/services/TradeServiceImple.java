@@ -112,45 +112,6 @@ public class TradeServiceImple implements TradeService {
 	}
 	
 	@Override
-	public Collection<Position> getUserPortfolio(String username) {
-		HashMap<String, Position> map = new HashMap<>();
-		List<Trade> userTrades = tradeRepo.getUserTrades(username);
-		for(Trade trade : userTrades) {
-			String key = trade.getStock().getSymbol();
-			if(!map.containsKey(key)) {
-				Position pos = new Position(trade.getStock().getSymbol(), 0,0,0);
-				map.put(key, pos);
-			}
-			
-			Position cur = map.get(key);
-			
-			if(trade.isBuy()) {
-				cur.setAmount(cur.getAmount() + trade.getQuantity());
-				cur.setValue(cur.getValue() + trade.getQuantity());
-			}else {
-				cur.setAmount(cur.getAmount() - trade.getQuantity());
-				cur.setValue(cur.getValue() - trade.getQuantity());
-			}
-		}
-		Account account = accountRepo.getAccountByUsername(username);
-		Position cash = new Position("cash", 0,0,0);
-		cash.setAmount(1);
-		cash.setValue(account.getBalance());
-		map.put("cash", cash);
-		
-		Collection<Position> positions = map.values();
-		Collection<Position> res = new ArrayList<>(positions.size());
-		for(Position pos : positions) {
-			if(pos.getAmount() != 0) {
-				res.add(pos);
-			}
-		}
-		
-		return res;
-		
-	}
-	
-	@Override
 	public List<StockPosition> getUserPositions(String username){
 		List<String> stocks = tradeRepo.getUserStocks(username);
 		System.err.println(stocks);

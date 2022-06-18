@@ -5,9 +5,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Trade } from 'src/app/models/trade';
 import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
-import { PortfolioChartComponent } from '../../graphs/portfolio-chart/portfolio-chart.component';
 import { AccountService } from 'src/app/services/account.service';
-
+import { StockPosition } from 'src/app/models/stock-position';
 
 
 @Component({
@@ -16,76 +15,76 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./account-home.component.css']
 })
 export class AccountHomeComponent implements OnInit {
+  
+  user : User = new User();
+  trades :Trade[] = [];
+  accountBalance:any = -1;
+  accountValue :number | null = null;
+  userPositions: StockPosition[] | null= null;
 
   constructor(private auth:AuthService,
-    private router:Router, private userServ:UsersService, 
+    private router:Router,
+    private userServ:UsersService, 
     private tradeServ:TradesService,
-    private accountService:AccountService) { }
-
-    accountBalance:any = -1;
-    accountValue :number | null = null;
-    user : User = new User();
-    trades :Trade[] = [];
-    users: User[]  =  [];
+    private accountService:AccountService
+  ) { }
 
   ngOnInit(): void {
-    this.isAuthorized()
+    if(!this.auth.checkLogin()){
+      this.router.navigateByUrl('home');
+    }
     this.setTrades()
     this.setUser()
-    this.setUsers()
     this.getUserBalance()
-  }
-  isAuthorized() {
-    if(!this.auth.checkLogin()){
-    this.router.navigateByUrl('home');
-    }
-  }
-
-  loggedIn():boolean{
-    return this.auth.checkLogin();
-  }
-
-  isAdmin(){
-    return this.auth.isAdmin();
+    this.getUserPositions();
   }
 
   setUser(){
     this.userServ.getUserByUsername().subscribe(
-      success =>{
-        this.user = success
-       // this.accountValue = success.account
-       //make account model and set accont to be an account or null in user
-      }
-    )
-  }
-
-  setUsers(){
-    this.userServ.getAllUsers().subscribe(
-      success =>{
-        this.users = success
-       //make account model and set accont to be an account or null in user
+      (user) =>{
+        this.user = user
+      }, 
+      (error) => {
+        console.error(error);
       }
     )
   }
 
   setTrades(){
     this.tradeServ.getUserTrades().subscribe(
-      success =>{
-        this.trades = success
+      (trades) =>{
+        this.trades = trades
       },
-      err=>{
-        console.log(err)
+      (error) =>{
+        console.log(error);
       }
     )
   }
+
   getUserBalance(){
     this.accountService.getUserAccountBalance().subscribe(
-      data =>{
-       this.accountBalance = data;
+      (balance) =>{
+       this.accountBalance = balance;
       },
-      err=>{
-        console.log(err)
+      (error) =>{
+        console.log(error)
       }
     )
   }
+
+  getUserPositions(){
+    this.tradeServ.getUserPositions().subscribe(
+      (positions) => {
+          this.userPositions = positions;
+          for(let pos of positions){
+            console.log(pos);
+          }
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
+
 }
