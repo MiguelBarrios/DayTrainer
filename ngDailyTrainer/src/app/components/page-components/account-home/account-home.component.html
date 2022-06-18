@@ -2,11 +2,6 @@
 
     <!--Main Navigation-->
     <div id="accountHomeContainerMain">
-        <div>
-            <!-- <app-logged-in-nav></app-logged-in-nav> -->
-        </div>
-
-
 
         <div id="accountHomeContainerContent" class="container-fluid">
 
@@ -29,7 +24,7 @@
                     </div>
                 </div>
                 <div id="portChartContainer">
-                    <h3>Account Balance: {{accountBalance}}</h3>
+
                     <app-portfolio-chart></app-portfolio-chart>
                 </div>
     
@@ -42,6 +37,25 @@
 
             <mat-tab-group mat-align-tabs="center">
                 <mat-tab label="Stocks"> 
+                    <div id="portfolioStats">
+                        <div>
+                            <p>Portfolio: {{portfolioCurrentValue + accountBalance | currency}}</p>
+                        </div>
+                        <div>
+                            <p>Cash: {{accountBalance | currency}}</p>
+     
+                        </div>
+                        <div>
+                            <p>Stocks: {{portfolioCurrentValue | currency}}</p>
+                        </div>
+                        <div>
+                            <p [ngClass]="{'trendingUp': (portfolioCurrentValue + accountBalance) - accountDeposits > 0, 'trendingDown' : (portfolioCurrentValue + accountBalance) - accountDeposits < 0 }">
+                                Return: {{(portfolioCurrentValue + accountBalance) - accountDeposits | currency}}
+                            </p>
+                        </div>
+
+                    </div>
+
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>

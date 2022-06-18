@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 })
 export class AccountService {
   
-  private url = environment.baseUrl +  'api/users';
+  private url = environment.baseUrl +  'api/';
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
@@ -24,11 +24,19 @@ export class AccountService {
   }
 
   getUserAccountBalance() {
-      return this.http.get<number>(this.url + '/accountbalance', this.getHttpOptions()).pipe(
+      return this.http.get<number>(this.url + 'users/accountbalance', this.getHttpOptions()).pipe(
         catchError((err:any) => {
           console.log(err);
           return throwError(() => new Error('Error getting user account balance'));
         })
       )
+  }
+
+  getUserAccountDeposits(){
+    return this.http.get<number>(this.url + 'account/depositsum', this.getHttpOptions()).pipe(
+      catchError((err:any) => {
+        return throwError(() => new Error('Error getting user account deposits'));
+      })
+    )
   }
 }

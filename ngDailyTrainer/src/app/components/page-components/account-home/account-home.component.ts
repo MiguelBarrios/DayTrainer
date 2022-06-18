@@ -18,9 +18,13 @@ export class AccountHomeComponent implements OnInit {
   
   user : User = new User();
   trades :Trade[] = [];
-  accountBalance:any = -1;
-  accountValue :number | null = null;
   userPositions: StockPosition[] | null= null;
+
+  accountBalance:any = -1;
+  accountDeposits = 0;
+  portfolioPurchaseValue = 0;
+  portfolioCurrentValue = 0;
+
 
   constructor(private auth:AuthService,
     private router:Router,
@@ -36,7 +40,22 @@ export class AccountHomeComponent implements OnInit {
     this.setTrades()
     this.setUser()
     this.getUserBalance()
+    this.getUserDeposits();
     this.getUserPositions();
+  }
+
+  calcPortValue(){
+    let purchaseValue = 0;
+    let currentValue = 0;
+    if(this.userPositions){
+      for(let pos of this.userPositions){
+        purchaseValue += pos.numberOfShares * pos.avgCostPerShare;
+        currentValue += pos.numberOfShares * pos.lastPrice;
+      }
+    }
+    this.portfolioCurrentValue = currentValue;
+    this.portfolioPurchaseValue = purchaseValue;
+
   }
 
   setUser(){
@@ -72,10 +91,23 @@ export class AccountHomeComponent implements OnInit {
     )
   }
 
+  getUserDeposits(){
+    this.accountService.getUserAccountDeposits().subscribe(
+      (deposits) => {
+        this.accountDeposits = deposits;
+        console.log("*** TotalDeposits: " + deposits);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
   getUserPositions(){
     this.tradeServ.getUserPositions().subscribe(
       (positions) => {
           this.userPositions = positions;
+          this.calcPortValue();
       },
       (error) => {
         console.log(error);
