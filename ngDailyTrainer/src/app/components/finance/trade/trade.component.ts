@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Trade } from 'src/app/models/trade';
 import { UsersService } from 'src/app/services/users.service';
 import { SingleStockViewComponent } from '../single-stock-view/single-stock-view.component';
+import { AccountService } from 'src/app/services/account.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class TradeComponent implements OnInit {
   errorSMS:string = ""
   errorFlag: boolean = false;
 
-  accountBalance: Number = 0;
+  accountBalance: any = 0;
   symbol:string | null = "";
   userTrades:Trade[] = [];
 
@@ -35,7 +36,8 @@ export class TradeComponent implements OnInit {
 
   constructor( private route: ActivatedRoute,private date:DatePipe, private tradeService: TradesService,
     private ssv:SingleStockViewComponent,
-    private userService:UsersService) { }
+    private userService:UsersService, 
+    private accountService:AccountService) { }
 
 
   ngOnInit(): void {
@@ -137,7 +139,7 @@ export class TradeComponent implements OnInit {
   }
 
   getAccountBalance(){
-    this.userService.accountBalance().subscribe(
+    this.accountService.getUserAccountBalance().subscribe(
       (data) => {
         this.accountBalance = data;
       },

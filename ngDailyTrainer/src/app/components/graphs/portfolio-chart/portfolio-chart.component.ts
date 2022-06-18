@@ -5,6 +5,9 @@ import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { Trade } from 'src/app/models/trade';
+import { AccountService } from 'src/app/services/account.service';
+import { forkJoin, Observable, throwError } from 'rxjs';
+import { StockPosition } from 'src/app/models/stock-position';
 
 @Component({
   selector: 'app-portfolio-chart',
@@ -12,16 +15,15 @@ import { Trade } from 'src/app/models/trade';
   styleUrls: ['./portfolio-chart.component.css']
 })
 export class PortfolioChartComponent implements OnInit {
-  ngOnInit(): void {
-    this.refreshChartData();
-  }
 
-   userTrades:Trade[]= [];
-   valueOfStocks = 0;
-   cashOnHand = 0;
-   portfolioValue = 0;
+   portfolio:StockPosition[]= [];
+   accountBalance:any = 0;
+
+   ngOnInit(): void {
+    this.loadChart();
+  }
   
-  constructor(private tradesService: TradesService){
+  constructor(private tradesService: TradesService, private accountService:AccountService){
   }
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
@@ -44,6 +46,26 @@ export class PortfolioChartComponent implements OnInit {
     }
   };
 
+  loadChart(){
+    forkJoin(
+      {
+        accountBalance : this.accountService.getUserAccountBalance(), 
+        portfolio : this.tradesService.getUserPositions()
+      }
+    ).subscribe(({accountBalance,portfolio}) => {
+        this.accountBalance = accountBalance;
+        this.portfolio = portfolio;
+        for(let position of portfolio){
+          let sliceAmount = position.avgCostPerShare * position.numberOfShares;
+          let sliceLable = [position.symbol];
+          this.addSlice(sliceAmount, sliceLable);
+        }
+        this.addSlice(accountBalance, ["Cash"]);
+        this.chart?.update();
+      }      
+    );
+  }
+
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [],
     datasets: [ {
@@ -63,7 +85,6 @@ export class PortfolioChartComponent implements OnInit {
     console.log(event, active);
   }
 
-
   changeLegendPosition(): void {
     if (this.pieChartOptions?.plugins?.legend) {
       this.pieChartOptions.plugins.legend.position = this.pieChartOptions.plugins.legend.position === 'left' ? 'top' : 'left';
@@ -79,31 +100,11 @@ export class PortfolioChartComponent implements OnInit {
     this.chart?.render();
   }
 
-  refreshChartData(): void{
-    this.tradesService.getUserPositions().subscribe(
-      (data) => {
-        console.error(data);
-        this.valueOfStocks = 0;
-        for(let position of data){
-          this.pieChartData.datasets[0].data.push(position.avgCostPerShare * position.numberOfShares);
-          this.valueOfStocks += position.avgCostPerShare * position.numberOfShares;
-          if(this.pieChartData.labels){
-            this.pieChartData.labels.push([position.symbol]);
-          }
-
-          if(position.symbol == 'Cash'){
-            this.cashOnHand = position.avgCostPerShare;
-            this.valueOfStocks -= position.avgCostPerShare;
-          }
-        }
-        this.portfolioValue = this.cashOnHand + this.valueOfStocks;
-        this.chart?.update();
-      },
-      (error) => {
-        console.log("Observable got and error " + error)
-      }
-    )
+  addSlice(data:number, label:string[]):void {
+    this.pieChartData.datasets[0].data.push(data);
+    if(this.pieChartData.labels){
+      this.pieChartData.labels?.push(label);
+    }
   }
-
 }
 

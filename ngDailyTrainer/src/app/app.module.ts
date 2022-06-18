@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule} from '@angular/material/card';
@@ -15,7 +14,6 @@ import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { FormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { DatePipe } from '@angular/common';
-
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -41,8 +39,6 @@ import { UsersComponent } from './components/user-components/users/users.compone
 import { BuySellPipe } from './pipes/buy-sell.pipe';
 import { LeaderboardPipe } from './pipes/leaderboard.pipe';
 import { MoversPipe } from './pipes/movers.pipe';
-
-
 
 @NgModule({
   declarations: [
@@ -87,7 +83,6 @@ import { MoversPipe } from './pipes/movers.pipe';
     MatGridListModule,
     NgApexchartsModule,
     MatTabsModule,
-
   ],
   providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe],
   bootstrap: [AppComponent],

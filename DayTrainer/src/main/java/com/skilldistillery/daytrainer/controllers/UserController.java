@@ -28,9 +28,9 @@ import com.skilldistillery.daytrainer.services.UserService;
 
 @RequestMapping("api")
 @RestController
-@CrossOrigin({ "*", "http://localhost" })
 @Configuration
 @EnableScheduling
+@CrossOrigin({ "*", "http://localhost" })
 public class UserController {
 
 	@Autowired

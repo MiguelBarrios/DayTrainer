@@ -6,6 +6,7 @@ import { Trade } from 'src/app/models/trade';
 import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
 import { PortfolioChartComponent } from '../../graphs/portfolio-chart/portfolio-chart.component';
+import { AccountService } from 'src/app/services/account.service';
 
 
 
@@ -18,13 +19,14 @@ export class AccountHomeComponent implements OnInit {
 
   constructor(private auth:AuthService,
     private router:Router, private userServ:UsersService, 
-    private tradeServ:TradesService) { }
+    private tradeServ:TradesService,
+    private accountService:AccountService) { }
 
+    accountBalance:any = -1;
     accountValue :number | null = null;
     user : User = new User();
     trades :Trade[] = [];
     users: User[]  =  [];
-    userBalance: string = '';
 
   ngOnInit(): void {
     this.isAuthorized()
@@ -77,10 +79,9 @@ export class AccountHomeComponent implements OnInit {
     )
   }
   getUserBalance(){
-    this.userServ.accountBalance().subscribe(
-      success =>{
-       console.error(success);
-       this.userBalance = success +" ";
+    this.accountService.getUserAccountBalance().subscribe(
+      data =>{
+       this.accountBalance = data;
       },
       err=>{
         console.log(err)

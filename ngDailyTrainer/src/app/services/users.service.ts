@@ -59,16 +59,6 @@ delete(id:number){
   )
 }
 
-accountBalance(){
-  return this.http.get<Number>(this.url+"/accountbalance", this.getHttpOptions()).pipe(
-    catchError((err: any) => {
-      console.log(err);
-      return throwError('Error creating new Trade');
-    })
-  )
-}
-
-
 getUserFollowingList(userId: number) {
   return this.http.get<User[]>(this.url + '/' + userId +  '/following', this.getHttpOptions()).pipe(
     catchError((err: any) => {

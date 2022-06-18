@@ -19,10 +19,3 @@ export class Candle {
       this.datetime = datetime;
     }
 }
-
-  // "open": 119.4,
-  // "high": 119.4,
-  // "low": 119.4,
-  // "close": 119.4,
-  // "volume": 100,
-  // "datetime": 1652701380000

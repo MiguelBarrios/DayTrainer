@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Trade } from 'src/app/models/trade';
 import { User } from 'src/app/models/user';
+import { AccountService } from 'src/app/services/account.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TradesService } from 'src/app/services/trades.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -14,7 +15,8 @@ import { UsersService } from 'src/app/services/users.service';
 export class FreindDetailViewComponent implements OnInit {
 
   constructor(private auth:AuthService,
-    private router:Router, private userServ:UsersService, private tradeServ:TradesService, private route:ActivatedRoute) { }
+    private router:Router, private userServ:UsersService, private tradeServ:TradesService, private route:ActivatedRoute,
+    private accountService:AccountService) { }
 
      accountValue :number | null = null;
      user : User = new User();
@@ -74,7 +76,7 @@ export class FreindDetailViewComponent implements OnInit {
   }
 
   getUserBalance(){
-    this.userServ.accountBalance().subscribe(
+    this.accountService.getUserAccountBalance().subscribe(
       success =>{
       this.userBalance = success + '';
       },
