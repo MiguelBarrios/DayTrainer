@@ -41,14 +41,6 @@ getLeaders() {
     }));
 }
 
-getUserTrades(username: string | null) {
-  return this.http.get<any[]>(environment.baseUrl + 'api/trades/portfolio', this.getHttpOptions()).pipe(
-    catchError((err:any) => {
-      console.log(err);
-      return throwError(() => new Error('KABOOM - Stock list cannot be retrieved.'));
-    }));
-  }
-
  getLeaderBoard(){
   return this.http.get<User[]>(this.url + '/leaders', this.getHttpOptions()).pipe(
     catchError((err:any) => {

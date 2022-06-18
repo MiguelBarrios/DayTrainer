@@ -2,8 +2,6 @@ package com.skilldistillery.daytrainer.services;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,8 +9,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skilldistillery.daytrainer.entities.Account;
-import com.skilldistillery.daytrainer.entities.Position;
+import com.skilldistillery.daytrainer.entities.QuoteWrapper;
 import com.skilldistillery.daytrainer.entities.Stock;
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
@@ -41,6 +44,8 @@ public class TradeServiceImple implements TradeService {
 	@Autowired
 	private AccountRepository accountRepo;
 	
+	@Autowired
+	private TDAService tdaService;
 	
 	@Override
 	public List<Trade> getUserTrades(String username) {
@@ -77,7 +82,6 @@ public class TradeServiceImple implements TradeService {
 		}else {
 			System.out.println("User sold shares: " + stock);
 			//Check if user Has shares
-			//TODO: Brute force, come back and create query
 			int positionSize = this.getCurrentHolding(username, stock.getSymbol());
 			if(trade.getQuantity() > positionSize) {
 				System.err.println("User tried to sell stock he does not have");
@@ -105,70 +109,51 @@ public class TradeServiceImple implements TradeService {
 				positionSize -= trade.getQuantity();
 			}
 		}
-		System.out.println("Number of trades on: " + symbol);
-		System.out.println("Position size: " + positionSize);
+
 		return positionSize;
 	
 	}
 	
 	@Override
-	public Collection<Position> getUserPortfolio(String username) {
-		HashMap<String, Position> map = new HashMap<>();
-		List<Trade> userTrades = tradeRepo.getUserTrades(username);
-		for(Trade trade : userTrades) {
-			String key = trade.getStock().getSymbol();
-			if(!map.containsKey(key)) {
-				Position pos = new Position(trade.getStock().getSymbol(), 0,0,0);
-				map.put(key, pos);
-			}
-			
-			Position cur = map.get(key);
-			
-			if(trade.isBuy()) {
-				cur.setAmount(cur.getAmount() + trade.getQuantity());
-				cur.setValue(cur.getValue() + trade.getQuantity());
-			}else {
-				cur.setAmount(cur.getAmount() - trade.getQuantity());
-				cur.setValue(cur.getValue() - trade.getQuantity());
-			}
-		}
-		Account account = accountRepo.getAccountByUsername(username);
-		Position cash = new Position("cash", 0,0,0);
-		cash.setAmount(1);
-		cash.setValue(account.getBalance());
-		map.put("cash", cash);
-		
-		Collection<Position> positions = map.values();
-		Collection<Position> res = new ArrayList<>(positions.size());
-		for(Position pos : positions) {
-			if(pos.getAmount() != 0) {
-				res.add(pos);
-			}
-		}
-		
-		return res;
-		
-	}
-	
-	@Override
 	public List<StockPosition> getUserPositions(String username){
 		List<String> stocks = tradeRepo.getUserStocks(username);
-		System.err.println(stocks);
 		List<StockPosition> positions = new ArrayList<>();
 		for(String stock : stocks) {
 			StockPosition pos = this.getUserPosition(username, stock);
 			if(pos.getNumberOfShares() > 0)
 				positions.add(pos);
 		}
+		
+		// Add Last price to Position
+		for(StockPosition pos : positions) {
+			String symbol = pos.getSymbol();
+			String quote = this.tdaService.getQuote(symbol);
+			// Get Quote, check if quote is present
+			ObjectNode node;
+			try {
+				node = new ObjectMapper().readValue(quote, ObjectNode.class);
+				if (node.has("lastPrice")) {
+					String lastPrice =  node.get("lastPrice").toString();
+					pos.setLastPrice(Double.parseDouble(lastPrice));
+					
+				}else {
+					System.err.println("lastPrice" + " not found");
+					pos.setLastPrice(-1);
+				}
+			}  catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+  
 		return positions;
 	}
 	
 	@Override
 	public StockPosition getUserPosition(String username, String ticker) {
 		List<Trade> purchases = tradeRepo.getUserStockPurchases(username, ticker);
-		System.out.println("Purchases: " + purchases);
 		if(purchases.size() == 0) {
-			return new StockPosition(ticker, 0,0);
+			return new StockPosition(ticker, 0,0, 0);
 		}
 		
 		Integer sharesSold = tradeRepo.getNumSharesSold(username, ticker);
@@ -203,7 +188,7 @@ public class TradeServiceImple implements TradeService {
 		}
 		
 		double avgCostPerShare = totalSpentOnShares / remainingShares;
-		return new StockPosition(ticker, remainingShares, avgCostPerShare);
+		return new StockPosition(ticker, remainingShares, avgCostPerShare, 0);
 	}
 	
 	

@@ -7,15 +7,18 @@ public class StockPosition {
 	private int numberOfShares;
 
 	private double avgCostPerShare;
+	
+	private double lastPrice;
 
 	public StockPosition() {
 	}
 
-	public StockPosition(String symbol, int numberOfShares, double avgCostPerShare) {
+	public StockPosition(String symbol, int numberOfShares, double avgCostPerShare, double lastPrice) {
 		super();
 		this.symbol = symbol;
 		this.numberOfShares = numberOfShares;
 		this.avgCostPerShare = avgCostPerShare;
+		this.lastPrice = lastPrice;
 	}
 
 	public String getSymbol() {
@@ -42,9 +45,18 @@ public class StockPosition {
 		this.avgCostPerShare = avgCostPerShare;
 	}
 
+	public double getLastPrice() {
+		return lastPrice;
+	}
+
+	public void setLastPrice(double lastPrice) {
+		this.lastPrice = lastPrice;
+	}
+
 	@Override
 	public String toString() {
-		return "StockPosition [numberOfShares=" + numberOfShares + ", avgCostPerShare=" + avgCostPerShare + "]";
+		return "StockPosition [symbol=" + symbol + ", numberOfShares=" + numberOfShares + ", avgCostPerShare="
+				+ avgCostPerShare + ", lastPrice=" + lastPrice + "]";
 	}
 
 }

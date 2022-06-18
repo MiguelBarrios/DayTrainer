@@ -94,46 +94,4 @@ export class LeaderBoardComponent implements OnInit {
       }
       console.log(this.rankings);
   }
-
-//   getLeaders() {
-//     this.userSvc.getLeaders().subscribe(
-//       (data) => {
-//         this.leaders = data;
-//         console.log('***new leaders request recieved');
-//         console.log(this.leaders)
-
-//               for (let index = 0; index < this.leaders.length; index++) {
-
-//                 this.userSvc.getUserTrades(this.leaders[index].username).subscribe(
-//                   (data) => {
-//                     this.leaders[index].positions = data;
-
-//                     console.log('***new leaders request recieved');
-//                     console.log(this.userTrades)
-//                   });
-
-//               }
-
-//       },
-//       (error) => {
-//         console.log('Observable got an error ' + error);
-//       }
-//     );
-//   }
-
-// getUserTrades(username: string| null) {
-// this.userSvc.getUserTrades(username).subscribe(
-//   (data) => {
-//     this.userTrades = data;
-//     console.log('***new leaders request recieved');
-//     console.log(this.userTrades)
-//   },
-//   (error) => {
-//     console.log('Observable got an error ' + error);
-//   });
-
-// }
-
-
-
 }
