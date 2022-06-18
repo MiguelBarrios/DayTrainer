@@ -14,4 +14,7 @@ public interface StockRepository extends JpaRepository<Stock, String> {
 	@Query("SELECT s.symbol FROM Stock s WHERE s.symbol like ':ticker%'")
 	List<Trade> findStockBySymbol(@Param("ticker") String ticker);
 
+	
+	@Query("Select s.symbol From Stock s")
+	List<String> getAllSymbols();
 }

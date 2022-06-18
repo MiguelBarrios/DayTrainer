@@ -2,8 +2,6 @@ package com.skilldistillery.daytrainer.services;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,8 +9,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skilldistillery.daytrainer.entities.Account;
-import com.skilldistillery.daytrainer.entities.Position;
+import com.skilldistillery.daytrainer.entities.QuoteWrapper;
 import com.skilldistillery.daytrainer.entities.Stock;
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
@@ -41,6 +43,8 @@ public class TradeServiceImple implements TradeService {
 	@Autowired
 	private AccountRepository accountRepo;
 	
+	@Autowired
+	private TDAService tdaService;
 	
 	@Override
 	public List<Trade> getUserTrades(String username) {
@@ -105,8 +109,7 @@ public class TradeServiceImple implements TradeService {
 				positionSize -= trade.getQuantity();
 			}
 		}
-		System.out.println("Number of trades on: " + symbol);
-		System.out.println("Position size: " + positionSize);
+
 		return positionSize;
 	
 	}
@@ -114,22 +117,31 @@ public class TradeServiceImple implements TradeService {
 	@Override
 	public List<StockPosition> getUserPositions(String username){
 		List<String> stocks = tradeRepo.getUserStocks(username);
-		System.err.println(stocks);
 		List<StockPosition> positions = new ArrayList<>();
 		for(String stock : stocks) {
 			StockPosition pos = this.getUserPosition(username, stock);
 			if(pos.getNumberOfShares() > 0)
 				positions.add(pos);
 		}
+		
+		List<String> symbols = positions.stream()
+				.map((pos) -> pos.getSymbol())
+				.collect(Collectors.toList());
+		
+		String csvSymbols = String.join(",", symbols);
+		
+		String json = tdaService.getQuotes(csvSymbols);
+  
+		
+		System.err.println(json);
 		return positions;
 	}
 	
 	@Override
 	public StockPosition getUserPosition(String username, String ticker) {
 		List<Trade> purchases = tradeRepo.getUserStockPurchases(username, ticker);
-		System.out.println("Purchases: " + purchases);
 		if(purchases.size() == 0) {
-			return new StockPosition(ticker, 0,0);
+			return new StockPosition(ticker, 0,0, 0);
 		}
 		
 		Integer sharesSold = tradeRepo.getNumSharesSold(username, ticker);
@@ -164,7 +176,7 @@ public class TradeServiceImple implements TradeService {
 		}
 		
 		double avgCostPerShare = totalSpentOnShares / remainingShares;
-		return new StockPosition(ticker, remainingShares, avgCostPerShare);
+		return new StockPosition(ticker, remainingShares, avgCostPerShare, 0);
 	}
 	
 	
