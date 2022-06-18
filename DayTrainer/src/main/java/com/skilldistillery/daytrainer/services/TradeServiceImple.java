@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.QuoteWrapper;
 import com.skilldistillery.daytrainer.entities.Stock;
@@ -81,7 +82,6 @@ public class TradeServiceImple implements TradeService {
 		}else {
 			System.out.println("User sold shares: " + stock);
 			//Check if user Has shares
-			//TODO: Brute force, come back and create query
 			int positionSize = this.getCurrentHolding(username, stock.getSymbol());
 			if(trade.getQuantity() > positionSize) {
 				System.err.println("User tried to sell stock he does not have");
@@ -124,16 +124,28 @@ public class TradeServiceImple implements TradeService {
 				positions.add(pos);
 		}
 		
-		List<String> symbols = positions.stream()
-				.map((pos) -> pos.getSymbol())
-				.collect(Collectors.toList());
-		
-		String csvSymbols = String.join(",", symbols);
-		
-		String json = tdaService.getQuotes(csvSymbols);
+		// Add Last price to Position
+		for(StockPosition pos : positions) {
+			String symbol = pos.getSymbol();
+			String quote = this.tdaService.getQuote(symbol);
+			// Get Quote, check if quote is present
+			ObjectNode node;
+			try {
+				node = new ObjectMapper().readValue(quote, ObjectNode.class);
+				if (node.has("lastPrice")) {
+					String lastPrice =  node.get("lastPrice").toString();
+					pos.setLastPrice(Double.parseDouble(lastPrice));
+					
+				}else {
+					System.err.println("lastPrice" + " not found");
+					pos.setLastPrice(-1);
+				}
+			}  catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
   
-		
-		System.err.println(json);
 		return positions;
 	}
 	

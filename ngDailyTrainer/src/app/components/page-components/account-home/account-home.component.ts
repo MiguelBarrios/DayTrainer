@@ -76,9 +76,6 @@ export class AccountHomeComponent implements OnInit {
     this.tradeServ.getUserPositions().subscribe(
       (positions) => {
           this.userPositions = positions;
-          for(let pos of positions){
-            console.log(pos);
-          }
       },
       (error) => {
         console.log(error);

@@ -42,9 +42,29 @@
 
             <mat-tab-group mat-align-tabs="center">
                 <mat-tab label="Stocks"> 
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" >Symbol</th>
+                                <th scope="col">Shares</th>
+                                <th scope="col">Avg Price</th>
+                                <th scope="col">Return</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pos of userPositions">
+                                <th scope="row">{{pos.symbol}}</th>
+                                <td>{{pos.numberOfShares}}</td>
+                                <td>{{pos.avgCostPerShare}}</td>
+                                <td [ngClass]="{'trendingUp': (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) <= 0, 'trendingDown' : (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) > 0 }"
+                                >
+                                    {{(pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) | currency}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
     
                 </mat-tab>
-                <mat-tab label="Profile"><app-settings></app-settings> </mat-tab>
                 <mat-tab label="Trades"> 
                     <div id="userTrades">
                         <div class="container-fluid">
@@ -73,6 +93,8 @@
 
                     </div>     
                 </mat-tab>
+                <mat-tab label="Profile"><app-settings></app-settings> </mat-tab>
+
 
             </mat-tab-group>
     
