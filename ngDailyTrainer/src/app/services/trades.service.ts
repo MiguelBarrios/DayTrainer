@@ -39,8 +39,7 @@ export class TradesService {
   }
 
   createTrade(trade:Trade){
-    var url = "http://localhost:8089/api/trades";
-    return this.http.post<Trade>(url, trade, this.getHttpOptions()).pipe(
+    return this.http.post<Trade>(this.url, trade, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error creating new Trade');
