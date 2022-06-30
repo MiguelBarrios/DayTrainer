@@ -48,13 +48,19 @@
 }
 
 #SingleStockViewPageContainer {
-    padding-top: 50px;
+    padding-top: 10px;
 }
-
 #searchBoxHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+
+#searchBoxHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .flash {
@@ -80,17 +86,24 @@
         margin: 0%;
     }
 
+    #searchBoxHeader {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
 
 }
 @media only screen and (min-width:576px) { 
+
+    #searchBoxHeader{
+        padding-top: 20px;
+    }
 
     #tradePageContainer h5{
         font-size: medium;
     }
 
-    #SingleStockViewPageContainer{
-        padding: 0%;
-    }
 
 
 }
