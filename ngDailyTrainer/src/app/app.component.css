@@ -1,5 +1,4 @@
-.footerComponent {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+
+@media only screen and (min-width:768px) { 
+
 }

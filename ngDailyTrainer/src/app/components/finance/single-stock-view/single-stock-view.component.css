@@ -3,10 +3,6 @@
     flex-direction: row;
 }
 
-#pageContent{
-    
-}
-
 #positionInfoContainer {
     display: flex;
     flex-direction: row;
@@ -52,15 +48,90 @@
 }
 
 #SingleStockViewPageContainer {
-    padding-top: 50px;
+    padding-top: 10px;
 }
-
 #searchBoxHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+
+#searchBoxHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
 .flash {
     text-shadow: 5px 5px 10px #53ce53;
 }
+
+
+
+@media only screen and (min-width:0px) { 
+
+    #tradePageContainer h5{
+        font-size: small;
+        font-weight: bold;
+    }
+    
+    #tradePageContainer h6{
+        font-size: small;
+    }
+
+
+    #tradePageContainer, #pageContent {
+        padding: 0px;
+        margin: 0%;
+    }
+
+    #searchBoxHeader {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+
+}
+@media only screen and (min-width:576px) { 
+
+    #searchBoxHeader{
+        padding-top: 20px;
+    }
+
+    #tradePageContainer h5{
+        font-size: medium;
+    }
+
+
+
+}
+
+@media only screen and (min-width:768px) { 
+
+    #tradePageContainer h5{
+        font-size: larger;
+    }
+
+    #tradePageContainer, #pageContent {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+}
+
+@media only screen and (min-width:992px) {
+    #tradePageContainer h5{
+        font-size: larger;
+    }
+
+
+
+ }
+
+@media only screen and (min-width:1200px) { }
+
+@media only screen and (min-width:1400px) { }

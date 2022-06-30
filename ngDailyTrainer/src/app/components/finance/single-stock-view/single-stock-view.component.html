@@ -1,21 +1,19 @@
-<div id="tradePageContainer" class="container-fluid">
-  <!-- <app-logged-in-nav></app-logged-in-nav> -->
-  <div id="pageContent" class="container-fluid">
+<div id="tradePageContainer">
+  <div id="pageContent">
     <div class="container" id="SingleStockViewPageContainer">
   
       <!--Search-->
       <div>
-        <!-- Top Movers
-              <app-top-movers>Loading ...</app-top-movers> -->
         <div id="searchBoxHeader">
-          <h1 id="selectedStock">{{quote?.symbol}}</h1>
           <div>
             <div id="searchBox">
-              <input class="form-control" type="search" name="searchTerm" placeholder="Search" aria-label="Search"
+              <input class="form-control" type="search" name="searchTerm" placeholder="Search Stocks" aria-label="Search"
                 [(ngModel)]="searchTerm"  (keyup.enter)="reload()">
               <button class="btn btn-outline-success" type="submit" (click)="reload()">Search</button>
             </div>
           </div>
+          <h1 id="selectedStock">{{quote?.symbol}}</h1>
+
   
         </div>
         <!-- Candle Chart Graph -->
