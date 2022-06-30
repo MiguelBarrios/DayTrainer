@@ -40,9 +40,6 @@ public class AuthSerivceImpl implements AuthService {
 		newAccount.setUser(user);
 		accountRepo.saveAndFlush(newAccount);
 		user.setAccount(newAccount);
-		
-		
-
 		return user;
 	}
 

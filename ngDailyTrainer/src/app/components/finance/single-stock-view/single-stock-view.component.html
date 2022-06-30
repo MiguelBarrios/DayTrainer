@@ -19,68 +19,28 @@
         <!-- Candle Chart Graph -->
         <app-candle-graph>Loading...</app-candle-graph>
         <!-- Stock Stats -->
-        <div id="stockStatsContainer" class="border">
+        <div id="stockStatsContainer" class="border stockStats3col">
           <div id="stockQuoteInfo">
-            <div>
-              <h5>Current</h5>
-              <h6 id="currentStockPrice">{{quote?.lastPrice| number:"1.2-2"}}</h6>
-            </div>
-            <div>
-              <h5>Open</h5>
-              <h6>{{quote?.openPrice| number:"1.2-2"}}</h6>
-            </div>
-            <div>
-              <h5>High</h5>
-              <h6>{{quote?.highPrice| number:"1.2-2"}}</h6>
-            </div>
-            <div>
-              <h5>Low</h5>
-              <h6>{{quote?.lowPrice| number:"1.2-2"}}</h6>
-            </div>
-  
+            <div><h5>Current</h5><h6 id="currentStockPrice">{{quote?.lastPrice| number:"1.2-2"}}</h6></div>
+            <div><h5>Open</h5><h6>{{quote?.openPrice| number:"1.2-2"}}</h6></div>
+            <div><h5>High</h5><h6>{{quote?.highPrice| number:"1.2-2"}}</h6></div>
+            <div><h5>Low</h5><h6>{{quote?.lowPrice| number:"1.2-2"}}</h6></div>
           </div>
-  
           <div id="stockStats" >
-            <div>
-              <h5>Change</h5>
-              <h6 [ngClass]="{'trendingDown': quote.netChange < 0, 'trendingUp' : quote.netChange > 0}"
-              > {{quote?.netChange| number:"1.2-2"}}</h6>
-            </div>
-            <div>
-              <h5>Volatility</h5>
-              <h6>{{quote?.volatility}}</h6>
-            </div>
-            <div>
-              <h5>52 Week High</h5>
-              <h6>{{quote?.WkHigh52| number:"1.2-2"}}</h6>
-            </div>
-            <div>
-              <h5>52 Week Low</h5>
-              <h6>{{quote?.WkLow52| number:"1.2-2"}}</h6>
-            </div>
-  
+            <div><h5>Change</h5><h6 [ngClass]="{'trendingDown': quote.netChange < 0, 'trendingUp' : quote.netChange > 0}"> {{quote?.netChange| number:"1.2-2"}}</h6></div>
+            <div><h5>Volatility</h5><h6>{{quote?.volatility}}</h6></div>
+            <div><h5>52 Week High</h5><h6>{{quote?.WkHigh52| number:"1.2-2"}}</h6></div>
+            <div><h5>52 Week Low</h5><h6>{{quote?.WkLow52| number:"1.2-2"}}</h6></div>
           </div>
-  
           <div id="stockStats2">
-            <div>
-              <h5>PE Ratio</h5>
-              <h6>{{quote?.peRatio| number:"1.2-2"}}</h6>
-            </div>
-            <div>
-              <h5>Dividend</h5>
-              <h6>{{quote?.divAmount| number:"1.2-2"}}</h6>
-            </div>
-            <div>
-              <h5>Dividend Yield</h5>
-              <h6>{{quote?.divYield| number:"1.2-2"}}</h6>
-            </div>
-            <div>
-              <h5>Dividend Date</h5>
-              <h6>{{quote?.divDate | date}}</h6>
-            </div>
+            <div><h5>PE Ratio</h5><h6>{{quote?.peRatio| number:"1.2-2"}}</h6></div>
+            <div><h5>Dividend</h5><h6>{{quote?.divAmount| number:"1.2-2"}}</h6></div>
+            <div><h5>Dividend Yield</h5><h6>{{quote?.divYield| number:"1.2-2"}}</h6></div>
+            <div><h5>Dividend Date</h5><h6>{{quote?.divDate | date}}</h6></div>
           </div>
         </div>
   
+        <!-- -------- -->
         <div id="userPositionInfo" class="border">
           <h1>Your Position</h1>
           <div id="positionInfoContainer">

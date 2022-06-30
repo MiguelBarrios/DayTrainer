@@ -26,10 +26,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepo;
 
 	@Autowired
-	private AccountRepository accRepo;
-
-	@Autowired
-	private CommentRepository commRepo;
+	private AccountRepository accountRepo;
 
 	@Autowired
 	private TradeService tradeService;
@@ -73,23 +70,22 @@ public class UserServiceImpl implements UserService {
 		Optional<User> op = userRepo.findById(userId);
 		if (currentUser != null && currentUser.getRole().equals("admin") && op.get() != null) {
 			User userToDelete = op.get();
-			accRepo.deleteById(userToDelete.getAccount().getId());
+			accountRepo.deleteById(userToDelete.getAccount().getId());
 			userRepo.delete(userToDelete);
 		}
 	}
 
 	@Override
-	public void payDay() {
-		List<User> allUsers = userRepo.findAll();
-		for (User user : allUsers) {
-			double currentBalance = user.getAccount().getBalance();
-			currentBalance += 200;
-			System.out.println(currentBalance);
-			user.getAccount().setBalance(currentBalance);
-			double deposits = user.getAccount().getDeposit() + 200;
-			user.getAccount().setDeposit(deposits);
-			accRepo.saveAndFlush(user.getAccount());
+	public void deposityFunds() {
+		List<Account> accounts = accountRepo.findAll();
+		for(Account account : accounts) {
+			double balance = account.getBalance() + 200;
+			account.setBalance(balance);
+			double deposits = account.getDeposit() + 200;
+			account.setDeposit(deposits);
 		}
+		
+		accountRepo.saveAllAndFlush(accounts);
 	}
 
 	@Override
@@ -126,7 +122,6 @@ public class UserServiceImpl implements UserService {
 			List<StockPosition> pos = tradeService.getUserPositions(user.getUsername());
 			user.setPassword(null);
 			double balance = user.getAccount().getBalance() - user.getAccount().getDeposit();
-//			System.out.printf("%s balance: %f  deposits: %f leaderBalance: %f", user.getUsername(), user.getAccount().getBalance(), user.getAccount().getDeposit(), balance);
 			LeaderBoardRanking cur = new LeaderBoardRanking(user, balance, pos);
 			rankings.add(cur);
 		}
@@ -134,43 +129,7 @@ public class UserServiceImpl implements UserService {
 		Map<String, Object> map = new HashMap<>();
 		map.put("data", rankings);
 		map.put("stocks", stocks);
-
 		return map;
-
-	}
-
-	@Override
-	public List<User> leadersList() {
-		List<User> temp = allUsers();
-		User first = new User();
-		first.setAccount(new Account());
-		first.getAccount().setBalance(3);
-		User second = new User();
-		second.setAccount(new Account());
-		second.getAccount().setBalance(2);
-		User third = new User();
-		third.setAccount(new Account());
-		third.getAccount().setBalance(1);
-		List<User> topThree = new ArrayList<>();
-		for (int i = 0; i < temp.size(); i++) {
-			User current = temp.get(i);
-			if (first.getAccount().getBalance() < current.getAccount().getBalance()) {
-				third = second;
-				second = first;
-				first = current;
-			} else if (second.getAccount().getBalance() < current.getAccount().getBalance()) {
-				third = second;
-				second = current;
-			} else if (third.getAccount().getBalance() < current.getAccount().getBalance()) {
-				third = current;
-			}
-
-		}
-		topThree.add(first);
-		topThree.add(second);
-		topThree.add(third);
-
-		return topThree;
 
 	}
 

@@ -116,8 +116,7 @@ public class UserController {
 	// cron = "* * 1 * * MON-FRI",zone = "GMT-5"
 	@Scheduled(fixedDelay = 7, timeUnit = TimeUnit.DAYS)
 	public void payDay() {
-		userSvc.payDay();
-		System.out.println("pay Day!!");
+		userSvc.deposityFunds();
 	}
 	
 	@GetMapping("users/{userId}/following")
