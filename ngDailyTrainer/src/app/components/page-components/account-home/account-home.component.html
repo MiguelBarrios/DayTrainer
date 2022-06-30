@@ -70,7 +70,7 @@
                                 <th scope="row">{{pos.symbol}}</th>
                                 <td>{{pos.numberOfShares}}</td>
                                 <td>{{pos.avgCostPerShare}}</td>
-                                <td [ngClass]="{'trendingUp': (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) <= 0, 'trendingDown' : (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) > 0 }"
+                                <td [ngClass]="{'trendingDown': (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) <= 0, 'trendingUp' : (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) > 0 }"
                                 >
                                     {{(pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) | currency}}
                                 </td>
