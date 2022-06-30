@@ -5,11 +5,11 @@
         <div id="tradeContainer" class="border">
             <div id="dataRow">
                 <div>
-                    <p>Funds: {{accountBalance}}</p>
+                    <p>Funds: {{accountBalance | currency}}</p>
                 </div>
                 <div>
 
-                    <p> Cost: {{totalCost}}</p>
+                    <p> Cost: {{totalCost | currency}}</p>
                 </div>
                 <div>
                     <p class="text-danger">{{errorSMS}}</p>
