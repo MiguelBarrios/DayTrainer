@@ -49,6 +49,7 @@ id:any | null = null;
 
   reload(){
     if(this.searchTerm.length > 0){
+      this.searchTerm = this.searchTerm.toUpperCase();
       this.router.navigateByUrl('/singleStockView/' + this.searchTerm);
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
