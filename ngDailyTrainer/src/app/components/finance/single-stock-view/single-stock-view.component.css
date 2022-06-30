@@ -3,10 +3,6 @@
     flex-direction: row;
 }
 
-#pageContent{
-    
-}
-
 #positionInfoContainer {
     display: flex;
     flex-direction: row;
@@ -64,3 +60,65 @@
 .flash {
     text-shadow: 5px 5px 10px #53ce53;
 }
+
+
+
+@media only screen and (min-width:0px) { 
+
+    #tradePageContainer h5{
+        font-size: small;
+        font-weight: bold;
+    }
+    
+    #tradePageContainer h6{
+        font-size: small;
+    }
+
+
+    #tradePageContainer, #pageContent {
+        padding: 0px;
+        margin: 0%;
+    }
+
+
+}
+@media only screen and (min-width:576px) { 
+
+    #tradePageContainer h5{
+        font-size: medium;
+    }
+
+    #SingleStockViewPageContainer{
+        padding: 0%;
+    }
+
+
+}
+
+@media only screen and (min-width:768px) { 
+
+    #tradePageContainer h5{
+        font-size: larger;
+    }
+
+    #tradePageContainer, #pageContent {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+}
+
+@media only screen and (min-width:992px) {
+    #tradePageContainer h5{
+        font-size: larger;
+    }
+
+
+
+ }
+
+@media only screen and (min-width:1200px) { }
+
+@media only screen and (min-width:1400px) { }
