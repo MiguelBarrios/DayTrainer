@@ -6,6 +6,7 @@
       <div>
         <div id="searchBoxHeader">
           <div>
+            <h6 *ngIf="unsuportedStockFlag" class="text-danger">Currently only stocks in the S&P 500 are supported</h6>
             <div id="searchBox">
               <input class="form-control" type="search" name="searchTerm" placeholder="Search Stocks" aria-label="Search"
                 [(ngModel)]="searchTerm"  (keyup.enter)="reload()">

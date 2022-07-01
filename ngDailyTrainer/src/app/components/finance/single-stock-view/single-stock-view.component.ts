@@ -4,9 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { Stock } from 'src/app/models/stock';
 import { StockPosition } from 'src/app/models/stock-position';
 import { TDAQuote } from 'src/app/models/tdaquote';
-import { TDAserviceService } from 'src/app/services/tdaservice.service';
 import { TradesService } from 'src/app/services/trades.service';
 import { TDAService } from 'src/app/services/tda.service';
+import { StockService } from 'src/app/services/stock.service';
 
 @Component({
   selector: 'app-single-stock-view',
@@ -24,14 +24,17 @@ quote:TDAQuote = new TDAQuote("",1,1,1,1,1,1,1,"",1,"",1,1,1,1,1);
 symbol = "";
 searchTerm = "";
 id:any | null = null;
+unsuportedStockFlag = false;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private tradesService: TradesService,
-    private tdaService:TDAserviceService, private tda:TDAService) { }
+    private tda:TDAService,
+    private stockService:StockService) { }
 
 
 
   ngOnInit(): void {
+      this.stockService.loadStocks();
       let symbol = this.route.snapshot.paramMap.get('symbol');
       if (symbol) {
         this.getQuote(symbol);
@@ -48,14 +51,19 @@ id:any | null = null;
   }
 
   reload(){
-    if(this.searchTerm.length > 0){
-      this.searchTerm = this.searchTerm.toUpperCase();
+    this.searchTerm = this.searchTerm.toUpperCase();
+    let stock = this.stockService.contains(this.searchTerm);
+
+    if(this.stockService.contains(this.searchTerm)){
+      this.unsuportedStockFlag = false;
       this.router.navigateByUrl('/singleStockView/' + this.searchTerm);
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate(['/singleStockView/' + this.searchTerm]);
     }
-
+    else{
+      this.unsuportedStockFlag = true; 
+    }
   }
 
   getUserPositionInfo(ticker:string){
@@ -105,6 +113,7 @@ id:any | null = null;
       document.getElementById("currentStockPrice")?.classList.remove("flash");
     }, 400);
   }
+
 }
 
 

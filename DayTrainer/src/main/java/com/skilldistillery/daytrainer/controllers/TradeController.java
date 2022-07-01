@@ -34,8 +34,6 @@ public class TradeController {
 	@Autowired 
 	private StockService stockService;
 	
-	@Autowired
-	private UserService userService;
 	
 	@GetMapping("trades")
 	public List<Trade> getUserTrades(Principal principal){

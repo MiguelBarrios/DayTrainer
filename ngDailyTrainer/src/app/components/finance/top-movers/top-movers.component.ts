@@ -25,7 +25,7 @@ export class TopMoversComponent implements OnInit {
 
   ngOnInit(): void {
 
-   this.getAllStocks();
+    this.getAvailableStocks();
     this.getTopMovers();
     this.id = setInterval(() => {
       this.getTopMovers();
@@ -58,12 +58,9 @@ export class TopMoversComponent implements OnInit {
     }
   }
 
-  getAllStocks() {
-    this.stockService.index().subscribe( data => {
-    this.stocks = data;
-    console.log("*** stock list retrieved");
-    }, (err) => { console.log(err);
-    console.log(this.stocks)});
+  getAvailableStocks() {
+    this.stocks = this.stockService.getStockList();
+    
 }
 
 onClickRow(stockSymbol: string|null) {
