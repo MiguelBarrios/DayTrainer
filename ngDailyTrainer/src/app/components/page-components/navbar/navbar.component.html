@@ -17,9 +17,9 @@
           <div *ngIf="loggedin">
             <a class="nav-link" [routerLink]="['/home']">Home</a>
             <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
-            <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leader Board</a>
+            <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leaderboard</a>
             <a class="nav-link" [routerLink]="['/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
-            <a class="nav-link" [routerLink]="['/topMovers']" tabindex="-1" aria-disabled="true">Top Movers</a>
+            <a class="nav-link" [routerLink]="['/topMovers']" tabindex="-1" aria-disabled="true">Browse Stocks</a>
           </div>
 
         </div>
@@ -35,10 +35,10 @@
             <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
           </li>
           <li class="nav-item" *ngIf="loggedin">
-            <a class="nav-link" [routerLink]="['/topMovers']" tabindex="-1" aria-disabled="true">Top Movers</a>
+            <a class="nav-link" [routerLink]="['/topMovers']" tabindex="-1" aria-disabled="true">Browse Stocks</a>
           </li>
           <li class="nav-item" *ngIf="loggedin">
-            <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leader Board</a>
+            <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leaderboard</a>
           </li>
           <li class="nav-item" *ngIf="loggedin">
             <a class="nav-link" [routerLink]="['/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
