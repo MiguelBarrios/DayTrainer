@@ -14,7 +14,7 @@ public interface UserService {
 
 	public void destroy(String name, int userId);
 
-	public void payDay();
+	public void deposityFunds();
 
 	public User getUserByUsername(String username);
 
@@ -24,11 +24,8 @@ public interface UserService {
 	
 	public List<User> allUsers();
 
-	public List<User> leadersList();
-
 	Map<String, Object> leaderBoard();
 	
-
 	public Double getBalance(String username);
 
 	public List<User> getFollowingList(int userId);

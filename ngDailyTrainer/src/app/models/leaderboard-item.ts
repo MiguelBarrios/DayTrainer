@@ -6,6 +6,7 @@ export class LeaderboardItem {
   username:string;
   totalNumberOfShares:number;
   portfolioValue:number;
+  totalReturn:number;
   constructor(
     userid:string,
     firstname:string,
@@ -13,7 +14,8 @@ export class LeaderboardItem {
     profilePicture:string,
     username:string,
     totalNumberOfShares:number,
-    portfolioValue:number
+    portfolioValue:number,
+    totalReturn:number,
   ){
     this.userid = userid;
     this.firstname = firstname;
@@ -22,5 +24,6 @@ export class LeaderboardItem {
     this.username = username;
     this.totalNumberOfShares = totalNumberOfShares;
     this.portfolioValue = portfolioValue;
+    this.totalReturn = totalReturn;
   }
 }

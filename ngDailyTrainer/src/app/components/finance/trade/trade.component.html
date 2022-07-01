@@ -43,11 +43,11 @@
                         <label class="text-danger">{{missingQuantitySMS}}</label>
                     </div>
 
-                    <div class="form-group col">
+                    <!-- <div class="form-group col">
                         <label>Symbol</label>
                         <input type="text" class="form-control" name="symbol" [(ngModel)]="newTrade.stock.symbol">
                         <label class="text-danger">{{missingSymbolSMS}}</label>
-                    </div>
+                    </div> -->
 
                     <div class="form-group col" id="submitTradeContainer">
                         <br>
@@ -63,20 +63,21 @@
             <table class="table border table-borderless" *ngIf="(userTrades | userTrades:symbol).length > 0">
                 <thead>
                     <tr class="border" class="tableData">
-                        <th scope="col">Symbol</th>
+                        <!-- <th scope="col">Symbol</th> -->
                         <th scope="col">Action</th>
                         <th scope="col">Quantity</th>
-                        <th scope="col">Purchase Price</th>
+                        <th scope="col">Price</th>
                         <th scope="col">Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let trade of userTrades.reverse() | userTrades:symbol" class="tableData">
-                        <td>{{trade.stock.symbol}}</td>
+                        <!-- <td>{{trade.stock.symbol}}</td> -->
                         <td>{{trade.buy | buySell}}</td>
                         <td>{{trade.quantity}}</td>
-                        <td>{{trade.pricePerShare | number:"1.2-2"}}</td>
-                        <td>{{trade.completionDate | date:'medium'}}</td>
+                        <td>{{trade.pricePerShare | currency}}</td>
+                        <td class="largeDate">{{trade.completionDate | date:'short'}}</td>
+                        <td class="mobileDate">{{trade.completionDate | date:'shortDate'}}</td>
                     </tr>
                 </tbody>
             </table>

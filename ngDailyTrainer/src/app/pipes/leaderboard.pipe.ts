@@ -8,7 +8,7 @@ export class LeaderboardPipe implements PipeTransform {
 
   transform(rankings: LeaderboardItem[], n:number): LeaderboardItem[] {
 
-    rankings.sort((a, b) => a.portfolioValue > b.portfolioValue ?  1 : 0);
+    rankings.sort((a, b) => a.totalReturn > b.totalReturn ?  -1 : 1);
     return rankings;
   }
 

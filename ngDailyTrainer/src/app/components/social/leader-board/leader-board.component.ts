@@ -88,7 +88,7 @@ export class LeaderBoardComponent implements OnInit {
           let lastname = arr[0].lastName;
           let pic = arr[0].profilePicture;
 
-          let ranking = new LeaderboardItem(userid,firstName, lastname, pic,username,totalNumberOfShares, userTotalProfit);
+          let ranking = new LeaderboardItem(userid,firstName, lastname, pic,username,totalNumberOfShares, 1,userTotalProfit);
           this.rankings.push(ranking);
         }
       }

@@ -15,7 +15,9 @@ export class StockService {
 private url = environment.baseUrl + 'api/stocks'
 stocks: Stock[] = [];
 
-  constructor(private http: HttpClient, private auth: AuthService) { }
+  constructor(private http: HttpClient, private auth: AuthService) { 
+
+  }
 
   getHttpOptions() {
     let options = {
@@ -27,12 +29,36 @@ stocks: Stock[] = [];
     return options;
   }
 
-  index() {
+  getStockList(){
+    return this.stocks;
+  }
+
+
+  loadStocks(){
+    this.getAvailableStocks().subscribe(
+      (data) => {
+        this.stocks = data;
+      },
+      (err) => {
+        console.log("Error getting stocks");
+      }
+    )
+  }
+
+  getAvailableStocks() {
     return this.http.get<Stock[]>(this.url, this.getHttpOptions()).pipe(
       catchError((err:any) => {
-        console.log(err);
-        return throwError(() => new Error('KABOOM - Stock list cannot be retrieved.'));
+        return throwError(() => new Error('Error getting stock list'));
       }));
 
-}
+  }
+
+  contains(symbol:string): boolean{
+    for(let stock of this.stocks){
+      if(stock.symbol == symbol){
+        return true;
+      }
+    }
+    return false;
+  }
 }
