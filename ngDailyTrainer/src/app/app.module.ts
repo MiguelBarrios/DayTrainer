@@ -39,6 +39,7 @@ import { UsersComponent } from './components/user-components/users/users.compone
 import { BuySellPipe } from './pipes/buy-sell.pipe';
 import { LeaderboardPipe } from './pipes/leaderboard.pipe';
 import { MoversPipe } from './pipes/movers.pipe';
+import { DashboardComponent } from './components/page-components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { MoversPipe } from './pipes/movers.pipe';
     LoggedInNavComponent,
     LeaderboardPipe,
     FreindDetailViewComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
