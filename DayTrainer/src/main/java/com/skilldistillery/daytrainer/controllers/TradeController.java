@@ -1,10 +1,15 @@
 package com.skilldistillery.daytrainer.controllers;
 
 import java.security.Principal;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+
+import com.skilldistillery.daytrainer.entities.StockPosition;
+import com.skilldistillery.daytrainer.entities.Trade;
+import com.skilldistillery.daytrainer.services.StockService;
+import com.skilldistillery.daytrainer.services.TDAService;
+import com.skilldistillery.daytrainer.services.TradeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,13 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.skilldistillery.daytrainer.entities.Position;
-import com.skilldistillery.daytrainer.entities.StockPosition;
-import com.skilldistillery.daytrainer.entities.Trade;
-import com.skilldistillery.daytrainer.services.StockService;
-import com.skilldistillery.daytrainer.services.TradeService;
-import com.skilldistillery.daytrainer.services.UserService;
 
 
 @RestController
@@ -33,6 +31,8 @@ public class TradeController {
 	
 	@Autowired 
 	private StockService stockService;
+	
+	
 	
 	
 	@GetMapping("trades")

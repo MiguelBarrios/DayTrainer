@@ -1,17 +1,18 @@
 package com.skilldistillery.daytrainer.services;
 
+import java.time.LocalDate;
 import java.util.Hashtable;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skilldistillery.daytrainer.Config;
 import com.skilldistillery.daytrainer.repository.StockRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class TDAService {
@@ -22,12 +23,20 @@ public class TDAService {
 	private String[] stocksSymbols = null;
 	Hashtable<String, String> table = new Hashtable<>();
 
-
 	private static String url ="https://api.tdameritrade.com/v1/marketdata/";
+
 	private final RestTemplate restTemplate;
 
 	public TDAService(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
+	}
+	
+	public boolean isMarketOpen() {
+		LocalDate date = LocalDate.now();
+		String today = date.toString();
+		String url = this.url + "EQUITY/hours/apikey=" + Config.getTDAKEY()  + "&date=" + today;
+		System.out.println(url);
+		return false;
 	}
 
 	public String getQuote(String symbol) {
@@ -58,7 +67,6 @@ public class TDAService {
 	
 	public String getQuotes(String symbols) {
 		symbols = symbols.toUpperCase();
-		//"https://api.tdameritrade.com/v1/marketdata/quotes?apikey=V6DTLTMJNGVWTXDOGACC59RLTM6NTQGH%40&symbol=A,QYLD"
 		String requestUrl = this.url + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + symbols;
 		System.out.println(requestUrl);
 		String json = this.restTemplate.getForObject(requestUrl, String.class);
