@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.controllers;
+package com.skilldistillery.daytrainer.comment;
 
 import java.security.Principal;
 import java.util.List;
@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.daytrainer.entities.Comment;
 import com.skilldistillery.daytrainer.entities.Trade;
-import com.skilldistillery.daytrainer.services.CommentService;
-import com.skilldistillery.daytrainer.services.TradeService;
+import com.skilldistillery.daytrainer.trade.TradeService;
 
 @RestController
 @RequestMapping("api")

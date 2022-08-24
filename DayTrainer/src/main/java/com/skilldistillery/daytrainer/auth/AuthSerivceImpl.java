@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.services;
+package com.skilldistillery.daytrainer.auth;
 
 import java.time.LocalDateTime;
 
@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.daytrainer.account.AccountRepository;
 import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.User;
-import com.skilldistillery.daytrainer.repository.AccountRepository;
-import com.skilldistillery.daytrainer.repository.UserRepository;
+import com.skilldistillery.daytrainer.user.UserRepository;
 
 @Service
 public class AuthSerivceImpl implements AuthService {

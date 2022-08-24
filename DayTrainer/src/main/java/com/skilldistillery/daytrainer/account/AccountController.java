@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.controllers;
+package com.skilldistillery.daytrainer.account;
 
 import java.security.Principal;
 
@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.skilldistillery.daytrainer.services.AccountService;
 
 @RequestMapping("api")
 @RestController

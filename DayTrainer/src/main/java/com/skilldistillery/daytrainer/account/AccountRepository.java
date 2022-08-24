@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.repository;
+package com.skilldistillery.daytrainer.account;
 
 import java.util.List;
 

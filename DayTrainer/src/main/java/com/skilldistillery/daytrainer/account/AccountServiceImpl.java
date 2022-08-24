@@ -1,11 +1,11 @@
-package com.skilldistillery.daytrainer.services;
+package com.skilldistillery.daytrainer.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.User;
-import com.skilldistillery.daytrainer.repository.UserRepository;
+import com.skilldistillery.daytrainer.user.UserRepository;
 
 @Service
 public class AccountServiceImpl implements AccountService {

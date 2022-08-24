@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.services;
+package com.skilldistillery.daytrainer.trade;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,16 +14,17 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.skilldistillery.daytrainer.account.AccountRepository;
 import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.QuoteWrapper;
 import com.skilldistillery.daytrainer.entities.Stock;
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
 import com.skilldistillery.daytrainer.entities.User;
-import com.skilldistillery.daytrainer.repository.AccountRepository;
-import com.skilldistillery.daytrainer.repository.StockRepository;
-import com.skilldistillery.daytrainer.repository.TradeRepository;
-import com.skilldistillery.daytrainer.repository.UserRepository;
+import com.skilldistillery.daytrainer.stock.StockRepository;
+import com.skilldistillery.daytrainer.stock.StockService;
+import com.skilldistillery.daytrainer.tda.TDAService;
+import com.skilldistillery.daytrainer.user.UserRepository;
 
 @Service
 public class TradeServiceImple implements TradeService {

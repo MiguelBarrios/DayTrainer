@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.services;
+package com.skilldistillery.daytrainer.comment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.daytrainer.entities.Comment;
 import com.skilldistillery.daytrainer.entities.Trade;
-import com.skilldistillery.daytrainer.repository.CommentRepository;
 
 @Service
 public class CommentServiceImpl implements CommentService {

@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.services;
+package com.skilldistillery.daytrainer.auth;
 
 import com.skilldistillery.daytrainer.entities.User;
 

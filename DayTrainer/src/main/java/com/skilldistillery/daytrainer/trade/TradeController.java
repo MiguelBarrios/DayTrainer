@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.controllers;
+package com.skilldistillery.daytrainer.trade;
 
 import java.security.Principal;
 import java.util.List;
@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
-import com.skilldistillery.daytrainer.services.StockService;
-import com.skilldistillery.daytrainer.services.TDAService;
-import com.skilldistillery.daytrainer.services.TradeService;
+import com.skilldistillery.daytrainer.stock.StockService;
+import com.skilldistillery.daytrainer.tda.TDAService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

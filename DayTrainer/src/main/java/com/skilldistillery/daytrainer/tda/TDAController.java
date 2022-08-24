@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.controllers;
+package com.skilldistillery.daytrainer.tda;
 
 import java.security.Principal;
 import java.util.concurrent.TimeUnit;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.skilldistillery.daytrainer.services.TDAService;
 
 @RestController
 @RequestMapping("api")

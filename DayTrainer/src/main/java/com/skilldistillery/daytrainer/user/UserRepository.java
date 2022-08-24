@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.repository;
+package com.skilldistillery.daytrainer.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

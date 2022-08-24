@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.controllers;
+package com.skilldistillery.daytrainer.stock;
 
 import java.security.Principal;
 import java.util.List;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.daytrainer.entities.Stock;
-import com.skilldistillery.daytrainer.services.StockService;
 
 @RestController
 @RequestMapping("api")

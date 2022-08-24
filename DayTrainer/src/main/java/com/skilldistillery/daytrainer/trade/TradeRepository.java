@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.repository;
+package com.skilldistillery.daytrainer.trade;
 
 import java.util.List;
 

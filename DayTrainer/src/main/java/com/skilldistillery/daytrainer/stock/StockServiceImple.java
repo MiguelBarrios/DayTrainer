@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.services;
+package com.skilldistillery.daytrainer.stock;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.daytrainer.entities.Stock;
 import com.skilldistillery.daytrainer.entities.Trade;
 import com.skilldistillery.daytrainer.entities.User;
-import com.skilldistillery.daytrainer.repository.StockRepository;
-import com.skilldistillery.daytrainer.repository.UserRepository;
+import com.skilldistillery.daytrainer.user.UserRepository;
 
 @Service
 public class StockServiceImple implements StockService {

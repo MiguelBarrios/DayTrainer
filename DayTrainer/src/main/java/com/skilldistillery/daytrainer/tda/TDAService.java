@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.services;
+package com.skilldistillery.daytrainer.tda;
 
 import java.time.LocalDate;
 import java.util.Hashtable;
@@ -7,7 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skilldistillery.daytrainer.Config;
-import com.skilldistillery.daytrainer.repository.StockRepository;
+import com.skilldistillery.daytrainer.stock.StockRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;

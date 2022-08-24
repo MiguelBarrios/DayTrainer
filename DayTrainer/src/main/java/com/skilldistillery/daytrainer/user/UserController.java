@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.controllers;
+package com.skilldistillery.daytrainer.user;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.daytrainer.entities.Comment;
 import com.skilldistillery.daytrainer.entities.User;
-import com.skilldistillery.daytrainer.services.UserService;
 
 @RequestMapping("api")
 @RestController

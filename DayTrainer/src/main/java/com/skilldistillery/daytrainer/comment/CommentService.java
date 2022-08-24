@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.services;
+package com.skilldistillery.daytrainer.comment;
 
 import java.util.List;
 import com.skilldistillery.daytrainer.entities.Comment;

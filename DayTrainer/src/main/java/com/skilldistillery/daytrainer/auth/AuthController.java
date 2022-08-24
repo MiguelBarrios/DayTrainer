@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.controllers;
+package com.skilldistillery.daytrainer.auth;
 
 import java.security.Principal;
 
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.daytrainer.entities.User;
-import com.skilldistillery.daytrainer.services.AuthService;
 
 
 @RestController

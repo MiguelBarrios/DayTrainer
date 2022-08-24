@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.services;
+package com.skilldistillery.daytrainer.user;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,15 +9,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.daytrainer.account.AccountRepository;
+import com.skilldistillery.daytrainer.comment.CommentRepository;
 import com.skilldistillery.daytrainer.entities.Account;
 import com.skilldistillery.daytrainer.entities.Comment;
 import com.skilldistillery.daytrainer.entities.LeaderBoardRanking;
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.User;
-import com.skilldistillery.daytrainer.repository.AccountRepository;
-import com.skilldistillery.daytrainer.repository.CommentRepository;
-import com.skilldistillery.daytrainer.repository.TradeRepository;
-import com.skilldistillery.daytrainer.repository.UserRepository;
+import com.skilldistillery.daytrainer.trade.TradeRepository;
+import com.skilldistillery.daytrainer.trade.TradeService;
 
 @Service
 public class UserServiceImpl implements UserService {

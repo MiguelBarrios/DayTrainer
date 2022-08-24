@@ -1,4 +1,4 @@
-package com.skilldistillery.daytrainer.services;
+package com.skilldistillery.daytrainer.user;
 
 import java.util.List;
 import java.util.Map;
