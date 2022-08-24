@@ -36,6 +36,12 @@ public class TDAService {
 	private LocalDate lastDate = null;
 	private LocalDateTime marketOpen = null;
 	private LocalDateTime marketClose = null;
+	
+	// So that get market hours request will run on first run
+	{
+		this.lastDate = LocalDate.now();
+		this.lastDate = this.lastDate.minusDays(1);
+	}
 
 	public TDAService(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
@@ -43,7 +49,8 @@ public class TDAService {
 	
 	public boolean isMarketOpen() {
 		LocalDate today = LocalDate.now();
-		if(lastDate == null || marketOpen == null || marketClose == null || !lastDate.isEqual(today)) {
+		if(!lastDate.isEqual(today)) {
+			System.out.println("Market hours updated");
 			lastDate = today;
 			JsonNode json = this.getMarketHours();
 			json = json.get("sessionHours");
@@ -55,33 +62,30 @@ public class TDAService {
 			this.marketClose = LocalDateTime.parse(regularMarketClose,formatter);
 			
 		}
-		else {
-			LocalDateTime now = LocalDateTime.now();
-			if(now.isAfter(marketOpen) && now.isBefore(marketClose)){
-				System.out.println("Market is open");
-			}
-			else {
-				System.out.println("Market is Closed");
-			}
-			
+		
+		LocalDateTime now = LocalDateTime.now();
+		boolean isOpen = false;
+		if(now.isAfter(marketOpen) && now.isBefore(marketClose)){
+			isOpen = true;
 		}
-		return false;
+		
+		return isOpen;
 	}
 	
 	public JsonNode getMarketHours() {
 		String url = this.url + "EQUITY/hours?apikey=" + Config.getTDAKEY()  + "&date=" + LocalDate.now().toString();
 		String json = this.restTemplate.getForObject(url, String.class);
 		ObjectMapper mapper = new ObjectMapper();
+		
+		JsonNode marketHours = null;
 		try {
 			JsonNode jsonNode = mapper.readTree(json);
-			JsonNode marketHours = jsonNode.get("equity").get("EQ");
-
-			return marketHours;
-			
+			marketHours = jsonNode.get("equity").get("EQ");			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
+		return marketHours;
 
 	}
 
@@ -119,7 +123,12 @@ public class TDAService {
 	}
 	
 	public void updateQuotesAll() {
-		System.out.println("Quotes updated");
+		if(!this.isMarketOpen()) {
+			System.out.println("Market is closed: quotes not updated");
+			return;
+		}
+		
+		System.out.println("Updating all Quotes");
 		if(this.stocksSymbols == null) {
 			List<String> symbols = this.stockRepo.getAllSymbols();
 			String[] symbolLists = {
