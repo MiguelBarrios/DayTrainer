@@ -13,7 +13,7 @@ import { MatCardModule} from '@angular/material/card';
 import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { FormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -86,7 +86,7 @@ import { DashboardComponent } from './components/page-components/dashboard/dashb
     NgApexchartsModule,
     MatTabsModule,
   ],
-  providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe],
+  providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe, CurrencyPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
