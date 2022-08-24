@@ -1,10 +1,10 @@
 package com.skilldistillery.daytrainer.tda;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,32 +19,61 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class TDAService {
+	
+	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
 
 	@Autowired
 	private StockRepository stockRepo;
 	
 	private String[] stocksSymbols = null;
+	
 	Hashtable<String, String> table = new Hashtable<>();
 
 	private static String url ="https://api.tdameritrade.com/v1/marketdata/";
 
 	private final RestTemplate restTemplate;
+	
+	private LocalDate lastDate = null;
+	private LocalDateTime marketOpen = null;
+	private LocalDateTime marketClose = null;
 
 	public TDAService(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
 	}
 	
-	public JsonNode isMarketOpen() {
-		LocalDate date = LocalDate.now();
-		String today = date.toString();
-		String url = this.url + "EQUITY/hours?apikey=" + Config.getTDAKEY()  + "&date=" + today;
+	public boolean isMarketOpen() {
+		LocalDate today = LocalDate.now();
+		if(lastDate == null || marketOpen == null || marketClose == null || !lastDate.isEqual(today)) {
+			lastDate = today;
+			JsonNode json = this.getMarketHours();
+			json = json.get("sessionHours");
+			JsonNode regularMarketHours = json.get("regularMarket").get(0);
+			String regularMarketOpen = regularMarketHours.get("start").asText();
+			String regularMarketClose = regularMarketHours.get("end").asText();
+
+			this.marketOpen = LocalDateTime.parse(regularMarketOpen, formatter);
+			this.marketClose = LocalDateTime.parse(regularMarketClose,formatter);
+			
+		}
+		else {
+			LocalDateTime now = LocalDateTime.now();
+			if(now.isAfter(marketOpen) && now.isBefore(marketClose)){
+				System.out.println("Market is open");
+			}
+			else {
+				System.out.println("Market is Closed");
+			}
+			
+		}
+		return false;
+	}
+	
+	public JsonNode getMarketHours() {
+		String url = this.url + "EQUITY/hours?apikey=" + Config.getTDAKEY()  + "&date=" + LocalDate.now().toString();
 		String json = this.restTemplate.getForObject(url, String.class);
 		ObjectMapper mapper = new ObjectMapper();
-		Map<String, String> map = new HashMap<>();
-		String isOpen = "false";
 		try {
 			JsonNode jsonNode = mapper.readTree(json);
-			isOpen = jsonNode.get("equity").get("EQ").get("isOpen").toString();
 			JsonNode marketHours = jsonNode.get("equity").get("EQ");
 
 			return marketHours;
@@ -85,12 +114,12 @@ public class TDAService {
 	public String getQuotes(String symbols) {
 		symbols = symbols.toUpperCase();
 		String requestUrl = this.url + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + symbols;
-		System.out.println(requestUrl);
 		String json = this.restTemplate.getForObject(requestUrl, String.class);
 		return json;
 	}
 	
 	public void updateQuotesAll() {
+		System.out.println("Quotes updated");
 		if(this.stocksSymbols == null) {
 			List<String> symbols = this.stockRepo.getAllSymbols();
 			String[] symbolLists = {

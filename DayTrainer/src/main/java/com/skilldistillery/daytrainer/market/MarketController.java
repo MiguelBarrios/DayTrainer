@@ -21,9 +21,10 @@ public class MarketController {
 	@Autowired
 	private TDAService tdaService;
 	
-	@RequestMapping("isopen")
+	@RequestMapping("hours")
 	public JsonNode isMarketOpen(HttpServletResponse response) {
-		JsonNode data = tdaService.isMarketOpen();
+		tdaService.isMarketOpen();
+		JsonNode data = tdaService.getMarketHours();
 		if(data == null) {
 			response.setStatus(404);
 		}
