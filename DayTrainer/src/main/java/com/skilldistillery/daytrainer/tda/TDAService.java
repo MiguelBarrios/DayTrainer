@@ -37,8 +37,8 @@ public class TDAService {
 	private LocalDateTime marketOpen = null;
 	private LocalDateTime marketClose = null;
 	
-	// So that get market hours request will run on first run
 	{
+		// So that get market hours request will run on first run
 		this.lastDate = LocalDate.now();
 		this.lastDate = this.lastDate.minusDays(1);
 	}
@@ -92,9 +92,10 @@ public class TDAService {
 	public String getQuote(String symbol) {
 		symbol = symbol.toUpperCase();
 		if(table.containsKey(symbol)) {
+			System.out.println("Quote requested: " + symbol + " " + table.get(symbol));
 			return table.get(symbol);
 		}else {
-			System.err.println("Non smp 500 quote requested");
+			System.err.println("Non smp 500 quote requested: " + symbol);
 			String requestUrl = url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
 			String json = this.restTemplate.getForObject(requestUrl, String.class);
 			String quote = null;
@@ -115,6 +116,10 @@ public class TDAService {
 
 	}
 	
+	public boolean isInitialized() {
+		return this.table.size() > 0;
+	}
+	
 	public String getQuotes(String symbols) {
 		symbols = symbols.toUpperCase();
 		String requestUrl = this.url + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + symbols;
@@ -123,12 +128,7 @@ public class TDAService {
 	}
 	
 	public void updateQuotesAll() {
-		if(!this.isMarketOpen()) {
-			System.out.println("Market is closed: quotes not updated");
-			return;
-		}
 		
-		System.out.println("Updating all Quotes");
 		if(this.stocksSymbols == null) {
 			List<String> symbols = this.stockRepo.getAllSymbols();
 			String[] symbolLists = {
@@ -165,7 +165,6 @@ public class TDAService {
 				}
 			}				
 		}
-
 	
 	}
 	
