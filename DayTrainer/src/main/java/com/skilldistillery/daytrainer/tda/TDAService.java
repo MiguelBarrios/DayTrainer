@@ -1,9 +1,12 @@
 package com.skilldistillery.daytrainer.tda;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skilldistillery.daytrainer.Config;
@@ -31,12 +34,26 @@ public class TDAService {
 		this.restTemplate = restTemplateBuilder.build();
 	}
 	
-	public boolean isMarketOpen() {
+	public JsonNode isMarketOpen() {
 		LocalDate date = LocalDate.now();
 		String today = date.toString();
-		String url = this.url + "EQUITY/hours/apikey=" + Config.getTDAKEY()  + "&date=" + today;
-		System.out.println(url);
-		return false;
+		String url = this.url + "EQUITY/hours?apikey=" + Config.getTDAKEY()  + "&date=" + today;
+		String json = this.restTemplate.getForObject(url, String.class);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, String> map = new HashMap<>();
+		String isOpen = "false";
+		try {
+			JsonNode jsonNode = mapper.readTree(json);
+			isOpen = jsonNode.get("equity").get("EQ").get("isOpen").toString();
+			JsonNode marketHours = jsonNode.get("equity").get("EQ");
+
+			return marketHours;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	public String getQuote(String symbol) {
