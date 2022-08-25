@@ -50,9 +50,11 @@ public class TDAService {
 	public boolean isMarketOpen() {
 		LocalDate today = LocalDate.now();
 		if(!lastDate.isEqual(today)) {
-			System.out.println("Market hours updated");
 			lastDate = today;
+
 			JsonNode json = this.getMarketHours();
+
+
 			json = json.get("sessionHours");
 			JsonNode regularMarketHours = json.get("regularMarket").get(0);
 			String regularMarketOpen = regularMarketHours.get("start").asText();
@@ -60,7 +62,6 @@ public class TDAService {
 
 			this.marketOpen = LocalDateTime.parse(regularMarketOpen, formatter);
 			this.marketClose = LocalDateTime.parse(regularMarketClose,formatter);
-			
 		}
 		
 		LocalDateTime now = LocalDateTime.now();
@@ -73,10 +74,16 @@ public class TDAService {
 	}
 	
 	public JsonNode getMarketHours() {
-		String url = this.url + "EQUITY/hours?apikey=" + Config.getTDAKEY()  + "&date=" + LocalDate.now().toString();
+		
+		LocalDate today = LocalDate.now();
+		if(LocalDateTime.now().getHour() >= 20) {
+			today = today.plusDays(1);
+		}
+		
+		String url = this.url + "EQUITY/hours?apikey=" + Config.getTDAKEY()  + "&date=" + today.toString();
 		String json = this.restTemplate.getForObject(url, String.class);
 		ObjectMapper mapper = new ObjectMapper();
-		
+
 		JsonNode marketHours = null;
 		try {
 			JsonNode jsonNode = mapper.readTree(json);

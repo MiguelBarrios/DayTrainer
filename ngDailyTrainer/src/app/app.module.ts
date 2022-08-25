@@ -17,7 +17,6 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { SingleStockViewComponent } from './components/finance/single-stock-view/single-stock-view.component';
 import { TopMoversComponent } from './components/finance/top-movers/top-movers.component';
 import { TradeComponent } from './components/finance/trade/trade.component';
 import { TradesComponent } from './components/finance/trades/trades.component';
@@ -41,6 +40,8 @@ import { LeaderboardPipe } from './pipes/leaderboard.pipe';
 import { MoversPipe } from './pipes/movers.pipe';
 import { DashboardComponent } from './components/page-components/dashboard/dashboard.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MarketService } from './services/market.service';
+import { SingleStockViewComponent } from './components/finance/single-stock-view/single-stock-view.component';
 
 
 @NgModule({
@@ -50,7 +51,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     PortfolioChartComponent,
     LeaderBoardComponent,
     FilterTablePipe,
-    SingleStockViewComponent,
     HomepageComponent,
     AccountHomeComponent,
     NavbarComponent,
@@ -72,6 +72,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     LeaderboardPipe,
     FreindDetailViewComponent,
     DashboardComponent,
+    SingleStockViewComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +90,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatTabsModule,
     MatSnackBarModule
   ],
-  providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe, CurrencyPipe],
+  providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe, CurrencyPipe, MarketService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

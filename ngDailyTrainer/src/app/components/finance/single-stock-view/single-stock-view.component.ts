@@ -8,9 +8,9 @@ import { TradesService } from 'src/app/services/trades.service';
 import { TDAService } from 'src/app/services/tda.service';
 import { StockService } from 'src/app/services/stock.service';
 import { NONE_TYPE } from '@angular/compiler';
-import { MarketService } from 'src/app/services/market.service';
 import { JsonPipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MarketService } from 'src/app/services/market.service';
 
 @Component({
   selector: 'app-single-stock-view',
@@ -32,6 +32,9 @@ unsuportedStockFlag = false;
 
 marketOpen: Date  = new Date(2000, 1);
 marketClose: Date = new Date(2000, 2);
+
+
+
 
   constructor(private router: Router, private route: ActivatedRoute,
     private tradesService: TradesService, private tda:TDAService,
