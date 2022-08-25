@@ -10,3 +10,4 @@ bin
 *.bak
 
 Config.java
+RemoteSystemsTempFiles/*

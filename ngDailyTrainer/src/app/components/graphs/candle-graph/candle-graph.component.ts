@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DatePipe, formatDate } from '@angular/common';
+import {CurrencyPipe, DatePipe, formatDate } from '@angular/common';
 
 import * as dayjs from 'dayjs'
 
@@ -37,14 +37,16 @@ export class CandleGraphComponent implements OnInit {
   symbol = "";
   isLoaded = false;
 
+
   ngOnInit(): void {
   }
   constructor(private router:Router, private route: ActivatedRoute,
-    private tdaService:TDAserviceService, private tda:TDAService, private datePipe:DatePipe) {
+    private tdaService:TDAserviceService, private tda:TDAService, private datePipe:DatePipe, private currencyPipe: CurrencyPipe) {
 let symbol = this.route.snapshot.paramMap.get('symbol');
 if (symbol) {
   this.getCandles(symbol);
 }
+
 }
   loadData(){
     this.chartOptions = {
@@ -72,6 +74,11 @@ if (symbol) {
       },
       yaxis: {
         type: 'category',
+        labels: {
+          formatter: function(val: any) {
+            return Math.round(val * 100) / 100
+          }
+        }
       },
       noData: {
         text: "No data text",

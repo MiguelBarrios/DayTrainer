@@ -13,7 +13,7 @@ import { MatCardModule} from '@angular/material/card';
 import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { FormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -39,6 +39,9 @@ import { UsersComponent } from './components/user-components/users/users.compone
 import { BuySellPipe } from './pipes/buy-sell.pipe';
 import { LeaderboardPipe } from './pipes/leaderboard.pipe';
 import { MoversPipe } from './pipes/movers.pipe';
+import { DashboardComponent } from './components/page-components/dashboard/dashboard.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -68,6 +71,7 @@ import { MoversPipe } from './pipes/movers.pipe';
     LoggedInNavComponent,
     LeaderboardPipe,
     FreindDetailViewComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,8 +87,9 @@ import { MoversPipe } from './pipes/movers.pipe';
     MatGridListModule,
     NgApexchartsModule,
     MatTabsModule,
+    MatSnackBarModule
   ],
-  providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe],
+  providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe, CurrencyPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

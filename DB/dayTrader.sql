@@ -265,7 +265,7 @@ INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('GOOGL', 'Alphabet Inc 
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('AMZN', 'Amazon.Com Inc.', 'Consumer Discretionary');
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('TSLA', 'Tesla Inc', 'Consumer Discretionary');
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('BRK.B', 'Berkshire Hathaway Inc. Class B', 'Financials');
-INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('FB', 'Facebook Inc Class A', 'Communication Services');
+INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('META', 'Facebook Inc Class A', 'Communication Services');
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('V', 'Visa Inc Class A', 'Information Technology');
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('NVDA', 'Nvidia Corp', 'Information Technology');
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('JNJ', 'Johnson & Johnson', 'Health Care');
@@ -525,7 +525,6 @@ INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('CTRA', 'Coterra Energy
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('AME', 'Ametek Inc', 'Industrials');
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('SIVB', 'SVB Financial Group', 'Financials');
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('AWK', 'American Water Works Inc', 'Utilities');
-INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('CERN', 'Cerner Corp', 'Health Care');
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('FANG', 'Diamondback Energy Inc', 'Energy');
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('VRSK', 'Verisk Analytics Inc', 'Industrials');
 INSERT INTO `stock` (`symbol`, `name`, `sector`) VALUES ('CPRT', 'Copart Inc', 'Industrials');
@@ -781,11 +780,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `dailytrainerdb`;
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (1, 1000.00, 1, 500, 1, 1000);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (2, 1500, 1, 600, 2, 1500);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (3, 4000, 1, 500, 3, 4000);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (4, 200, 1, 500, 4, 200);
-INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (5, 500, 1, 500, 5, 500);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (1, 10000.00, 1, 0, 1, 10000.00);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (2, 10000.00, 1, 0, 2, 10000.00);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (3, 10000.00, 1, 0, 3, 10000.00);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (4, 10000.00, 1, 0, 4, 10000.00);
+INSERT INTO `account` (`id`, `balance`, `margin_enable`, `margin_amount`, `user_id`, `deposit`) VALUES (5, 10000.00, 1, 0, 5, 10000.00);
 
 COMMIT;
 

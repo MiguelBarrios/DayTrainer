@@ -22,6 +22,10 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedin = this.loggedIn();
+    if(this.loggedIn()){
+      this.router.navigateByUrl('/accounthome');
+    }
+
   }
 
   loggedIn():boolean{
