@@ -69,7 +69,7 @@
                             <tr *ngFor="let pos of userPositions">
                                 <th scope="row">{{pos.symbol}}</th>
                                 <td>{{pos.numberOfShares}}</td>
-                                <td>{{pos.avgCostPerShare}}</td>
+                                <td>{{pos.avgCostPerShare | currency}}</td>
                                 <td [ngClass]="{'trendingDown': (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) <= 0, 'trendingUp' : (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) > 0 }"
                                 >
                                     {{(pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) | currency}}
