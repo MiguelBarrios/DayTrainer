@@ -38,9 +38,10 @@ unsuportedStockFlag = false;
       let symbol = this.route.snapshot.paramMap.get('symbol');
       if (symbol) {
         this.getQuote(symbol);
-       this.id = setInterval(() => {
-        this.getQuote(symbol);
-       }, 10000);
+        this.id = setInterval(() => {
+          this.getQuote(symbol);
+          this.flashPriceChange();
+       }, 10000 / 2);
       }
     }
 
@@ -96,7 +97,6 @@ unsuportedStockFlag = false;
             this.quote.WkHigh52 = data[high];
             this.quote.WkLow52 = data[low];
             this.getUserPositionInfo(symbol);
-            this.flashPriceChange();
 
         },
         (error) => {
@@ -108,10 +108,10 @@ unsuportedStockFlag = false;
   }
 
   flashPriceChange(){
-    document.getElementById("currentStockPrice")?.classList.add("flash");
+    document.getElementById("currentStockPrice")?.classList.add("text-warning", "font-weight-bold");  //flash
     setTimeout(function(){
-      document.getElementById("currentStockPrice")?.classList.remove("flash");
-    }, 400);
+      document.getElementById("currentStockPrice")?.classList.remove("text-warning", "font-weight-bold");
+    }, 700);
   }
 
 }

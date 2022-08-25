@@ -7,6 +7,7 @@ import { Trade } from 'src/app/models/trade';
 import { UsersService } from 'src/app/services/users.service';
 import { SingleStockViewComponent } from '../single-stock-view/single-stock-view.component';
 import { AccountService } from 'src/app/services/account.service';
+import { MarketService } from 'src/app/services/market.service';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class TradeComponent implements OnInit {
   constructor( private route: ActivatedRoute,private date:DatePipe, private tradeService: TradesService,
     private ssv:SingleStockViewComponent,
     private userService:UsersService, 
-    private accountService:AccountService) { }
+    private accountService:AccountService,
+    private marketService:MarketService) { }
 
 
   ngOnInit(): void {
@@ -47,6 +49,19 @@ export class TradeComponent implements OnInit {
     if(this.symbol){
       this.newTrade.stock.symbol = this.symbol;
     }
+
+    this.getMarketHours();
+  }
+
+  getMarketHours(){
+    this.marketService.getMarketHours().subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
   updateExtimate(){

@@ -41,13 +41,8 @@ public class TDAController {
 	public void refreshQuotes() {
 		if(!tdaService.isMarketOpen()) {
 			if(!tdaService.isInitialized()) {
-				System.out.println("table initilized");
 				tdaService.updateQuotesAll();
 			}
-			else {
-				System.out.println("Market is closed: Quotes not updated");	
-			}
-			
 		}
 		else {
 			System.out.println("Quotes updated");
