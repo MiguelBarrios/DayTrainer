@@ -40,6 +40,8 @@ import { BuySellPipe } from './pipes/buy-sell.pipe';
 import { LeaderboardPipe } from './pipes/leaderboard.pipe';
 import { MoversPipe } from './pipes/movers.pipe';
 import { DashboardComponent } from './components/page-components/dashboard/dashboard.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -85,6 +87,7 @@ import { DashboardComponent } from './components/page-components/dashboard/dashb
     MatGridListModule,
     NgApexchartsModule,
     MatTabsModule,
+    MatSnackBarModule
   ],
   providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe, CurrencyPipe],
   bootstrap: [AppComponent],

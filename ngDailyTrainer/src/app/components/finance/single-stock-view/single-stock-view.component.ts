@@ -10,6 +10,7 @@ import { StockService } from 'src/app/services/stock.service';
 import { NONE_TYPE } from '@angular/compiler';
 import { MarketService } from 'src/app/services/market.service';
 import { JsonPipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-single-stock-view',
@@ -33,11 +34,9 @@ marketOpen: Date  = new Date(2000, 1);
 marketClose: Date = new Date(2000, 2);
 
   constructor(private router: Router, private route: ActivatedRoute,
-    private tradesService: TradesService,
-    private tda:TDAService,
-    private stockService:StockService, private marketService: MarketService) { }
-
-
+    private tradesService: TradesService, private tda:TDAService,
+    private stockService:StockService, private marketService: MarketService,
+    private _snackBar:MatSnackBar) { }
 
   ngOnInit(): void {
       this.refreshMarketHours();
@@ -45,12 +44,13 @@ marketClose: Date = new Date(2000, 2);
       let symbol = this.route.snapshot.paramMap.get('symbol');
       if (symbol) {
         this.getQuote(symbol);
+
         this.id = setInterval(() => {
           if( this.marketIsOpen() || this.quote.symbol == ""){
             this.getQuote(symbol);
             this.flashPriceChange();
           }          
-       }, 15000 / 4);
+       }, 15000);
       }
     }
 
@@ -65,7 +65,7 @@ marketClose: Date = new Date(2000, 2);
     let day = today.getDay();
     let open = this.marketOpen?.getDay();
 
-    if(this.marketOpen == null || this.marketClose == null || day != open){
+    if(day != open){
       this.refreshMarketHours();
     }
 
@@ -157,7 +157,6 @@ marketClose: Date = new Date(2000, 2);
             this.quote.WkHigh52 = data[high];
             this.quote.WkLow52 = data[low];
             this.getUserPositionInfo(symbol);
-
         },
         (error) => {
           console.error("Error getting quote");
@@ -172,6 +171,10 @@ marketClose: Date = new Date(2000, 2);
     setTimeout(function(){
       document.getElementById("currentStockPrice")?.classList.remove("text-warning", "font-weight-bold");
     }, 700);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
 }

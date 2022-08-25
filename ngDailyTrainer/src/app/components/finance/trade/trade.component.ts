@@ -8,6 +8,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { SingleStockViewComponent } from '../single-stock-view/single-stock-view.component';
 import { AccountService } from 'src/app/services/account.service';
 import { MarketService } from 'src/app/services/market.service';
+import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
 
 
 @Component({
@@ -90,6 +91,13 @@ export class TradeComponent implements OnInit {
 
 
   submitTrade(){
+
+    if(!this.ssv.marketIsOpen()){
+      console.log("Market is closed");
+      this.ssv.openSnackBar('Market is closed','x');
+      return;
+    }
+
     if(this.totalCost > this.accountBalance){
       console.error("Incuficiunt funds");
       return;
