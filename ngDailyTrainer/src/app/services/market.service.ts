@@ -25,7 +25,7 @@ export class MarketService {
 
   getMarketHours(){
     var url = this.baseurl + "/hours";
-    return this.http.get<JSON>(url, this.getHttpOptions()).pipe(
+    return this.http.get<string>(url, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

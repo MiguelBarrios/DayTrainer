@@ -7,6 +7,9 @@ import { TDAQuote } from 'src/app/models/tdaquote';
 import { TradesService } from 'src/app/services/trades.service';
 import { TDAService } from 'src/app/services/tda.service';
 import { StockService } from 'src/app/services/stock.service';
+import { NONE_TYPE } from '@angular/compiler';
+import { MarketService } from 'src/app/services/market.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-single-stock-view',
@@ -26,22 +29,28 @@ searchTerm = "";
 id:any | null = null;
 unsuportedStockFlag = false;
 
+marketOpen: Date  = new Date(2000, 1);
+marketClose: Date = new Date(2000, 2);
+
   constructor(private router: Router, private route: ActivatedRoute,
     private tradesService: TradesService,
     private tda:TDAService,
-    private stockService:StockService) { }
+    private stockService:StockService, private marketService: MarketService) { }
 
 
 
   ngOnInit(): void {
+      this.refreshMarketHours();
       this.stockService.loadStocks();
       let symbol = this.route.snapshot.paramMap.get('symbol');
       if (symbol) {
         this.getQuote(symbol);
         this.id = setInterval(() => {
-          this.getQuote(symbol);
-          this.flashPriceChange();
-       }, 10000 / 2);
+          if( this.marketIsOpen() || this.quote.symbol == ""){
+            this.getQuote(symbol);
+            this.flashPriceChange();
+          }          
+       }, 15000 / 4);
       }
     }
 
@@ -50,6 +59,57 @@ unsuportedStockFlag = false;
          clearInterval(this.id);
        }
   }
+
+  marketIsOpen(): boolean{
+    let today = new Date();
+    let day = today.getDay();
+    let open = this.marketOpen?.getDay();
+
+    if(this.marketOpen == null || this.marketClose == null || day != open){
+      this.refreshMarketHours();
+    }
+
+    let now = new Date();
+
+    return now.getTime() >= this.marketOpen.getTime() &&
+           now.getTime() <= this.marketClose.getTime();
+
+  }
+
+  parseDate(dateStr:string): Date {
+    let arr = dateStr.split("T");
+    let tokens = arr[0].split('-');
+
+    let year = parseInt(tokens[0])
+    let month = parseInt(tokens[1]) - 1;
+    let day = parseInt(tokens[2]);
+
+    tokens = arr[1].split(':');
+    let hour = parseInt(tokens[0]);
+    let minute = parseInt(tokens[1]);
+    
+    return new Date(year, month, day, hour, minute);
+  }
+
+  refreshMarketHours(){
+    this.marketService.getMarketHours().subscribe(
+      (data) => {
+        console.log("getMarketHours()");
+        let jsonString = JSON.stringify(data);
+        let obj = JSON.parse(jsonString);
+        let regularMarketHours = obj['sessionHours']['regularMarket'][0];
+        let marketOpen = regularMarketHours['start'];
+        let marketClose = regularMarketHours['end'];
+
+       this.marketOpen = this.parseDate(marketOpen.substring(0,19));
+       this.marketClose = this.parseDate(marketClose.substring(0,19));
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
 
   reload(){
     this.searchTerm = this.searchTerm.toUpperCase();
@@ -108,7 +168,7 @@ unsuportedStockFlag = false;
   }
 
   flashPriceChange(){
-    document.getElementById("currentStockPrice")?.classList.add("text-warning", "font-weight-bold");  //flash
+    document.getElementById("currentStockPrice")?.classList.add("text-warning", "font-weight-bold");  
     setTimeout(function(){
       document.getElementById("currentStockPrice")?.classList.remove("text-warning", "font-weight-bold");
     }, 700);

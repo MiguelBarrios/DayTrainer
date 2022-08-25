@@ -38,8 +38,7 @@ export class TradeComponent implements OnInit {
   constructor( private route: ActivatedRoute,private date:DatePipe, private tradeService: TradesService,
     private ssv:SingleStockViewComponent,
     private userService:UsersService, 
-    private accountService:AccountService,
-    private marketService:MarketService) { }
+    private accountService:AccountService) { }
 
 
   ngOnInit(): void {
@@ -50,19 +49,8 @@ export class TradeComponent implements OnInit {
       this.newTrade.stock.symbol = this.symbol;
     }
 
-    this.getMarketHours();
   }
 
-  getMarketHours(){
-    this.marketService.getMarketHours().subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
-  }
 
   updateExtimate(){
 

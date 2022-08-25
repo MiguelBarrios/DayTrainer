@@ -23,13 +23,15 @@ public class MarketController {
 	private TDAService tdaService;
 	
 	@GetMapping("hours")
-	public JsonNode isMarketOpen(HttpServletResponse response) {
+	public String isMarketOpen(HttpServletResponse response) {
 		tdaService.isMarketOpen();
 		JsonNode data = tdaService.getMarketHours();
 		if(data == null) {
 			response.setStatus(404);
 		}
-		return data;
+		System.out.println(data.toString());
+		System.out.println(data.textValue());
+		return data.toString();
 		
 	}
 
