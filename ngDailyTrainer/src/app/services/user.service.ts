@@ -14,19 +14,8 @@ export class UserService {
   private url = environment.baseUrl + 'api/users'
 
   constructor(private http: HttpClient, private auth: AuthService) { }
-
-  getHttpOptions() {
-    let options = {
-      headers: {
-        Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    };
-    return options;
-  }
-
 index() {
-  return this.http.get<User[]>(this.url, this.getHttpOptions()).pipe(
+  return this.http.get<User[]>(this.url, this.auth.getHttpOptions()).pipe(
     catchError((err:any) => {
       console.log(err);
       return throwError(() => new Error('KABOOM - Stock list cannot be retrieved.'));
@@ -34,7 +23,7 @@ index() {
 }
 
 getLeaders() {
-  return this.http.get<User[]>(this.url + '/leaders', this.getHttpOptions()).pipe(
+  return this.http.get<User[]>(this.url + '/leaders', this.auth.getHttpOptions()).pipe(
     catchError((err:any) => {
       console.log(err);
       return throwError(() => new Error('KABOOM - Stock list cannot be retrieved.'));
@@ -42,7 +31,7 @@ getLeaders() {
 }
 
  getLeaderBoard(){
-  return this.http.get<User[]>(this.url + '/leaders', this.getHttpOptions()).pipe(
+  return this.http.get<User[]>(this.url + '/leaders', this.auth.getHttpOptions()).pipe(
     catchError((err:any) => {
       console.log(err);
       return throwError(() => new Error('KABOOM - Stock list cannot be retrieved.'));

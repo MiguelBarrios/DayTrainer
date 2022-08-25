@@ -13,18 +13,8 @@ export class UsersService {
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
-  getHttpOptions() {
-    let options = {
-      headers: {
-        Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    };
-    return options;
-  }
-
 getUserByUsername(){
-  return this.http.get<User>(this.url + '/' +'name' +'/'+ localStorage.getItem('username'), this.getHttpOptions()).pipe(
+  return this.http.get<User>(this.url + '/' +'name' +'/'+ localStorage.getItem('username'), this.auth.getHttpOptions()).pipe(
     catchError((err: any) => {
       console.log(err);
       return throwError('Error creating new Trade');
@@ -33,7 +23,7 @@ getUserByUsername(){
 }
 
 update(user:User){
-  return this.http.put<User>(this.url, user, this.getHttpOptions()).pipe(
+  return this.http.put<User>(this.url, user, this.auth.getHttpOptions()).pipe(
     catchError((err: any) => {
       console.log(err);
       return throwError('Error creating new Trade');
@@ -42,7 +32,7 @@ update(user:User){
 }
 
 getAllUsers(){
-  return this.http.get<User[]>(this.url, this.getHttpOptions()).pipe(
+  return this.http.get<User[]>(this.url, this.auth.getHttpOptions()).pipe(
     catchError((err: any) => {
       console.log(err);
       return throwError('Error creating new Trade');
@@ -51,7 +41,7 @@ getAllUsers(){
 }
 
 delete(id:number){
-  return this.http.delete<void>(this.url+ '/'+ id, this.getHttpOptions()).pipe(
+  return this.http.delete<void>(this.url+ '/'+ id, this.auth.getHttpOptions()).pipe(
     catchError((err: any) => {
       console.log(err);
       return throwError('Error creating new Trade');
@@ -60,7 +50,7 @@ delete(id:number){
 }
 
 getUserFollowingList(userId: number) {
-  return this.http.get<User[]>(this.url + '/' + userId +  '/following', this.getHttpOptions()).pipe(
+  return this.http.get<User[]>(this.url + '/' + userId +  '/following', this.auth.getHttpOptions()).pipe(
     catchError((err: any) => {
       console.log(err);
       return throwError('Error creating new Trade');
@@ -69,7 +59,7 @@ getUserFollowingList(userId: number) {
   }
 
   getUserWithUsername(username:string){
-    return this.http.get<User>(this.url +'/' +'name/'+ username, this.getHttpOptions()).pipe(
+    return this.http.get<User>(this.url +'/' +'name/'+ username, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error finding username with username');

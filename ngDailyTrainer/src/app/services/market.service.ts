@@ -13,19 +13,9 @@ export class MarketService {
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
-  getHttpOptions() {
-    let options = {
-      headers: {
-        Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    };
-    return options;
-  }
-
   getMarketHours(){
     var url = this.baseurl + "/hours";
-    return this.http.get<string>(url, this.getHttpOptions()).pipe(
+    return this.http.get<string>(url, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('KABOOM');

@@ -13,18 +13,8 @@ export class AccountService {
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
-  getHttpOptions() {
-    let options = {
-      headers: {
-        Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    };
-    return options;
-  }
-
   getUserAccountBalance() {
-      return this.http.get<number>(this.url + 'users/accountbalance', this.getHttpOptions()).pipe(
+      return this.http.get<number>(this.url + 'users/accountbalance', this.auth.getHttpOptions()).pipe(
         catchError((err:any) => {
           console.log(err);
           return throwError(() => new Error('Error getting user account balance'));
@@ -33,7 +23,7 @@ export class AccountService {
   }
 
   getUserAccountDeposits(){
-    return this.http.get<number>(this.url + 'account/depositsum', this.getHttpOptions()).pipe(
+    return this.http.get<number>(this.url + 'account/depositsum', this.auth.getHttpOptions()).pipe(
       catchError((err:any) => {
         return throwError(() => new Error('Error getting user account deposits'));
       })

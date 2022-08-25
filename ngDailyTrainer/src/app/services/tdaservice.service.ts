@@ -13,16 +13,6 @@ export class TDAserviceService {
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
-  getHttpOptions() {
-    let options = {
-      headers: {
-        Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    };
-    return options;
-  }
-
   getStockStats(symbol:string){
     var targetUrl = this.url + symbol + "/quotes?apikey=V6DTLTMJNGVWTXDOGACC59RLTM6NTQGH%40";
     return this.http.get<Object>(targetUrl).pipe(

@@ -16,19 +16,9 @@ export class TDAService {
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
-  getHttpOptions() {
-    let options = {
-      headers: {
-        Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    };
-    return options;
-  }
-
   getQuote(symbol:string){
     var url =   this.url + "/quote/" + symbol;
-    return this.http.get<TDAQuote>(url, this.getHttpOptions()).pipe(
+    return this.http.get<TDAQuote>(url, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error in TDAService.getQuote()');

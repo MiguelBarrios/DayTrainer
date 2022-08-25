@@ -18,16 +18,6 @@ export class TradesService {
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
-  getHttpOptions() {
-    let options = {
-      headers: {
-        Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    };
-    return options;
-  }
-
   topMovers(){
     var url = "https://api.tdameritrade.com/v1/marketdata/$COMPX/movers?apikey=V6DTLTMJNGVWTXDOGACC59RLTM6NTQGH%40";
     return this.http.get<Movers[]>(url).pipe(
@@ -39,7 +29,7 @@ export class TradesService {
   }
 
   createTrade(trade:Trade){
-    return this.http.post<Trade>(this.url, trade, this.getHttpOptions()).pipe(
+    return this.http.post<Trade>(this.url, trade, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error creating new Trade');
@@ -48,7 +38,7 @@ export class TradesService {
   }
 
   getUserTrades(){
-    return this.http.get<Trade[]>(this.url,this.getHttpOptions()).pipe(
+    return this.http.get<Trade[]>(this.url, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error in getUserTrades() request');
@@ -58,7 +48,7 @@ export class TradesService {
 
   getStockPosition(symbol:string){
     var url = this.url + "/position/" + symbol;
-    return this.http.get<StockPosition>(url, this.getHttpOptions()).pipe(
+    return this.http.get<StockPosition>(url, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error in getStockPosition() request');
@@ -68,7 +58,7 @@ export class TradesService {
 
   getUserPositions(){
     var url = this.url + "/position";
-    return this.http.get<StockPosition[]>(url, this.getHttpOptions()).pipe(
+    return this.http.get<StockPosition[]>(url, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error in getuserPositions() request');
@@ -78,7 +68,7 @@ export class TradesService {
 
   getFriendsTrade(username:string){
     var url = this.url + "/users/" + username;
-    return this.http.get<Trade[]>(url, this.getHttpOptions()).pipe(
+    return this.http.get<Trade[]>(url, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         return throwError('Error in getuserPositions() request');
       })

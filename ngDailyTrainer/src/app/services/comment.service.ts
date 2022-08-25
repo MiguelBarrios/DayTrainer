@@ -15,18 +15,8 @@ export class CommentService {
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
-  getHttpOptions() {
-    let options = {
-      headers: {
-        Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    };
-    return options;
-  }
-
   index(trades:Trade[]) {
-    return this.http.get<Comment[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<Comment[]>(this.url, this.auth.getHttpOptions()).pipe(
       catchError((err:any) => {
         console.log(err);
         return throwError(() => new Error('KABOOM - comment list cannot be retrieved.'));

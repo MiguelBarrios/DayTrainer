@@ -15,19 +15,7 @@ export class StockService {
 private url = environment.baseUrl + 'api/stocks'
 stocks: Stock[] = [];
 
-  constructor(private http: HttpClient, private auth: AuthService) { 
-
-  }
-
-  getHttpOptions() {
-    let options = {
-      headers: {
-        Authorization: 'Basic ' + this.auth.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    };
-    return options;
-  }
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
   getStockList(){
     return this.stocks;
@@ -46,7 +34,7 @@ stocks: Stock[] = [];
   }
 
   getAvailableStocks() {
-    return this.http.get<Stock[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<Stock[]>(this.url, this.auth.getHttpOptions()).pipe(
       catchError((err:any) => {
         return throwError(() => new Error('Error getting stock list'));
       }));
