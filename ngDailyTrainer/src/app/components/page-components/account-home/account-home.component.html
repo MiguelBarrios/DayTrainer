@@ -1,39 +1,101 @@
 
 
-    <!--Main Navigation-->
-    <div id="accountHomeContainerMain">
+<div id="accounthome-container" class="container-fluid">
 
-        <div id="accountHomeContainerContent" class="container-fluid">
-
-            <div id="accountHomeTopContainer">
-                <div>
-                    <div id="accountHomeContainerUpper">
-                        <div id="accountHomeContainerUpperRight">
-                            <div class="col">
-                                <div class="team-member">
-                                    
-                                    <img *ngIf="user.profilePicture" class="mx-auto rounded-circle" src="{{user.profilePicture}}" alt="assets/img/profilePic.png" />
-                                    <img *ngIf="!user.profilePicture" class="mx-auto rounded-circle" src="assets/img/profilePic.png" alt="assets/img/profilePic.png"/>
-                                    <h4 class="pt-3">{{user.firstName +' '+ user.lastName}}</h4>
-                                    <p class="text-muted">Member Since: {{user.createdAt | date}} <br> Account Type: {{user.role | uppercase}}
-                                        <br> Bio: {{user.biography}}
-                                    </p>
-                                </div>
-                            </div>
+        <!-- Member info Container -->
+        <div class="col-xl-2 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Account</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                         </div>
                     </div>
                 </div>
-                <div id="portChartContainer">
-
-                    <app-portfolio-chart></app-portfolio-chart>
-                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div id="userInfoContainer">
+                        <div>
+                            <img *ngIf="user.profilePicture" class="mx-auto rounded-circle profileImage shadow-sm img-fluid" src="{{user.profilePicture}}" alt="assets/img/profilePic.png" />
+                            <!-- <img *ngIf="!user.profilePicture" class="mx-auto rounded-circle profileImage" src="assets/img/profilePic.png" alt="assets/img/profilePic.png" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/> -->
+                        </div>
+                        <div id="userInfoData">
     
+                            <h5 class="mb-0">{{user.firstName +' '+ user.lastName}}</h5>
+                            <h3 class="small text-uppercase text-muted">Member Since: {{user.createdAt | date}}</h3>
+    
+                            <h6 class="small text-uppercase text-muted">{{user.biography}}</h6>
+                        </div>
+                    </div>
+    
+                    <div class="mt-4 text-center small">
+                        <button type="button"  class="btn btn-warning">Update info</button>
+                    </div>
+                </div>
             </div>
+        </div>
+
+    <!-- Pie Chart Container -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Portfolio</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Dropdown Header:</div>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <!-- <canvas id="myPieChart" width="580" height="392" style="display: block; height: 245px; width: 363px;" class="chartjs-render-monitor"></canvas> -->
+                    <app-portfolio-chart></app-portfolio-chart>
+
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-primary"></i> Direct
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-success"></i> Social
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-info"></i> Referral
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
+    
+
+    
 
 
+</div> <!-- End div -->
+    
+
+<!--
+
+
+    <div id="accountHomeContainerMain">
+
+        <div id="accountHomeContainerContent" class="container-fluid">
 
             <mat-tab-group mat-align-tabs="center">
                 <mat-tab label="Stocks"> 
@@ -118,4 +180,5 @@
     </div>
         
 
+-->
 

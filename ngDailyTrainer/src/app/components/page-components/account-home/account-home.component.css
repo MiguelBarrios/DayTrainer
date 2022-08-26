@@ -1,3 +1,23 @@
+#userInfoContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profileImage{
+    width: 8rem;
+    height: 8rem;
+}
+
+#userInfoData{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Old CSS */
+
+
 #Header {
     color: black;
 }
@@ -56,9 +76,7 @@
     justify-content: space-around;
 }
 
-#portChartContainer{
-    padding-top: 20px;
-}
+
 
 
 #userTrades{
