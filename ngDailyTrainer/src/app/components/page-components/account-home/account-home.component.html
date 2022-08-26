@@ -1,257 +1,178 @@
-
-
-<div id="accounthome-container" class="container-fluid">
-    
-
-        <!-- Member info Container -->
-        <div class="col-xl-2 col-lg-5">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Account</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        </div>
-                    </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div id="userInfoContainer">
-                        <div>
-                            <img *ngIf="user.profilePicture" class="mx-auto rounded-circle profileImage shadow-sm img-fluid" src="{{user.profilePicture}}" alt="assets/img/profilePic.png" />
-                            <!-- <img *ngIf="!user.profilePicture" class="mx-auto rounded-circle profileImage" src="assets/img/profilePic.png" alt="assets/img/profilePic.png" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"/> -->
-                        </div>
-                        <div id="userInfoData">
-    
-                            <h5 class="mb-0">{{user.firstName +' '+ user.lastName}}</h5>
-                            <h3 class="small text-uppercase text-muted">Member Since: {{user.createdAt | date}}</h3>
-    
-                            <h6 class="small text-uppercase text-muted">{{user.biography}}</h6>
-                        </div>
-                    </div>
-    
-                    <div class="mt-4 text-center small">
-                        <button type="button"  class="btn btn-warning">Update info</button>
-                    </div>
-                </div>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+      <div class="profile-nav col-md-3">
+        <div class="panel">
+          <div class="user-heading round">
+            <a href="#">
+              <img *ngIf="user.profilePicture" src="{{user.profilePicture}}" alt="assets/img/profilePic.png" />
+              <img *ngIf="!user.profilePicture" src="assets/img/profilePic.png" alt="assets/img/profilePic.png" />
+            </a>
+            <h1 class="large text-uppercase">{{user.firstName +' '+ user.lastName}}</h1>
+            <h3 class="small text-uppercase">Member Since: {{user.createdAt | date}}</h3>
+            <p>{{user.biography}}</p>
+          </div>
         </div>
-
-    <!-- Pie Chart Container -->
-    <div class="col-xl-4 col-lg-5">
-        <div class="card shadow mb-4">
+      </div>
+    </div>
+    <!-- Content Row -->
+    <div class="row">
+      <!-- Portfolio Value -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Portfolio Value</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{portfolioCurrentValue + accountBalance | currency}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Purchasing Power -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Purchasing Power</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800"> {{accountBalance | currency}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Total Invested Value -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Invested Value </div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800"> {{portfolioCurrentValue | currency}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- PROTFOLIO VALUE CONTAINER -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">RETURN</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  <p [ngClass]="{'trendingUp': (portfolioCurrentValue + accountBalance) - accountDeposits > 0, 'trendingDown' : (portfolioCurrentValue + accountBalance) - accountDeposits < 0 }">
+                    {{(portfolioCurrentValue + accountBalance) - accountDeposits | currency}}
+                  </p>
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Content Row -->
+      <div class="row">
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-5">
+          <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Portfolio</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
+              <h6 class="m-0 font-weight-bold text-primary">Portfolio</h6>
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                    <!-- <canvas id="myPieChart" width="580" height="392" style="display: block; height: 245px; width: 363px;" class="chartjs-render-monitor"></canvas> -->
-                    <app-portfolio-chart></app-portfolio-chart>
-
+              <div class="chart-pie pt-4 pb-2">
+                <div class="chartjs-size-monitor">
+                  <div class="chartjs-size-monitor-expand">
+                    <div class=""></div>
+                  </div>
+                  <div class="chartjs-size-monitor-shrink">
+                    <div class=""></div>
+                  </div>
                 </div>
-                <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                </div>
+                <app-portfolio-chart></app-portfolio-chart>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-
-    <!-- TRADE HISTORY CONTAINER -->
-    <div class="col-xl-5 col-lg-5">
-        <div class="card shadow mb-4">
+      </div>
+      <div class="row">
+        <!-- Positions -->
+        <div class="col-xl-8 col-lg-7">
+          <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">TRADE HISTORY</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                    </div>
-                </div>
+              <h6 class="m-0 font-weight-bold text-primary">Positions</h6>
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div id="userTrades">
-                    <div class="container-fluid">
-                        <table class="table table-hover">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col" >Symbol</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Action</th>
-                                    <th scope="col">Time</th>
-                                    <th scope="col">Price Per Share</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let trade of trades">
-                                    <th scope="row">{{trade.stock.symbol}}</th>
-                                    <td>{{trade.orderType.name }}</td>
-                                    <td>{{trade.buy | buySell}}</td>
-                                    <td>{{trade.createdAt | date}}</td>
-                                    <td>{{trade.pricePerShare | currency}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                </div>  
+              <table class="table table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Avg Price</th>
+                    <th scope="col">Return</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pos of userPositions">
+                    <th scope="row">{{pos.symbol}}</th>
+                    <td>{{pos.numberOfShares}}</td>
+                    <td>{{pos.avgCostPerShare | currency}}</td>
+                    <td [ngClass]="{'trendingDown': (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) <= 0, 'trendingUp' : (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) > 0 }">
+                      {{(pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) | currency}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
-    </div>
-
-    <!-- USER POSITION CONTAINER -->
-    <div class="col-xl-5 col-lg-5">
-        <div class="card shadow mb-4">
+        <!-- Trade History -->
+        <div class="col-xl-8 col-lg-7">
+          <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">POSITIONS</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                    </div>
-                </div>
+              <h6 class="m-0 font-weight-bold text-primary">Trade History</h6>
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <table class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col" >Symbol</th>
-                            <th scope="col">Shares</th>
-                            <th scope="col">Avg Price</th>
-                            <th scope="col">Return</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let pos of userPositions">
-                            <th scope="row">{{pos.symbol}}</th>
-                            <td>{{pos.numberOfShares}}</td>
-                            <td>{{pos.avgCostPerShare | currency}}</td>
-                            <td [ngClass]="{'trendingDown': (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) <= 0, 'trendingUp' : (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) > 0 }"
-                            >
-                                {{(pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) | currency}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                
+              <table class="table table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Price Per Share</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let trade of trades">
+                    <th scope="row">{{trade.stock.symbol}}</th>
+                    <td>{{trade.orderType.name }}</td>
+                    <td>{{trade.buy | buySell}}</td>
+                    <td>{{trade.createdAt | date}}</td>
+                    <td>{{trade.pricePerShare | currency}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
-    </div>
-
-    <!-- PROTFOLIO VALUE CONTAINER -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Portfolio Value</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{portfolioCurrentValue + accountBalance | currency}}</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PROTFOLIO VALUE CONTAINER -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">RETURN</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            <p [ngClass]="{'trendingUp': (portfolioCurrentValue + accountBalance) - accountDeposits > 0, 'trendingDown' : (portfolioCurrentValue + accountBalance) - accountDeposits < 0 }">
-                                {{(portfolioCurrentValue + accountBalance) - accountDeposits | currency}}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PURCHASING POWER -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Purchasing Power</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            <p class="trendingUp">
-                                {{accountBalance | currency}}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PURCHASING POWER -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Invested Value</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            <p class="trendingUp">
-                                {{portfolioCurrentValue | currency}}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    
-
-</div> <!-- End div -->
-
+      </div>
