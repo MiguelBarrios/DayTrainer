@@ -5,7 +5,6 @@ import { SingleStockViewComponent } from './components/finance/single-stock-view
 import { TopMoversComponent } from './components/finance/top-movers/top-movers.component';
 import { TradesComponent } from './components/finance/trades/trades.component';
 import { AccountHomeComponent } from './components/page-components/account-home/account-home.component';
-import { DashboardComponent } from './components/page-components/dashboard/dashboard.component';
 import { HomepageComponent } from './components/page-components/homepage/homepage.component';
 import { NotfoundComponent } from './components/page-components/notfound/notfound.component';
 import { SettingsComponent } from './components/page-components/settings/settings.component';
@@ -32,7 +31,6 @@ const routes: Routes = [
   {path:  'users', component: UsersComponent},
   {path:  'trades', component: TradesComponent},
   {path:  'friendView/:username', component: FreindDetailViewComponent},
-  {path:  'dashboard2', component:DashboardComponent},
   {path:  '**', component: NotfoundComponent},
 
 ];
