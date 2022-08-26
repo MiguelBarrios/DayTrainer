@@ -1,6 +1,7 @@
 
 
 <div id="accounthome-container" class="container-fluid">
+    
 
         <!-- Member info Container -->
         <div class="col-xl-2 col-lg-5">
@@ -125,72 +126,132 @@
             </div>
         </div>
     </div>
+
+    <!-- USER POSITION CONTAINER -->
+    <div class="col-xl-5 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">POSITIONS</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" >Symbol</th>
+                            <th scope="col">Shares</th>
+                            <th scope="col">Avg Price</th>
+                            <th scope="col">Return</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let pos of userPositions">
+                            <th scope="row">{{pos.symbol}}</th>
+                            <td>{{pos.numberOfShares}}</td>
+                            <td>{{pos.avgCostPerShare | currency}}</td>
+                            <td [ngClass]="{'trendingDown': (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) <= 0, 'trendingUp' : (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) > 0 }"
+                            >
+                                {{(pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) | currency}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- PROTFOLIO VALUE CONTAINER -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Portfolio Value</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{portfolioCurrentValue + accountBalance | currency}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROTFOLIO VALUE CONTAINER -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">RETURN</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <p [ngClass]="{'trendingUp': (portfolioCurrentValue + accountBalance) - accountDeposits > 0, 'trendingDown' : (portfolioCurrentValue + accountBalance) - accountDeposits < 0 }">
+                                {{(portfolioCurrentValue + accountBalance) - accountDeposits | currency}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PURCHASING POWER -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Purchasing Power</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <p class="trendingUp">
+                                {{accountBalance | currency}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PURCHASING POWER -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Invested Value</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <p class="trendingUp">
+                                {{portfolioCurrentValue | currency}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     
 
 </div> <!-- End div -->
-    
-
-<!--
-
-
-    <div id="accountHomeContainerMain">
-
-        <div id="accountHomeContainerContent" class="container-fluid">
-
-            <mat-tab-group mat-align-tabs="center">
-                <mat-tab label="Stocks"> 
-                    <div id="portfolioStats">
-                        <div>
-                            <p>Portfolio: {{portfolioCurrentValue + accountBalance | currency}}</p>
-                        </div>
-                        <div>
-                            <p>Cash: {{accountBalance | currency}}</p>
-     
-                        </div>
-                        <div>
-                            <p>Stocks: {{portfolioCurrentValue | currency}}</p>
-                        </div>
-                        <div>
-                            <p [ngClass]="{'trendingUp': (portfolioCurrentValue + accountBalance) - accountDeposits > 0, 'trendingDown' : (portfolioCurrentValue + accountBalance) - accountDeposits < 0 }">
-                                Return: {{(portfolioCurrentValue + accountBalance) - accountDeposits | currency}}
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col" >Symbol</th>
-                                <th scope="col">Shares</th>
-                                <th scope="col">Avg Price</th>
-                                <th scope="col">Return</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let pos of userPositions">
-                                <th scope="row">{{pos.symbol}}</th>
-                                <td>{{pos.numberOfShares}}</td>
-                                <td>{{pos.avgCostPerShare | currency}}</td>
-                                <td [ngClass]="{'trendingDown': (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) <= 0, 'trendingUp' : (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) > 0 }"
-                                >
-                                    {{(pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) | currency}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-    
-                </mat-tab>
-                <mat-tab label="Profile"><app-settings></app-settings> </mat-tab>
-
-
-            </mat-tab-group>
-    
-
-        </div>
-        
-    </div>
-        
-
--->
 
