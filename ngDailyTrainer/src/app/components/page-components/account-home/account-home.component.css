@@ -383,3 +383,18 @@ ul.summary-list > li:last-child  {
 .activity-desk .album a:last-child{
     margin-right: 0px;
 }
+
+
+/* RESPONSIVE */
+@media only screen and (min-width:768px) { 
+
+    .profile-nav .user-heading {
+        background: #fbc02d;
+        color: #fff;
+        border-radius: 4px 4px 0 0;
+        -webkit-border-radius: 4px 4px 0 0;
+        padding: 30px;
+        text-align: center;
+    }
+    
+}

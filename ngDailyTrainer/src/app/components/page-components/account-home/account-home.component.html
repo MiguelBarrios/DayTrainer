@@ -1,6 +1,8 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="profile-nav col-md-3">
+
+    <div class="row mb-4">
+      <div class="profile-nav ">
+        <!-- HERE -->
         <div class="panel">
           <div class="user-heading round">
             <a href="#">
@@ -10,10 +12,12 @@
             <h1 class="large text-uppercase">{{user.firstName +' '+ user.lastName}}</h1>
             <h3 class="small text-uppercase">Member Since: {{user.createdAt | date}}</h3>
             <p>{{user.biography}}</p>
+            <button class="btn btn-light">update</button>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Content Row -->
     <div class="row">
       <!-- Portfolio Value -->
@@ -38,7 +42,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Purchasing Power</div>
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Purchasing Power</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800"> {{accountBalance | currency}}</div>
               </div>
               <div class="col-auto">
@@ -54,7 +58,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Invested Value </div>
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Invested Value </div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800"> {{portfolioCurrentValue | currency}}</div>
               </div>
               <div class="col-auto">
@@ -152,26 +156,33 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-              <table class="table table-hover">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">Symbol</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Action</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Price Per Share</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let trade of trades">
-                    <th scope="row">{{trade.stock.symbol}}</th>
-                    <td>{{trade.orderType.name }}</td>
-                    <td>{{trade.buy | buySell}}</td>
-                    <td>{{trade.createdAt | date}}</td>
-                    <td>{{trade.pricePerShare | currency}}</td>
-                  </tr>
-                </tbody>
-              </table>
+                
+                <div class="table-responsive table-responsive-sm">
+                    <table class="table table-sm table-hover">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Shares</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Avg Cost</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let trade of trades">
+                            <th scope="row">{{trade.stock.symbol}}</th>
+                            <td>{{trade.buy | buySell}}</td>
+                            <td>{{trade.quantity}}</td>
+                            <td>{{trade.createdAt | date:'L-dd'}}</td>
+                            <td>{{trade.pricePerShare | currency}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+
+
+
+
             </div>
           </div>
         </div>
