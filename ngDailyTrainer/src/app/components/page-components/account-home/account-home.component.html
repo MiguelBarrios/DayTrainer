@@ -12,7 +12,7 @@
             <h1 class="large text-uppercase">{{user.firstName +' '+ user.lastName}}</h1>
             <h3 class="small text-uppercase">Member Since: {{user.createdAt | date}}</h3>
             <p>{{user.biography}}</p>
-            <button class="btn btn-light">update</button>
+            <button class="btn btn-light" (click)="open(updateUserModal)">update</button>
           </div>
         </div>
       </div>
@@ -164,32 +164,43 @@
     </div>
 
     <div class="row">
-                               <!-- Pie Chart -->
-                               <div class="col-xl-4 col-lg-6 col-md-7">
-                                <div class="card shadow mb-4">
-                                  <!-- Card Header - Dropdown -->
-                                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Portfolio</h6>
-                                  </div>
-                                  <!-- Card Body -->
-                                  <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                      <div class="chartjs-size-monitor">
-                                        <div class="chartjs-size-monitor-expand">
-                                          <div class=""></div>
-                                        </div>
-                                        <div class="chartjs-size-monitor-shrink">
-                                          <div class=""></div>
-                                        </div>
-                                      </div>
-                                      <app-portfolio-chart></app-portfolio-chart>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+        <!-- Pie Chart -->
+        <div class="col-xl-4 col-lg-6 col-md-7">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Portfolio</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+            <div class="chart-pie pt-4 pb-2">
+                <div class="chartjs-size-monitor">
+                <div class="chartjs-size-monitor-expand">
+                    <div class=""></div>
+                </div>
+                <div class="chartjs-size-monitor-shrink">
+                    <div class=""></div>
+                </div>
+                </div>
+                <app-portfolio-chart></app-portfolio-chart>
+            </div>
+            </div>
+        </div>
+        </div>
     </div>
-
-
-
-      
 </div>
+
+
+<!-- Register Modal -->
+<ng-template #updateUserModal let-modal>
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Portal</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <app-user-update-form></app-user-update-form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-outline-success" (click)="updateUserInfo(updatedUser); modal.dismiss()">Register</button>
+</div>
+</ng-template>

@@ -8,9 +8,6 @@ import { AccountHomeComponent } from './components/page-components/account-home/
 import { HomepageComponent } from './components/page-components/homepage/homepage.component';
 import { NotfoundComponent } from './components/page-components/notfound/notfound.component';
 import { SettingsComponent } from './components/page-components/settings/settings.component';
-import { FeedComponent } from './components/social/feed/feed.component';
-import { FreindDetailViewComponent } from './components/social/freind-detail-view/freind-detail-view.component';
-import { FriendsComponent } from './components/social/friends/friends.component';
 import { LeaderBoardComponent } from './components/social/leader-board/leader-board.component';
 import { UsersComponent } from './components/user-components/users/users.component';
 
@@ -25,12 +22,9 @@ const routes: Routes = [
   { path: 'singleStockView/:symbol', component: SingleStockViewComponent},
   { path: 'dashboard', component: AccountHomeComponent},
   { path: 'accounthome', component: AccountHomeComponent},
-  {path:  'feed', component: FeedComponent},
-  {path:  'friends', component: FriendsComponent},
   {path:  'settings', component: SettingsComponent},
   {path:  'users', component: UsersComponent},
   {path:  'trades', component: TradesComponent},
-  {path:  'friendView/:username', component: FreindDetailViewComponent},
   {path:  '**', component: NotfoundComponent},
 
 ];

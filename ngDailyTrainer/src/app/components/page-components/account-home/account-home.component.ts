@@ -7,6 +7,8 @@ import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
 import { AccountService } from 'src/app/services/account.service';
 import { StockPosition } from 'src/app/models/stock-position';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
@@ -25,12 +27,16 @@ export class AccountHomeComponent implements OnInit {
   portfolioPurchaseValue = 0;
   portfolioCurrentValue = 0;
 
+  updatedUser: User = new User();
+  closeResult = '';
+
 
   constructor(private auth:AuthService,
     private router:Router,
     private userServ:UsersService, 
     private tradeServ:TradesService,
-    private accountService:AccountService
+    private accountService:AccountService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -115,5 +121,26 @@ export class AccountHomeComponent implements OnInit {
     )
   }
 
+  updateUserInfo(user:User){
+
+  }
+
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 
 }

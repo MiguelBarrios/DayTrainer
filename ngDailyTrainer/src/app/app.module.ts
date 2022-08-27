@@ -25,13 +25,9 @@ import { PortfolioChartComponent } from './components/graphs/portfolio-chart/por
 import { AccountHomeComponent } from './components/page-components/account-home/account-home.component';
 import { FooterComponent } from './components/page-components/footer/footer.component';
 import { HomepageComponent } from './components/page-components/homepage/homepage.component';
-import { LoggedInNavComponent } from './components/page-components/logged-in-nav/logged-in-nav.component';
 import { NavbarComponent } from './components/page-components/navbar/navbar.component';
 import { NotfoundComponent } from './components/page-components/notfound/notfound.component';
 import { SettingsComponent } from './components/page-components/settings/settings.component';
-import { FeedComponent } from './components/social/feed/feed.component';
-import { FreindDetailViewComponent } from './components/social/freind-detail-view/freind-detail-view.component';
-import { FriendsComponent } from './components/social/friends/friends.component';
 import { LeaderBoardComponent } from './components/social/leader-board/leader-board.component';
 import { UserUpdateFormComponent } from './components/user-components/user-update-form/user-update-form.component';
 import { UsersComponent } from './components/user-components/users/users.component';
@@ -57,19 +53,15 @@ import { SingleStockViewComponent } from './components/finance/single-stock-view
     TradeComponent,
     NotfoundComponent,
     UserUpdateFormComponent,
-    FeedComponent,
     SettingsComponent,
     UsersComponent,
-    FriendsComponent,
     TradesComponent,
     UserTradesPipe,
     BuySellPipe,
     UserUpdateFormComponent,
     CandleGraphComponent,
     MoversPipe,
-    LoggedInNavComponent,
     LeaderboardPipe,
-    FreindDetailViewComponent,
     SingleStockViewComponent
   ],
   imports: [
