@@ -1,5 +1,6 @@
 package com.skilldistillery.daytrainer.tda;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriBuilder;
 
 @Service
 public class TDAService {
@@ -79,6 +81,7 @@ public class TDAService {
 		if(LocalDateTime.now().getHour() >= 20) {
 			today = today.plusDays(1);
 		}
+		
 		
 		String url = this.url + "EQUITY/hours?apikey=" + Config.getTDAKEY()  + "&date=" + today.toString();
 		String json = this.restTemplate.getForObject(url, String.class);

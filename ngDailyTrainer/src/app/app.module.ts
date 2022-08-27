@@ -38,7 +38,6 @@ import { UsersComponent } from './components/user-components/users/users.compone
 import { BuySellPipe } from './pipes/buy-sell.pipe';
 import { LeaderboardPipe } from './pipes/leaderboard.pipe';
 import { MoversPipe } from './pipes/movers.pipe';
-import { DashboardComponent } from './components/page-components/dashboard/dashboard.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MarketService } from './services/market.service';
 import { SingleStockViewComponent } from './components/finance/single-stock-view/single-stock-view.component';
@@ -71,7 +70,6 @@ import { SingleStockViewComponent } from './components/finance/single-stock-view
     LoggedInNavComponent,
     LeaderboardPipe,
     FreindDetailViewComponent,
-    DashboardComponent,
     SingleStockViewComponent
   ],
   imports: [
