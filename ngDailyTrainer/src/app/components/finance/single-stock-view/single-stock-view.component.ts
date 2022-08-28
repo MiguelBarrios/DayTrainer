@@ -11,6 +11,7 @@ import { NONE_TYPE } from '@angular/compiler';
 import { JsonPipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MarketService } from 'src/app/services/market.service';
+import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-single-stock-view',
@@ -95,6 +96,15 @@ marketClose: Date = new Date(2000, 2);
   }
 
   refreshMarketHours(){
+
+    var today = new Date();
+    // Check to see if it is the weekened
+    if(today.getDay() == 6 || today.getDay() == 0){
+      this.marketClose = new Date(2020);
+      this.marketOpen = new Date(2020);
+      return;
+    }
+
     this.marketService.getMarketHours().subscribe(
       (data) => {
         console.log("getMarketHours()");

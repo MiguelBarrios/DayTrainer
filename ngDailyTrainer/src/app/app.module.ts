@@ -27,7 +27,6 @@ import { FooterComponent } from './components/page-components/footer/footer.comp
 import { HomepageComponent } from './components/page-components/homepage/homepage.component';
 import { NavbarComponent } from './components/page-components/navbar/navbar.component';
 import { NotfoundComponent } from './components/page-components/notfound/notfound.component';
-import { SettingsComponent } from './components/page-components/settings/settings.component';
 import { LeaderBoardComponent } from './components/social/leader-board/leader-board.component';
 import { UserUpdateFormComponent } from './components/user-components/user-update-form/user-update-form.component';
 import { UsersComponent } from './components/user-components/users/users.component';
@@ -37,6 +36,8 @@ import { MoversPipe } from './pipes/movers.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MarketService } from './services/market.service';
 import { SingleStockViewComponent } from './components/finance/single-stock-view/single-stock-view.component';
+import { SettingsComponent } from './settings/settings.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -53,7 +54,6 @@ import { SingleStockViewComponent } from './components/finance/single-stock-view
     TradeComponent,
     NotfoundComponent,
     UserUpdateFormComponent,
-    SettingsComponent,
     UsersComponent,
     TradesComponent,
     UserTradesPipe,
@@ -62,9 +62,11 @@ import { SingleStockViewComponent } from './components/finance/single-stock-view
     CandleGraphComponent,
     MoversPipe,
     LeaderboardPipe,
-    SingleStockViewComponent
+    SingleStockViewComponent,
+    SettingsComponent
   ],
   imports: [
+    MatProgressSpinnerModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,

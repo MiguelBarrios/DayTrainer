@@ -14,11 +14,14 @@ export class MarketService {
   constructor(private http:HttpClient, private auth:AuthService) { }
 
   getMarketHours(){
+
+    
+
     var url = this.baseurl + "/hours";
     return this.http.get<string>(url, this.auth.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('KABOOM');
+        return throwError('Error getting market hours');
       })
     )
   }

@@ -30,4 +30,6 @@ public interface UserService {
 
 	public List<User> getFollowingList(int userId);
 
+	User update2(String name, User user);
+
 }

@@ -85,6 +85,7 @@ public class UserController {
 			@RequestBody User user) {
 		try {
 			user = userSvc.update(principal.getName(), user);
+			
 			if (user == null) {
 				res.setStatus(404);
 			}
@@ -93,6 +94,21 @@ public class UserController {
 			res.setStatus(400);
 		}
 
+		return user;
+	}
+	
+	@PutMapping("users/info")
+	public User updateUser2(Principal principal, @RequestBody User user, HttpServletResponse res) {
+		try {
+			user = userSvc.update2(principal.getName(), user);
+			if(user == null) {
+				res.setStatus(404);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
 		return user;
 	}
 
@@ -117,7 +133,6 @@ public class UserController {
 //			followedUsers.add(u);
 //		}
 		return followedUsers;
-		
 	}
 	
 	@GetMapping("users/accountbalance")
@@ -125,5 +140,7 @@ public class UserController {
 		return userSvc.getBalance(principal.getName());
 		 
 	}
+	
+	
 	
 }

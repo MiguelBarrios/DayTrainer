@@ -9,10 +9,11 @@
               <img *ngIf="user.profilePicture" src="{{user.profilePicture}}" alt="assets/img/profilePic.png" />
               <img *ngIf="!user.profilePicture" src="assets/img/profilePic.png" alt="assets/img/profilePic.png" />
             </a>
-            <h1 class="large text-uppercase">{{user.firstName +' '+ user.lastName}}</h1>
+            <h1 class="large">@{{user.username}}</h1>
+            <h3>{{user.firstName}} {{user.lastName}}</h3>
             <h3 class="small text-uppercase">Member Since: {{user.createdAt | date}}</h3>
             <p>{{user.biography}}</p>
-            <button class="btn btn-light" (click)="open(updateUserModal)">update</button>
+            <app-settings></app-settings>
           </div>
         </div>
       </div>
@@ -191,16 +192,3 @@
 </div>
 
 
-<!-- Register Modal -->
-<ng-template #updateUserModal let-modal>
-<div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Update Portal</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-</div>
-<div class="modal-body">
-    <app-user-update-form></app-user-update-form>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-outline-success" (click)="updateUserInfo(updatedUser); modal.dismiss()">Register</button>
-</div>
-</ng-template>

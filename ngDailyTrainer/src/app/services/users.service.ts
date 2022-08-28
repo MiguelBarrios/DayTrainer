@@ -26,7 +26,16 @@ update(user:User){
   return this.http.put<User>(this.url, user, this.auth.getHttpOptions()).pipe(
     catchError((err: any) => {
       console.log(err);
-      return throwError('Error creating new Trade');
+      return throwError('Error updating user');
+    })
+  )
+}
+
+update2(user:User){
+  let url = this.url + "/info"
+  return this.http.put<User>(this.url, user,this.auth.getHttpOptions()).pipe(
+    catchError((err: any) => {
+      return throwError("Error update user login info");
     })
   )
 }

@@ -46,16 +46,29 @@ public class UserServiceImpl implements UserService {
 		}
 		return null;
 	}
+	
+	@Override
+	public User update2(String name, User user) {
+		System.out.println(name);
+		System.out.println(user);
+		User managed = userRepo.findByUsername(name);
+		if(managed != null) {
+			user.setUsername(user.getUsername());
+			userRepo.saveAndFlush(user);
+		}
+		return user;
+	}
 
 	@Override
 	public User update(String name, User user) {
+		
 		User managed = userRepo.findByUsername(name);
 		if (managed != null) {
 			managed.setEnabled(user.isEnabled());
-			//TODO: ENCRYPT PASSWORD
-			//managed.setPassword(user.getPassword());
 			managed.setUsername(user.getUsername());
 			managed.setEmail(user.getEmail());
+			managed.setFirstName(user.getFirstName());
+			managed.setLastName(user.getLastName());
 			managed.setProfilePicture(user.getProfilePicture());
 			managed.setBiography(user.getBiography());
 			userRepo.saveAndFlush(managed);

@@ -1,0 +1,56 @@
+<button class="btn btn-light" (click)="open(updateUserModal)">settings</button>
+
+<!-- Register Modal -->
+<ng-template #updateUserModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Settings</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <mat-tab-group>
+        <mat-tab label="Personal information"> 
+            <div class="form-group col">
+                <label for="fistname">First Name</label>
+                <input type="text" class="form-control" name="fistname" [(ngModel)]="user.firstName">
+                <br>
+                <label for="exampleInputPassword1">Last Name</label>
+                <input type="text" class="form-control" name="symbol" [(ngModel)]="user.lastName">
+                <br>
+                <label for="email">Email</label>
+                <input type="text" class="form-control" name="email" [(ngModel)]="user.email">
+                <br>
+                <label for="biography">Biography</label>
+                <textarea class="form-control" id="form6Example7" rows="4" [(ngModel)]="user.biography"></textarea>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-outline-success" (click)="updateUserInfo(user); modal.dismiss()">Update</button>
+            </div>
+        </mat-tab>
+        <mat-tab label="Login"> 
+            <label for="username">Username <span *ngIf="nullUserNameFlag" class="text-danger">*username required</span></label>
+            <input type="text" class="form-control" name="username" [(ngModel)]="newUsername">
+            <label for="password">Old Password <span *ngIf="incorrectPasswordFlag" class="text-danger"> *Incorect password</span></label>
+            <input type="text" class="form-control" name="password" [(ngModel)]="oldPasswordInput">
+
+            <label for="newpassword">New Password</label>
+            <input type="text" class="form-control" name="newpassword" [(ngModel)]="newPassword">
+
+
+            <div class="modal-footer">
+                <button class="btn btn-outline-success" (click)="updateLoginInfo(); modal.dismiss">Update</button>
+            </div>
+
+            
+
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+
+    
+</ng-template>
+
+
+<!-- <label for="username">Username</label>
+<input type="text" class="form-control" name="username" [(ngModel)]="user.username">
+<br> -->

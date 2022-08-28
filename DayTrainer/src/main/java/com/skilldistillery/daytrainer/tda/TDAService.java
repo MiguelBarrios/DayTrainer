@@ -1,9 +1,10 @@
 package com.skilldistillery.daytrainer.tda;
 
-import java.net.URI;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriBuilder;
 
 @Service
 public class TDAService {
@@ -49,8 +49,17 @@ public class TDAService {
 		this.restTemplate = restTemplateBuilder.build();
 	}
 	
+    public static boolean isWeekend(final LocalDate ld)
+    {
+        DayOfWeek day = DayOfWeek.of(ld.get(ChronoField.DAY_OF_WEEK));
+        return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
+    }
+	
 	public boolean isMarketOpen() {
 		LocalDate today = LocalDate.now();
+		if(isWeekend(today)) {
+			return false;
+		}
 		if(!lastDate.isEqual(today)) {
 			lastDate = today;
 
@@ -102,7 +111,7 @@ public class TDAService {
 	public String getQuote(String symbol) {
 		symbol = symbol.toUpperCase();
 		if(table.containsKey(symbol)) {
-			System.out.println("Quote requested: " + symbol + " " + table.get(symbol));
+//			System.out.println("Quote requested: " + symbol + " " + table.get(symbol));
 			return table.get(symbol);
 		}else {
 			System.err.println("Non smp 500 quote requested: " + symbol);
