@@ -1,1 +1,25 @@
-<p>browse-stocks works!</p>
+<div id="pageContainer" class="container-fluid">
+
+    <div class="row">
+        <div class="pt-4">
+            <form class="example-form w-100">
+                <mat-form-field  appearance="fill" class="w-100">
+                  <mat-label>ticker</mat-label>
+                  <input  matInput [(ngModel)]="searchQuery" name="searchQuery" type="text" placeholder="Pick one" [(ngModel)]="searchQuery">
+                    <mat-option *ngFor="let stock of stocks | stockFilter:searchQuery" (click)="selectOption(stock)">
+                      {{stock.symbol}}
+                    </mat-option>
+                </mat-form-field>
+              </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div *ngIf="selected">
+            <h1>{{selected.name}}</h1>
+        </div>
+    </div>
+
+
+</div>
+

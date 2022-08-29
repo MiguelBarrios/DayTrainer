@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { map, Observable, startWith } from 'rxjs';
+import { Stock } from 'src/app/models/stock';
+import { StockService } from 'src/app/services/stock.service';
 
 @Component({
   selector: 'app-browse-stocks',
@@ -7,9 +11,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrowseStocksComponent implements OnInit {
 
-  constructor() { }
+  
+  searchQuery = "";
+  a:Stock = new Stock('ABC');
+  b:Stock = new Stock('ABCD');
+  c:Stock = new Stock('ADE');
+  d:Stock = new Stock('ADEF');
 
-  ngOnInit(): void {
+  constructor(private stockSvc:StockService) { 
   }
+
+  stocks:Stock[] = [];
+  myControl = new FormControl('');
+  options: string[] = ['ABC', 'ABCD', 'ADE', "ADEF"];
+  filteredOptions: string[] = [];
+  selected:Stock | null = null;
+
+  ngOnInit() {
+    this.stockSvc.getStocks().subscribe(
+      (data) => {
+        this.stocks = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
+  }
+
+  selectOption(stock:Stock){
+    console.log(stock);
+    this.searchQuery = "";
+    this.selected = stock;
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+
 
 }

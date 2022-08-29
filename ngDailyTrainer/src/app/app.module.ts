@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule} from '@angular/material/card';
 import { FilterTablePipe } from './pipes/filter-table.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -39,6 +39,16 @@ import { SingleStockViewComponent } from './components/finance/single-stock-view
 import { SettingsComponent } from './settings/settings.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { BrowseStocksComponent } from './components/finance/browse-stocks/browse-stocks.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { StockFilterPipe } from './pipes/stock-filter.pipe';
+
+
+
+
+
+
 
 
 @NgModule({
@@ -65,9 +75,14 @@ import { BrowseStocksComponent } from './components/finance/browse-stocks/browse
     LeaderboardPipe,
     SingleStockViewComponent,
     SettingsComponent,
-    BrowseStocksComponent
+    BrowseStocksComponent,
+    StockFilterPipe,
   ],
   imports: [
+    MatInputModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
     MatProgressSpinnerModule,
     BrowserModule,
     AppRoutingModule,
