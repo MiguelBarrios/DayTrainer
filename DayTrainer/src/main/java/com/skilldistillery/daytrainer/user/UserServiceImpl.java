@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.daytrainer.account.AccountRepository;
@@ -22,6 +23,9 @@ import com.skilldistillery.daytrainer.trade.TradeService;
 @Service
 public class UserServiceImpl implements UserService {
 
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	@Autowired
 	private UserRepository userRepo;
 
@@ -49,11 +53,11 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User update2(String name, User user) {
-		System.out.println(name);
-		System.out.println(user);
 		User managed = userRepo.findByUsername(name);
+		System.out.println(managed.getPassword());
 		if(managed != null) {
 			user.setUsername(user.getUsername());
+			user.setPassword(encoder.encode(user.getPassword()));
 			userRepo.saveAndFlush(user);
 		}
 		return user;
@@ -65,7 +69,6 @@ public class UserServiceImpl implements UserService {
 		User managed = userRepo.findByUsername(name);
 		if (managed != null) {
 			managed.setEnabled(user.isEnabled());
-			managed.setUsername(user.getUsername());
 			managed.setEmail(user.getEmail());
 			managed.setFirstName(user.getFirstName());
 			managed.setLastName(user.getLastName());
@@ -167,4 +170,11 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	@Override
+	public boolean isAvailable(String username, String newUsername) {
+		User user = userRepo.findByUsername(newUsername);
+		System.out.println(user);
+		return false;
+	}
+	
 }

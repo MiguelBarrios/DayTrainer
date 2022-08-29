@@ -50,7 +50,6 @@ public class TradeServiceImple implements TradeService {
 	
 	@Override
 	public List<Trade> getUserTrades(String username) {
-		System.err.println("Here");
 		return tradeRepo.getUserTrades(username);
 	}
 	
@@ -74,6 +73,7 @@ public class TradeServiceImple implements TradeService {
 		
 		if(trade.isBuy()) {
 			System.out.println("User bought shares: " + stock);
+			System.out.println("*" + trade);
 			double updatedBalance = account.getBalance() - (trade.getPricePerShare() * trade.getQuantity());
 			account.setBalance(updatedBalance);
 			accountRepo.saveAndFlush(account);

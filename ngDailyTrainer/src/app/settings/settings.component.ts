@@ -23,6 +23,7 @@ export class SettingsComponent implements OnInit {
   nullUserNameFlag = false;
   usernameTakenFlag = false;
   incorrectPasswordFlag = false;
+  invalidNewPasswordFlag = false;
 
   constructor(private modalService: NgbModal,
     private userServ:UsersService,
@@ -65,43 +66,30 @@ export class SettingsComponent implements OnInit {
     let cred = this.authServ.getCredentials();
 
     // check for username field is accounted for
-    if(this.newUsername.length == 0){
-      this.nullUserNameFlag = true;
-    }
-    else{
-      this.nullUserNameFlag = false;
-    }
-
-    // Check if username is not taken
-
-
-
+    this.nullUserNameFlag = (this.newUsername.length == 0);
+  
 
     // Check for correct password
     if(cred){
       let tokens = atob(cred).split(":");
       let oldUsername = tokens[0];
       let oldPassword = tokens[1];
-      if(this.oldPasswordInput != oldPassword){
-        console.error("Incorrect password");
-        this.incorrectPasswordFlag = true;
-      }
-      else{
-        console.log("correct passwored");
-        this.incorrectPasswordFlag = false;
-        this.oldPasswordInput = "";
-        this.modalService.dismissAll();
-      }
+      this.incorrectPasswordFlag = (this.oldPasswordInput != oldPassword)
     }
 
 
-    if(!this.nullUserNameFlag && !this.usernameTakenFlag){
+    if(!this.nullUserNameFlag && !this.usernameTakenFlag && !this.incorrectPasswordFlag && !this.invalidNewPasswordFlag){
       this.user.username = this.newUsername;
+      this.user.password = this.newPassword;
       this.userServ.update2(this.user).subscribe(
         (updatedUser) => {
           this.authServ.login(this.newUsername, this.newPassword).subscribe(
             {
               next: (loggedinUser) => {
+                this.nullUserNameFlag = false;
+                this.usernameTakenFlag = false;
+                this.incorrectPasswordFlag = false;
+                this.invalidNewPasswordFlag = false;
                 location.reload();
               },
               error: () => {
@@ -111,6 +99,9 @@ export class SettingsComponent implements OnInit {
           )
         }
       )
+    }
+    else{
+      console.error("Error: info not updated")
     }
   }
 

@@ -33,7 +33,7 @@ update(user:User){
 
 update2(user:User){
   let url = this.url + "/info"
-  return this.http.put<User>(this.url, user,this.auth.getHttpOptions()).pipe(
+  return this.http.put<User>(url, user,this.auth.getHttpOptions()).pipe(
     catchError((err: any) => {
       return throwError("Error update user login info");
     })

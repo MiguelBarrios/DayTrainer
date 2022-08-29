@@ -34,6 +34,12 @@ public class UserController {
 
 	@Autowired
 	private UserService userSvc;
+	
+	@GetMapping("users/available/{username}")
+	public boolean isAvalable(Principal principal, @PathVariable String username) {
+		userSvc.isAvailable(username, username);
+		return false;
+	}
 
 	@GetMapping("users")
 	public List<User> getAllUser(Principal principal, HttpServletResponse res) {
@@ -83,6 +89,7 @@ public class UserController {
 	@PutMapping("users")
 	public User updateUser(Principal principal, HttpServletRequest req, HttpServletResponse res,
 			@RequestBody User user) {
+		System.out.println("it made it herer");
 		try {
 			user = userSvc.update(principal.getName(), user);
 			
@@ -99,6 +106,8 @@ public class UserController {
 	
 	@PutMapping("users/info")
 	public User updateUser2(Principal principal, @RequestBody User user, HttpServletResponse res) {
+		System.out.println("it made it herer 2.0");
+		System.out.println(user);
 		try {
 			user = userSvc.update2(principal.getName(), user);
 			if(user == null) {
