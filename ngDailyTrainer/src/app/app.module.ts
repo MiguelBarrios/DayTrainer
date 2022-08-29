@@ -38,6 +38,7 @@ import { MarketService } from './services/market.service';
 import { SingleStockViewComponent } from './components/finance/single-stock-view/single-stock-view.component';
 import { SettingsComponent } from './settings/settings.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { BrowseStocksComponent } from './components/finance/browse-stocks/browse-stocks.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MoversPipe,
     LeaderboardPipe,
     SingleStockViewComponent,
-    SettingsComponent
+    SettingsComponent,
+    BrowseStocksComponent
   ],
   imports: [
     MatProgressSpinnerModule,

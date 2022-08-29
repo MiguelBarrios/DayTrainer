@@ -1,6 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowseStocksComponent } from './components/finance/browse-stocks/browse-stocks.component';
 import { SingleStockViewComponent } from './components/finance/single-stock-view/single-stock-view.component';
 import { TopMoversComponent } from './components/finance/top-movers/top-movers.component';
 import { TradesComponent } from './components/finance/trades/trades.component';
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomepageComponent},
   { path: '', component: HomepageComponent},
   { path: 'leaderBoard', component: LeaderBoardComponent},
-  { path: 'topMovers', component: TopMoversComponent},
+  { path: 'browse', component: BrowseStocksComponent},
   { path: 'singleStockView/', component: SingleStockViewComponent},
   { path: 'singleStockView/:symbol', component: SingleStockViewComponent},
   { path: 'dashboard', component: AccountHomeComponent},
