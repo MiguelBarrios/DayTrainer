@@ -29,8 +29,7 @@ public class MarketController {
 		if(data == null) {
 			response.setStatus(404);
 		}
-		System.out.println(data.toString());
-		System.out.println(data.textValue());
+
 		return data.toString();
 		
 	}

@@ -106,7 +106,9 @@ export class TradeComponent implements OnInit {
     this.newTrade.buy = (this.action == "Buy");
     this.newTrade.orderType.name = this.orderType;
     this.newTrade.orderType.id = (this.orderType == "Market") ? 1 : 2;
-    let currentPrice = document.getElementById("currentStockPrice")?.textContent;
+    let currentPrice = document.getElementById("currentStockPrice")?.textContent?.replace(",", "");
+    // WHAT IF THERE IS A COMMA
+    console.error("#### " + currentPrice);
     if(currentPrice){
       this.newTrade.pricePerShare = parseFloat(currentPrice);
     }
@@ -123,7 +125,8 @@ export class TradeComponent implements OnInit {
 
     this.tradeService.createTrade(this.newTrade).subscribe(
       (data) => {
-        console.log("New Trade Created");
+        console.log("New Trade Created" + this.newTrade);
+        
         console.log(data);
         this.userTrades.push(data);
         this.userTrades = [...this.userTrades]

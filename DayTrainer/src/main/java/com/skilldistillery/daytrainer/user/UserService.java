@@ -32,4 +32,6 @@ public interface UserService {
 
 	User update2(String name, User user);
 
+	boolean isAvailable(String username, String newUsername);
+
 }

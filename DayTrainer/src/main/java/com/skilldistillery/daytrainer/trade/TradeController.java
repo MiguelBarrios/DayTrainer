@@ -53,7 +53,6 @@ public class TradeController {
 	
 	@PostMapping("trades")
 	public Trade create(@RequestBody Trade trade, HttpServletResponse response, Principal principal) {
-		System.out.println("TEst");
 		
 		String orderType = trade.getOrderType().getName();
 		if(orderType.equals("Market")){
