@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { map, Observable, startWith } from 'rxjs';
 import { Stock } from 'src/app/models/stock';
 import { StockService } from 'src/app/services/stock.service';
@@ -18,7 +19,7 @@ export class BrowseStocksComponent implements OnInit {
   c:Stock = new Stock('ADE');
   d:Stock = new Stock('ADEF');
 
-  constructor(private stockSvc:StockService) { 
+  constructor(private stockSvc:StockService, private route: Router) { 
   }
 
   stocks:Stock[] = [];
@@ -42,13 +43,14 @@ export class BrowseStocksComponent implements OnInit {
   selectOption(stock:Stock){
     console.log(stock);
     this.searchQuery = "";
-    this.selected = stock;
+    this.selected = stock; 
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  loadSelected(){
+    if(this.selected){
+      this.route.navigateByUrl('/singleStockView/' + this.selected.symbol);
+    }
+    
   }
 
 

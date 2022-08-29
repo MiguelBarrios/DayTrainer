@@ -14,23 +14,27 @@
         </div>
     </div>
 
-    <div class="row">
-        <div *ngIf="selected">
-            <h1>{{selected.symbol}}</h1>
-            <h1>{{selected.name}}</h1>
-            <h1>{{selected.sector}}</h1>
+
+
+    <div class="row" *ngIf="selected">
+        <!-- Positions -->
+        <div class="col-lg-6">
+          <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">{{selected.name}}</h6>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <h4>ticker: {{selected.symbol}}</h4>
+            <h4>sector: {{selected.sector}}</h4>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-warning w-100" (click)="loadSelected()">trade</button>
+            </div>
+            
+          </div>
+          </div>
     </div>
-
-    <!-- symbol: string;
-    name: string;
-    open: number;
-    high: number;
-    low: number;
-    price: number;
-    volume: number;
-    previousClose: number;
-    change: number; -->
-
-
+ 
 </div>
 
