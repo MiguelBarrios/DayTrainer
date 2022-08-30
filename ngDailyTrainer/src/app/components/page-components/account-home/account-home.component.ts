@@ -101,7 +101,6 @@ export class AccountHomeComponent implements OnInit {
     this.accountService.getUserAccountDeposits().subscribe(
       (deposits) => {
         this.accountDeposits = deposits;
-        console.log("*** TotalDeposits: " + deposits);
       },
       (error) => {
         console.log(error);
@@ -123,13 +122,6 @@ export class AccountHomeComponent implements OnInit {
 
   getUser(): User{
     return this.user;
-  }
-
-
-
-
-  verifyPassword(oldpassword:string){
-
   }
 
 }

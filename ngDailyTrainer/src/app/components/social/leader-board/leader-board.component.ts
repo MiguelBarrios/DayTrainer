@@ -66,7 +66,6 @@ export class LeaderBoardComponent implements OnInit {
   generateLeaderBoard(){
       this.rankings = [];
       for(let user of this.users){
-        console.log(user);
         if(user.positions){
           let userTotalProfit = 0;
           let totalNumberOfShares = 0;
@@ -92,6 +91,5 @@ export class LeaderBoardComponent implements OnInit {
           this.rankings.push(ranking);
         }
       }
-      console.log(this.rankings);
   }
 }

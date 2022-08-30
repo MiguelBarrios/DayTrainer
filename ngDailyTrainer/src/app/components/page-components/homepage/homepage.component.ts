@@ -34,8 +34,6 @@ export class HomepageComponent implements OnInit {
   }
 
   login(user:User){
-    console.log("Login user");
-    console.log(user);
     this.auth.login(user.username, user.password).subscribe(
       {
           next: (loggedinUser) => {

@@ -43,7 +43,6 @@ export class BrowseStocksComponent implements OnInit {
   }
 
   selectOption(stock:Stock){
-    console.log(stock);
     this.searchQuery = "";
     this.selected = stock; 
   }
@@ -55,7 +54,6 @@ export class BrowseStocksComponent implements OnInit {
   }
 
   redirectBySelectedCard(symbol:string){
-    console.log(symbol);
     this.route.navigateByUrl('/singleStockView/' + symbol);
   }
 

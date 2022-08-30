@@ -107,7 +107,6 @@ marketClose: Date = new Date(2000, 2);
 
     this.marketService.getMarketHours().subscribe(
       (data) => {
-        console.log("getMarketHours()");
         let jsonString = JSON.stringify(data);
         let obj = JSON.parse(jsonString);
         let regularMarketHours = obj['sessionHours']['regularMarket'][0];

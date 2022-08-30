@@ -61,7 +61,6 @@ export class TradeComponent implements OnInit {
           this.totalCost = this.newTrade.quantity * this.ssv.quote.lastPrice;
         }
       }
-      console.log(this.totalCost);
 
       if(this.totalCost >  this.accountBalance){
         this.errorSMS = "incuficient funds";
@@ -93,7 +92,6 @@ export class TradeComponent implements OnInit {
   submitTrade(){
 
     if(!this.ssv.marketIsOpen()){
-      console.log("Market is closed");
       this.ssv.openSnackBar('Market is closed','x');
       return;
     }
@@ -121,13 +119,11 @@ export class TradeComponent implements OnInit {
       console.log("Error returned");
       return;
     }
-    console.log("Not error");
 
     this.tradeService.createTrade(this.newTrade).subscribe(
       (data) => {
-        console.log("New Trade Created" + this.newTrade);
+        // console.log("New Trade Created" + this.newTrade);
         
-        console.log(data);
         this.userTrades.push(data);
         this.userTrades = [...this.userTrades]
         if(this.symbol){
