@@ -69,9 +69,6 @@ export class BrowseStocksComponent implements OnInit {
         element.classList.remove("btn-light");
         element.classList.add("btn-warning");
       }
-
-      console.log(name);
-      // items[i].classList.add("btn-warning");
     }
   }
 
