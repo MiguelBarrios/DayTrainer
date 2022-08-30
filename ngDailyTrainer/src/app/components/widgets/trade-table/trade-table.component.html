@@ -54,7 +54,7 @@
           </div>
           <div class="row">
             <div class="col-sm-12 col-md-5">
-              <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing {{pageNumber + 1}} to {{numberOfPages}} of {{numberOfTrades}} entries</div>
+              <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing {{(pageSize * (currentPage))}} to {{math.min((pageSize * currentPage) + pageSize,numberOfTrades)}} of {{numberOfTrades}} entries</div>
             </div>
             <div class="col-sm-12 col-md-7">
               <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">

@@ -9,6 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class TradeTableComponent implements OnInit {
 
+  math = Math;
   numberOfTrades:number = 0;
   pageNumber:number = 0;
   pageSize:number = 5;
