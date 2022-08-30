@@ -45,6 +45,7 @@ import { StockFilterPipe } from './pipes/stock-filter.pipe';
 import { SectorPipePipe } from './pipes/sector-pipe.pipe';
 import { BrowseStocksComponent } from './components/finance/browse-stocks/browse-stocks.component';
 import { TradeTableComponent } from './components/widgets/trade-table/trade-table.component';
+import { PositionTableComponent } from './components/widgets/position-table/position-table.component';
 
 
 
@@ -80,7 +81,8 @@ import { TradeTableComponent } from './components/widgets/trade-table/trade-tabl
     BrowseStocksComponent,
     StockFilterPipe,
     SectorPipePipe,
-    TradeTableComponent
+    TradeTableComponent,
+    PositionTableComponent
   ],
   imports: [
     MatInputModule,
