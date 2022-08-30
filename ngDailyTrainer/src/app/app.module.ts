@@ -38,12 +38,12 @@ import { MarketService } from './services/market.service';
 import { SingleStockViewComponent } from './components/finance/single-stock-view/single-stock-view.component';
 import { SettingsComponent } from './settings/settings.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { BrowseStocksComponent } from './components/finance/browse-stocks/browse-stocks.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { StockFilterPipe } from './pipes/stock-filter.pipe';
 import { SectorPipePipe } from './pipes/sector-pipe.pipe';
+import { BrowseStocksComponent } from './components/finance/browse-stocks/browse-stocks.component';
 
 
 
@@ -101,7 +101,7 @@ import { SectorPipePipe } from './pipes/sector-pipe.pipe';
     MatTabsModule,
     MatSnackBarModule
   ],
-  providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe, CurrencyPipe, MarketService],
+  providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe, CurrencyPipe, MarketService, SectorPipePipe, StockFilterPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
