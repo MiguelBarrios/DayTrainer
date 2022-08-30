@@ -114,7 +114,7 @@ public class TDAService {
 //			System.out.println("Quote requested: " + symbol + " " + table.get(symbol));
 			return table.get(symbol);
 		}else {
-			System.err.println("Non smp 500 quote requested: " + symbol);
+//			System.err.println("Non smp 500 quote requested: " + symbol);
 			String requestUrl = url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
 			String json = this.restTemplate.getForObject(requestUrl, String.class);
 			String quote = null;

@@ -45,9 +45,7 @@ public class TDAController {
 			}
 		}
 		else {
-			System.out.println("Quotes updated");
 			tdaService.updateQuotesAll();
-
 		}
 	}
 }

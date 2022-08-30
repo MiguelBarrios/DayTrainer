@@ -42,7 +42,6 @@ public class UserController {
 	@GetMapping("users/trades/{pageNumber}/{pageSize}")
 	public List<Trade> test(Principal principal, @PathVariable Integer pageNumber, @PathVariable Integer pageSize) {
 		List<Trade> trades = tradeService.getUserTradesPagnated(principal.getName(), pageNumber, pageSize);
-		System.out.println(trades.size());
 		return trades;
 	}
 	
@@ -78,10 +77,7 @@ public class UserController {
 
 	@GetMapping("users/leaders")
 	public Map<String, Object> getLeaders() {
-		// List<User> test = userSvc.leadersList();
-		// System.out.println(test);
 		return userSvc.leaderBoard();
-
 	}
 
 	@GetMapping("users/{userId}")
@@ -105,7 +101,6 @@ public class UserController {
 	@PutMapping("users")
 	public User updateUser(Principal principal, HttpServletRequest req, HttpServletResponse res,
 			@RequestBody User user) {
-		System.out.println("it made it herer");
 		try {
 			user = userSvc.update(principal.getName(), user);
 			
@@ -122,8 +117,6 @@ public class UserController {
 	
 	@PutMapping("users/info")
 	public User updateUser2(Principal principal, @RequestBody User user, HttpServletResponse res) {
-		System.out.println("it made it herer 2.0");
-		System.out.println(user);
 		try {
 			user = userSvc.update2(principal.getName(), user);
 			if(user == null) {
@@ -153,10 +146,6 @@ public class UserController {
 	public List<User> getUserFollowing(Principal principal, @PathVariable Integer userId, HttpServletResponse res) {
 		
 		List<User> followedUsers = userSvc.getFollowingList(userId);
-//		for (Integer followed : followingIds) {
-//			User u = userSvc.getUserById(followed, principal.getName());
-//			followedUsers.add(u);
-//		}
 		return followedUsers;
 	}
 	

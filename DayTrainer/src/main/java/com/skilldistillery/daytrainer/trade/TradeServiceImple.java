@@ -86,8 +86,8 @@ public class TradeServiceImple implements TradeService {
 		Account account = user.getAccount();
 		
 		if(trade.isBuy()) {
-			System.out.println("User bought shares: " + stock);
-			System.out.println("*" + trade);
+//			System.out.println("User bought shares: " + stock);
+//			System.out.println("*" + trade);
 			double updatedBalance = account.getBalance() - (trade.getPricePerShare() * trade.getQuantity());
 			account.setBalance(updatedBalance);
 			accountRepo.saveAndFlush(account);
@@ -95,11 +95,11 @@ public class TradeServiceImple implements TradeService {
 			tradeRepo.saveAndFlush(trade);
 			
 		}else {
-			System.out.println("User sold shares: " + stock);
+//			System.out.println("User sold shares: " + stock);
 			//Check if user Has shares
 			int positionSize = this.getCurrentHolding(username, stock.getSymbol());
 			if(trade.getQuantity() > positionSize) {
-				System.err.println("User tried to sell stock he does not have");
+//				System.err.println("User tried to sell stock he does not have");
 				return null;
 			}else {
 				double updatedBalance = account.getBalance() + (trade.getPricePerShare() * trade.getQuantity());
@@ -152,7 +152,7 @@ public class TradeServiceImple implements TradeService {
 					pos.setLastPrice(Double.parseDouble(lastPrice));
 					
 				}else {
-					System.err.println("lastPrice" + " not found");
+//					System.err.println("lastPrice" + " not found");
 					pos.setLastPrice(-1);
 				}
 			}  catch (Exception e) {

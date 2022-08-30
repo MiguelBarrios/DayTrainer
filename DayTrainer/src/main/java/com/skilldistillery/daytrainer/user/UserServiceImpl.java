@@ -54,7 +54,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User update2(String name, User user) {
 		User managed = userRepo.findByUsername(name);
-		System.out.println(managed.getPassword());
 		if(managed != null) {
 			user.setUsername(user.getUsername());
 			user.setPassword(encoder.encode(user.getPassword()));
@@ -162,7 +161,6 @@ public class UserServiceImpl implements UserService {
 
 	public List<User> getFollowingList(int userId) {
 		Optional<User> u = userRepo.findById(userId);
-		System.out.println(u.get());
 		if (u.isPresent()) {
 			List<User> following = u.get().getFollowing();
 			return following;
@@ -173,7 +171,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean isAvailable(String username, String newUsername) {
 		User user = userRepo.findByUsername(newUsername);
-		System.out.println(user);
 		return false;
 	}
 	
