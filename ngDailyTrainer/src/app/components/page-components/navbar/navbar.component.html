@@ -20,6 +20,7 @@
             <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leaderboard</a>
             <a class="nav-link" [routerLink]="['/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
             <a class="nav-link" [routerLink]="['/browse']" tabindex="-1" aria-disabled="true">Browse Stocks</a>
+            <a class="nav-link" [routerLink]="['/home']" tabindex="-1" aria-disabled="true" (click)="logout()">Logout</a>
           </div>
 
 
@@ -44,7 +45,6 @@
           <li class="nav-item" *ngIf="loggedin">
             <a class="nav-link" [routerLink]="['/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
           </li>
-
         </ul> 
         <!-- Left links -->
         <div class="d-flex align-items-center ms-auto">
