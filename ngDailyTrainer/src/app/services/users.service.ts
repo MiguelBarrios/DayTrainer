@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Trade } from '../models/trade';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
 
@@ -13,10 +14,18 @@ export class UsersService {
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
+getUserTrades(pageNumber:string, pageSize:string){
+  let url = this.url + "/trades/" + pageNumber + "/" + pageSize;
+  return this.http.get<Trade[]>(url, this.auth.getHttpOptions()).pipe(
+    catchError((err: any) => {
+      return throwError('Error getting user trades');
+    })
+  )
+}
+
 getUserByUsername(){
   return this.http.get<User>(this.url + '/' +'name' +'/'+ localStorage.getItem('username'), this.auth.getHttpOptions()).pipe(
     catchError((err: any) => {
-      console.log(err);
       return throwError('Error creating new Trade');
     })
   )

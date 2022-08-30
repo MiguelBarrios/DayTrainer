@@ -55,6 +55,11 @@ public class TradeServiceImple implements TradeService {
 	}
 	
 	@Override
+	public Integer getNumUserTrades(String username) {
+		return tradeRepo.getNumUserTrades(username);
+	}
+	
+	@Override
 	public List<Trade> getUserTradesPagnated(String username, int pageNumber, int pageSize){
 		User user = userRepo.findByUsername(username);
 		

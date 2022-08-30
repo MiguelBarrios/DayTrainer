@@ -32,4 +32,7 @@ public interface TradeRepository extends JpaRepository<Trade, Integer>{
 	//distinct(stock_symbol) from trade where buy = true;
 	@Query("SELECT DISTINCT(t.stock.symbol) FROM Trade t Where t.buy = true")
 	List<String> getCurrentlyHeldStocks();
+	
+	@Query("SELECT COUNT(t) FROM Trade t WHERE t.user.username = :username")
+	Integer getNumUserTrades(@Param("username") String username);
 }

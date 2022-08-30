@@ -44,6 +44,7 @@ import { MatInputModule } from '@angular/material/input';
 import { StockFilterPipe } from './pipes/stock-filter.pipe';
 import { SectorPipePipe } from './pipes/sector-pipe.pipe';
 import { BrowseStocksComponent } from './components/finance/browse-stocks/browse-stocks.component';
+import { TradeTableComponent } from './components/widgets/trade-table/trade-table.component';
 
 
 
@@ -79,6 +80,7 @@ import { BrowseStocksComponent } from './components/finance/browse-stocks/browse
     BrowseStocksComponent,
     StockFilterPipe,
     SectorPipePipe,
+    TradeTableComponent
   ],
   imports: [
     MatInputModule,

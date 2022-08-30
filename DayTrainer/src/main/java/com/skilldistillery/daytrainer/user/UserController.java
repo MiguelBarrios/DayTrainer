@@ -46,6 +46,11 @@ public class UserController {
 		return trades;
 	}
 	
+	@GetMapping("users/trades/size")
+	public Integer getNumberOfTrades(Principal principal) {
+		return tradeService.getNumUserTrades(principal.getName());
+	}
+	
 	@GetMapping("users/available/{username}")
 	public boolean isAvalable(Principal principal, @PathVariable String username) {
 		userSvc.isAvailable(username, username);
