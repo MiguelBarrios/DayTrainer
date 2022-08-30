@@ -14,6 +14,9 @@ export class TradeTableComponent implements OnInit {
   pageSize:number = 5;
   numberOfPages:number = 0;
   userTrades:Trade[] = [];
+  currentPage:number = 0;
+
+  pagesArray:any = [];
   constructor(private userService:UsersService) { }
 
   ngOnInit(): void {
@@ -23,6 +26,8 @@ export class TradeTableComponent implements OnInit {
 
   updateNumberOfPages(event: any){
     this.pageSize = event.value;
+    this.numberOfPages = Math.ceil(this.numberOfTrades / this.pageSize);
+    this.pagesArray = new Array(this.numberOfPages);
     this.loadPage(this.pageNumber, this.pageSize);
   }
 
@@ -31,11 +36,31 @@ export class TradeTableComponent implements OnInit {
       (data) => {
         this.numberOfTrades = data;
         this.numberOfPages = Math.ceil(this.numberOfTrades / this.pageSize);
+        this.pagesArray = new Array(this.numberOfPages);
       },
       (error) => {
         console.log(error);
       }
     )
+  }
+
+  loadSelectedPage(pageNum:number){
+    this.currentPage = pageNum;
+    this.loadPage(pageNum, this.pageSize);
+  }
+
+  loadNextPage(){
+    if(this.currentPage + 1 < this.numberOfPages){
+      this.currentPage = this.currentPage + 1;
+      this.loadPage(this.currentPage, this.pageSize);
+    }
+  }
+
+  loadPreviousPage(){
+    if(this.currentPage - 1 >= 0){
+      this.currentPage = this.currentPage - 1;
+      this.loadPage(this.currentPage, this.pageSize);
+    }
   }
 
   loadPage(pageNum:number, pageSize: number){
