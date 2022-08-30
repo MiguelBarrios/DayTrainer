@@ -1,0 +1,105 @@
+<div id="pageContainer" class="container-fluid">
+
+    <div class="row">
+        <div class="pt-4">
+            <form class="example-form w-100">
+                <mat-form-field  appearance="fill" class="w-100">
+                  <mat-label>Stock search</mat-label>
+                  <input  matInput [(ngModel)]="searchQuery" name="searchQuery" type="text" placeholder="Pick one" [(ngModel)]="searchQuery">
+                    <mat-option *ngFor="let stock of stocks | stockFilter:searchQuery" (click)="selectOption(stock)">
+                      {{stock.symbol}}
+                    </mat-option>
+                </mat-form-field>
+              </form>
+        </div>
+    </div>
+
+
+
+    <div class="row" *ngIf="selected">
+        <!-- Positions -->
+        <div class="col-lg-6">
+          <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">{{selected.name}}</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+              <h4>ticker: {{selected.symbol}}</h4>
+              <h4>sector: {{selected.sector}}</h4>
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-warning w-100" (click)="loadSelected()">trade</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <h3 class="d-flex justify-content-center">Browse By Sector</h3>
+        <div id="sectorsContainer" class="d-flex flex-wrap justify-content-center">
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Consumer Staples')">Consumer Staples</button>
+            </div>
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Utilities')">Utilities</button>
+            </div>
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Financials')">Financials</button>
+            </div>
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Information Technology')">Information Technology</button>
+            </div>
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Materials')">Materials</button>
+            </div>
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Health Care')">Health Care</button>
+            </div>
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Industrials')">Industrials</button>
+            </div>
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Energy')">Energy</button>
+            </div>
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Consumer Discretionary')">Consumer Discretionary</button>
+            </div>
+
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Real Estate')">Real Estate </button>
+            </div>
+
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Communication Services')">Communication Services</button>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Stocks -->
+
+
+    <div class="row mt-4">
+
+        <div class="col-xl-3 col-md-6 mb-4" *ngFor="let stock of stocks | sectorPipe:selectedSector">
+            <div class="card border-left-primary shadow h-100 py-2 sectorItem" (click)="redirectBySelectedCard(stock.symbol)">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{stock.name}}</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{stock.symbol}}</div>
+                  </div>
+                  <!-- <div class="col-auto">
+                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </div>
+
+</div>
+

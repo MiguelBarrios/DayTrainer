@@ -33,6 +33,13 @@ stocks: Stock[] = [];
     )
   }
 
+  getStocks(){
+      return this.http.get<Stock[]>(this.url, this.auth.getHttpOptions()).pipe(
+        catchError((err:any) => {
+          return throwError(() => new Error('Error getting stock list'));
+        }));
+  }
+
   getAvailableStocks() {
     return this.http.get<Stock[]>(this.url, this.auth.getHttpOptions()).pipe(
       catchError((err:any) => {

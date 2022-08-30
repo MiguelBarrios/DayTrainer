@@ -1,0 +1,7 @@
+.d-flex{
+    gap:5px;
+}
+
+.sectorItem:hover{
+  background-color:#eee;
+}

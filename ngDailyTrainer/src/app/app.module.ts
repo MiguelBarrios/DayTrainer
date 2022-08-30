@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule} from '@angular/material/card';
 import { FilterTablePipe } from './pipes/filter-table.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -38,6 +38,18 @@ import { MarketService } from './services/market.service';
 import { SingleStockViewComponent } from './components/finance/single-stock-view/single-stock-view.component';
 import { SettingsComponent } from './settings/settings.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { BrowseStocksComponent } from './components/finance/browse-stocks/browse-stocks.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { StockFilterPipe } from './pipes/stock-filter.pipe';
+import { SectorPipePipe } from './pipes/sector-pipe.pipe';
+
+
+
+
+
+
 
 
 @NgModule({
@@ -63,9 +75,16 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MoversPipe,
     LeaderboardPipe,
     SingleStockViewComponent,
-    SettingsComponent
+    SettingsComponent,
+    BrowseStocksComponent,
+    StockFilterPipe,
+    SectorPipePipe,
   ],
   imports: [
+    MatInputModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
     MatProgressSpinnerModule,
     BrowserModule,
     AppRoutingModule,
