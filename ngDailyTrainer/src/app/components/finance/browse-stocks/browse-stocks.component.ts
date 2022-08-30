@@ -56,6 +56,23 @@ export class BrowseStocksComponent implements OnInit {
 
   browseBySector(sector:string){
     this.selectedSector = sector;
+
+    let items = document.getElementsByClassName("sector");
+    for(let i = 0; i < items.length; ++i){
+      let element = items[i];
+      let name = element.textContent
+      if(name == this.selectedSector){
+        element.classList.remove("btn-warning");
+        element.classList.add("btn-light");
+      }
+      else{
+        element.classList.remove("btn-light");
+        element.classList.add("btn-warning");
+      }
+
+      console.log(name);
+      // items[i].classList.add("btn-warning");
+    }
   }
 
 

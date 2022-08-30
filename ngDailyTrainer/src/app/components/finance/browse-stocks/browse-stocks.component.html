@@ -40,39 +40,39 @@
         <h3>Browse by sector</h3>
         <div id="sectorsContainer" class="d-flex flex-wrap justify-content-center">
             <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Consumer Staples')">Consumer Staples</button>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Consumer Staples')">Consumer Staples</button>
             </div>
             <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Utilities')">Utilities</button>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Utilities')">Utilities</button>
             </div>
             <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Financials')">Financials</button>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Financials')">Financials</button>
             </div>
             <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Information Technology')">Information Technology</button>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Information Technology')">Information Technology</button>
             </div>
             <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Materials')">Materials</button>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Materials')">Materials</button>
             </div>
             <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Health Care')">Health Care</button>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Health Care')">Health Care</button>
             </div>
             <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Industrials')">Industrials</button>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Industrials')">Industrials</button>
             </div>
             <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Energy')">Energy</button>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Energy')">Energy</button>
             </div>
             <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Consumer Discretionary')">Consumer Discretionary</button>
-            </div>
-
-            <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Real Estate')">Real Estate </button>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Consumer Discretionary')">Consumer Discretionary</button>
             </div>
 
             <div>
-                <button class="btn btn-warning rounded-pill" (click)="browseBySector('Communication Services')">Communication Services</button>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Real Estate')">Real Estate </button>
+            </div>
+
+            <div>
+                <button class="btn btn-warning rounded-pill sector" (click)="browseBySector('Communication Services')">Communication Services</button>
             </div>
 
         </div>
@@ -91,9 +91,9 @@
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{stock.name}}</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{stock.symbol}}</div>
                   </div>
-                  <div class="col-auto">
+                  <!-- <div class="col-auto">
                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
