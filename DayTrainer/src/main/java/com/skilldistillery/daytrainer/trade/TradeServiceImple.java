@@ -6,17 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skilldistillery.daytrainer.account.AccountRepository;
 import com.skilldistillery.daytrainer.entities.Account;
-import com.skilldistillery.daytrainer.entities.QuoteWrapper;
 import com.skilldistillery.daytrainer.entities.Stock;
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
@@ -26,12 +19,20 @@ import com.skilldistillery.daytrainer.stock.StockService;
 import com.skilldistillery.daytrainer.tda.TDAService;
 import com.skilldistillery.daytrainer.user.UserRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 @Service
 public class TradeServiceImple implements TradeService {
 
 	
 	@Autowired
 	private TradeRepository tradeRepo;
+	
+	@Autowired
+	private TradeRepository2 tradeRepoP;
 	
 	@Autowired
 	private UserRepository userRepo;
@@ -51,6 +52,14 @@ public class TradeServiceImple implements TradeService {
 	@Override
 	public List<Trade> getUserTrades(String username) {
 		return tradeRepo.getUserTrades(username);
+	}
+	
+	@Override
+	public List<Trade> getUserTradesPagnated(String username, int pageNumber, int pageSize){
+		User user = userRepo.findByUsername(username);
+		
+		Pageable pages = PageRequest.of(pageNumber, pageSize);
+		return tradeRepoP.findByUser_id(user.getId(), pages);
 	}
 	
 	@Override

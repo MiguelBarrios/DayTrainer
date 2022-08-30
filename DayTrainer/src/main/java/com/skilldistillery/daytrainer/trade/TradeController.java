@@ -32,8 +32,6 @@ public class TradeController {
 	private StockService stockService;
 	
 	
-	
-	
 	@GetMapping("trades")
 	public List<Trade> getUserTrades(Principal principal){
 		String username = principal.getName();

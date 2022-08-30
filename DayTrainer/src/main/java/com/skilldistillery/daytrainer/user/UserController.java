@@ -1,13 +1,17 @@
 package com.skilldistillery.daytrainer.user;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.skilldistillery.daytrainer.entities.Comment;
+import com.skilldistillery.daytrainer.entities.Trade;
+import com.skilldistillery.daytrainer.entities.User;
+import com.skilldistillery.daytrainer.trade.TradeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.daytrainer.entities.Comment;
-import com.skilldistillery.daytrainer.entities.User;
-
 @RequestMapping("api")
 @RestController
 @Configuration
@@ -34,6 +35,16 @@ public class UserController {
 
 	@Autowired
 	private UserService userSvc;
+	
+	@Autowired
+	private TradeService tradeService;
+	
+	@GetMapping("users/trades/{pageNumber}/{pageSize}")
+	public List<Trade> test(Principal principal, @PathVariable Integer pageNumber, @PathVariable Integer pageSize) {
+		List<Trade> trades = tradeService.getUserTradesPagnated(principal.getName(), pageNumber, pageSize);
+		System.out.println(trades.size());
+		return trades;
+	}
 	
 	@GetMapping("users/available/{username}")
 	public boolean isAvalable(Principal principal, @PathVariable String username) {

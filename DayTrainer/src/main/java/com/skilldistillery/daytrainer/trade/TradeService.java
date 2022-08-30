@@ -18,5 +18,7 @@ public interface TradeService {
 	public StockPosition getUserPosition(String username, String ticker);
 
 	List<StockPosition> getUserPositions(String username);
+
+	List<Trade> getUserTradesPagnated(String username, int pageNumber, int pageSize);
 	
 }
