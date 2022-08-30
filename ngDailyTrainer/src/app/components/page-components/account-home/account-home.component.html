@@ -103,31 +103,10 @@
         </div>
         <!-- Card Body -->
         <div class="card-body">
-            <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">Symbol</th>
-                <th scope="col">Shares</th>
-                <th scope="col">Avg Price</th>
-                <th scope="col">Return</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let pos of userPositions">
-                <th scope="row">{{pos.symbol}}</th>
-                <td>{{pos.numberOfShares}}</td>
-                <td>{{pos.avgCostPerShare | currency}}</td>
-                <td [ngClass]="{'trendingDown': (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) <= 0, 'trendingUp' : (pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) > 0 }">
-                    {{(pos.numberOfShares*pos.lastPrice - pos.numberOfShares*pos.avgCostPerShare) | currency}}
-                </td>
-                </tr>
-            </tbody>
-            </table>
+            <app-position-table></app-position-table>
         </div>
         </div>
   </div>
-
-  
 
   <!-- Trade History -->
   <div class="col-lg-6">
@@ -142,7 +121,7 @@
   </div>
     </div>
 
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <!-- Pie Chart -->
         <div class="col-xl-4 col-lg-6 col-md-7">
         <div class="card shadow mb-4">
@@ -171,5 +150,3 @@
     <div class="row">
     </div>
 </div>
-
-
