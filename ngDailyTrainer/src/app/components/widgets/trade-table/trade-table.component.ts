@@ -9,20 +9,39 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class TradeTableComponent implements OnInit {
 
-  pageNumber:string = "0";
-  pageSize:string = "5";
+  numberOfTrades:number = 0;
+  pageNumber:number = 0;
+  pageSize:number = 5;
+  numberOfPages:number = 0;
   userTrades:Trade[] = [];
   constructor(private userService:UsersService) { }
 
   ngOnInit(): void {
-    this.loadFirstPage();
+    this.getNumUserTrades();
+    this.loadPage(this.numberOfPages, this.pageSize);
   }
 
-  loadFirstPage(){
-    this.userService.getUserTrades(this.pageNumber, this.pageSize).subscribe(
+  updateNumberOfPages(event: any){
+    this.pageSize = event.value;
+    this.loadPage(this.pageNumber, this.pageSize);
+  }
+
+  getNumUserTrades(){
+    this.userService.getNumUserTrades().subscribe(
+      (data) => {
+        this.numberOfTrades = data;
+        this.numberOfPages = Math.ceil(this.numberOfTrades / this.pageSize);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
+  loadPage(pageNum:number, pageSize: number){
+    this.userService.getUserTrades(pageNum, pageSize).subscribe(
       (data) => {
         this.userTrades = data;
-        console.log(data);
       },
       (error) => {
         console.log(error);

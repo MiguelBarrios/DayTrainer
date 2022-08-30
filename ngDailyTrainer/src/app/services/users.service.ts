@@ -14,7 +14,16 @@ export class UsersService {
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
-getUserTrades(pageNumber:string, pageSize:string){
+getNumUserTrades(){
+  let url = this.url + "/trades/size";
+  return this.http.get<number>(url, this.auth.getHttpOptions()).pipe(
+    catchError((err: any) => {
+      return throwError('Error getting num user trades');
+    })
+  )
+}
+
+getUserTrades(pageNumber:number, pageSize:number){
   let url = this.url + "/trades/" + pageNumber + "/" + pageSize;
   return this.http.get<Trade[]>(url, this.auth.getHttpOptions()).pipe(
     catchError((err: any) => {
