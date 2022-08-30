@@ -43,6 +43,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { StockFilterPipe } from './pipes/stock-filter.pipe';
+import { SectorPipePipe } from './pipes/sector-pipe.pipe';
 
 
 
@@ -77,6 +78,7 @@ import { StockFilterPipe } from './pipes/stock-filter.pipe';
     SettingsComponent,
     BrowseStocksComponent,
     StockFilterPipe,
+    SectorPipePipe,
   ],
   imports: [
     MatInputModule,

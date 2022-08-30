@@ -14,6 +14,7 @@ export class BrowseStocksComponent implements OnInit {
 
   
   searchQuery = "";
+  selectedSector = "";
   a:Stock = new Stock('ABC');
   b:Stock = new Stock('ABCD');
   c:Stock = new Stock('ADE');
@@ -27,6 +28,7 @@ export class BrowseStocksComponent implements OnInit {
   options: string[] = ['ABC', 'ABCD', 'ADE', "ADEF"];
   filteredOptions: string[] = [];
   selected:Stock | null = null;
+
 
   ngOnInit() {
     this.stockSvc.getStocks().subscribe(
@@ -50,7 +52,10 @@ export class BrowseStocksComponent implements OnInit {
     if(this.selected){
       this.route.navigateByUrl('/singleStockView/' + this.selected.symbol);
     }
-    
+  }
+
+  browseBySector(sector:string){
+    this.selectedSector = sector;
   }
 
 
