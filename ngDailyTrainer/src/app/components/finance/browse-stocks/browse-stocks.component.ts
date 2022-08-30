@@ -54,6 +54,11 @@ export class BrowseStocksComponent implements OnInit {
     }
   }
 
+  redirectBySelectedCard(symbol:string){
+    console.log(symbol);
+    this.route.navigateByUrl('/singleStockView/' + symbol);
+  }
+
   browseBySector(sector:string){
     this.selectedSector = sector;
 
