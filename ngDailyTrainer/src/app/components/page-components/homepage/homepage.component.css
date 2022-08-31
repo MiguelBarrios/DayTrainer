@@ -11411,8 +11411,13 @@ header.masthead {
   padding-top: 10.5rem;
   padding-bottom: 6rem;
   text-align: center;
-  color: #fff;
-  background-image: url("http://3.229.131.97:8080/DayTrainer/assets/img/stockchart2.jpg");
+  /* color: rgb(96, 160, 43); */
+  color: #000;
+  /* color: #fff; */
+  /* background-image: url("https://cdn-cdjkj.nitrocdn.com/uvomeNHzFnNlcAGzKUrRMWCnCXOTxEcC/assets/static/optimized/rev-c0a23a2/wp-content/uploads/2021/10/make-money-investing-in-stocks-compressor.png"); */
+  background-image: url("http://3.229.131.97:8080/DayTrainer/assets/img/bannerpic.png");
+
+  /* background-image: url("http://3.229.131.97:8080/DayTrainer/assets/img/stockchart2.jpg"); */
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
