@@ -1,5 +1,8 @@
 # Daily Trainer FinalProject
 
+## Deployed Site
+http://3.229.131.97:8080/DayTrainer/#/home
+
 ## Description
 
 For our final project to culminate the completion of our learning experience at Skill Distillery Full-Stack Software Development course, our team of developers created Day Trainer. Day Trainer is an investing application that allows users to trade stocks with simulated money. It allows users to gain experience trading and investing without the high stakes. Users can make buy and sell orders and track their accounts performance over time.
