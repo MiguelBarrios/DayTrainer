@@ -83,7 +83,7 @@
 
     <div class="row mt-4">
 
-        <div class="col-xl-3 col-md-6 mb-4" *ngFor="let stock of stocks | sectorPipe:selectedSector">
+        <div class="col-xl-3 col-md-6 mb-4" *ngFor="let stock of filteredStocksBySector">
             <div class="card border-left-primary shadow h-100 py-2 sectorItem" (click)="redirectBySelectedCard(stock.symbol)">
               <div class="card-body">
                 <div class="row no-gutters align-items-center">

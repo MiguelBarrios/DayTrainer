@@ -42,16 +42,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { StockFilterPipe } from './pipes/stock-filter.pipe';
-import { SectorPipePipe } from './pipes/sector-pipe.pipe';
 import { BrowseStocksComponent } from './components/finance/browse-stocks/browse-stocks.component';
 import { TradeTableComponent } from './components/widgets/trade-table/trade-table.component';
 import { PositionTableComponent } from './components/widgets/position-table/position-table.component';
-
-
-
-
-
-
 
 
 @NgModule({
@@ -80,7 +73,6 @@ import { PositionTableComponent } from './components/widgets/position-table/posi
     SettingsComponent,
     BrowseStocksComponent,
     StockFilterPipe,
-    SectorPipePipe,
     TradeTableComponent,
     PositionTableComponent
   ],
@@ -105,7 +97,7 @@ import { PositionTableComponent } from './components/widgets/position-table/posi
     MatTabsModule,
     MatSnackBarModule
   ],
-  providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe, CurrencyPipe, MarketService, SectorPipePipe, StockFilterPipe],
+  providers: [TradesService, FilterTablePipe, DatePipe, MoversPipe, CurrencyPipe, MarketService, StockFilterPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

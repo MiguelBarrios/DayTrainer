@@ -29,11 +29,14 @@ export class BrowseStocksComponent implements OnInit {
   filteredOptions: string[] = [];
   selected:Stock | null = null;
 
+  filteredStocksBySector:Stock[] = [];
+
 
   ngOnInit() {
     this.stockSvc.getStocks().subscribe(
       (data) => {
         this.stocks = data;
+        this.filteredStocksBySector = this.stocks;
       },
       (error) => {
         console.log(error);
@@ -73,8 +76,18 @@ export class BrowseStocksComponent implements OnInit {
         element.classList.add("btn-warning");
       }
     }
+
+    this.filteredStocksBySector = [];
+    for(let stock of this.stocks){
+      if(stock.sector.startsWith(this.selectedSector)){
+        this.filteredStocksBySector.push(stock);
+      }
+    }
+
+
   }
 
 
 
 }
+ C
