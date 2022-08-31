@@ -90,4 +90,3 @@ export class BrowseStocksComponent implements OnInit {
 
 
 }
- C
