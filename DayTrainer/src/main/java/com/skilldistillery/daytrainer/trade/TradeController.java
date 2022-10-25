@@ -21,24 +21,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/v1/trades")
 @CrossOrigin({ "*", "http://localhost" })
 public class TradeController {
 	
 	@Autowired
 	private TradeService tradeService;
 	
-	@Autowired 
-	private StockService stockService;
 	
-	
-	@GetMapping("trades")
+	@GetMapping
 	public List<Trade> getUserTrades(Principal principal){
 		String username = principal.getName();
 		return tradeService.getUserTrades(username);
 	}
 	
-	@GetMapping("trades/{tid}")
+	@GetMapping("{tid}")
 	public Trade getTradeById(@PathVariable Integer tid, HttpServletResponse response, Principal principal) {
 		
 		Trade trade = tradeService.getTradeById(tid);
@@ -49,7 +46,7 @@ public class TradeController {
 		return trade;
 	}
 	
-	@PostMapping("trades")
+	@PostMapping
 	public Trade create(@RequestBody Trade trade, HttpServletResponse response, Principal principal) {
 		
 		String orderType = trade.getOrderType().getName();
@@ -66,21 +63,15 @@ public class TradeController {
 	}
 	
 	
-	@GetMapping("trades/position/{ticker}")
+	@GetMapping("position/{ticker}")
 	public StockPosition getUserStockPosition(Principal principal, @PathVariable String ticker) {
 		StockPosition pos = tradeService.getUserPosition(principal.getName(), ticker);
 		return pos;
 	}
 	
-	@GetMapping("trades/position")
+	@GetMapping("position")
 	public List<StockPosition> getUserStockPositions(Principal principal){
 		return tradeService.getUserPositions(principal.getName());
 	}
-	
-	@GetMapping("trades/users/{username}")
-	public List<Trade> friendsTrades(Principal principal, @PathVariable String username){
-		return tradeService.getUserTrades(username);
-	}
-	
 
 }
