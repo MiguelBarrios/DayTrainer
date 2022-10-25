@@ -44,14 +44,12 @@ public class TradeController {
 	}
 	
 	@PostMapping
-	public Trade create(@RequestBody Trade trade, HttpServletResponse response, Principal principal) {
+	public Trade placeTrade(@RequestBody Trade trade, HttpServletResponse response, Principal principal) {
 		
 		String orderType = trade.getOrderType().getName();
 		if(orderType.equals("Market")){
-			trade = tradeService.createMarketTrade(principal.getName(),trade);
-			if(trade == null) {
-				response.setStatus(401);
-			}
+			trade = tradeService.placeTrade(principal.getName(), trade);
+
 		}else {
 			//TODO: Place limit order
 		}

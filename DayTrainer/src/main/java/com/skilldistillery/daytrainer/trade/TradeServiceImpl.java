@@ -66,26 +66,40 @@ public class TradeServiceImpl implements TradeService {
 	@Override
 	public Trade getTradeById(int tid, String username) {
 		
-		Optional<Trade> option = tradeRepository.findById(tid);
+		Trade trade = tradeRepository.findById(tid)
+			.orElseThrow(() -> new TradeNotFoundException(String.format("Trade with %d not found", tid)) );
 		
-		if(option.isPresent()) {
-			Trade trade = option.get();
-			String tradeExecutedUser = trade.getUser().getUsername();
-			if(username.equals(tradeExecutedUser)) {
-				throw new UserNotAuthorizedException("Unauthorized");
-			}
-			return trade;
+		String authorizedUser = trade.getUser().getUsername();
+		if(!username.equals(authorizedUser)) {
+			throw new UserNotAuthorizedException("Unauthorized");
+		}
+		
+		return trade;
+		
+	}
+	
+	
+	
+	@Override
+	public Trade placeTrade(String username, Trade trade) {
+		String orderType = trade.getOrderType().getName();
+		if(orderType.equals("Market")) {
+			Trade managedTrade = createMarketTrade(username, trade);
+			return managedTrade;
+			
+		}
+		else if(orderType.equals("Limit")) {
+			return null;
 		}
 		else {
-			throw new TradeNotFoundException(String.format("Trade with %d not found", tid));
+			return null;
 		}
-		
-		
-		
 	}
 	
 	@Override
 	public Trade createMarketTrade(String username, Trade trade) {
+		
+		
 	
 		//PERSIST STOCK SYMBOL IF NOT PRESENT
 		Stock stock = trade.getStock();
