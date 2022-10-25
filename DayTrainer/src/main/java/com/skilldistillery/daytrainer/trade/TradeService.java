@@ -1,9 +1,7 @@
 package com.skilldistillery.daytrainer.trade;
 
-import java.util.Collection;
 import java.util.List;
 
-import com.skilldistillery.daytrainer.entities.Position;
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
 

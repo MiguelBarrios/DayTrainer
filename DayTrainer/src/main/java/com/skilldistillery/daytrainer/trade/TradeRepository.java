@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.skilldistillery.daytrainer.entities.Trade;
 
-public interface TradeRepository extends JpaRepository<Trade, Integer>{
+public interface TradeRepository extends JpaRepository<Trade, Integer> {
 	
 	@Query("SELECT t FROM Trade t WHERE t.user.username = :username")
 	List<Trade> getUserTrades(@Param("username") String username);

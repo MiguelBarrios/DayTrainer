@@ -29,45 +29,44 @@ public class TradeServiceImple implements TradeService {
 
 	
 	@Autowired
-	private TradeRepository tradeRepo;
+	private TradeRepository tradeRepository;
 	
 	@Autowired
-	private TradeRepository2 tradeRepoP;
+	private TradePaginationRepository tradePaginationRepository;
 	
 	@Autowired
-	private UserRepository userRepo;
+	private UserRepository userRepository;
 	
 	
 	@Autowired 
 	private StockService stockService;
 	
 	@Autowired
-	private AccountRepository accountRepo;
+	private AccountRepository accountRepository;
 	
 	@Autowired
 	private TDAService tdaService;
 	
 	@Override
 	public List<Trade> getUserTrades(String username) {
-		return tradeRepo.getUserTrades(username);
+		return tradeRepository.getUserTrades(username);
 	}
 	
 	@Override
 	public Integer getNumUserTrades(String username) {
-		return tradeRepo.getNumUserTrades(username);
+		return tradeRepository.getNumUserTrades(username);
 	}
 	
 	@Override
 	public List<Trade> getUserTradesPagnated(String username, int pageNumber, int pageSize){
-		User user = userRepo.findByUsername(username);
-		
+		User user = userRepository.findByUsername(username);
 		Pageable pages = PageRequest.of(pageNumber, pageSize);
-		return tradeRepoP.findByUser_id(user.getId(), pages);
+		return tradePaginationRepository.findByUser_id(user.getId(), pages);
 	}
 	
 	@Override
 	public Trade getTradeById(int tid) {
-		Optional<Trade> trade = tradeRepo.findById(tid);
+		Optional<Trade> trade = tradeRepository.findById(tid);
 		
 		if(trade.isPresent()) {
 			return trade.get();
@@ -84,7 +83,7 @@ public class TradeServiceImple implements TradeService {
 		Stock stock = trade.getStock();
 		stock = stockService.getStock(stock);
 		
-		User user = userRepo.findByUsername(username);
+		User user = userRepository.findByUsername(username);
 		trade.setUser(user);
 		
 		Account account = user.getAccount();
@@ -94,9 +93,9 @@ public class TradeServiceImple implements TradeService {
 //			System.out.println("*" + trade);
 			double updatedBalance = account.getBalance() - (trade.getPricePerShare() * trade.getQuantity());
 			account.setBalance(updatedBalance);
-			accountRepo.saveAndFlush(account);
+			accountRepository.saveAndFlush(account);
 			trade.setCompletionDate(LocalDateTime.now());
-			tradeRepo.saveAndFlush(trade);
+			tradeRepository.saveAndFlush(trade);
 			
 		}else {
 //			System.out.println("User sold shares: " + stock);
@@ -108,9 +107,9 @@ public class TradeServiceImple implements TradeService {
 			}else {
 				double updatedBalance = account.getBalance() + (trade.getPricePerShare() * trade.getQuantity());
 				account.setBalance(updatedBalance);
-				accountRepo.saveAndFlush(account);
+				accountRepository.saveAndFlush(account);
 				trade.setCompletionDate(LocalDateTime.now());
-				tradeRepo.saveAndFlush(trade);
+				tradeRepository.saveAndFlush(trade);
 			}
 
 			
@@ -119,7 +118,7 @@ public class TradeServiceImple implements TradeService {
 	}
 	
 	private int getCurrentHolding(String username, String symbol) {
-		List<Trade> holding = tradeRepo.getUserTradesByStock(username, symbol);
+		List<Trade> holding = tradeRepository.getUserTradesByStock(username, symbol);
 		int positionSize = 0;
 		for(Trade trade : holding) {
 			if(trade.isBuy()) {
@@ -135,7 +134,7 @@ public class TradeServiceImple implements TradeService {
 	
 	@Override
 	public List<StockPosition> getUserPositions(String username){
-		List<String> stocks = tradeRepo.getUserStocks(username);
+		List<String> stocks = tradeRepository.getUserStocks(username);
 		List<StockPosition> positions = new ArrayList<>();
 		for(String stock : stocks) {
 			StockPosition pos = this.getUserPosition(username, stock);
@@ -170,12 +169,12 @@ public class TradeServiceImple implements TradeService {
 	
 	@Override
 	public StockPosition getUserPosition(String username, String ticker) {
-		List<Trade> purchases = tradeRepo.getUserStockPurchases(username, ticker);
+		List<Trade> purchases = tradeRepository.getUserStockPurchases(username, ticker);
 		if(purchases.size() == 0) {
 			return new StockPosition(ticker, 0,0, 0);
 		}
 		
-		Integer sharesSold = tradeRepo.getNumSharesSold(username, ticker);
+		Integer sharesSold = tradeRepository.getNumSharesSold(username, ticker);
 		if(sharesSold == null) {
 			sharesSold = 0;
 		}
