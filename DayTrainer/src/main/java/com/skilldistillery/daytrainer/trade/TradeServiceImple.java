@@ -14,7 +14,7 @@ import com.skilldistillery.daytrainer.entities.Stock;
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
 import com.skilldistillery.daytrainer.entities.User;
-import com.skilldistillery.daytrainer.stock.StockRepository;
+import com.skilldistillery.daytrainer.exceptions.TradeNotFoundException;
 import com.skilldistillery.daytrainer.stock.StockService;
 import com.skilldistillery.daytrainer.tda.TDAService;
 import com.skilldistillery.daytrainer.user.UserRepository;
@@ -37,8 +37,6 @@ public class TradeServiceImple implements TradeService {
 	@Autowired
 	private UserRepository userRepo;
 	
-	@Autowired
-	private StockRepository stockRepo;
 	
 	@Autowired 
 	private StockService stockService;
@@ -69,8 +67,14 @@ public class TradeServiceImple implements TradeService {
 	
 	@Override
 	public Trade getTradeById(int tid) {
-		Optional<Trade> option = tradeRepo.findById(tid);
-		return (option.isPresent()) ? option.get() : null;
+		Optional<Trade> trade = tradeRepo.findById(tid);
+		
+		if(trade.isPresent()) {
+			return trade.get();
+		}
+		else {
+			throw new TradeNotFoundException(String.format("Trade with %d not found", tid));
+		}
 	}
 	
 	@Override

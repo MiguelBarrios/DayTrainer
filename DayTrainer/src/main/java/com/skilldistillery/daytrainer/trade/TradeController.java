@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
-import com.skilldistillery.daytrainer.stock.StockService;
-import com.skilldistillery.daytrainer.tda.TDAService;
+import com.skilldistillery.daytrainer.exceptions.TradeNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController
@@ -37,12 +38,7 @@ public class TradeController {
 	
 	@GetMapping("{tid}")
 	public Trade getTradeById(@PathVariable Integer tid, HttpServletResponse response, Principal principal) {
-		
 		Trade trade = tradeService.getTradeById(tid);
-		if(trade == null) {
-			response.setStatus(404);
-		}
-		
 		return trade;
 	}
 	
