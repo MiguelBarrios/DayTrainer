@@ -79,6 +79,11 @@ public class User {
 	public User() {
 
 	}
+	
+	
+	public boolean hasSufficientFunds(Trade trade) {
+		return this.account.hasSufficientFunds(trade);
+	}
 
 	public List<User> getFollowing() {
 		return following;

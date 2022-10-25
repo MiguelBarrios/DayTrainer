@@ -3,17 +3,18 @@ package com.skilldistillery.daytrainer.trade;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skilldistillery.daytrainer.account.AccountRepository;
 import com.skilldistillery.daytrainer.entities.Account;
-import com.skilldistillery.daytrainer.entities.Stock;
+import com.skilldistillery.daytrainer.entities.OrderType;
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
 import com.skilldistillery.daytrainer.entities.User;
+import com.skilldistillery.daytrainer.exceptions.InsufficientFundsException;
+import com.skilldistillery.daytrainer.exceptions.InsufficientSharesException;
 import com.skilldistillery.daytrainer.exceptions.TradeNotFoundException;
 import com.skilldistillery.daytrainer.exceptions.UserNotAuthorizedException;
 import com.skilldistillery.daytrainer.stock.StockService;
@@ -75,71 +76,77 @@ public class TradeServiceImpl implements TradeService {
 		}
 		
 		return trade;
-		
 	}
 	
 	
 	
 	@Override
 	public Trade placeTrade(String username, Trade trade) {
-		String orderType = trade.getOrderType().getName();
-		if(orderType.equals("Market")) {
-			Trade managedTrade = createMarketTrade(username, trade);
-			return managedTrade;
-			
+		Trade managedTrade = null;
+		
+		OrderType orderType = trade.getOrderType();
+		if(orderType.isMarketOrder()) {
+			managedTrade = createMarketTrade(username, trade);			
 		}
-		else if(orderType.equals("Limit")) {
-			return null;
-		}
-		else {
-			return null;
-		}
-	}
 	
+		// TODO: implement logic for limit orders
+		
+		return managedTrade;
+	}
+		
 	@Override
 	public Trade createMarketTrade(String username, Trade trade) {
-		
-		
-	
-		//PERSIST STOCK SYMBOL IF NOT PRESENT
-		Stock stock = trade.getStock();
-		stock = stockService.getStock(stock);
-		
+				
 		User user = userRepository.findByUsername(username);
 		trade.setUser(user);
-		
-		Account account = user.getAccount();
-		
-		if(trade.isBuy()) {
-//			System.out.println("User bought shares: " + stock);
-//			System.out.println("*" + trade);
-			double updatedBalance = account.getBalance() - (trade.getPricePerShare() * trade.getQuantity());
-			account.setBalance(updatedBalance);
-			accountRepository.saveAndFlush(account);
-			trade.setCompletionDate(LocalDateTime.now());
-			tradeRepository.saveAndFlush(trade);
-			
+				
+		if(trade.isBuyOrder()) {
+			executeBuyOrder(trade);
 		}else {
-//			System.out.println("User sold shares: " + stock);
-			//Check if user Has shares
-			int positionSize = this.getCurrentHolding(username, stock.getSymbol());
-			if(trade.getQuantity() > positionSize) {
-//				System.err.println("User tried to sell stock he does not have");
-				return null;
-			}else {
-				double updatedBalance = account.getBalance() + (trade.getPricePerShare() * trade.getQuantity());
-				account.setBalance(updatedBalance);
-				accountRepository.saveAndFlush(account);
-				trade.setCompletionDate(LocalDateTime.now());
-				tradeRepository.saveAndFlush(trade);
-			}
-
-			
+			executeSellOrder(trade);
 		}		
+		
 		return trade;
 	}
 	
-	private int getCurrentHolding(String username, String symbol) {
+	@Override
+	public void executeBuyOrder(Trade trade){
+		User user = trade.getUser();
+		
+		if(!user.hasSufficientFunds(trade)) {
+			throw new InsufficientFundsException();
+		}
+		
+		Account account = user.getAccount();
+		account.prossesBuyOrder(trade);
+		accountRepository.saveAndFlush(account);
+		
+		trade.setCompletionDate(LocalDateTime.now());
+		tradeRepository.saveAndFlush(trade);
+	}
+	
+	@Override
+	public void executeSellOrder(Trade trade) {
+		User user = trade.getUser();
+		String username = user.getUsername();
+		String stockSymbol = trade.getStock().getSymbol();
+		int numberOfSharesToSell = trade.getQuantity();
+		int availableShares = getNumberOfSharesOfStockByUser(username, stockSymbol);
+		
+		if(numberOfSharesToSell > availableShares) {
+			throw new InsufficientSharesException();
+		}
+		
+		Account account = user.getAccount();
+		account.proccessSellOrder(trade);
+		accountRepository.saveAndFlush(account);
+		
+		trade.setCompletionDate(LocalDateTime.now());
+		tradeRepository.saveAndFlush(trade);
+	}
+	
+	
+	private int getNumberOfSharesOfStockByUser(String username, String symbol) {
 		List<Trade> holding = tradeRepository.getUserTradesByStock(username, symbol);
 		int positionSize = 0;
 		for(Trade trade : holding) {
