@@ -9,7 +9,7 @@ public interface TradeService {
 
 	public List<Trade> getUserTrades(String username);
 
-	public Trade getTradeById(int tid);
+	public Trade getTradeById(int tid, String username);
 
 	public Trade createMarketTrade(String username, Trade trade);
 

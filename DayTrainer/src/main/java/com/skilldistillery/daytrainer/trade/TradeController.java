@@ -38,7 +38,8 @@ public class TradeController {
 	
 	@GetMapping("{tid}")
 	public Trade getTradeById(@PathVariable Integer tid, HttpServletResponse response, Principal principal) {
-		Trade trade = tradeService.getTradeById(tid);
+		String username = principal.getName();
+		Trade trade = tradeService.getTradeById(tid, username);
 		return trade;
 	}
 	

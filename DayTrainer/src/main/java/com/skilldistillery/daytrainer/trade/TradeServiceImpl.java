@@ -15,6 +15,7 @@ import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
 import com.skilldistillery.daytrainer.entities.User;
 import com.skilldistillery.daytrainer.exceptions.TradeNotFoundException;
+import com.skilldistillery.daytrainer.exceptions.UserNotAuthorizedException;
 import com.skilldistillery.daytrainer.stock.StockService;
 import com.skilldistillery.daytrainer.tda.TDAService;
 import com.skilldistillery.daytrainer.user.UserRepository;
@@ -25,9 +26,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TradeServiceImple implements TradeService {
+public class TradeServiceImpl implements TradeService {
 
-	
 	@Autowired
 	private TradeRepository tradeRepository;
 	
@@ -36,7 +36,6 @@ public class TradeServiceImple implements TradeService {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
 	
 	@Autowired 
 	private StockService stockService;
@@ -65,15 +64,24 @@ public class TradeServiceImple implements TradeService {
 	}
 	
 	@Override
-	public Trade getTradeById(int tid) {
-		Optional<Trade> trade = tradeRepository.findById(tid);
+	public Trade getTradeById(int tid, String username) {
 		
-		if(trade.isPresent()) {
-			return trade.get();
+		Optional<Trade> option = tradeRepository.findById(tid);
+		
+		if(option.isPresent()) {
+			Trade trade = option.get();
+			String tradeExecutedUser = trade.getUser().getUsername();
+			if(username.equals(tradeExecutedUser)) {
+				throw new UserNotAuthorizedException("Unauthorized");
+			}
+			return trade;
 		}
 		else {
 			throw new TradeNotFoundException(String.format("Trade with %d not found", tid));
 		}
+		
+		
+		
 	}
 	
 	@Override
