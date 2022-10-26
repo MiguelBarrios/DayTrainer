@@ -12,4 +12,6 @@ public interface StockService {
 	public Stock getStockBySymbol(String username, String symbol);
 
 	public List<Stock> getAllStocks();
+
+	Stock getStock(Trade trade);
 }

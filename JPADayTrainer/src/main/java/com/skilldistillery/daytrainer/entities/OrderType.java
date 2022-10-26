@@ -25,6 +25,10 @@ public class OrderType {
 		super();
 
 	}
+	
+	public boolean isMarketOrder() {
+		return name.equals("Market");
+	}
 
 
 	public int getId() {

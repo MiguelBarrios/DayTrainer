@@ -42,7 +42,7 @@ public class TDAService {
 	{
 		// So that get market hours request will run on first run
 		this.lastDate = LocalDate.now();
-		this.lastDate = this.lastDate.minusDays(1);
+		this.lastDate = this.lastDate.minusDays(1);		
 	}
 
 	public TDAService(RestTemplateBuilder restTemplateBuilder) {
@@ -107,36 +107,44 @@ public class TDAService {
 		return marketHours;
 
 	}
+	
+	public String requestQuote(String symbol) {
+		String requestUrl = url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
+		String json = this.restTemplate.getForObject(requestUrl, String.class);
+		String quote = null;
+
+		try {
+			// Get Quote, check if quote is present
+			final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
+			if (node.has(symbol)) {
+				quote =  node.get(symbol).toString();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return quote;
+	}
 
 	public String getQuote(String symbol) {
 		symbol = symbol.toUpperCase();
+		String quote = null;
 		if(table.containsKey(symbol)) {
-//			System.out.println("Quote requested: " + symbol + " " + table.get(symbol));
-			return table.get(symbol);
+			quote = table.get(symbol);
 		}else {
-//			System.err.println("Non smp 500 quote requested: " + symbol);
-			String requestUrl = url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
-			String json = this.restTemplate.getForObject(requestUrl, String.class);
-			String quote = null;
-
-			try {
-				// Get Quote, check if quote is present
-				final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
-				if (node.has(symbol)) {
-					quote =  node.get(symbol).toString();
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return quote;
+			quote = requestQuote(symbol);
 		}
-
+		
+		return quote;
 	}
 	
 	public boolean isInitialized() {
 		return this.table.size() > 0;
+	}
+	
+	public Double getLastPrice(String symbol) {
+		return null;
 	}
 	
 	public String getQuotes(String symbols) {
@@ -146,20 +154,24 @@ public class TDAService {
 		return json;
 	}
 	
+	public void initSymbolList(){
+		List<String> symbols = this.stockRepo.getAllSymbols();
+		String[] symbolLists = {
+			String.join(",", symbols.subList(0, 84)),
+			String.join(",", symbols.subList(84, 168)),
+			String.join(",", symbols.subList(168, 252)),
+			String.join(",", symbols.subList(252, 336)),
+			String.join(",", symbols.subList(336, 420)),
+			String.join(",", symbols.subList(420, symbols.size())),
+		};
+		
+		this.stocksSymbols = symbolLists;
+	}
+	
 	public void updateQuotesAll() {
 		
 		if(this.stocksSymbols == null) {
-			List<String> symbols = this.stockRepo.getAllSymbols();
-			String[] symbolLists = {
-				String.join(",", symbols.subList(0, 84)),
-				String.join(",", symbols.subList(84, 168)),
-				String.join(",", symbols.subList(168, 252)),
-				String.join(",", symbols.subList(252, 336)),
-				String.join(",", symbols.subList(336, 420)),
-				String.join(",", symbols.subList(420, symbols.size())),
-			};
-			
-			this.stocksSymbols = symbolLists;
+			initSymbolList();
 		}
 		
 		for(String symbols : this.stocksSymbols) {

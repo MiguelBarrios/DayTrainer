@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.skilldistillery.daytrainer.entities.Trade;
 
-public interface TradeRepository extends JpaRepository<Trade, Integer>{
+public interface TradeRepository extends JpaRepository<Trade, Integer> {
 	
 	@Query("SELECT t FROM Trade t WHERE t.user.username = :username")
 	List<Trade> getUserTrades(@Param("username") String username);
@@ -35,4 +35,16 @@ public interface TradeRepository extends JpaRepository<Trade, Integer>{
 	
 	@Query("SELECT COUNT(t) FROM Trade t WHERE t.user.username = :username")
 	Integer getNumUserTrades(@Param("username") String username);
+	
+	@Query(value = "SELECT SUM(IF(buy, quantity, quantity * -1))\"shares\" FROM trade where user_id = :userId AND stock_symbol = :symbol"
+			,nativeQuery = true)
+	Integer getNumberOfAvailableShares(@Param("userId") Integer userId, @Param("symbol") String symbol);
+	
+	@Query(value = "SELECT * FROM trade\n"
+			+ "WHERE user_id = :userId \n"
+			+ "AND stock_symbol = :symbol \n"
+			+ "AND buy \n"
+			+ "ORDER BY created_at DESC",
+			nativeQuery = true)
+	List<Trade> getPreviousBuyOrders(@Param("userId") Integer userId, @Param("symbol") String symbol);
 }

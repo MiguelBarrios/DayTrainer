@@ -14,7 +14,7 @@ export class TradesService {
 
   private tdaUrl = "https://api.tdameritrade.com/v1/marketdata/";
 
-  private url = environment.baseUrl + 'api/trades'
+  private url = environment.baseUrl + 'api/v1/trades'
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
