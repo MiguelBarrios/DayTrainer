@@ -26,5 +26,8 @@ public interface TradeService {
 
 	void executeBuyOrder(Trade trade);
 
-	void executeSellOrder(Trade trade);	
+	void executeSellOrder(Trade trade);
+
+	double getAverageCostPerShare(List<Trade> buyOrders, Integer numberOfShares);
+
 }

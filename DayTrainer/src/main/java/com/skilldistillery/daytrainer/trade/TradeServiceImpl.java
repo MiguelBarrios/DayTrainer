@@ -17,7 +17,6 @@ import com.skilldistillery.daytrainer.exceptions.InsufficientFundsException;
 import com.skilldistillery.daytrainer.exceptions.InsufficientSharesException;
 import com.skilldistillery.daytrainer.exceptions.TradeNotFoundException;
 import com.skilldistillery.daytrainer.exceptions.UserNotAuthorizedException;
-import com.skilldistillery.daytrainer.stock.StockService;
 import com.skilldistillery.daytrainer.tda.TDAService;
 import com.skilldistillery.daytrainer.user.UserRepository;
 
@@ -37,9 +36,6 @@ public class TradeServiceImpl implements TradeService {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
-	@Autowired 
-	private StockService stockService;
 	
 	@Autowired
 	private AccountRepository accountRepository;
@@ -146,10 +142,12 @@ public class TradeServiceImpl implements TradeService {
 	}
 	
 	
+	
 	private int getNumberOfSharesOfStockByUser(String username, String symbol) {
-		List<Trade> holding = tradeRepository.getUserTradesByStock(username, symbol);
+		List<Trade> trades = tradeRepository.getUserTradesByStock(username, symbol);
+		
 		int positionSize = 0;
-		for(Trade trade : holding) {
+		for(Trade trade : trades) {
 			if(trade.isBuy()) {
 				positionSize += trade.getQuantity();
 			}else {
@@ -161,9 +159,12 @@ public class TradeServiceImpl implements TradeService {
 	
 	}
 	
+
+	
 	@Override
 	public List<StockPosition> getUserPositions(String username){
 		List<String> stocks = tradeRepository.getUserStocks(username);
+		
 		List<StockPosition> positions = new ArrayList<>();
 		for(String stock : stocks) {
 			StockPosition pos = this.getUserPosition(username, stock);
@@ -198,50 +199,27 @@ public class TradeServiceImpl implements TradeService {
 	
 	@Override
 	public StockPosition getUserPosition(String username, String ticker) {
-		List<Trade> purchases = tradeRepository.getUserStockPurchases(username, ticker);
-		if(purchases.size() == 0) {
-			return new StockPosition(ticker, 0,0, 0);
-		}
+		User user = userRepository.findByUsername(username);
+		int userId = user.getId();
+		Integer numberOfAvailableShares = tradeRepository.getNumberOfAvailableShares(userId, ticker);
+		List<Trade> buyOrders = tradeRepository.getPreviousBuyOrders(userId, ticker);
 		
-		Integer sharesSold = tradeRepository.getNumSharesSold(username, ticker);
-		if(sharesSold == null) {
-			sharesSold = 0;
-		}
-
-		for(int i = 0; i < purchases.size(); ++i) {
-			Trade cur = purchases.get(i);
-			int amount = cur.getQuantity();
-			if(sharesSold >= amount) {
-				sharesSold -= amount;
-				purchases.set(i, null);
-			}
-			else {
-				cur.setQuantity(amount - sharesSold);
-				sharesSold = 0;
-			}
-			
-			if(sharesSold == 0) {
-				break;
-			}
-		}
+		double averageCost = getAverageCostPerShare(buyOrders, numberOfAvailableShares);
 		
-		List<Trade> remainingTrades = purchases.stream().filter((t) -> t != null).collect(Collectors.toList());
-		
-		int remainingShares = 0;
-		double totalSpentOnShares = 0;
-		for(Trade cur : remainingTrades) {
-			remainingShares += cur.getQuantity();
-			totalSpentOnShares += cur.getQuantity() * cur.getPricePerShare();
-		}
-		
-		double avgCostPerShare = totalSpentOnShares / remainingShares;
-		return new StockPosition(ticker, remainingShares, avgCostPerShare, 0);
+		return new StockPosition(ticker, numberOfAvailableShares, averageCost, 0);
 	}
 	
-	
-	
-	
-	
-
-	
+	@Override
+	public double getAverageCostPerShare(List<Trade> buyOrders, Integer numberOfShares) {
+		int totalNumber = numberOfShares;
+		double averageCost = 0;
+		for(int i = 0; i < buyOrders.size() && numberOfShares > 0; ++i) {
+			Trade trade = buyOrders.get(i);
+			int quantity = trade.getQuantity();
+			int cur = Math.min(quantity , numberOfShares );
+			averageCost += trade.getPricePerShare() * cur;
+			numberOfShares -= cur;
+		}
+		return averageCost / totalNumber;
+	}
 }
