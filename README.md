@@ -53,7 +53,6 @@ Another new lesson learned while working on this project was how to develop a me
 * GitHub
 * MySQL
 * Tomcat 8
-* MAMP
 * AWS
 * Google
 * Spring Tool Suite 4
@@ -62,7 +61,6 @@ Another new lesson learned while working on this project was how to develop a me
 * Slack
 * Zoom
 * Gradle
-* Google Drive Terminal
 * Object-Relational Mapping (ORM)
 * Object-Oriented Programming
 * Test Driven Development using JUNIT Juniper
