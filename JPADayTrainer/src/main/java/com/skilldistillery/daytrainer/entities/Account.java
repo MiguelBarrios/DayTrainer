@@ -35,6 +35,21 @@ public class Account {
 	public Account() {
 		super();
 	}
+	
+	public boolean hasSufficientFunds(Trade trade) {
+		double fundsRequired = (trade.getPricePerShare() * trade.getQuantity());
+		return fundsRequired >= balance;
+	}
+	
+	public void proccessSellOrder(Trade trade) {
+		double updatedBalance = balance + (trade.getPricePerShare() * trade.getQuantity());
+		setBalance(updatedBalance);
+	}
+	
+	public void prossesBuyOrder(Trade trade) {
+		double updatedBalance = balance - (trade.getPricePerShare() * trade.getQuantity());
+		setBalance(updatedBalance);
+	}
 
 	public double getDeposit() {
 		return deposit;

@@ -81,6 +81,11 @@ public class Trade {
 	public boolean isBuy() {
 		return buy;
 	}
+	
+	public boolean isBuyOrder() {
+		return buy;
+	}
+
 
 	public void setBuy(boolean buy) {
 		this.buy = buy;

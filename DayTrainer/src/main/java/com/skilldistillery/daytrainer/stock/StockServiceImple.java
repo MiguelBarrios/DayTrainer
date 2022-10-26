@@ -32,6 +32,12 @@ public class StockServiceImple implements StockService {
 	}
 	
 	@Override
+	public Stock getStock(Trade trade) {
+		Stock stock = trade.getStock();
+		return getStock(stock);
+	}
+	
+	@Override
 	public Stock getStockBySymbol(String username, String symbol) {
 		User currentUser = userRepo.findByUsername(username);
 		Optional<Stock> op =  stockRepo.findById(symbol);
