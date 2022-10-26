@@ -3,7 +3,6 @@ package com.skilldistillery.daytrainer.trade;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -127,7 +126,7 @@ public class TradeServiceImpl implements TradeService {
 		String username = user.getUsername();
 		String stockSymbol = trade.getStock().getSymbol();
 		int numberOfSharesToSell = trade.getQuantity();
-		int availableShares = getNumberOfSharesOfStockByUser(username, stockSymbol);
+		int availableShares = tradeRepository.getNumberOfAvailableShares(user.getId(), stockSymbol);
 		
 		if(numberOfSharesToSell > availableShares) {
 			throw new InsufficientSharesException();
@@ -141,61 +140,45 @@ public class TradeServiceImpl implements TradeService {
 		tradeRepository.saveAndFlush(trade);
 	}
 	
-	
-	
-	private int getNumberOfSharesOfStockByUser(String username, String symbol) {
-		List<Trade> trades = tradeRepository.getUserTradesByStock(username, symbol);
-		
-		int positionSize = 0;
-		for(Trade trade : trades) {
-			if(trade.isBuy()) {
-				positionSize += trade.getQuantity();
-			}else {
-				positionSize -= trade.getQuantity();
-			}
-		}
 
-		return positionSize;
-	
-	}
-	
-
-	
 	@Override
 	public List<StockPosition> getUserPositions(String username){
-		List<String> stocks = tradeRepository.getUserStocks(username);
-		
-		List<StockPosition> positions = new ArrayList<>();
-		for(String stock : stocks) {
-			StockPosition pos = this.getUserPosition(username, stock);
-			if(pos.getNumberOfShares() > 0)
-				positions.add(pos);
-		}
-		
-		// Add Last price to Position
-		for(StockPosition pos : positions) {
-			String symbol = pos.getSymbol();
-			String quote = this.tdaService.getQuote(symbol);
-			// Get Quote, check if quote is present
-			ObjectNode node;
-			try {
-				node = new ObjectMapper().readValue(quote, ObjectNode.class);
-				if (node.has("lastPrice")) {
-					String lastPrice =  node.get("lastPrice").toString();
-					pos.setLastPrice(Double.parseDouble(lastPrice));
-					
-				}else {
-//					System.err.println("lastPrice" + " not found");
-					pos.setLastPrice(-1);
-				}
-			}  catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-  
+		List<String> symbols = tradeRepository.getUserStocks(username);
+		List<StockPosition> positions = getPositions(symbols, username);
 		return positions;
 	}
+	
+	public List<StockPosition> getPositions(List<String> symbols, String username){
+		List<StockPosition> positions = new ArrayList<>();
+		
+		for(String symbol : symbols) {
+			StockPosition pos = getUserPosition(username, symbol);
+			if(pos.getNumberOfShares() > 0) {
+				Double lastPrice = getLastPrice(symbol);
+				pos.setLastPrice(lastPrice);
+				positions.add(pos);
+			}
+		}
+		return positions;
+	}
+	
+	public Double getLastPrice(String symbol) {
+		Double res = -1.0;
+		String quote = this.tdaService.getQuote(symbol);
+		// Get Quote, check if quote is present
+		ObjectNode node;
+		try {
+			node = new ObjectMapper().readValue(quote, ObjectNode.class);
+			if (node.has("lastPrice")) {
+				String lastPrice =  node.get("lastPrice").toString();
+				res = Double.parseDouble(lastPrice);
+			}
+		}  catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 	
 	@Override
 	public StockPosition getUserPosition(String username, String ticker) {

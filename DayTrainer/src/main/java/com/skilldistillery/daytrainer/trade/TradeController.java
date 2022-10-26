@@ -70,5 +70,5 @@ public class TradeController {
 	public List<StockPosition> getUserStockPositions(Principal principal){
 		return tradeService.getUserPositions(principal.getName());
 	}
-
+	
 }

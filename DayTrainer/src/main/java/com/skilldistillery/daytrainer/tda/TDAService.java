@@ -111,7 +111,6 @@ public class TDAService {
 	public String getQuote(String symbol) {
 		symbol = symbol.toUpperCase();
 		if(table.containsKey(symbol)) {
-//			System.out.println("Quote requested: " + symbol + " " + table.get(symbol));
 			return table.get(symbol);
 		}else {
 //			System.err.println("Non smp 500 quote requested: " + symbol);
@@ -137,6 +136,10 @@ public class TDAService {
 	
 	public boolean isInitialized() {
 		return this.table.size() > 0;
+	}
+	
+	public Double getLastPrice(String symbol) {
+		return null;
 	}
 	
 	public String getQuotes(String symbols) {
