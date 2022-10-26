@@ -76,24 +76,24 @@ Another new lesson learned while working on this project was how to develop a me
 
 Cecelia Guerrero
 
-* Lead developer
+* developer
 * GitHub: https://github.com/Cagugu
 * LinkedIn: https://www.linkedin.com/in/cecelia-guerrero/
 
 Anthony Butler
 
-* Database Administrator/ Senior developer
+* Database Administrator / developer
 * GitHub: https://github.com/anthonyb0824
 * LinkedIn: https://www.linkedin.com/in/anthony-tyler-butler/
 
 Miguel Barrios
 
-* Repository Owner/ Senior developer
+* developer
 * GitHub: https://github.com/MiguelBarrios
 * LinkedIn: https://www.linkedin.com/in/miguelbarriosdavila/
 
 Daniel Kregstein
 
-* Chief Concept Officer/ Senior developer
+* developer
 * GitHub: https://github.com/Akregstein
 * LinkedIn: https://www.linkedin.com/in/daniel-kregstein-364883240/
