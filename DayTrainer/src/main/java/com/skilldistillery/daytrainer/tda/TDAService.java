@@ -42,7 +42,7 @@ public class TDAService {
 	{
 		// So that get market hours request will run on first run
 		this.lastDate = LocalDate.now();
-		this.lastDate = this.lastDate.minusDays(1);
+		this.lastDate = this.lastDate.minusDays(1);		
 	}
 
 	public TDAService(RestTemplateBuilder restTemplateBuilder) {
@@ -113,7 +113,6 @@ public class TDAService {
 		if(table.containsKey(symbol)) {
 			return table.get(symbol);
 		}else {
-//			System.err.println("Non smp 500 quote requested: " + symbol);
 			String requestUrl = url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
 			String json = this.restTemplate.getForObject(requestUrl, String.class);
 			String quote = null;
@@ -149,20 +148,24 @@ public class TDAService {
 		return json;
 	}
 	
+	public void initSymbolList(){
+		List<String> symbols = this.stockRepo.getAllSymbols();
+		String[] symbolLists = {
+			String.join(",", symbols.subList(0, 84)),
+			String.join(",", symbols.subList(84, 168)),
+			String.join(",", symbols.subList(168, 252)),
+			String.join(",", symbols.subList(252, 336)),
+			String.join(",", symbols.subList(336, 420)),
+			String.join(",", symbols.subList(420, symbols.size())),
+		};
+		
+		this.stocksSymbols = symbolLists;
+	}
+	
 	public void updateQuotesAll() {
 		
 		if(this.stocksSymbols == null) {
-			List<String> symbols = this.stockRepo.getAllSymbols();
-			String[] symbolLists = {
-				String.join(",", symbols.subList(0, 84)),
-				String.join(",", symbols.subList(84, 168)),
-				String.join(",", symbols.subList(168, 252)),
-				String.join(",", symbols.subList(252, 336)),
-				String.join(",", symbols.subList(336, 420)),
-				String.join(",", symbols.subList(420, symbols.size())),
-			};
-			
-			this.stocksSymbols = symbolLists;
+			initSymbolList();
 		}
 		
 		for(String symbols : this.stocksSymbols) {

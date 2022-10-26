@@ -162,6 +162,7 @@ public class TradeServiceImpl implements TradeService {
 		return positions;
 	}
 	
+	//TODO: move to tda service
 	public Double getLastPrice(String symbol) {
 		Double res = -1.0;
 		String quote = this.tdaService.getQuote(symbol);
