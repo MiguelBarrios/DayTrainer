@@ -107,30 +107,36 @@ public class TDAService {
 		return marketHours;
 
 	}
+	
+	public String requestQuote(String symbol) {
+		String requestUrl = url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
+		String json = this.restTemplate.getForObject(requestUrl, String.class);
+		String quote = null;
+
+		try {
+			// Get Quote, check if quote is present
+			final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
+			if (node.has(symbol)) {
+				quote =  node.get(symbol).toString();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return quote;
+	}
 
 	public String getQuote(String symbol) {
 		symbol = symbol.toUpperCase();
+		String quote = null;
 		if(table.containsKey(symbol)) {
-			return table.get(symbol);
+			quote = table.get(symbol);
 		}else {
-			String requestUrl = url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
-			String json = this.restTemplate.getForObject(requestUrl, String.class);
-			String quote = null;
-
-			try {
-				// Get Quote, check if quote is present
-				final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
-				if (node.has(symbol)) {
-					quote =  node.get(symbol).toString();
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			return quote;
+			quote = requestQuote(symbol);
 		}
-
+		
+		return quote;
 	}
 	
 	public boolean isInitialized() {
