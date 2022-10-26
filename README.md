@@ -1,19 +1,17 @@
-# Daily Trainer FinalProject
+# Day Trainer
 
 ## Deployed Site
 http://3.229.131.97:8080/DayTrainer/#/home
 
 ## Description
 
-For our final project to culminate the completion of our learning experience at Skill Distillery Full-Stack Software Development course, our team of developers created Day Trainer. Day Trainer is an investing application that allows users to trade stocks with simulated money. It allows users to gain experience trading and investing without the high stakes. Users can make buy and sell orders and track their accounts performance over time.
+For our final project to culminate the completion of our learning experience at Skill Distillery Full-Stack Software Development course, our team of developers created Day Trainer. Day Trainer is an investing application that allows users to trade stocks with simulated money. It allows users to gain experience trading and investing without the high stakes. Users can place buy and sell orders and track their accounts performance over time.
 
 The motivation for this project comes from personal interactions with friends who have stated that they have always wanted to get started with investing and either didn't have the money to spare or they didn't feel like they had the knowledge and experience to get started on their own. Day Trainer is the perfect platform to get experience buying and selling stocks without having to risk any money. The ability of a user to track their performance over time helps fine tune strategies and shows a user real metrics for measuring growth. With Day Trainer, failure only means learning from your mistakes. After using Day Trainer, we are confident our users will feel ready to invest for real, and will have the confidence to make bold decisions and calculate risk.
 
-Day Trainer also welcomes social interaction. We feature the ability of users following fellow Day Trainers to see their trades and master even more trade strategies. Users can also work towards making their way onto our leaderboard, which displays users ranked in order by top performance computed by largest account balance.
+Day Trainer also welcomes social interaction. Users can also work towards making their way onto our leaderboard, which displays users ranked in order by greatest return on their trades.
 
-When a user logs in they are brought to a dashboard that displays total account balance as well as a detailed chart displaying their current holdings, calculated by the percentage of their total account balance. On this page is also displayed all of the users past trades and cost averages.
-
-The site implements two 3rd Party APIs in order to leverage real time stock data. This way each trade transaction mimics real world trades and track realistic metrics based on market data.
+The site consumes two 3rd Party APIs in order to leverage real time stock data. This way each trade transaction mimics real world trades and track realistic metrics based on market data.
 
 ---
 ## Key Features
