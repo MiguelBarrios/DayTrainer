@@ -1,4 +1,4 @@
-package com.miguelbarrios.userservice.com.miguelbarrios.userservice.repository;
+package com.miguelbarrios.userservice.repositories;
 
 import com.miguelbarrios.userservice.models.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
