@@ -8,6 +8,7 @@
 
   <modules>
     <module>user-service</module>
+      <module>discovery-service</module>
   </modules>
 
   <name>Archetype - day-trader-microservices</name>
