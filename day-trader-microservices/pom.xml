@@ -11,6 +11,7 @@
       <module>discovery-service</module>
       <module>api-gateway</module>
       <module>stock-service</module>
+      <module>quote-service</module>
   </modules>
 
   <name>Archetype - day-trader-microservices</name>
