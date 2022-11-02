@@ -8,7 +8,6 @@ import com.miguelbarrios.quoteservice.models.MarketHours;
 import com.miguelbarrios.quoteservice.models.Quote;
 import com.miguelbarrios.quoteservice.models.Stock;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -26,13 +25,11 @@ import java.util.List;
 @Slf4j
 @Service
 public class QuoteServiceImpl implements QuoteService{
-    @Value("${config.tda.apikey}")
-    private  static String tdaApiKey;
+
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
     private static List<String> symbols = new ArrayList<>();
     private static String[] symbolParamBatches = null;
     private Hashtable<String, String> table = new Hashtable<>();
-    private static String url ="https://api.tdameritrade.com/v1/marketdata/";
 
     private TDAClient tdaClient;
 
@@ -47,18 +44,20 @@ public class QuoteServiceImpl implements QuoteService{
         try (BufferedReader br = new BufferedReader(new FileReader(pathToCSV))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                Stock stock = Stock.builder()
-                        .symbol(values[0])
-                        .name(values[1])
-                        .sector(values[2]).build();
+                Stock stock = parseLine(line);
                 symbols.add(stock.getName());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
-
+    public static Stock parseLine(String line){
+        String[] values = line.split(",");
+        return Stock.builder()
+                .symbol(values[0])
+                .name(values[1])
+                .sector(values[2]).build();
     }
 
     public QuoteServiceImpl(TDAClient tdaClient) {
@@ -87,8 +86,7 @@ public class QuoteServiceImpl implements QuoteService{
 
     public MarketHours getMarketHours() {
         String marketHoursJson = tdaClient.requestMarketHours();
-        MarketHours marketHours = parseMarketHoursRequest(marketHoursJson);
-        return  marketHours;
+        return parseMarketHoursRequest(marketHoursJson);
     }
 
     public MarketHours parseMarketHoursRequest(String marketHoursJson){
@@ -103,12 +101,12 @@ public class QuoteServiceImpl implements QuoteService{
 
             LocalDateTime marketOpen = LocalDateTime.parse(regularMarketOpen, formatter);
             LocalDateTime marketClose = LocalDateTime.parse(regularMarketClose,formatter);
-            MarketHours marketHours = MarketHours.builder()
+
+            return MarketHours.builder()
                     .marketOpen(marketOpen)
                     .marketClose(marketClose)
                     .build();
 
-            return marketHours;
         } catch (Exception e){
             log.info("Error parsing market hours request");
             return null;
@@ -162,13 +160,6 @@ public class QuoteServiceImpl implements QuoteService{
         return null;
     }
 
-    public boolean isInitialized() {
-        return this.table.size() > 0;
-    }
-
-    public Double getLastPrice(String symbol) {
-        return null;
-    }
 
     public void initSymbolList(){
 
@@ -186,13 +177,12 @@ public class QuoteServiceImpl implements QuoteService{
         for(String symbols : symbols) {
             String json = tdaClient.requestQuotes(symbols);
             String[] keys = symbols.split(",");
-            String quote = "";
             for(String key : keys) {
                 try {
                     // Get Quote, check if quote is present
                     final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
                     if (node.has(key)) {
-                        quote =  node.get(key).toString();
+                        String quote =  node.get(key).toString();
                         table.put(key, quote);
                     }else {
                         System.err.println(key + " not found");
