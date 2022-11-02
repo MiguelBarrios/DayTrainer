@@ -3,15 +3,13 @@ package com.miguelbarrios.quoteservice.services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.miguelbarrios.quoteservice.TDAClient;
 import com.miguelbarrios.quoteservice.models.MarketHours;
 import com.miguelbarrios.quoteservice.models.Quote;
 import com.miguelbarrios.quoteservice.models.Stock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.yaml.snakeyaml.error.Mark;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -29,13 +27,14 @@ import java.util.List;
 @Service
 public class QuoteServiceImpl implements QuoteService{
     @Value("${config.tda.apikey}")
-    private  String tdaApiKey;
+    private  static String tdaApiKey;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
     private static List<String> symbols = new ArrayList<>();
-    private static String[] smp500symbolBatches = null;
-    Hashtable<String, String> table = new Hashtable<>();
+    private static String[] symbolParamBatches = null;
+    private Hashtable<String, String> table = new Hashtable<>();
     private static String url ="https://api.tdameritrade.com/v1/marketdata/";
-    private final RestTemplate restTemplate;
+
+    private TDAClient tdaClient;
 
     static {
         loadCSVFile();
@@ -62,8 +61,8 @@ public class QuoteServiceImpl implements QuoteService{
 
     }
 
-    public QuoteServiceImpl(RestTemplateBuilder restTemplateBuilder ) {
-        this.restTemplate = restTemplateBuilder.build();
+    public QuoteServiceImpl(TDAClient tdaClient) {
+        this.tdaClient = tdaClient;
         initSymbolList();
     }
 
@@ -83,8 +82,13 @@ public class QuoteServiceImpl implements QuoteService{
         LocalDateTime marketOpen = marketHours.getMarketOpen();
         LocalDateTime marketClose = marketHours.getMarketClose();
         LocalDateTime currentTime = LocalDateTime.now();
-
         return (currentTime.isBefore(marketClose) && currentTime.isAfter(marketOpen));
+    }
+
+    public MarketHours getMarketHours() {
+        String marketHoursJson = tdaClient.requestMarketHours();
+        MarketHours marketHours = parseMarketHoursRequest(marketHoursJson);
+        return  marketHours;
     }
 
     public MarketHours parseMarketHoursRequest(String marketHoursJson){
@@ -113,28 +117,10 @@ public class QuoteServiceImpl implements QuoteService{
 
     }
 
-    public MarketHours getMarketHours() {
-        LocalDate date = getNextDayMarketIsOpen();
-        String url = this.url + "EQUITY/hours?apikey=" + tdaApiKey  + "&date=" + date.toString();
-        String response = this.restTemplate.getForObject(url, String.class);
-        MarketHours marketHours = parseMarketHoursRequest(response);
-        return  marketHours;
-    }
-
-    public LocalDate getNextDayMarketIsOpen(){
-        LocalDate today = LocalDate.now();
-        if(LocalDateTime.now().getHour() >= 20) {
-            today = today.plusDays(1);
-        }
-        return today;
-    }
-
-
     public String requestQuote(String symbol) {
-        String requestUrl = url + symbol + "/quotes?apikey=" + tdaApiKey;
-        String json = this.restTemplate.getForObject(requestUrl, String.class);
-        String quote = null;
+        String json = tdaClient.requestQuote(symbol);
 
+        String quote = null;
         try {
             // Get Quote, check if quote is present
             final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
@@ -184,16 +170,9 @@ public class QuoteServiceImpl implements QuoteService{
         return null;
     }
 
-    public String getQuotes(String symbols) {
-        symbols = symbols.toUpperCase();
-        String requestUrl = this.url + "/quotes?apikey=" + tdaApiKey + "&symbol=" + symbols;
-        String json = this.restTemplate.getForObject(requestUrl, String.class);
-        return json;
-    }
-
     public void initSymbolList(){
 
-        this.smp500symbolBatches = new String[]{
+        this.symbolParamBatches = new String[]{
                 String.join(",", symbols.subList(0, 84)),
                 String.join(",", symbols.subList(84, 168)),
                 String.join(",", symbols.subList(168, 252)),
@@ -205,9 +184,7 @@ public class QuoteServiceImpl implements QuoteService{
 
     public void updateSMP500Quotes() {
         for(String symbols : symbols) {
-
-            String requestUrl = this.url + "/quotes?apikey=" + tdaApiKey + "&symbol=" + symbols;
-            String json = this.restTemplate.getForObject(requestUrl, String.class);
+            String json = tdaClient.requestQuotes(symbols);
             String[] keys = symbols.split(",");
             String quote = "";
             for(String key : keys) {
