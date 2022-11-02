@@ -10,6 +10,7 @@
     <module>user-service</module>
       <module>discovery-service</module>
       <module>api-gateway</module>
+      <module>stock-service</module>
   </modules>
 
   <name>Archetype - day-trader-microservices</name>

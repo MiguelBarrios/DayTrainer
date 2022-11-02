@@ -5,6 +5,7 @@
       <directory url="file://$PROJECT_DIR$/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/discovery-service/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/api-gateway/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/stock-service/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
@@ -13,8 +14,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
-        <module name="discovery-service" />
+        <module name="stock-service" />
         <module name="user-service" />
+        <module name="discovery-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -23,6 +25,7 @@
       <module name="api-gateway" options="-parameters" />
       <module name="day-trader-microservices" options="" />
       <module name="discovery-service" options="-parameters" />
+      <module name="stock-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
