@@ -49,20 +49,22 @@ public class TDAClient {
         }
     }
 
-    public List<Quote> requestQuotes(String symbols){
+    public Map<String, Quote> requestQuotes(String symbols){
         String requestUrl = this.url + "/quotes?apikey=" + tdaApiKey + "&symbol=" + symbols;
         String jsonString = this.restTemplate.getForObject(requestUrl, String.class);
+        Map<String, Quote> map = TDARequestParser.parseMultipleQuotesRequest(jsonString);
+        return map;
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            Map<String, Quote> map = objectMapper.readValue(jsonString, new TypeReference<Map<String, Quote>>() {});
-            List<Quote> quotes = new ArrayList<>(map.values());
-            quotes.stream().forEach(System.out::println);
-            return Collections.emptyList();
-
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        try {
+//            Map<String, Quote> map = objectMapper.readValue(jsonString, new TypeReference<Map<String, Quote>>() {});
+//            List<Quote> quotes = new ArrayList<>(map.values());
+//            quotes.stream().forEach(System.out::println);
+//            return Collections.emptyList();
+//
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
 
     }
 

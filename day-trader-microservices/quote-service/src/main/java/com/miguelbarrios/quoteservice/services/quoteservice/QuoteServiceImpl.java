@@ -21,6 +21,7 @@ import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -176,33 +177,11 @@ public class QuoteServiceImpl implements QuoteService{
     @Override
     public void updateSMP500Quotes() {
         log.info("updated smp 500 quotes");
-        for(String symbols : this.symbolParamBatches){
-            List<Quote> quotes = tdaClient.requestQuotes(symbols);
-            for(Quote quote : quotes){
-                System.out.println(quote);
-            }
-        }
-//        for(String symbols : symbols) {
-//            System.out.println(symbols);
-//            String json = tdaClient.requestQuotes(symbols);
-//            String[] keys = symbols.split(",");
-//            for(String key : keys) {
-//                try {
-//                    // Get Quote, check if quote is present
-//                    final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
-//                    if (node.has(key)) {
-//                        String quote =  node.get(key).toString();
-//                        table.put(key, quote);
-//                    }else {
-//                        System.err.println(key + " not found");
-//                    }
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
 
+        for(String symbols : this.symbolParamBatches){
+            Map<String, Quote> map = tdaClient.requestQuotes(symbols);
+            System.out.println(map);
+        }
     }
 
 
