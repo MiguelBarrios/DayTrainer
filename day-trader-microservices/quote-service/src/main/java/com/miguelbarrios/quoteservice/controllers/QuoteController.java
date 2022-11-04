@@ -46,6 +46,7 @@ public class QuoteController {
 
     @Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
     public void refreshQuotes() {
-
+        log.info("refreshQuotes()");
+        quoteService.updateSMP500Quotes();
     }
 }

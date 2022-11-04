@@ -8,5 +8,6 @@ public interface QuoteService {
 
     Quote getQuote(String symbol);
     List<Quote> getQuotes(String[] symbol);
+    public void updateSMP500Quotes();
 
 }

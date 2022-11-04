@@ -1,7 +1,9 @@
 package com.miguelbarrios.quoteservice.services.tdaservice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 import com.miguelbarrios.quoteservice.exceptions.ErrorParsingQuoteException;
 import com.miguelbarrios.quoteservice.models.Quote;
 import com.miguelbarrios.quoteservice.models.QuoteWrapper;
@@ -13,6 +15,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -44,10 +49,21 @@ public class TDAClient {
         }
     }
 
-    public String requestQuotes(String symbols){
+    public List<Quote> requestQuotes(String symbols){
         String requestUrl = this.url + "/quotes?apikey=" + tdaApiKey + "&symbol=" + symbols;
-        String json = this.restTemplate.getForObject(requestUrl, String.class);
-        return json;
+        String jsonString = this.restTemplate.getForObject(requestUrl, String.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            Map<String, Quote> map = objectMapper.readValue(jsonString, new TypeReference<Map<String, Quote>>() {});
+            List<Quote> quotes = new ArrayList<>(map.values());
+            quotes.stream().forEach(System.out::println);
+            return Collections.emptyList();
+
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public String requestMarketHours(){

@@ -42,10 +42,10 @@ public class QuoteServiceImpl implements QuoteService{
         pathToCSV = pathToCSV + "/stock-service/src/main/resources/" + "tickers.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(pathToCSV))) {
-            String line;
+            String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 Stock stock = parseLine(line);
-                symbols.add(stock.getName());
+                symbols.add(stock.getSymbol());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -173,26 +173,35 @@ public class QuoteServiceImpl implements QuoteService{
         };
     }
 
+    @Override
     public void updateSMP500Quotes() {
-        for(String symbols : symbols) {
-            String json = tdaClient.requestQuotes(symbols);
-            String[] keys = symbols.split(",");
-            for(String key : keys) {
-                try {
-                    // Get Quote, check if quote is present
-                    final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
-                    if (node.has(key)) {
-                        String quote =  node.get(key).toString();
-                        table.put(key, quote);
-                    }else {
-                        System.err.println(key + " not found");
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        log.info("updated smp 500 quotes");
+        for(String symbols : this.symbolParamBatches){
+            List<Quote> quotes = tdaClient.requestQuotes(symbols);
+            for(Quote quote : quotes){
+                System.out.println(quote);
             }
         }
+//        for(String symbols : symbols) {
+//            System.out.println(symbols);
+//            String json = tdaClient.requestQuotes(symbols);
+//            String[] keys = symbols.split(",");
+//            for(String key : keys) {
+//                try {
+//                    // Get Quote, check if quote is present
+//                    final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
+//                    if (node.has(key)) {
+//                        String quote =  node.get(key).toString();
+//                        table.put(key, quote);
+//                    }else {
+//                        System.err.println(key + " not found");
+//                    }
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
 
     }
 

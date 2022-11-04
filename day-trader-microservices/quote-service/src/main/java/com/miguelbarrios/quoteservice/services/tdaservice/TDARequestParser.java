@@ -24,6 +24,7 @@ public class TDARequestParser {
     }
 
     public static List<Quote> parseMultipleQuotesRequest(String jsonResponse){
+
         return null;
     }
 
