@@ -1,4 +1,4 @@
-package com.miguelbarrios.quoteservice.services;
+package com.miguelbarrios.quoteservice.services.quoteservice;
 
 import com.miguelbarrios.quoteservice.models.Quote;
 

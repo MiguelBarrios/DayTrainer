@@ -1,9 +1,9 @@
-package com.miguelbarrios.quoteservice.services;
+package com.miguelbarrios.quoteservice.services.quoteservice;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.miguelbarrios.quoteservice.TDAClient;
+import com.miguelbarrios.quoteservice.services.tdaservice.TDAClient;
 import com.miguelbarrios.quoteservice.models.MarketHours;
 import com.miguelbarrios.quoteservice.models.Quote;
 import com.miguelbarrios.quoteservice.models.Stock;
@@ -115,16 +115,13 @@ public class QuoteServiceImpl implements QuoteService{
 
     }
 
-    public String requestQuote(String symbol) {
-        String json = tdaClient.requestQuote(symbol);
 
-        String quote = null;
+
+    public Quote requestQuote(String symbol) {
+        Quote quote = tdaClient.requestQuote(symbol);
+
         try {
-            // Get Quote, check if quote is present
-            final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
-            if (node.has(symbol)) {
-                quote =  node.get(symbol).toString();
-            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,24 +132,27 @@ public class QuoteServiceImpl implements QuoteService{
 
     @Override
     public Quote getQuote(String symbol) {
-
-        if(isMarketOpen()){
-            System.err.println("Market is open");
-        }
-        else{
-            System.err.println("Market is closed");
-        }
-
-        symbol = symbol.toUpperCase();
-        String quote = null;
-        if(table.containsKey(symbol)) {
-            quote = table.get(symbol);
-        }else {
-            quote = requestQuote(symbol);
-        }
+        System.out.println("getting quote for : " + symbol);
+        Quote quote = tdaClient.requestQuote(symbol);
 
 
-        return null;
+//        if(isMarketOpen()){
+//            System.err.println("Market is open");
+//        }
+//        else{
+//            System.err.println("Market is closed");
+//        }
+//
+//        symbol = symbol.toUpperCase();
+//        String quote = null;
+//        if(table.containsKey(symbol)) {
+//            quote = table.get(symbol);
+//        }else {
+//            quote = requestQuote(symbol);
+//        }
+
+
+        return quote;
     }
 
     @Override

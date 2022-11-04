@@ -134,7 +134,7 @@ public class TDAService {
 		}
 		return marketHours;
 	}
-	
+
 	public String requestQuote(String symbol) {
 		String requestUrl = url + symbol + "/quotes?apikey=" + tdaApiKey;
 		String json = this.restTemplate.getForObject(requestUrl, String.class);
