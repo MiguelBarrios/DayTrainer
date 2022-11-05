@@ -135,16 +135,13 @@ public class QuoteServiceImpl implements QuoteService{
     }
 
     @Override
-    public List<Quote> getQuotes(String[] symbol) {
-        return null;
+    public Map<String,Quote> getQuotes(List<String> symbols) {
+        return tdaClient.requestQuotes(symbols);
     }
-
-
 
 
     @Override
     public void updateSMP500Quotes() {
         Map<String, Quote> quotes = tdaClient.requestQuotes(smp500Symbols);
-        
     }
 }

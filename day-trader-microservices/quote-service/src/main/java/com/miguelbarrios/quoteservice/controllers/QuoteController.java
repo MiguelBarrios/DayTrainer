@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -38,9 +39,8 @@ public class QuoteController {
         return response;
     }
 
-
-    @GetMapping("/symbols")
-    public List<Quote> getQuotes(@RequestParam(value="symbol") String[] symbols){
+    @GetMapping("/symbols/")
+    public Map<String,Quote> getQuotes(@RequestParam(value="symbol") List<String> symbols){
         return quoteService.getQuotes(symbols);
     }
 
