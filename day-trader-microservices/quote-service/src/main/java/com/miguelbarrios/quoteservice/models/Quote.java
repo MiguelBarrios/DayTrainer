@@ -5,14 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
+
+import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-
+@RedisHash("Quote")
 @Data
-public class Quote {
+public class Quote implements Serializable {
+    @Id
+    String symbol;
     String assetType;
     String assetMainType;
-    String symbol;
     String description;
     Double bidPrice;
     Integer bidSize;

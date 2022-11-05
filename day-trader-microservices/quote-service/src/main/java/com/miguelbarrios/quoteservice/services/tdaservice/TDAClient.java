@@ -66,18 +66,6 @@ public class TDAClient {
         String jsonString = this.restTemplate.getForObject(requestUrl, String.class);
         Map<String, Quote> map = TDARequestParser.parseMultipleQuotesRequest(jsonString);
         return map;
-
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        try {
-//            Map<String, Quote> map = objectMapper.readValue(jsonString, new TypeReference<Map<String, Quote>>() {});
-//            List<Quote> quotes = new ArrayList<>(map.values());
-//            quotes.stream().forEach(System.out::println);
-//            return Collections.emptyList();
-//
-//        } catch (JsonProcessingException e) {
-//            throw new RuntimeException(e);
-//        }
-
     }
 
     public String requestMarketHours(){
@@ -94,6 +82,4 @@ public class TDAClient {
         }
         return today;
     }
-
-
 }

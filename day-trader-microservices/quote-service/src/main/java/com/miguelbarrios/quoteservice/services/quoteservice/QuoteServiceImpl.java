@@ -2,6 +2,7 @@ package com.miguelbarrios.quoteservice.services.quoteservice;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.miguelbarrios.quoteservice.repository.QuoteRepository;
 import com.miguelbarrios.quoteservice.services.tdaservice.TDAClient;
 import com.miguelbarrios.quoteservice.models.MarketHours;
 import com.miguelbarrios.quoteservice.models.Quote;
@@ -28,13 +29,16 @@ public class QuoteServiceImpl implements QuoteService{
 
     private Hashtable<String, String> table = new Hashtable<>();
 
+    private QuoteRepository quoteRepository;
+
     private TDAClient tdaClient;
 
     static {
         readSMP500SymbolsCSV();
     }
-    public QuoteServiceImpl(TDAClient tdaClient) {
+    public QuoteServiceImpl(TDAClient tdaClient, QuoteRepository quoteRepository) {
         this.tdaClient = tdaClient;
+        this.quoteRepository = quoteRepository;
     }
 
     public static void readSMP500SymbolsCSV(){
@@ -142,6 +146,11 @@ public class QuoteServiceImpl implements QuoteService{
 
     @Override
     public void updateSMP500Quotes() {
-        Map<String, Quote> quotes = tdaClient.requestQuotes(smp500Symbols);
+
+
+        Map<String, Quote> map = tdaClient.requestQuotes(smp500Symbols);
+        quoteRepository.saveAll(map.values());
+        long size = quoteRepository.count();
+        log.info("smp 500 quotes updated: " + size);
     }
 }
