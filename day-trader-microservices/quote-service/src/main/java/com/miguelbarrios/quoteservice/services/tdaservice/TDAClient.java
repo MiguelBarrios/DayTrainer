@@ -1,12 +1,8 @@
 package com.miguelbarrios.quoteservice.services.tdaservice;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.CollectionType;
+
 import com.miguelbarrios.quoteservice.exceptions.ErrorParsingQuoteException;
 import com.miguelbarrios.quoteservice.models.Quote;
-import com.miguelbarrios.quoteservice.models.QuoteWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -15,8 +11,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +43,22 @@ public class TDAClient {
             log.info("Error Processing Quote");
             throw new ErrorParsingQuoteException();
         }
+    }
+
+    public Map<String, Quote> requestQuotes(List<String> symbols){
+
+        Map<String, Quote> quotes = new HashMap<>((int)(symbols.size() * 1.3));
+
+        int paramsPerRequest = 90;
+        for(int i = 0; i < symbols.size(); i += paramsPerRequest){
+            String requestParams = String.join(",", symbols.subList(i, Math.min(i + paramsPerRequest, symbols.size())));
+            String requestUrl = this.url + "/quotes?apikey=" + tdaApiKey + "&symbol=" + requestParams;
+            String jsonString = this.restTemplate.getForObject(requestUrl, String.class);
+            Map<String, Quote> current = TDARequestParser.parseMultipleQuotesRequest(jsonString);
+            quotes.putAll(current);
+        }
+
+        return quotes;
     }
 
     public Map<String, Quote> requestQuotes(String symbols){

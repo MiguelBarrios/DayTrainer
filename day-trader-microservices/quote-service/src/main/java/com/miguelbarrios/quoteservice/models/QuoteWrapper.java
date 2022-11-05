@@ -16,7 +16,6 @@ public class QuoteWrapper {
 
 
     @JsonProperty("quote")
-    @JsonSerialize(using = CustomSerializer.class)
     Quote quote;
 
     @JsonAnyGetter
