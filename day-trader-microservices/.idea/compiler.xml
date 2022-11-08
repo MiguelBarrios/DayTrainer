@@ -7,6 +7,7 @@
       <directory url="file://$PROJECT_DIR$/api-gateway/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/stock-service/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/quote-service/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/account-service/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
@@ -15,20 +16,26 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
-        <module name="stock-service" />
         <module name="user-service" />
         <module name="quote-service" />
+        <module name="account-service" />
         <module name="discovery-service" />
+        <module name="trade-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="stock-service" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="account-service" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="day-trader-microservices" options="" />
       <module name="discovery-service" options="-parameters" />
       <module name="quote-service" options="-parameters" />
       <module name="stock-service" options="-parameters" />
+      <module name="trade-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>

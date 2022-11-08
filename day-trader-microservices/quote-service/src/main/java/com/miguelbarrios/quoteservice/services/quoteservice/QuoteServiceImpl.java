@@ -41,6 +41,39 @@ public class QuoteServiceImpl implements QuoteService{
         this.quoteRepository = quoteRepository;
     }
 
+    @Override
+    public Quote getQuote(String symbol) {
+        symbol = symbol.toUpperCase();
+        Quote quote;
+
+        Optional<Quote> optional = quoteRepository.findById(symbol);
+
+        if(optional.isPresent()){
+            quote = optional.get();
+            log.info(symbol + " quote retrieved from repository");
+        }
+        else{
+            quote = tdaClient.requestQuote(symbol);
+            log.info(symbol + " quote retrieved from client");
+        }
+
+        return quote;
+    }
+
+    @Override
+    public Map<String,Quote> getQuotes(List<String> symbols) {
+        return tdaClient.requestQuotes(symbols);
+    }
+
+    @Override
+    public void updateSMP500Quotes() {
+        if(marketIsOpen()){
+            Map<String, Quote> map = tdaClient.requestQuotes(smp500Symbols);
+            quoteRepository.saveAll(map.values());
+            log.info("smp 500 quotes updated");
+        }
+    }
+
     public static void readSMP500SymbolsCSV(){
         String pathToCSV = System.getProperty("user.dir");
         pathToCSV = pathToCSV + "/stock-service/src/main/resources/" + "tickers.csv";
@@ -71,13 +104,16 @@ public class QuoteServiceImpl implements QuoteService{
         return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
     }
 
-    public boolean isMarketOpen() {
+    public boolean marketIsOpen() {
 
         if(isWeekend()){
             return false;
         }
 
         MarketHours marketHours = getMarketHours();
+        if(marketHours == null)
+            return false;
+
         LocalDateTime marketOpen = marketHours.getMarketOpen();
         LocalDateTime marketClose = marketHours.getMarketClose();
         LocalDateTime currentTime = LocalDateTime.now();
@@ -107,50 +143,7 @@ public class QuoteServiceImpl implements QuoteService{
                     .marketClose(marketClose)
                     .build();
         } catch (Exception e){
-            log.info("Error parsing market hours request");
             return null;
         }
-    }
-
-
-    @Override
-    public Quote getQuote(String symbol) {
-        System.out.println("getting quote for : " + symbol);
-        Quote quote = tdaClient.requestQuote(symbol);
-
-
-//        if(isMarketOpen()){
-//            System.err.println("Market is open");
-//        }
-//        else{
-//            System.err.println("Market is closed");
-//        }
-//
-//        symbol = symbol.toUpperCase();
-//        String quote = null;
-//        if(table.containsKey(symbol)) {
-//            quote = table.get(symbol);
-//        }else {
-//            quote = requestQuote(symbol);
-//        }
-
-
-        return quote;
-    }
-
-    @Override
-    public Map<String,Quote> getQuotes(List<String> symbols) {
-        return tdaClient.requestQuotes(symbols);
-    }
-
-
-    @Override
-    public void updateSMP500Quotes() {
-
-
-        Map<String, Quote> map = tdaClient.requestQuotes(smp500Symbols);
-        quoteRepository.saveAll(map.values());
-        long size = quoteRepository.count();
-        log.info("smp 500 quotes updated: " + size);
     }
 }
