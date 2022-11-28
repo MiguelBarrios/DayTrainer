@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost" })
@@ -37,6 +42,21 @@ public class TDAController {
 		return tdaService.getQuotes(symbols);
 	}
 	
+	@RequestMapping("v1/trades/isMarketOpen")
+	public Boolean isMarketOpen() {
+		try {
+			tdaService.isMarketOpen();
+			JsonNode data = tdaService.getMarketHours();
+			return data.get("isOpen").asBoolean();
+		}
+		catch(Exception e) {
+			log.info(e.getMessage());
+			return false;
+		}
+
+
+	}
+	
 	@Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
 	public void refreshQuotes() {
 		if(!tdaService.isMarketOpen()) {
@@ -47,5 +67,7 @@ public class TDAController {
 		else {
 			tdaService.updateQuotesAll();
 		}
-	}
+    }
+	
+	
 }

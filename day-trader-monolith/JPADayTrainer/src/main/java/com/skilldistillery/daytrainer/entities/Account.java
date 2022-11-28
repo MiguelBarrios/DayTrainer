@@ -38,7 +38,7 @@ public class Account {
 	
 	public boolean hasSufficientFunds(Trade trade) {
 		double fundsRequired = (trade.getPricePerShare() * trade.getQuantity());
-		return fundsRequired >= balance;
+		return fundsRequired <= balance;
 	}
 	
 	public void proccessSellOrder(Trade trade) {

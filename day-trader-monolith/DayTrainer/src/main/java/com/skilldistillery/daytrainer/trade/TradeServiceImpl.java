@@ -24,6 +24,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class TradeServiceImpl implements TradeService {
 
@@ -77,6 +80,7 @@ public class TradeServiceImpl implements TradeService {
 	
 	@Override
 	public Trade placeTrade(String username, Trade trade) {
+		System.out.println("tradeService.placeTrade()");
 		Trade managedTrade = null;
 		
 		OrderType orderType = trade.getOrderType();
@@ -91,7 +95,7 @@ public class TradeServiceImpl implements TradeService {
 		
 	@Override
 	public Trade createMarketTrade(String username, Trade trade) {
-				
+		System.out.println("tradeService.createMarketTrade()");
 		User user = userRepository.findByUsername(username);
 		trade.setUser(user);
 				
@@ -107,6 +111,7 @@ public class TradeServiceImpl implements TradeService {
 	@Override
 	public void executeBuyOrder(Trade trade){
 		User user = trade.getUser();
+		log.info("Trade placed: " + trade);
 		
 		if(!user.hasSufficientFunds(trade)) {
 			throw new InsufficientFundsException();

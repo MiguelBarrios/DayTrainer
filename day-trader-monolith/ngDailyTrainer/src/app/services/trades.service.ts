@@ -12,8 +12,6 @@ import { environment } from 'src/environments/environment';
 })
 export class TradesService {
 
-  private tdaUrl = "https://api.tdameritrade.com/v1/marketdata/";
-
   private url = environment.baseUrl + 'api/v1/trades'
 
   constructor(private http:HttpClient, private auth:AuthService) { }
@@ -74,5 +72,15 @@ export class TradesService {
       })
     )
   }
+
+  isMarketOpen(){
+    var url = this.url + "/isMarketOpen";
+    return this.http.get<Boolean>(url, this.auth.getHttpOptions()).pipe(
+      catchError((err:any) => {
+        return throwError(err);
+      })
+    )
+  }
+
 
 }

@@ -68,7 +68,7 @@ marketClose: Date = new Date(2000, 2);
     let today = new Date();
     let day = today.getDay();
     let open = this.marketOpen?.getDay();
-
+    
     if(day != open){
       this.refreshMarketHours();
     }

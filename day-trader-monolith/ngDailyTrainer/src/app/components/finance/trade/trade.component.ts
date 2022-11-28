@@ -91,10 +91,10 @@ export class TradeComponent implements OnInit {
 
   submitTrade(){
 
-    if(!this.ssv.marketIsOpen()){
+    if(!this.tradeService.isMarketOpen()){
       this.ssv.openSnackBar('Market is closed','x');
-      return;
     }
+
 
     if(this.totalCost > this.accountBalance){
       console.error("Incuficiunt funds");
@@ -105,8 +105,8 @@ export class TradeComponent implements OnInit {
     this.newTrade.orderType.name = this.orderType;
     this.newTrade.orderType.id = (this.orderType == "Market") ? 1 : 2;
     let currentPrice = document.getElementById("currentStockPrice")?.textContent?.replace(",", "");
-    // WHAT IF THERE IS A COMMA
-    console.error("#### " + currentPrice);
+    
+
     if(currentPrice){
       this.newTrade.pricePerShare = parseFloat(currentPrice);
     }
@@ -116,13 +116,12 @@ export class TradeComponent implements OnInit {
     this.missingSymbolSMS = (!this.newTrade.stock.symbol) ? "Symbol Required" : "";
 
     if(!this.newTrade.quantity || !this.newTrade.stock.symbol){
-      console.log("Error returned");
       return;
     }
 
+    console.log(this.newTrade);
     this.tradeService.createTrade(this.newTrade).subscribe(
       (data) => {
-        // console.log("New Trade Created" + this.newTrade);
         
         this.userTrades.push(data);
         this.userTrades = [...this.userTrades]
@@ -132,7 +131,7 @@ export class TradeComponent implements OnInit {
         this.getAccountBalance();
       },
       (error) => {
-        console.log("Observable got and error " + error)
+        console.log("Observable got and error: " + error)
       }
     )
   }

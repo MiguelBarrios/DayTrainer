@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
-import com.skilldistillery.daytrainer.exceptions.TradeNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("api/v1/trades")
 @CrossOrigin({ "*", "http://localhost" })
@@ -45,13 +44,13 @@ public class TradeController {
 	
 	@PostMapping
 	public Trade placeTrade(@RequestBody Trade trade, HttpServletResponse response, Principal principal) {
-		
+		log.info("trade placed");
 		String orderType = trade.getOrderType().getName();
 		if(orderType.equals("Market")){
 			trade = tradeService.placeTrade(principal.getName(), trade);
 
 		}else {
-			//TODO: Place limit order
+			System.out.println("Error");
 		}
 		
 		return trade;
