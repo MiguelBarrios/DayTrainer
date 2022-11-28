@@ -119,7 +119,6 @@ export class TradeComponent implements OnInit {
       return;
     }
 
-    console.log(this.newTrade);
     this.tradeService.createTrade(this.newTrade).subscribe(
       (data) => {
         

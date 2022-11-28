@@ -80,7 +80,6 @@ public class TradeServiceImpl implements TradeService {
 	
 	@Override
 	public Trade placeTrade(String username, Trade trade) {
-		System.out.println("tradeService.placeTrade()");
 		Trade managedTrade = null;
 		
 		OrderType orderType = trade.getOrderType();
@@ -95,7 +94,6 @@ public class TradeServiceImpl implements TradeService {
 		
 	@Override
 	public Trade createMarketTrade(String username, Trade trade) {
-		System.out.println("tradeService.createMarketTrade()");
 		User user = userRepository.findByUsername(username);
 		trade.setUser(user);
 				
@@ -192,6 +190,9 @@ public class TradeServiceImpl implements TradeService {
 		int userId = user.getId();
 		Integer numberOfAvailableShares = tradeRepository.getNumberOfAvailableShares(userId, ticker);
 		List<Trade> buyOrders = tradeRepository.getPreviousBuyOrders(userId, ticker);
+		if(buyOrders.size() == 0) {
+			return new StockPosition(ticker, 0, 0, 0);
+		}
 		
 		double averageCost = getAverageCostPerShare(buyOrders, numberOfAvailableShares);
 		
