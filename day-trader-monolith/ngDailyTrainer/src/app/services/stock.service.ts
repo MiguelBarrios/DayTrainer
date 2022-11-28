@@ -56,4 +56,8 @@ stocks: Stock[] = [];
     }
     return false;
   }
+
+  isMarketOpen(){
+    
+  }
 }
