@@ -1,2 +1,4 @@
-package com.miguelbarrios.accountservice.models;public class TradeTransaction {
+package com.miguelbarrios.accountservice.models;
+
+public class TradeTransaction {
 }
