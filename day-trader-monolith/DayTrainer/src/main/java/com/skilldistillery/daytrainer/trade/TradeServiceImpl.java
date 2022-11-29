@@ -24,26 +24,23 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TradeServiceImpl implements TradeService {
 
-	@Autowired
-	private TradeRepository tradeRepository;
+	private final TradeRepository tradeRepository;
 	
-	@Autowired
-	private TradePaginationRepository tradePaginationRepository;
+	private final TradePaginationRepository tradePaginationRepository;
 	
-	@Autowired
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
 	
-	@Autowired
-	private AccountRepository accountRepository;
+	private final AccountRepository accountRepository;
 	
-	@Autowired
-	private TDAService tdaService;
+	private final TDAService tdaService;
 	
 	@Override
 	public List<Trade> getUserTrades(String username) {
@@ -86,8 +83,10 @@ public class TradeServiceImpl implements TradeService {
 		if(orderType.isMarketOrder()) {
 			managedTrade = createMarketTrade(username, trade);			
 		}
+		else {
+			throw new RuntimeException("Unsuported Trade");
+		}
 	
-		// TODO: implement logic for limit orders
 		
 		return managedTrade;
 	}

@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,12 +44,10 @@ public class TDAController {
 		return tdaService.getQuotes(symbols);
 	}
 	
-	@RequestMapping("v1/trades/isMarketOpen")
+	@GetMapping("v1/trades/isMarketOpen")
 	public Boolean isMarketOpen() {
 		try {
-			tdaService.isMarketOpen();
-			JsonNode data = tdaService.getMarketHours();
-			return data.get("isOpen").asBoolean();
+			return tdaService.isMarketOpen();
 		}
 		catch(Exception e) {
 			log.info(e.getMessage());
@@ -56,6 +56,7 @@ public class TDAController {
 
 
 	}
+	
 	
 	@Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
 	public void refreshQuotes() {

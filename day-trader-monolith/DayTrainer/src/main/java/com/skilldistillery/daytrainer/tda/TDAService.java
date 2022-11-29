@@ -1,10 +1,6 @@
 package com.skilldistillery.daytrainer.tda;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -19,97 +15,40 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class TDAService {
 	
-	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZZZZZ");
+
+	private static final String TDA_BASE_URL ="https://api.tdameritrade.com/v1/marketdata/";
+
+	private static String[] SYMBOL_BATCHES = null;
 
 	@Autowired
-	private StockRepository stockRepo;
+	private StockRepository stockRepository;
 	
-	private String[] stocksSymbols = null;
-	
-	Hashtable<String, String> table = new Hashtable<>();
-
-	private static String url ="https://api.tdameritrade.com/v1/marketdata/";
+	private Hashtable<String, String> quoteLookupTable = new Hashtable<>();
 
 	private final RestTemplate restTemplate;
 	
-	private LocalDate lastDate = null;
-	private LocalDateTime marketOpen = null;
-	private LocalDateTime marketClose = null;
+	private TDAClient tdaClient;
 	
-	{
-		// So that get market hours request will run on first run
-		this.lastDate = LocalDate.now();
-		this.lastDate = this.lastDate.minusDays(1);		
-	}
-
-	public TDAService(RestTemplateBuilder restTemplateBuilder) {
+	public TDAService(RestTemplateBuilder restTemplateBuilder, TDAClient tdaClient) {
 		this.restTemplate = restTemplateBuilder.build();
+		this.tdaClient = tdaClient;
 	}
-	
-    public static boolean isWeekend(final LocalDate ld)
-    {
-        DayOfWeek day = DayOfWeek.of(ld.get(ChronoField.DAY_OF_WEEK));
-        return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
-    }
 	
 	public boolean isMarketOpen() {
-		LocalDate today = LocalDate.now();
-		if(isWeekend(today)) {
-			return false;
-		}
-		if(!lastDate.isEqual(today)) {
-			lastDate = today;
-
-			JsonNode json = this.getMarketHours();
-
-
-			json = json.get("sessionHours");
-			JsonNode regularMarketHours = json.get("regularMarket").get(0);
-			String regularMarketOpen = regularMarketHours.get("start").asText();
-			String regularMarketClose = regularMarketHours.get("end").asText();
-
-			this.marketOpen = LocalDateTime.parse(regularMarketOpen, formatter);
-			this.marketClose = LocalDateTime.parse(regularMarketClose,formatter);
-		}
-		
-		LocalDateTime now = LocalDateTime.now();
-		boolean isOpen = false;
-		if(now.isAfter(marketOpen) && now.isBefore(marketClose)){
-			isOpen = true;
-		}
-		
-		return isOpen;
+		MarketHours marketHours = this.tdaClient.getMarketHours();
+		return marketHours.getIsMarketOpen();
 	}
 	
-	public JsonNode getMarketHours() {
-		
-		LocalDate today = LocalDate.now();
-		if(LocalDateTime.now().getHour() >= 20) {
-			today = today.plusDays(1);
-		}
-		
-		
-		String url = this.url + "EQUITY/hours?apikey=" + Config.getTDAKEY()  + "&date=" + today.toString();
-		String json = this.restTemplate.getForObject(url, String.class);
-		ObjectMapper mapper = new ObjectMapper();
 
-		JsonNode marketHours = null;
-		try {
-			JsonNode jsonNode = mapper.readTree(json);
-			marketHours = jsonNode.get("equity").get("EQ");			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		return marketHours;
-
-	}
 	
 	public String requestQuote(String symbol) {
-		String requestUrl = url + symbol + "/quotes?apikey=" + Config.getTDAKEY();
+		String requestUrl = TDA_BASE_URL + symbol + "/quotes?apikey=" + Config.getTDAKEY();
 		String json = this.restTemplate.getForObject(requestUrl, String.class);
 		String quote = null;
 
@@ -121,7 +60,7 @@ public class TDAService {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		
 		return quote;
@@ -130,8 +69,8 @@ public class TDAService {
 	public String getQuote(String symbol) {
 		symbol = symbol.toUpperCase();
 		String quote = null;
-		if(table.containsKey(symbol)) {
-			quote = table.get(symbol);
+		if(quoteLookupTable.containsKey(symbol)) {
+			quote = quoteLookupTable.get(symbol);
 		}else {
 			quote = requestQuote(symbol);
 		}
@@ -140,22 +79,18 @@ public class TDAService {
 	}
 	
 	public boolean isInitialized() {
-		return this.table.size() > 0;
+		return this.quoteLookupTable.size() > 0;
 	}
 	
-	public Double getLastPrice(String symbol) {
-		return null;
-	}
 	
 	public String getQuotes(String symbols) {
 		symbols = symbols.toUpperCase();
-		String requestUrl = this.url + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + symbols;
-		String json = this.restTemplate.getForObject(requestUrl, String.class);
-		return json;
+		String requestUrl = TDA_BASE_URL + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + symbols;
+		return this.restTemplate.getForObject(requestUrl, String.class);
 	}
 	
 	public void initSymbolList(){
-		List<String> symbols = this.stockRepo.getAllSymbols();
+		List<String> symbols = this.stockRepository.getAllSymbols();
 		String[] symbolLists = {
 			String.join(",", symbols.subList(0, 84)),
 			String.join(",", symbols.subList(84, 168)),
@@ -165,38 +100,39 @@ public class TDAService {
 			String.join(",", symbols.subList(420, symbols.size())),
 		};
 		
-		this.stocksSymbols = symbolLists;
+		SYMBOL_BATCHES = symbolLists;
 	}
 	
 	public void updateQuotesAll() {
+		tdaClient.getQuotes(this.stockRepository.getAllSymbols());
 		
-		if(this.stocksSymbols == null) {
+		if(SYMBOL_BATCHES == null) {
 			initSymbolList();
 		}
 		
-		for(String symbols : this.stocksSymbols) {
+		StringBuilder notFound = new StringBuilder();
+
+		for(String symbols : SYMBOL_BATCHES) {
 			
-			String requestUrl = this.url + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + symbols;
+			String requestUrl = TDA_BASE_URL + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + symbols;
 			String json = this.restTemplate.getForObject(requestUrl, String.class);
-			String[] keys = symbols.split(",");
-			String quote = "";
-			for(String key : keys) {
+			for(String key : symbols.split(",")) {
 				try {
 					// Get Quote, check if quote is present
 					final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
 					if (node.has(key)) {
-						quote =  node.get(key).toString();
-						table.put(key, quote);
+						quoteLookupTable.put(key, node.get(key).toString());
 					}else {
-						System.err.println(key + " not found");
+						notFound.append(key).append(",");
 					}
 
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.error("error parsing request");
 				}
 			}				
 		}
-	
+		log.info("stocks not found: "  + notFound.toString());
+		
 	}
 	
 

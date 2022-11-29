@@ -9,6 +9,7 @@ import com.skilldistillery.daytrainer.entities.StockPosition;
 import com.skilldistillery.daytrainer.entities.Trade;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,17 +44,17 @@ public class TradeController {
 	}
 	
 	@PostMapping
-	public Trade placeTrade(@RequestBody Trade trade, HttpServletResponse response, Principal principal) {
-		log.info("trade placed");
-		String orderType = trade.getOrderType().getName();
-		if(orderType.equals("Market")){
-			trade = tradeService.placeTrade(principal.getName(), trade);
-
-		}else {
-			System.out.println("Error");
-		}
+	public ResponseEntity<Trade> placeTrade(@RequestBody Trade trade, HttpServletResponse response, Principal principal) {
 		
-		return trade;
+		try {
+			trade = tradeService.placeTrade(principal.getName(), trade);
+			return ResponseEntity.created(null).body(trade);
+		}
+		catch(Exception e) {
+			log.info(e.getMessage());
+			return ResponseEntity.badRequest().build();
+		}
+				
 	}
 	
 	
