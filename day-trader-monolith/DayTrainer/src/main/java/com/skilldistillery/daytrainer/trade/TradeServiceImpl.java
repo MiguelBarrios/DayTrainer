@@ -16,10 +16,10 @@ import com.skilldistillery.daytrainer.exceptions.InsufficientFundsException;
 import com.skilldistillery.daytrainer.exceptions.InsufficientSharesException;
 import com.skilldistillery.daytrainer.exceptions.TradeNotFoundException;
 import com.skilldistillery.daytrainer.exceptions.UserNotAuthorizedException;
+import com.skilldistillery.daytrainer.tda.TDAQuote;
 import com.skilldistillery.daytrainer.tda.TDAService;
 import com.skilldistillery.daytrainer.user.UserRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -164,22 +164,9 @@ public class TradeServiceImpl implements TradeService {
 		return positions;
 	}
 	
-	//TODO: move to tda service
 	public Double getLastPrice(String symbol) {
-		Double res = -1.0;
-		String quote = this.tdaService.getQuote(symbol);
-		// Get Quote, check if quote is present
-		ObjectNode node;
-		try {
-			node = new ObjectMapper().readValue(quote, ObjectNode.class);
-			if (node.has("lastPrice")) {
-				String lastPrice =  node.get("lastPrice").toString();
-				res = Double.parseDouble(lastPrice);
-			}
-		}  catch (Exception e) {
-			e.printStackTrace();
-		}
-		return res;
+		TDAQuote quote = this.tdaService.getQuote(symbol);
+		return quote.getLastPrice();
 	}
 
 	

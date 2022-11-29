@@ -17,6 +17,5 @@ public class TDARequestBuilder {
 	public static String buildGetQuotesRequest(List<String> symbols) {
 		String params = String.join(",", symbols);
 		return TDA_BASE_URL + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + params;
-		
 	}
 }

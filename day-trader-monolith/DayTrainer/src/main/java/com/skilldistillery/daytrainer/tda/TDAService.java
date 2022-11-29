@@ -1,10 +1,8 @@
 package com.skilldistillery.daytrainer.tda;
 
-import java.time.LocalDate;
 import java.util.Hashtable;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.skilldistillery.daytrainer.Config;
@@ -24,12 +22,12 @@ public class TDAService {
 
 	private static final String TDA_BASE_URL ="https://api.tdameritrade.com/v1/marketdata/";
 
-	private static String[] SYMBOL_BATCHES = null;
+	private static String[] STOCK_SYMBOLS = null;
 
 	@Autowired
 	private StockRepository stockRepository;
 	
-	private Hashtable<String, String> quoteLookupTable = new Hashtable<>();
+	private Hashtable<String, TDAQuote> quoteLookupTable = new Hashtable<>();
 
 	private final RestTemplate restTemplate;
 	
@@ -53,7 +51,6 @@ public class TDAService {
 		String quote = null;
 
 		try {
-			// Get Quote, check if quote is present
 			final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
 			if (node.has(symbol)) {
 				quote =  node.get(symbol).toString();
@@ -66,13 +63,14 @@ public class TDAService {
 		return quote;
 	}
 
-	public String getQuote(String symbol) {
+	public TDAQuote getQuote(String symbol) {
 		symbol = symbol.toUpperCase();
-		String quote = null;
+		TDAQuote quote = null;
 		if(quoteLookupTable.containsKey(symbol)) {
 			quote = quoteLookupTable.get(symbol);
 		}else {
-			quote = requestQuote(symbol);
+			log.info("Non smp stocke requested {}", symbol);
+//			quote = requestQuote(symbol);
 		}
 		
 		return quote;
@@ -100,40 +98,23 @@ public class TDAService {
 			String.join(",", symbols.subList(420, symbols.size())),
 		};
 		
-		SYMBOL_BATCHES = symbolLists;
+		STOCK_SYMBOLS = symbolLists;
 	}
 	
 	public void updateQuotesAll() {
-		tdaClient.getQuotes(this.stockRepository.getAllSymbols());
 		
-		if(SYMBOL_BATCHES == null) {
+		if(STOCK_SYMBOLS == null) {
 			initSymbolList();
 		}
 		
-		StringBuilder notFound = new StringBuilder();
-
-		for(String symbols : SYMBOL_BATCHES) {
-			
-			String requestUrl = TDA_BASE_URL + "/quotes?apikey=" + Config.getTDAKEY() + "&symbol=" + symbols;
-			String json = this.restTemplate.getForObject(requestUrl, String.class);
-			for(String key : symbols.split(",")) {
-				try {
-					// Get Quote, check if quote is present
-					final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
-					if (node.has(key)) {
-						quoteLookupTable.put(key, node.get(key).toString());
-					}else {
-						notFound.append(key).append(",");
-					}
-
-				} catch (Exception e) {
-					log.error("error parsing request");
-				}
-			}				
+		List<String> smp500Symbols = this.stockRepository.getAllSymbols();
+		List<TDAQuote> quotes = tdaClient.getQuotes(smp500Symbols);
+		for(TDAQuote quote : quotes) {
+			quoteLookupTable.put(quote.getSymbol(), quote);
 		}
-		log.info("stocks not found: "  + notFound.toString());
-		
 	}
+	
+
 	
 
 }

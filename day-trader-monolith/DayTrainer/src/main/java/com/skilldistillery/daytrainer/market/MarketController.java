@@ -1,10 +1,9 @@
 package com.skilldistillery.daytrainer.market;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.skilldistillery.daytrainer.tda.TDAClient;
 import com.skilldistillery.daytrainer.tda.TDAService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +21,19 @@ public class MarketController {
 	@Autowired
 	private TDAService tdaService;
 	
-//	@GetMapping("hours")
-//	public String isMarketOpen(HttpServletResponse response) {
-//		tdaService.isMarketOpen();
-//		JsonNode data = tdaService.getMarketHours();
-//		if(data == null) {
-//			response.setStatus(404);
-//		}
-//
-//		return data.toString();
-//		
-//	}
+	@Autowired
+	private TDAClient tdaClient;
+	
+	@GetMapping("hours")
+	public String isMarketOpen(HttpServletResponse response) {
+		tdaService.isMarketOpen();
+		JsonNode data = tdaClient.getMarketHours2();
+		if(data == null) {
+			response.setStatus(404);
+		}
+
+		return data.toString();
+		
+	}
 
 }

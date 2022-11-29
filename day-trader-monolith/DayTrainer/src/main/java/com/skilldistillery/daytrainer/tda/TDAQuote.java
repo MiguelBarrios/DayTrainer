@@ -43,6 +43,8 @@ public class TDAQuote {
 	
 	private Double divAmount;
 	
-//	private LocalDate divDate;
+	private String divDate;
+	
+	private double divYield;
 	
 }

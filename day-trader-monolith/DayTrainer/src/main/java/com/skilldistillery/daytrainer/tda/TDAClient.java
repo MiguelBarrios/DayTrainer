@@ -1,15 +1,13 @@
 package com.skilldistillery.daytrainer.tda;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skilldistillery.daytrainer.Config;
-import com.skilldistillery.daytrainer.entities.Quote;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -21,12 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class TDAClient {
 
-	private static final String TDA_BASE_URL ="https://api.tdameritrade.com/v1/marketdata/";
-
 	private final RestTemplate restTemplate;
 	
 	private TDAResponseParser tdaResponseParser;
-	
 	
 	public TDAClient(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
@@ -47,17 +42,6 @@ public class TDAClient {
 		return quotes;
 	}
 	
-    public static List<Quote> parseMultipleQuotesRequest(String jsonResponse){
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            Map<String, Quote> map = objectMapper.readValue(jsonResponse, new TypeReference<Map<String, Quote>>() {});
-            System.out.println(map);
-            return new ArrayList<>(map.values());
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
 	
 	public MarketHours getMarketHours() {
 		MarketHours hours = new MarketHours();
@@ -92,8 +76,30 @@ public class TDAClient {
 			log.error(e.getMessage());
 			throw new RuntimeException("Error getting market hours");
 		}
+	}
+	
+	public JsonNode getMarketHours2() {
+		
+		LocalDate today = LocalDate.now();
+		if(LocalDateTime.now().getHour() >= 20) {
+			today = today.plusDays(1);
+		}
+		
+		
+		String url = "https://api.tdameritrade.com/v1/marketdata/" + "EQUITY/hours?apikey=" + Config.getTDAKEY()  + "&date=" + today.toString();
+		String json = this.restTemplate.getForObject(url, String.class);
+		ObjectMapper mapper = new ObjectMapper();
+
+		JsonNode marketHours = null;
+		try {
+			JsonNode jsonNode = mapper.readTree(json);
+			marketHours = jsonNode.get("equity").get("EQ");			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return marketHours;
 
 	}
-
 
 }

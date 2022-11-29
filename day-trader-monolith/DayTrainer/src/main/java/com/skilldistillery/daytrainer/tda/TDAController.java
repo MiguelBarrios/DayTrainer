@@ -31,12 +31,12 @@ public class TDAController {
 	private TDAService tdaService;
 	
 	@RequestMapping(path = "tda/quote/{symbol}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String getQuote(Principal principal, @PathVariable String symbol, HttpServletResponse response) {
-		String res = tdaService.getQuote(symbol);
-		if(res == null) {
+	public TDAQuote getQuote(Principal principal, @PathVariable String symbol, HttpServletResponse response) {
+		TDAQuote quote = tdaService.getQuote(symbol);
+		if(quote == null) {
 			response.setStatus(404);
 		}
-		return res;
+		return quote;
 	}
 	
 	@RequestMapping(path = "tda/quotes/{symbols}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,7 +44,7 @@ public class TDAController {
 		return tdaService.getQuotes(symbols);
 	}
 	
-	@GetMapping("v1/trades/isMarketOpen")
+	@GetMapping("v1/tda/isMarketOpen")
 	public Boolean isMarketOpen() {
 		try {
 			return tdaService.isMarketOpen();
