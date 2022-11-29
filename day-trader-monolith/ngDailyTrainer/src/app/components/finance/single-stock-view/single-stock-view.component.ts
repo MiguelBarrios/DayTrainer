@@ -147,7 +147,7 @@ marketClose: Date = new Date(2000, 2);
           this.numberOfShares = data.numberOfShares;
           this.marketValue = data.numberOfShares * this.quote?.lastPrice;
           this.avgCostPerShare = data.avgCostPerShare;
-          this.totalReturn = (this.avgCostPerShare * this.numberOfShares) - (this.quote.lastPrice * this.numberOfShares);
+          this.totalReturn = (this.quote.lastPrice * this.numberOfShares) - (this.avgCostPerShare * this.numberOfShares) ;
         }
 
       },
