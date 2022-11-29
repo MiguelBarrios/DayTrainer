@@ -11,3 +11,4 @@ bin
 
 Config.java
 RemoteSystemsTempFiles/*
+application.properties
