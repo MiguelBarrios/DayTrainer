@@ -65,11 +65,6 @@ Another new lesson learned while working on this project was how to develop a me
 * Postman
 
 ---
-## Code Highlights
-
-![alt text](codesnippet1.jpg)
-
----
 ## Meet the Team
 
 Cecelia Guerrero
