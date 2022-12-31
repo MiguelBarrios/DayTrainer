@@ -24,8 +24,6 @@ The site consumes two 3rd Party APIs in order to leverage real time stock data. 
 
 * Leader Board- Hierarchical display that ranks users with the most profitable accounts
 
-* Friends- Page that gives access to user's friends list and to view their trades
-
 * Account Settings- Allows user to update profile information
 
 ---
@@ -43,17 +41,12 @@ Another new lesson learned while working on this project was how to develop a me
 * JavaScript
 * CSS
 * HTML
-* MySQL Workbench
+* MySQL
 * SpringBoot
 * Bootstrap
-* Atom
-* Hibernate
+* JPA
 * GitHub
-* MySQL
-* Tomcat 8
 * AWS
-* Google
-* Spring Tool Suite 4
 * Trello
 * Figma
 * Slack
