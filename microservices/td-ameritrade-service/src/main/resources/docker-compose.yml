@@ -1,0 +1,17 @@
+version: "3"
+services:
+  td-ameritrade-service:
+    image: td-ameritrade-service
+    platform: linux/amd64
+    container_name: td-ameritrade-service
+    depends_on:
+      - redis
+    ports:
+      - 8080:8080
+    links:
+      - redis
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
