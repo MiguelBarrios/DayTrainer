@@ -9,6 +9,8 @@ bin
 *.war
 *.bak
 
+.idea
+
 Config.java
 RemoteSystemsTempFiles/*
 application.properties
