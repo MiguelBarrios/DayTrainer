@@ -5,6 +5,7 @@
       <directory url="file://$PROJECT_DIR$/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/quote-service/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/api-gateway/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/user-service/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
@@ -15,6 +16,7 @@
         <module name="api-gateway" />
         <module name="td-ameritrade-service" />
         <module name="quote-service" />
+        <module name="user-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,6 +30,7 @@
       <module name="quote-service" options="-parameters" />
       <module name="td-ameritrade-service" options="-parameters" />
       <module name="untitled" options="-parameters" />
+      <module name="user-service" options="-parameters" />
     </option>
   </component>
 </project>
