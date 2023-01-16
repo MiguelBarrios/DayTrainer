@@ -19,6 +19,16 @@ public class QuoteController {
         return "pong";
     }
 
+    @GetMapping("/pong")
+    public String ping2(){
+        return "yooo";
+    }
+
+    @GetMapping("/test")
+    public String ping3(){
+        return "success";
+    }
+
     @PutMapping
     public Quote saveQuote(@RequestBody Quote quote){
         System.out.println("Saving quote");
