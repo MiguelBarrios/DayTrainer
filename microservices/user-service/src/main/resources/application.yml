@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:mysql://mysqldb:3306/userservice?createDatabaseIfNotExist=true
+    username: user
+    password: user
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
