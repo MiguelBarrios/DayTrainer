@@ -10,6 +10,7 @@
       <module>td-ameritrade-service</module>
     <module>api-gateway</module>
     <module>user-service</module>
+      <module>discovery-service</module>
   </modules>
   <name>Archetype - microservices</name>
   <url>http://maven.apache.org</url>

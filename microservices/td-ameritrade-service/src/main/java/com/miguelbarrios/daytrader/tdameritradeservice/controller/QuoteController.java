@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@RequestMapping("api/v1/quotes")
+@RequestMapping("api/v1/tda")
 @RestController
 public class QuoteController {
 
