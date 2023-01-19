@@ -5,8 +5,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import com.miguelbarrios.daytrader.tdameritradeservice.entities.TDAQuote;
 import com.miguelbarrios.daytrader.tdameritradeservice.services.TDAService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost" })
 public class TDAController {
-	
-	
+
 	@Autowired
 	private TDAService tdaService;
 	

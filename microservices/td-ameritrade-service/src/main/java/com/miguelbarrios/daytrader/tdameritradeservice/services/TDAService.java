@@ -8,9 +8,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.miguelbarrios.daytrader.tdameritradeservice.Config;
 import com.miguelbarrios.daytrader.tdameritradeservice.entities.MarketHours;
 import com.miguelbarrios.daytrader.tdameritradeservice.entities.TDAQuote;
-import com.miguelbarrios.daytrader.tdameritradeservice.repository.StockRepository;
 
 
+import com.miguelbarrios.daytrader.tdameritradeservice.repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -28,17 +28,19 @@ public class TDAService {
 	private static String[] STOCK_SYMBOLS = null;
 
 	@Autowired
-	private StockRepository stockRepository;
+	private QuoteRepository stockRepository;
 	
 	private Hashtable<String, TDAQuote> quoteLookupTable = new Hashtable<>();
 
 	private final RestTemplate restTemplate;
 	
 	private TDAClient tdaClient;
-	
+
+
 	public TDAService(RestTemplateBuilder restTemplateBuilder, TDAClient tdaClient) {
 		this.restTemplate = restTemplateBuilder.build();
 		this.tdaClient = tdaClient;
+
 	}
 	
 	public boolean isMarketOpen() {
@@ -91,14 +93,14 @@ public class TDAService {
 	}
 	
 	public void initSymbolList(){
-		List<String> symbols = this.stockRepository.getAllSymbols();
+		List<String> symbols = Symbols.symbols;//this.stockRepository.getAllSymbols();
 		String[] symbolLists = {
-			String.join(",", symbols.subList(0, 84)),
-			String.join(",", symbols.subList(84, 168)),
-			String.join(",", symbols.subList(168, 252)),
-			String.join(",", symbols.subList(252, 336)),
-			String.join(",", symbols.subList(336, 420)),
-			String.join(",", symbols.subList(420, symbols.size())),
+//			String.join(",", symbols.subList(0, 84)),
+//			String.join(",", symbols.subList(84, 168)),
+//			String.join(",", symbols.subList(168, 252)),
+//			String.join(",", symbols.subList(252, 336)),
+//			String.join(",", symbols.subList(336, 420)),
+			String.join(",", symbols.subList(0, symbols.size())),
 		};
 		
 		STOCK_SYMBOLS = symbolLists;
@@ -109,8 +111,8 @@ public class TDAService {
 		if(STOCK_SYMBOLS == null) {
 			initSymbolList();
 		}
-		
-		List<String> smp500Symbols = this.stockRepository.getAllSymbols();
+
+		List<String> smp500Symbols = Symbols.symbols;//this.stockRepository.getAllSymbols();
 		List<TDAQuote> quotes = tdaClient.getQuotes(smp500Symbols);
 		for(TDAQuote quote : quotes) {
 			quoteLookupTable.put(quote.getSymbol(), quote);
