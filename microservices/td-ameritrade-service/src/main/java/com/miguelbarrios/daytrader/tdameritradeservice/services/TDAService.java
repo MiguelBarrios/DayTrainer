@@ -95,12 +95,12 @@ public class TDAService {
 	public void initSymbolList(){
 		List<String> symbols = Symbols.symbols;//this.stockRepository.getAllSymbols();
 		String[] symbolLists = {
-//			String.join(",", symbols.subList(0, 84)),
-//			String.join(",", symbols.subList(84, 168)),
-//			String.join(",", symbols.subList(168, 252)),
-//			String.join(",", symbols.subList(252, 336)),
-//			String.join(",", symbols.subList(336, 420)),
-			String.join(",", symbols.subList(0, symbols.size())),
+			String.join(",", symbols.subList(0, 84)),
+			String.join(",", symbols.subList(84, 168)),
+			String.join(",", symbols.subList(168, 252)),
+			String.join(",", symbols.subList(252, 336)),
+			String.join(",", symbols.subList(336, 420)),
+			String.join(",", symbols.subList(420, symbols.size())),
 		};
 		
 		STOCK_SYMBOLS = symbolLists;

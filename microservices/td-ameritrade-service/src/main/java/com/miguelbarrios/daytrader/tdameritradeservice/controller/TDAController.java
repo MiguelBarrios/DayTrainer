@@ -3,6 +3,7 @@ package com.miguelbarrios.daytrader.tdameritradeservice.controller;
 import java.security.Principal;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 
 import com.miguelbarrios.daytrader.tdameritradeservice.entities.TDAQuote;
@@ -21,14 +22,19 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/v1/tda")
 @CrossOrigin({ "*", "http://localhost" })
 public class TDAController {
 
 	@Autowired
 	private TDAService tdaService;
+
+	@PostConstruct
+	public void init(){
+		refreshQuotes();
+	}
 	
-	@RequestMapping(path = "tda/quote/{symbol}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(path = "/quote/{symbol}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public TDAQuote getQuote(Principal principal, @PathVariable String symbol, HttpServletResponse response) {
 		TDAQuote quote = tdaService.getQuote(symbol);
 		if(quote == null) {
@@ -37,7 +43,7 @@ public class TDAController {
 		return quote;
 	}
 	
-	@RequestMapping(path = "tda/quotes/{symbols}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(path = "/quotes/{symbols}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getQuotes(Principal principal, @PathVariable String symbols) {
 		return tdaService.getQuotes(symbols);
 	}
@@ -58,9 +64,11 @@ public class TDAController {
 	
 	@Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
 	public void refreshQuotes() {
+		log.info("refreshing quotes");
 		if(!tdaService.isMarketOpen()) {
 			if(!tdaService.isInitialized()) {
 				tdaService.updateQuotesAll();
+				log.info("quotes updated");
 			}
 		}
 		else {
