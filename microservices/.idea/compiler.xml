@@ -16,12 +16,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="td-ameritrade-service" />
-        <module name="quote-service" />
         <module name="user-service" />
         <module name="discovery-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="quote-service" target="1.8" />
       <module name="untitled" target="18" />
     </bytecodeTargetLevel>
   </component>
