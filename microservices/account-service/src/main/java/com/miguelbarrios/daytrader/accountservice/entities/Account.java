@@ -24,8 +24,8 @@ public class Account {
     @Column(name = "margin_amount")
     private double marginAmount;
 
-    private double deposit;
-
+    private BigDecimal deposit;
+    @Column(name = "user_id")
     private int userId;
 
     public Account() {
@@ -63,11 +63,11 @@ public class Account {
         this.marginAmount = marginAmount;
     }
 
-    public double getDeposit() {
+    public BigDecimal getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(double deposit) {
+    public void setDeposit(BigDecimal deposit) {
         this.deposit = deposit;
     }
 
