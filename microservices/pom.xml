@@ -6,11 +6,11 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>quote-service</module>
       <module>td-ameritrade-service</module>
     <module>api-gateway</module>
     <module>user-service</module>
       <module>discovery-service</module>
+      <module>trade-service</module>
   </modules>
   <name>Archetype - microservices</name>
   <url>http://maven.apache.org</url>
