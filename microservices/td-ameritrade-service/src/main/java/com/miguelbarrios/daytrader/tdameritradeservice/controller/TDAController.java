@@ -49,7 +49,7 @@ public class TDAController {
 		return tdaService.getQuotes(symbols);
 	}
 	
-	@GetMapping("v1/tda/isMarketOpen")
+	@GetMapping("/isMarketOpen")
 	public Boolean isMarketOpen() {
 		try {
 			return tdaService.isMarketOpen();
