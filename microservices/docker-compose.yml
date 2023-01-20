@@ -1,0 +1,58 @@
+version: "3"
+services:
+  discovery-service:
+    container_name: discovery-service
+    build: ./discovery-service/.
+    restart: always
+    ports:
+      - 8761:8761
+  api-gateway:
+    container_name: api-gateway
+    build: ./api-gateway/.
+    restart: always
+    ports:
+      - 8080:8080
+  td-ameritrade-service:
+    build: ./td-ameritrade-service/.
+    container_name: td-ameritrade-service
+    depends_on:
+      - redis
+    ports:
+      - 8081:8080
+    links:
+      - redis
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+
+
+
+
+
+
+
+      #  user-service:
+      #    container_name: user-service
+      #    build: ./user-service/.
+      #    ports:
+      #      - 8081:8081
+      #    restart: always
+      #    depends_on:
+      #      - mysqldb
+#  mysqldb:
+#    platform: linux/amd64
+#    image: "mysql:latest"
+#    restart: always
+#    environment:
+#      MYSQL_DATABASE: userservice
+#      MYSQL_USER: user
+#      MYSQL_PASSWORD: user
+#      MYSQL_ROOT_PASSWORD: user
+#    ports:
+#      - 3306:3306
+#    volumes:
+#      - "mysql-data:/var/lib/mysql"
+#volumes:
+#  mysql-data:
