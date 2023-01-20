@@ -31,7 +31,8 @@ public class TDAController {
 
 	@PostConstruct
 	public void init(){
-		refreshQuotes();
+		log.info("init quotes");
+		tdaService.updateQuotesAll();
 	}
 	
 	@RequestMapping(path = "/quote/{symbol}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -57,21 +58,13 @@ public class TDAController {
 			log.info(e.getMessage());
 			return false;
 		}
-
-
 	}
 	
 	
-	@Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
+	@Scheduled(fixedDelay = 120, timeUnit = TimeUnit.SECONDS)
 	public void refreshQuotes() {
 		log.info("refreshing quotes");
-		if(!tdaService.isMarketOpen()) {
-			if(!tdaService.isInitialized()) {
-				tdaService.updateQuotesAll();
-				log.info("quotes updated");
-			}
-		}
-		else {
+		if(tdaService.isMarketOpen()){
 			tdaService.updateQuotesAll();
 		}
     }

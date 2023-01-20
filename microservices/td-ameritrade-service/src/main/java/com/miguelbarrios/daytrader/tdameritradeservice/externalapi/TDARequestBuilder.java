@@ -1,4 +1,4 @@
-package com.miguelbarrios.daytrader.tdameritradeservice.services;
+package com.miguelbarrios.daytrader.tdameritradeservice.externalapi;
 
 import com.miguelbarrios.daytrader.tdameritradeservice.Config;
 

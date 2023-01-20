@@ -1,11 +1,10 @@
-package com.miguelbarrios.daytrader.tdameritradeservice.services;
+package com.miguelbarrios.daytrader.tdameritradeservice.entities;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Symbols {
-    public static List<String> symbols = Arrays.asList(
+    public static List<String> smp500Symbols = Arrays.asList(
             "Symbol",
             "AAPL",
             "MSFT",

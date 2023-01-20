@@ -7,9 +7,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.miguelbarrios.daytrader.tdameritradeservice.Config;
 import com.miguelbarrios.daytrader.tdameritradeservice.entities.MarketHours;
+import com.miguelbarrios.daytrader.tdameritradeservice.entities.Symbols;
 import com.miguelbarrios.daytrader.tdameritradeservice.entities.TDAQuote;
 
 
+import com.miguelbarrios.daytrader.tdameritradeservice.externalapi.TDAClient;
 import com.miguelbarrios.daytrader.tdameritradeservice.repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -93,7 +95,7 @@ public class TDAService {
 	}
 	
 	public void initSymbolList(){
-		List<String> symbols = Symbols.symbols;//this.stockRepository.getAllSymbols();
+		List<String> symbols = Symbols.smp500Symbols;//this.stockRepository.getAllSymbols();
 		String[] symbolLists = {
 			String.join(",", symbols.subList(0, 84)),
 			String.join(",", symbols.subList(84, 168)),
@@ -112,7 +114,7 @@ public class TDAService {
 			initSymbolList();
 		}
 
-		List<String> smp500Symbols = Symbols.symbols;//this.stockRepository.getAllSymbols();
+		List<String> smp500Symbols = Symbols.smp500Symbols;//this.stockRepository.getAllSymbols();
 		List<TDAQuote> quotes = tdaClient.getQuotes(smp500Symbols);
 		for(TDAQuote quote : quotes) {
 			quoteLookupTable.put(quote.getSymbol(), quote);

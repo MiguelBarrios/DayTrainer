@@ -1,4 +1,4 @@
-package com.miguelbarrios.daytrader.tdameritradeservice.services;
+package com.miguelbarrios.daytrader.tdameritradeservice.externalapi;
 
 import java.util.ArrayList;
 import java.util.Collections;
