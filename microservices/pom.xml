@@ -11,6 +11,7 @@
     <module>user-service</module>
       <module>discovery-service</module>
       <module>trade-service</module>
+      <module>account-service</module>
   </modules>
   <name>Archetype - microservices</name>
   <url>http://maven.apache.org</url>
