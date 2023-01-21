@@ -11,16 +11,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -40,13 +35,13 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/api/users")
+    @GetMapping("/api/admin/users")
     public ResponseEntity<List<AppUser>> getUsers(){
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    @PostMapping("/api/users/save")
-    public ResponseEntity<AppUser> saveUser(@RequestBody AppUser user){
+    @PostMapping("/api/v1/users/save")
+    public ResponseEntity<AppUser> create(@RequestBody AppUser user){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/users/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }

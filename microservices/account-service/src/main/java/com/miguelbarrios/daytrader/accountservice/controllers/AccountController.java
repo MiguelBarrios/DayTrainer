@@ -54,8 +54,8 @@ public class AccountController {
         }
     }
 
-    @PutMapping("/{userId}/{amount}")
-    public Account updateAccount(@PathVariable Integer userId, @PathVariable BigDecimal amount){
-        return accountService.updateAccountBalance(userId, amount);
+    @PutMapping("/{userId}/transactionAmount/{amount}")
+    public Account processTransaction(@PathVariable Integer userId, @PathVariable BigDecimal amount){
+        return accountService.updateBalanceAfterTransaction(userId, amount);
     }
 }

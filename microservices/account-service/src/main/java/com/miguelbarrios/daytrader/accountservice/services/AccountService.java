@@ -7,6 +7,6 @@ import java.math.BigDecimal;
 public interface AccountService {
     Account createAccount(int userId);
     boolean deleteAccount(int userId);
-    Account updateAccountBalance(int userId, BigDecimal amount);
+    Account updateBalanceAfterTransaction(int userId, BigDecimal transactionAmount);
     Account getAccountInformation(int userId);
 }
