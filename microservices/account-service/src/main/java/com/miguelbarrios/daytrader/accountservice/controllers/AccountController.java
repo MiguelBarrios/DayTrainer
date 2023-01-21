@@ -1,7 +1,11 @@
 package com.miguelbarrios.daytrader.accountservice.controllers;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.miguelbarrios.daytrader.accountservice.entities.Account;
 import com.miguelbarrios.daytrader.accountservice.services.AccountService;
+import com.miguelbarrios.daytrader.accountservice.utilities.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
+import java.security.Principal;
+import java.util.Map;
 
 @CrossOrigin({ "*", "http://localhost" })
 @RestController
@@ -38,7 +44,8 @@ public class AccountController {
     }
 
     @GetMapping("/{userId}")
-    public Account getAccountInfo(@PathVariable Integer userId,  HttpServletResponse response){
+    public Account getAccountInfo(@PathVariable Integer userId, HttpServletRequest request, HttpServletResponse response){
+        String username = JWTUtil.getUsernameFromHeader(request);
         Account account = accountService.getAccountInformation(userId);
         if(account == null){
             response.setStatus(HttpStatus.NOT_FOUND.value());

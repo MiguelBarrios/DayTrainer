@@ -36,7 +36,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final WebClient.Builder webClientBuilder;
 
-
     @Override
     public AppUser saveUser(AppUser newUser) {
         AppUser user = userRepository.findByUsername(newUser.getUsername());
