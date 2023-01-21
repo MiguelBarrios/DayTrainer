@@ -43,25 +43,24 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account updateAccountBalance(int userId, BigDecimal amount) {
+    public Account updateBalanceAfterTransaction(int userId, BigDecimal transactionAmount) {
         Account account = accountRepository.findByUserId(userId);
 
         BigDecimal balance = account.getBalance();
-        if(amount.signum() == -1){
-            amount = amount.abs();
-            if(amount.compareTo(balance) <= 0){
-                balance = balance.subtract(amount);
+        if(transactionAmount.signum() == -1){
+            transactionAmount = transactionAmount.abs();
+            if(transactionAmount.compareTo(balance) <= 0){
+                balance = balance.subtract(transactionAmount);
                 account.setBalance(balance);
             }
             else{
                 throw new InsufficientFundsException("Insufficient Funds");
             }
         }
-        else if(amount.signum() == 1){
-            balance = balance.add(amount);
+        else if(transactionAmount.signum() == 1){
+            balance = balance.add(transactionAmount);
             account.setBalance(balance);
         }
-
 
         return account;
     }

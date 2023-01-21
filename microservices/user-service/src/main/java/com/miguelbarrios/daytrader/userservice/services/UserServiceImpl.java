@@ -1,5 +1,8 @@
 package com.miguelbarrios.daytrader.userservice.services;
 
+import com.miguelbarrios.daytrader.userservice.exceptions.AccountCreationException;
+import com.miguelbarrios.daytrader.userservice.exceptions.UserNameUnavailableException;
+import com.miguelbarrios.daytrader.userservice.model.Account;
 import com.miguelbarrios.daytrader.userservice.model.AppUser;
 import com.miguelbarrios.daytrader.userservice.model.Role;
 import com.miguelbarrios.daytrader.userservice.repository.RoleRepository;
@@ -13,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.transaction.Transactional;
 import java.sql.Array;
@@ -30,11 +34,38 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
+    private final WebClient.Builder webClientBuilder;
+
     @Override
-    public AppUser saveUser(AppUser user) {
-        log.info("Saving new user {} to the database: ", user.getName());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public AppUser saveUser(AppUser newUser) {
+        AppUser user = userRepository.findByUsername(newUser.getUsername());
+        if(user != null){
+            throw new UserNameUnavailableException(newUser.getUsername() + " not available");
+        }
+
+        log.info("Saving new user {} to the database: ", newUser.getFirstName());
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        user = userRepository.save(newUser);
+        Account account = createAccount(user.getId());
+        if(account == null){
+            userRepository.delete(user);
+            log.info("unable to create user entity, account unable to be created");
+            throw new AccountCreationException("Unable to create Account");
+        }
+        addRoleToUser(user.getUsername(), "ROLE_USER");
+        user.setAccountId(account.getId());
+        return user;
+    }
+
+    public Account createAccount(Long userId){
+        // Call Inventory Service and place order if product is in stock
+        Account account = webClientBuilder.build().post()
+                .uri("http://account-service/api/v1/account/" + userId)
+                .retrieve()
+                .bodyToMono(Account.class)
+                .block();
+
+        return account;
     }
 
     @Override
@@ -50,7 +81,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         Role role = roleRepository.findByName(roleName);
         user.getRoles().add(role);
         // Because we have @Transactional at the top we do not need to call .save on the user repository
-        log.info("Adding Role {} to user {}", role.getId(), user.getName());
+        log.info("Adding Role {} to user {}", role.getId(), user.getFirstName());
     }
 
     @Override
