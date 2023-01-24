@@ -14,4 +14,6 @@ public class TradeController {
     public String ping(){
         return "pong";
     }
+
+
 }
