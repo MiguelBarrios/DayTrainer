@@ -1,18 +1,16 @@
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Stock } from 'src/app/models/stock';
 import { StockPosition } from 'src/app/models/stock-position';
 import { TDAQuote } from 'src/app/models/tdaquote';
 import { TradesService } from 'src/app/services/trades.service';
 import { TDAService } from 'src/app/services/tda.service';
 import { StockService } from 'src/app/services/stock.service';
-import { NONE_TYPE } from '@angular/compiler';
-import { JsonPipe } from '@angular/common';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MarketService } from 'src/app/services/market.service';
-import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 
+console.log("Single stock view lazy loaded");
 @Component({
   selector: 'app-single-stock-view',
   templateUrl: './single-stock-view.component.html',

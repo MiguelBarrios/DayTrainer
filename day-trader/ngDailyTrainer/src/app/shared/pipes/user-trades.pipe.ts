@@ -1,4 +1,4 @@
-import { Trade } from './../models/trade';
+import { Trade } from '../../models/trade';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
