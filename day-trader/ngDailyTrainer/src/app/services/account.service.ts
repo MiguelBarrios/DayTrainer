@@ -4,6 +4,8 @@ import { catchError, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Account } from '../models/account';
 import { AuthService } from './auth.service';
+import { Observable, of } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +17,37 @@ export class AccountService {
 
   constructor(private http:HttpClient, private auth:AuthService) {}
 
-  getUserAccount(){
+  refreshAccountData(){
     return this.http.get<Account>(this.url, this.auth.getHttpOptions()).pipe(
+      tap(
+        (account) => {
+          console.log("tapping into account request");
+          console.log(account);
+          this.userAccount = account;
+        }
+      ),
       catchError((err:any) => {
         console.log(err);
         return throwError(() => new Error('Error getting user account'));
       })
     )
+  }
+
+  getUserAccount(){
+    if(this.userAccount){      
+      return of(this.userAccount);
+    }
+    else{
+      return this.http.get<Account>(this.url, this.auth.getHttpOptions()).pipe(
+        tap(
+          (account) => {
+            this.userAccount = account;
+          }
+        ),
+        catchError((err:any) => {
+          return throwError(() => new Error('Error getting user account'));
+        })
+      )
+    }
   }
 }

@@ -42,7 +42,7 @@ marketClose: Date = new Date(2000, 2);
 
   ngOnInit(): void {
       this.refreshMarketHours();
-      this.stockService.loadStocks();
+      this.stockService.getStocks
       let symbol = this.route.snapshot.paramMap.get('symbol');
       if (symbol) {
         this.getQuote(symbol);
