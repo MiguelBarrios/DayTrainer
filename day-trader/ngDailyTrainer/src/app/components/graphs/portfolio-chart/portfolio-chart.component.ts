@@ -8,6 +8,7 @@ import { Trade } from 'src/app/models/trade';
 import { AccountService } from 'src/app/services/account.service';
 import { forkJoin, Observable, throwError } from 'rxjs';
 import { StockPosition } from 'src/app/models/stock-position';
+import { Account } from 'src/app/models/account';
 
 @Component({
   selector: 'app-portfolio-chart',
@@ -18,6 +19,7 @@ export class PortfolioChartComponent implements OnInit {
 
    portfolio:StockPosition[]= [];
    accountBalance:any = 0;
+   account: Account | null = null;
 
    ngOnInit(): void {
     this.loadChart();
@@ -49,18 +51,18 @@ export class PortfolioChartComponent implements OnInit {
   loadChart(){
     forkJoin(
       {
-        accountBalance : this.accountService.getUserAccountBalance(), 
+        account: this.accountService.getUserAccount(),
         portfolio : this.tradesService.getUserPositions()
       }
-    ).subscribe(({accountBalance,portfolio}) => {
-        this.accountBalance = accountBalance;
+    ).subscribe(({account,portfolio}) => {
+        this.accountBalance = account.balance;
         this.portfolio = portfolio;
         for(let position of portfolio){
           let sliceAmount = position.avgCostPerShare * position.numberOfShares;
           let sliceLable = [position.symbol];
           this.addSlice(sliceAmount, sliceLable);
         }
-        this.addSlice(accountBalance, ["Cash"]);
+        this.addSlice(account.balance, ["Cash"]);
         this.chart?.update();
       }      
     );
