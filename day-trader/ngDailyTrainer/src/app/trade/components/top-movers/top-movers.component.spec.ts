@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FilterTablePipe } from 'src/app/pipes/filter-table.pipe';
+import { FilterTablePipe } from 'src/app/shared/pipes/filter-table.pipe';
 import { TopMoversComponent } from './top-movers.component';
 
 describe('TopMoversComponent', () => {

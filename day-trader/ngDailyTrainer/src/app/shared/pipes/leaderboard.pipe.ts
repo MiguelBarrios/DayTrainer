@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { LeaderboardItem } from '../models/leaderboard-item';
+import { LeaderboardItem } from '../../models/leaderboard-item';
 
 @Pipe({
   name: 'leaderboard'

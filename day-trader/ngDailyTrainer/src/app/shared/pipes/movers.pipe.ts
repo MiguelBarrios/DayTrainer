@@ -1,4 +1,4 @@
-import { Movers } from './../models/movers';
+import { Movers } from '../../models/movers';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
