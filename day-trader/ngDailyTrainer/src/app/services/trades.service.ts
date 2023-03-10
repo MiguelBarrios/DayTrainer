@@ -41,9 +41,7 @@ export class TradesService {
   }
 
   getUserTrades(){
-    if(this.userTrades){
-      console.log("Getting trades from cash");
-      
+    if(this.userTrades){      
       return of(this.userTrades);
     }
     else{

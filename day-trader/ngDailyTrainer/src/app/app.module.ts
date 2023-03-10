@@ -10,7 +10,6 @@ import { NgChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule} from '@angular/material/card';
-import { FilterTablePipe } from './shared/pipes/filter-table.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { CurrencyPipe, DatePipe } from '@angular/common';
@@ -27,9 +26,7 @@ import { NotfoundComponent } from './components/page-components/notfound/notfoun
 import { LeaderBoardComponent } from './components/social/leader-board/leader-board.component';
 import { UserUpdateFormComponent } from './components/user-components/user-update-form/user-update-form.component';
 import { UsersComponent } from './components/user-components/users/users.component';
-import { BuySellPipe } from './shared/pipes/buy-sell.pipe';
-import { LeaderboardPipe } from './shared/pipes/leaderboard.pipe';
-import { MoversPipe } from './shared/pipes/movers.pipe';
+
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MarketService } from './services/market.service';
 import { SettingsComponent } from './settings/settings.component';
@@ -37,8 +34,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { StockFilterPipe } from './shared/pipes/stock-filter.pipe';
-import { BrowseStocksComponent } from './trade/components/browse-stocks/browse-stocks.component';
+
 import { TradeTableComponent } from './components/widgets/trade-table/trade-table.component';
 import { PositionTableComponent } from './components/widgets/position-table/position-table.component';
 import { SharedModule } from './shared/shared.module';

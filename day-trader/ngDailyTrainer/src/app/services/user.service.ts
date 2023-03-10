@@ -18,7 +18,6 @@ export class UserService {
 
  getLeaderBoard(){
   if(this.leaders){
-    console.log("getting leaders from cash");
     return of(this.leaders);
   }
   else{

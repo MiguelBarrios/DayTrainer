@@ -74,8 +74,6 @@ export class NavbarComponent implements OnInit {
   }
 
   register(user: User): void {
-    console.log('Registering user:');
-    console.log(user);
     this.authService.register(user).subscribe({
       next: (registeredUser) => {
         this.authService.login(user.username, user.password).subscribe({

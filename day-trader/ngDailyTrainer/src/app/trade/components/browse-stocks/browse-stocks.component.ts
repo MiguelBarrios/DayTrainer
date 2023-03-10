@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map, Observable, startWith } from 'rxjs';
 import { Stock } from 'src/app/models/stock';
 import { StockService } from 'src/app/services/stock.service';
-
-console.log("Brows stock page loaded");
 
 @Component({
   selector: 'app-browse-stocks',

@@ -10,7 +10,6 @@ import { StockService } from 'src/app/services/stock.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MarketService } from 'src/app/services/market.service';
 
-console.log("Single stock view lazy loaded");
 @Component({
   selector: 'app-single-stock-view',
   templateUrl: './single-stock-view.component.html',
