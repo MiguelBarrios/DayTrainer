@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.skilldistillery.daytrainer.Config;
+import com.skilldistillery.daytrainer.config.Config;
 import com.skilldistillery.daytrainer.stock.StockRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

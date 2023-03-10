@@ -35,9 +35,7 @@ export class AccountHomeComponent implements OnInit {
     private router:Router,
     private userServ:UsersService, 
     private tradeServ:TradesService,
-    private accountService:AccountService,
-    private modalService: NgbModal
-  ) { }
+    private accountService:AccountService ) { }
 
   ngOnInit(): void {
     if(!this.auth.checkLogin()){
@@ -45,9 +43,8 @@ export class AccountHomeComponent implements OnInit {
     }
     this.setTrades()
     this.setUser()
-    this.getUserBalance()
-    this.getUserDeposits();
     this.getUserPositions();
+    this.getUserAccount();
   }
 
   calcPortValue(){
@@ -86,27 +83,18 @@ export class AccountHomeComponent implements OnInit {
     )
   }
 
-  getUserBalance(){
-    this.accountService.getUserAccountBalance().subscribe(
-      (balance) =>{
-       this.accountBalance = balance;
-      },
-      (error) =>{
-        console.log(error)
-      }
-    )
-  }
-
-  getUserDeposits(){
-    this.accountService.getUserAccountDeposits().subscribe(
-      (deposits) => {
-        this.accountDeposits = deposits;
+  getUserAccount(){
+    this.accountService.getUserAccount().subscribe(
+      (account) => {
+        this.accountDeposits = account.deposit;
+        this.accountBalance = account.balance;
       },
       (error) => {
         console.log(error);
       }
     )
   }
+
 
   getUserPositions(){
     this.tradeServ.getUserPositions().subscribe(

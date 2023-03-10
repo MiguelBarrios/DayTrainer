@@ -2,17 +2,22 @@ import { StockPosition } from './../models/stock-position';
 import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { Movers } from '../models/movers';
 import { Trade } from '../models/trade';
 import { environment } from 'src/environments/environment';
+import { Observable, of } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TradesService {
 
-  private url = environment.baseUrl + 'api/v1/trades'
+  private url = environment.baseUrl + 'api/v1/trades';
+  private userPositions:StockPosition[] | null = null;
+  private userTrades: Trade[] | null = null;
+
 
   constructor(private http:HttpClient, private auth:AuthService) { }
 
@@ -36,7 +41,31 @@ export class TradesService {
   }
 
   getUserTrades(){
+    if(this.userTrades){      
+      return of(this.userTrades);
+    }
+    else{
+      return this.http.get<Trade[]>(this.url, this.auth.getHttpOptions()).pipe(
+        tap(
+          (trades) => {
+            this.userTrades = trades;
+          }
+        ),
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Error in getUserTrades() request');
+        })
+      )
+    }
+  }
+
+  refreshTrades(){
     return this.http.get<Trade[]>(this.url, this.auth.getHttpOptions()).pipe(
+      tap(
+        (trades) => {
+          this.userTrades = trades;
+        }
+      ),
       catchError((err: any) => {
         console.log(err);
         return throwError('Error in getUserTrades() request');
@@ -55,13 +84,25 @@ export class TradesService {
   }
 
   getUserPositions(){
-    var url = this.url + "/position";
-    return this.http.get<StockPosition[]>(url, this.auth.getHttpOptions()).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('Error in getuserPositions() request');
-      })
-    )
+    if(this.userPositions){
+      return of(this.userPositions);
+    }
+    else{
+      var url = this.url + "/position";
+      return this.http.get<StockPosition[]>(url, this.auth.getHttpOptions()).pipe(
+        tap(
+          (userPositions: StockPosition[]) => {
+            this.userPositions = userPositions;
+          }
+        ),
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Error in getuserPositions() request');
+        })
+      )
+    }
+
+
   }
 
   getFriendsTrade(username:string){

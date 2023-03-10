@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,29 +22,23 @@ import com.skilldistillery.daytrainer.trade.TradeRepository;
 import com.skilldistillery.daytrainer.trade.TradeService;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private PasswordEncoder encoder;
-	
-	@Autowired
-	private UserRepository userRepo;
-
-	@Autowired
-	private AccountRepository accountRepo;
-
-	@Autowired
-	private TradeService tradeService;
-
-	@Autowired
-	private TradeRepository tradeRepo;
+	private final PasswordEncoder encoder;
+	private final UserRepository userRepo;
+	private final AccountRepository accountRepo;
+	private final TradeService tradeService;
+	private final TradeRepository tradeRepo;
 
 	@Override
 	public User getUserById(int userId, String name) {
+
 		User currentUser = userRepo.findByUsername(name);
 		if (currentUser != null && currentUser.getRole().equals("admin")) {
 			Optional<User> found = userRepo.findById(userId);
 			User foundUser = found.get();
+
 			if (foundUser != null) {
 				return foundUser;
 			}
@@ -171,7 +166,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean isAvailable(String username, String newUsername) {
 		User user = userRepo.findByUsername(newUsername);
-		return false;
+		return user == null;
 	}
 	
 }

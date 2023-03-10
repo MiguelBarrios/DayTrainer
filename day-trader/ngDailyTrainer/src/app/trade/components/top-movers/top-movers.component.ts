@@ -59,8 +59,11 @@ export class TopMoversComponent implements OnInit {
   }
 
   getAvailableStocks() {
-    this.stocks = this.stockService.getStockList();
-    
+    this.stockService.getStocks().subscribe(
+      (stocks) => {
+        this.stocks = stocks;
+      }
+    )    
 }
 
 onClickRow(stockSymbol: string|null) {

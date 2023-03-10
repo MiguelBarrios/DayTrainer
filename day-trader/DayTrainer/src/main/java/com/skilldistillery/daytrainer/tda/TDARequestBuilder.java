@@ -1,9 +1,10 @@
 package com.skilldistillery.daytrainer.tda;
 
+import com.skilldistillery.daytrainer.config.Config;
+
 import java.time.LocalDate;
 import java.util.List;
 
-import com.skilldistillery.daytrainer.Config;
 
 public class TDARequestBuilder {
 	private static final String TDA_BASE_URL ="https://api.tdameritrade.com/v1/marketdata/";

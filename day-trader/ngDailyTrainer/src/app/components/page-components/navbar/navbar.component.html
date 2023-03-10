@@ -18,8 +18,8 @@
             <a class="nav-link" [routerLink]="['/home']">Home</a>
             <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
             <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leaderboard</a>
-            <a class="nav-link" [routerLink]="['/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
-            <a class="nav-link" [routerLink]="['/browse']" tabindex="-1" aria-disabled="true">Browse Stocks</a>
+            <a class="nav-link" [routerLink]="['/trade/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
+            <a class="nav-link" [routerLink]="['/trade/browse']" tabindex="-1" aria-disabled="true">Browse Stocks</a>
             <a class="nav-link" [routerLink]="['/home']" tabindex="-1" aria-disabled="true" (click)="logout()">Logout</a>
           </div>
 
@@ -37,13 +37,13 @@
             <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
           </li>
           <li class="nav-item" *ngIf="loggedin">
-            <a class="nav-link" [routerLink]="['/browse']" tabindex="-1" aria-disabled="true">Browse Stocks</a>
+            <a class="nav-link" [routerLink]="['trade/browse']" tabindex="-1" aria-disabled="true">Browse Stocks</a>
           </li>
           <li class="nav-item" *ngIf="loggedin">
             <a class="nav-link" [routerLink]="['/leaderBoard']" tabindex="-1" aria-disabled="true">Leaderboard</a>
           </li>
           <li class="nav-item" *ngIf="loggedin">
-            <a class="nav-link" [routerLink]="['/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
+            <a class="nav-link" [routerLink]="['/trade/singleStockView/ORCL']" tabindex="-1" aria-disabled="true">Trade</a>
           </li>
         </ul> 
         <!-- Left links -->
@@ -71,7 +71,7 @@
           <label>Username</label>
           <input class="form-control" name="username" type="text" [(ngModel)]="loginUser.username">
           <label>Password</label>
-          <input class="form-control" name="password" type="password" [(ngModel)]="loginUser.password" (keyup.enter)="login(loginUser)">
+          <input class="form-control" name="password" type="password" autocomplete="password" [(ngModel)]="loginUser.password" (keyup.enter)="login(loginUser)">
         </div>
         <label *ngIf="loginError" class="text-danger">Invalid login</label>
       </form>
@@ -87,18 +87,8 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <label>First Name</label>
-      <input class="form-control" name="firstname" type="text" [(ngModel)]="newUser.firstName">
-      <label>Last Name</label>
-      <input class="form-control" name="lastname" type="text" [(ngModel)]="newUser.lastName">
       <label>Username</label>
       <input class="form-control" name="username" type="text" [(ngModel)]="newUser.username">
-      <label>Email</label>
-      <input class="form-control" name="email" type="text" [(ngModel)]="newUser.email">
-      <label>Profile Picture</label>
-      <input class="form-control" name="profilePic" type="text" [(ngModel)]="newUser.profilePicture">
-      <label>Bio</label>
-      <input class="form-control" name="bib" type="text" [(ngModel)]="newUser.biography">
       <label>Password</label>
       <input class="form-control" name="password" type="password" [(ngModel)]="newUser.password" (keyup.enter)="register(newUser)">
     </div>

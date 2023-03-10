@@ -1,5 +1,7 @@
 package com.skilldistillery.daytrainer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -29,6 +31,7 @@ public class Account {
 
 	@OneToOne
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 
 	// methods

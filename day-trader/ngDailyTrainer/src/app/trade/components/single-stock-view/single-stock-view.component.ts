@@ -1,17 +1,14 @@
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Stock } from 'src/app/models/stock';
 import { StockPosition } from 'src/app/models/stock-position';
 import { TDAQuote } from 'src/app/models/tdaquote';
 import { TradesService } from 'src/app/services/trades.service';
 import { TDAService } from 'src/app/services/tda.service';
 import { StockService } from 'src/app/services/stock.service';
-import { NONE_TYPE } from '@angular/compiler';
-import { JsonPipe } from '@angular/common';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MarketService } from 'src/app/services/market.service';
-import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-single-stock-view',
@@ -35,8 +32,6 @@ marketOpen: Date  = new Date(2000, 1);
 marketClose: Date = new Date(2000, 2);
 
 
-
-
   constructor(private router: Router, private route: ActivatedRoute,
     private tradesService: TradesService, private tda:TDAService,
     private stockService:StockService, private marketService: MarketService,
@@ -44,7 +39,7 @@ marketClose: Date = new Date(2000, 2);
 
   ngOnInit(): void {
       this.refreshMarketHours();
-      this.stockService.loadStocks();
+      this.stockService.getStocks
       let symbol = this.route.snapshot.paramMap.get('symbol');
       if (symbol) {
         this.getQuote(symbol);
