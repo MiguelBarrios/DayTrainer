@@ -15,5 +15,10 @@ public class TradeController {
         return "pong";
     }
 
+    @GetMapping("/pingSecured")
+    public String ping2(){
+        return "pong";
+    }
+
 
 }

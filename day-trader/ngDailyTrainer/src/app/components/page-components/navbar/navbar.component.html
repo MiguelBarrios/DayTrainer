@@ -87,18 +87,6 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-      <label>First Name</label>
-      <input class="form-control" name="firstname" type="text" [(ngModel)]="newUser.firstName">
-      <label>Last Name</label>
-      <input class="form-control" name="lastname" type="text" [(ngModel)]="newUser.lastName">
-      <label>Username</label>
-      <input class="form-control" name="username" type="text" [(ngModel)]="newUser.username">
-      <label>Email</label>
-      <input class="form-control" name="email" type="text" [(ngModel)]="newUser.email">
-      <label>Profile Picture</label>
-      <input class="form-control" name="profilePic" type="text" [(ngModel)]="newUser.profilePicture">
-      <label>Bio</label>
-      <input class="form-control" name="bib" type="text" [(ngModel)]="newUser.biography">
       <label>Password</label>
       <input class="form-control" name="password" type="password" [(ngModel)]="newUser.password" (keyup.enter)="register(newUser)">
     </div>

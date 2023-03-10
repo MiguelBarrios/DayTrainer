@@ -35,8 +35,6 @@ marketOpen: Date  = new Date(2000, 1);
 marketClose: Date = new Date(2000, 2);
 
 
-
-
   constructor(private router: Router, private route: ActivatedRoute,
     private tradesService: TradesService, private tda:TDAService,
     private stockService:StockService, private marketService: MarketService,

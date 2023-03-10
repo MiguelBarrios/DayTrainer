@@ -3,7 +3,7 @@ package com.skilldistillery.daytrainer.notifications;
 import java.io.IOException;
 
 import com.sendgrid.*;
-import com.skilldistillery.daytrainer.Config;
+import com.skilldistillery.daytrainer.config.Config;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 
@@ -59,9 +59,9 @@ public class NotificationService {
 	      request.setEndpoint("mail/send");
 	      request.setBody(mail.build());
 	      Response response = sg.api(request);
-	      System.out.println(response.getStatusCode());
-	      System.out.println(response.getBody());
-	      System.out.println(response.getHeaders());
+//	      System.out.println(response.getStatusCode());
+//	      System.out.println(response.getBody());
+//	      System.out.println(response.getHeaders());
 	    } catch (Exception e) {
 	    	log.error(e.getMessage());
 	    }
